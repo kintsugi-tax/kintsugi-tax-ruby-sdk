@@ -8,6 +8,15 @@ generation:
     nameResolutionDec2023: false
     parameterOrderingFeb2024: false
     requestResponseComponentNamesFeb2024: false
+  operationNameOverrides:
+    create_credit_note_by_transaction_id_v1_transactions__original_transaction_id__credit_notes_post: createCreditNote
+    update_credit_note_by_transaction_id_v1_transactions__original_transaction_id__credit_notes__credit_note_id__put: updateCreditNote
+    create_transaction_by_customer_id_v1_customers__customer_id__transactions_post: createTransactionByCustomer
+    get_transactions_by_customer_id_v1_customers__customer_id__transactions_get: getTransactionsByCustomer
+    get_transactions_by_filing_id_v1_transactions_filings__filing_id__get: getTransactionsByFiling
+    get_transaction_by_external_id_v1_transactions_external__external_id__get: getTransactionByExternalId
+    upload_exemption_certificate_v1_exemptions__exemption_id__attachments_post: uploadExemptionCert
+    get_attachments_for_exemption_v1_exemptions__exemption_id__attachments_get: getExemptionAttachments
 ruby:
   version: 5.4.0
   additionalDependencies: {}
@@ -28,4 +37,5 @@ ruby:
   maxMethodParams: 0
   packageName: open_api_sdk
   responseFormat: flat
-  templateVersion: v2 
+  templateVersion: v2
+  maxFileNameLength: 100 
