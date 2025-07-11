@@ -1,4 +1,4 @@
-# openapi
+# Kintsugi Tax
 
 Developer-friendly & type-safe Ruby SDK specifically catered to leverage Kintsugi's tax API.
 
@@ -20,7 +20,7 @@ Developer-friendly & type-safe Ruby SDK specifically catered to leverage Kintsug
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
 <!-- $toc-max-depth=2 -->
-* [openapi](#openapi)
+* [Kintsugi Tax](#)
   * [SDK Installation](#sdk-installation)
   * [SDK Example Usage](#sdk-example-usage)
   * [Authentication](#authentication)
