@@ -14,6 +14,9 @@ targets:
     ruby:
         target: ruby
         source: kintsugi-overlay
+        publish:
+            rubygems:
+                token: $rubygems_auth_token
         codeSamples:
             registry:
                 location: registry.speakeasyapi.dev/kintsugi-ai/tax-platform/kintsugi-overlay-ruby-code-samples
