@@ -136,41 +136,6 @@ actions:
       x-public: true
 
   # =============================================================================
-  # STEP 1.5: Shorten operation IDs to avoid filename length issues
-  # =============================================================================
-  - target: $.paths['/v1/transactions/{original_transaction_id}/credit_notes'].post
-    update:
-      operationId: createCreditNote
-      
-  - target: $.paths['/v1/transactions/{original_transaction_id}/credit_notes/{credit_note_id}'].put
-    update:
-      operationId: updateCreditNote
-      
-  - target: $.paths['/v1/customers/{customer_id}/transactions'].post
-    update:
-      operationId: createTransactionByCustomer
-      
-  - target: $.paths['/v1/customers/{customer_id}/transactions'].get
-    update:
-      operationId: getTransactionsByCustomer
-      
-  - target: $.paths['/v1/transactions/filings/{filing_id}'].get
-    update:
-      operationId: getTransactionsByFiling
-      
-  - target: $.paths['/v1/transactions/external/{external_id}'].get
-    update:
-      operationId: getTransactionByExternalId
-      
-  - target: $.paths['/v1/exemptions/{exemption_id}/attachments'].post
-    update:
-      operationId: uploadExemptionCert
-      
-  - target: $.paths['/v1/exemptions/{exemption_id}/attachments'].get
-    update:
-      operationId: getExemptionAttachments
-
-  # =============================================================================
   # STEP 2: Explicitly remove problematic marketplace endpoints
   # =============================================================================
   - target: $.paths['/v1/marketplaces/{source_type}']

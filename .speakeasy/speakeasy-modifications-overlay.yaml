@@ -74,6 +74,7 @@ actions:
       type: method-name
   - target: $["paths"]["/v1/exemptions/{exemption_id}/attachments"]["get"]
     update:
+      operationId: getExemptionAttachments
       x-speakeasy-name-override: getAttachments
     x-speakeasy-metadata:
       after: sdk.exemptions.getAttachments()
@@ -92,6 +93,7 @@ actions:
       type: method-name
   - target: $["paths"]["/v1/exemptions/{exemption_id}/attachments"]["post"]
     update:
+      operationId: uploadExemptionCert
       x-speakeasy-name-override: uploadCertificate
     x-speakeasy-metadata:
       after: sdk.exemptions.uploadCertificate()
@@ -101,6 +103,7 @@ actions:
       type: method-name
   - target: $["paths"]["/v1/transactions/{original_transaction_id}/credit_notes"]["post"]
     update:
+      operationId: createCreditNote
       x-speakeasy-name-override: createCreditNote
     x-speakeasy-metadata:
       after: sdk.transactions.createCreditNote()
@@ -137,6 +140,7 @@ actions:
       type: method-name
   - target: $["paths"]["/v1/customers/{customer_id}/transactions"]["get"]
     update:
+      operationId: getTransactionsByCustomer
       x-speakeasy-name-override: getTransactions
     x-speakeasy-metadata:
       after: sdk.customers.getTransactions()
@@ -155,6 +159,7 @@ actions:
       type: method-name
   - target: $["paths"]["/v1/transactions/external/{external_id}"]["get"]
     update:
+      operationId: getTransactionByExternalId
       x-speakeasy-name-override: getByExternalId
     x-speakeasy-metadata:
       after: sdk.transactions.getByExternalId()
@@ -201,6 +206,7 @@ actions:
       type: method-name
   - target: $["paths"]["/v1/transactions/{original_transaction_id}/credit_notes/{credit_note_id}"]["put"]
     update:
+      operationId: updateCreditNote
       x-speakeasy-name-override: updateCreditNote
     x-speakeasy-metadata:
       after: sdk.transactions.updateCreditNote()
@@ -237,6 +243,7 @@ actions:
       type: method-name
   - target: $["paths"]["/v1/customers/{customer_id}/transactions"]["post"]
     update:
+      operationId: createTransactionByCustomer
       x-speakeasy-name-override: createTransaction
     x-speakeasy-metadata:
       after: sdk.customers.createTransaction()
@@ -256,6 +263,7 @@ actions:
       type: method-name
   - target: $["paths"]["/v1/transactions/filings/{filing_id}"]["get"]
     update:
+      operationId: getTransactionsByFiling
       x-speakeasy-name-override: getByFilingId
     x-speakeasy-metadata:
       after: sdk.transactions.getByFilingId()
