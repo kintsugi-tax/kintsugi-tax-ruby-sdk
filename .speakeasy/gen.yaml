@@ -30,12 +30,13 @@ ruby:
     paths:
       callbacks: models/callbacks
       errors: models/errors
-      operations: models/operations
+      operations: models/ops
       shared: models/shared
       webhooks: models/webhooks
   inputTypes: false
   maxMethodParams: 0
-  packageName: open_api_sdk
+  packageName: kintsugi_sdk
   responseFormat: flat
   templateVersion: v2
-  maxFileNameLength: 100 
+  maxFileNameLength: 50
+  disableCompilation: true 
