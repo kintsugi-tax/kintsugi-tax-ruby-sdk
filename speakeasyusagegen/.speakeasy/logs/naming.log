@@ -1,0 +1,625 @@
+DEBUG	
+
+--- Renaming 4 types with name "Total Amount" ---
+DEBUG	discriminated: Renamed to "TransactionCreate_Total Amount" 
+	 labels: "original_name:Total Amount scope:shared data_type:union refName:TransactionCreate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionCreate property:total_amount originalName:Total Amount"
+DEBUG	discriminated: Renamed to "TransactionPublicRequest_Total Amount" 
+	 labels: "original_name:Total Amount scope:shared data_type:union refName:TransactionPublicRequest" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionPublicRequest property:total_amount originalName:Total Amount"
+DEBUG	discriminated: Renamed to "TransactionUpdate_Total Amount" 
+	 labels: "original_name:Total Amount scope:shared data_type:union refName:TransactionUpdate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionUpdate property:total_amount originalName:Total Amount"
+DEBUG	discriminated: Renamed to "CreditNoteCreate_Total Amount" 
+	 labels: "original_name:Total Amount scope:shared data_type:union refName:CreditNoteCreate" 
+	 registrationID: "scope:shared refType:Schemas refName:CreditNoteCreate property:total_amount originalName:Total Amount"
+DEBUG	
+
+--- Renaming 3 types with name "Total Tax Amount Imported" ---
+DEBUG	discriminated: Renamed to "TransactionCreate_Total Tax Amount Imported" 
+	 labels: "original_name:Total Tax Amount Imported scope:shared data_type:union refName:TransactionCreate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionCreate property:total_tax_amount_imported originalName:Total Tax Amount Imported"
+DEBUG	discriminated: Renamed to "TransactionPublicRequest_Total Tax Amount Imported" 
+	 labels: "original_name:Total Tax Amount Imported scope:shared data_type:union refName:TransactionPublicRequest" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionPublicRequest property:total_tax_amount_imported originalName:Total Tax Amount Imported"
+DEBUG	discriminated: Renamed to "TransactionUpdate_Total Tax Amount Imported" 
+	 labels: "original_name:Total Tax Amount Imported scope:shared data_type:union refName:TransactionUpdate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionUpdate property:total_tax_amount_imported originalName:Total Tax Amount Imported"
+DEBUG	
+
+--- Renaming 7 types with name "Tax Rate Imported" ---
+DEBUG	discriminated: Renamed to "TransactionCreate_Tax Rate Imported" 
+	 labels: "original_name:Tax Rate Imported scope:shared data_type:union refName:TransactionCreate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionCreate property:tax_rate_imported originalName:Tax Rate Imported"
+DEBUG	discriminated: Renamed to "TransactionItemCreateUpdate_Tax Rate Imported" 
+	 labels: "original_name:Tax Rate Imported scope:shared data_type:union refName:TransactionItemCreateUpdate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionItemCreateUpdate property:tax_rate_imported originalName:Tax Rate Imported"
+DEBUG	discriminated: Renamed to "TransactionPublicRequest_Tax Rate Imported" 
+	 labels: "original_name:Tax Rate Imported scope:shared data_type:union refName:TransactionPublicRequest" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionPublicRequest property:tax_rate_imported originalName:Tax Rate Imported"
+DEBUG	discriminated: Renamed to "TransactionItemBuilder_Tax Rate Imported" 
+	 labels: "original_name:Tax Rate Imported scope:shared data_type:union refName:TransactionItemBuilder" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionItemBuilder property:tax_rate_imported originalName:Tax Rate Imported"
+DEBUG	discriminated: Renamed to "TransactionUpdate_Tax Rate Imported" 
+	 labels: "original_name:Tax Rate Imported scope:shared data_type:union refName:TransactionUpdate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionUpdate property:tax_rate_imported originalName:Tax Rate Imported"
+DEBUG	discriminated: Renamed to "CreditNoteCreate_Tax Rate Imported" 
+	 labels: "original_name:Tax Rate Imported scope:shared data_type:union refName:CreditNoteCreate" 
+	 registrationID: "scope:shared refType:Schemas refName:CreditNoteCreate property:tax_rate_imported originalName:Tax Rate Imported"
+DEBUG	discriminated: Renamed to "CreditNoteItemCreateUpdate_Tax Rate Imported" 
+	 labels: "original_name:Tax Rate Imported scope:shared data_type:union refName:CreditNoteItemCreateUpdate" 
+	 registrationID: "scope:shared refType:Schemas refName:CreditNoteItemCreateUpdate property:tax_rate_imported originalName:Tax Rate Imported"
+DEBUG	
+
+--- Renaming 3 types with name "Total Tax Amount Calculated" ---
+DEBUG	discriminated: Renamed to "TransactionCreate_Total Tax Amount Calculated" 
+	 labels: "original_name:Total Tax Amount Calculated scope:shared data_type:union refName:TransactionCreate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionCreate property:total_tax_amount_calculated originalName:Total Tax Amount Calculated"
+DEBUG	discriminated: Renamed to "TransactionPublicRequest_Total Tax Amount Calculated" 
+	 labels: "original_name:Total Tax Amount Calculated scope:shared data_type:union refName:TransactionPublicRequest" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionPublicRequest property:total_tax_amount_calculated originalName:Total Tax Amount Calculated"
+DEBUG	discriminated: Renamed to "TransactionUpdate_Total Tax Amount Calculated" 
+	 labels: "original_name:Total Tax Amount Calculated scope:shared data_type:union refName:TransactionUpdate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionUpdate property:total_tax_amount_calculated originalName:Total Tax Amount Calculated"
+DEBUG	
+
+--- Renaming 5 types with name "Tax Rate Calculated" ---
+DEBUG	discriminated: Renamed to "TransactionCreate_Tax Rate Calculated" 
+	 labels: "original_name:Tax Rate Calculated scope:shared data_type:union refName:TransactionCreate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionCreate property:tax_rate_calculated originalName:Tax Rate Calculated"
+DEBUG	discriminated: Renamed to "TransactionItemCreateUpdate_Tax Rate Calculated" 
+	 labels: "original_name:Tax Rate Calculated scope:shared data_type:union refName:TransactionItemCreateUpdate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionItemCreateUpdate property:tax_rate_calculated originalName:Tax Rate Calculated"
+DEBUG	discriminated: Renamed to "TransactionPublicRequest_Tax Rate Calculated" 
+	 labels: "original_name:Tax Rate Calculated scope:shared data_type:union refName:TransactionPublicRequest" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionPublicRequest property:tax_rate_calculated originalName:Tax Rate Calculated"
+DEBUG	discriminated: Renamed to "TransactionItemBuilder_Tax Rate Calculated" 
+	 labels: "original_name:Tax Rate Calculated scope:shared data_type:union refName:TransactionItemBuilder" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionItemBuilder property:tax_rate_calculated originalName:Tax Rate Calculated"
+DEBUG	discriminated: Renamed to "TransactionUpdate_Tax Rate Calculated" 
+	 labels: "original_name:Tax Rate Calculated scope:shared data_type:union refName:TransactionUpdate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionUpdate property:tax_rate_calculated originalName:Tax Rate Calculated"
+DEBUG	
+
+--- Renaming 3 types with name "Total Tax Liability Amount" ---
+DEBUG	discriminated: Renamed to "TransactionCreate_Total Tax Liability Amount" 
+	 labels: "original_name:Total Tax Liability Amount scope:shared data_type:union refName:TransactionCreate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionCreate property:total_tax_liability_amount originalName:Total Tax Liability Amount"
+DEBUG	discriminated: Renamed to "TransactionPublicRequest_Total Tax Liability Amount" 
+	 labels: "original_name:Total Tax Liability Amount scope:shared data_type:union refName:TransactionPublicRequest" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionPublicRequest property:total_tax_liability_amount originalName:Total Tax Liability Amount"
+DEBUG	discriminated: Renamed to "TransactionUpdate_Total Tax Liability Amount" 
+	 labels: "original_name:Total Tax Liability Amount scope:shared data_type:union refName:TransactionUpdate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionUpdate property:total_tax_liability_amount originalName:Total Tax Liability Amount"
+DEBUG	
+
+--- Renaming 7 types with name "Taxable Amount" ---
+DEBUG	discriminated: Renamed to "TransactionCreate_Taxable Amount" 
+	 labels: "original_name:Taxable Amount scope:shared data_type:union refName:TransactionCreate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionCreate property:taxable_amount originalName:Taxable Amount"
+DEBUG	discriminated: Renamed to "TransactionItemCreateUpdate_Taxable Amount" 
+	 labels: "original_name:Taxable Amount scope:shared data_type:union refName:TransactionItemCreateUpdate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionItemCreateUpdate property:taxable_amount originalName:Taxable Amount"
+DEBUG	discriminated: Renamed to "TransactionPublicRequest_Taxable Amount" 
+	 labels: "original_name:Taxable Amount scope:shared data_type:union refName:TransactionPublicRequest" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionPublicRequest property:taxable_amount originalName:Taxable Amount"
+DEBUG	discriminated: Renamed to "TransactionItemBuilder_Taxable Amount" 
+	 labels: "original_name:Taxable Amount scope:shared data_type:union refName:TransactionItemBuilder" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionItemBuilder property:taxable_amount originalName:Taxable Amount"
+DEBUG	discriminated: Renamed to "TransactionUpdate_Taxable Amount" 
+	 labels: "original_name:Taxable Amount scope:shared data_type:union refName:TransactionUpdate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionUpdate property:taxable_amount originalName:Taxable Amount"
+DEBUG	discriminated: Renamed to "CreditNoteCreate_Taxable Amount" 
+	 labels: "original_name:Taxable Amount scope:shared data_type:union refName:CreditNoteCreate" 
+	 registrationID: "scope:shared refType:Schemas refName:CreditNoteCreate property:taxable_amount originalName:Taxable Amount"
+DEBUG	discriminated: Renamed to "CreditNoteItemCreateUpdate_Taxable Amount" 
+	 labels: "original_name:Taxable Amount scope:shared data_type:union refName:CreditNoteItemCreateUpdate" 
+	 registrationID: "scope:shared refType:Schemas refName:CreditNoteItemCreateUpdate property:taxable_amount originalName:Taxable Amount"
+DEBUG	
+
+--- Renaming 2 types with name "Converted Total Amount" ---
+DEBUG	discriminated: Renamed to "TransactionCreate_Converted Total Amount" 
+	 labels: "original_name:Converted Total Amount scope:shared data_type:union refName:TransactionCreate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionCreate property:converted_total_amount originalName:Converted Total Amount"
+DEBUG	discriminated: Renamed to "TransactionUpdate_Converted Total Amount" 
+	 labels: "original_name:Converted Total Amount scope:shared data_type:union refName:TransactionUpdate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionUpdate property:converted_total_amount originalName:Converted Total Amount"
+DEBUG	
+
+--- Renaming 2 types with name "Converted Total Tax Amount Imported" ---
+DEBUG	discriminated: Renamed to "TransactionCreate_Converted Total Tax Amount Imported" 
+	 labels: "original_name:Converted Total Tax Amount Imported scope:shared data_type:union refName:TransactionCreate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionCreate property:converted_total_tax_amount_imported originalName:Converted Total Tax Amount Imported"
+DEBUG	discriminated: Renamed to "TransactionUpdate_Converted Total Tax Amount Imported" 
+	 labels: "original_name:Converted Total Tax Amount Imported scope:shared data_type:union refName:TransactionUpdate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionUpdate property:converted_total_tax_amount_imported originalName:Converted Total Tax Amount Imported"
+DEBUG	
+
+--- Renaming 2 types with name "Converted Total Tax Amount Calculated" ---
+DEBUG	discriminated: Renamed to "TransactionCreate_Converted Total Tax Amount Calculated" 
+	 labels: "original_name:Converted Total Tax Amount Calculated scope:shared data_type:union refName:TransactionCreate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionCreate property:converted_total_tax_amount_calculated originalName:Converted Total Tax Amount Calculated"
+DEBUG	discriminated: Renamed to "TransactionUpdate_Converted Total Tax Amount Calculated" 
+	 labels: "original_name:Converted Total Tax Amount Calculated scope:shared data_type:union refName:TransactionUpdate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionUpdate property:converted_total_tax_amount_calculated originalName:Converted Total Tax Amount Calculated"
+DEBUG	
+
+--- Renaming 2 types with name "Conversion Rate" ---
+DEBUG	discriminated: Renamed to "TransactionCreate_Conversion Rate" 
+	 labels: "original_name:Conversion Rate scope:shared data_type:union refName:TransactionCreate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionCreate property:conversion_rate originalName:Conversion Rate"
+DEBUG	discriminated: Renamed to "TransactionUpdate_Conversion Rate" 
+	 labels: "original_name:Conversion Rate scope:shared data_type:union refName:TransactionUpdate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionUpdate property:conversion_rate originalName:Conversion Rate"
+DEBUG	
+
+--- Renaming 4 types with name "Converted Taxable Amount" ---
+DEBUG	discriminated: Renamed to "TransactionCreate_Converted Taxable Amount" 
+	 labels: "original_name:Converted Taxable Amount scope:shared data_type:union refName:TransactionCreate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionCreate property:converted_taxable_amount originalName:Converted Taxable Amount"
+DEBUG	discriminated: Renamed to "TransactionItemCreateUpdate_Converted Taxable Amount" 
+	 labels: "original_name:Converted Taxable Amount scope:shared data_type:union refName:TransactionItemCreateUpdate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionItemCreateUpdate property:converted_taxable_amount originalName:Converted Taxable Amount"
+DEBUG	discriminated: Renamed to "TransactionItemBuilder_Converted Taxable Amount" 
+	 labels: "original_name:Converted Taxable Amount scope:shared data_type:union refName:TransactionItemBuilder" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionItemBuilder property:converted_taxable_amount originalName:Converted Taxable Amount"
+DEBUG	discriminated: Renamed to "TransactionUpdate_Converted Taxable Amount" 
+	 labels: "original_name:Converted Taxable Amount scope:shared data_type:union refName:TransactionUpdate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionUpdate property:converted_taxable_amount originalName:Converted Taxable Amount"
+DEBUG	
+
+--- Renaming 4 types with name "Converted Total Discount" ---
+DEBUG	discriminated: Renamed to "TransactionCreate_Converted Total Discount" 
+	 labels: "original_name:Converted Total Discount scope:shared data_type:union refName:TransactionCreate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionCreate property:converted_total_discount originalName:Converted Total Discount"
+DEBUG	discriminated: Renamed to "TransactionItemCreateUpdate_Converted Total Discount" 
+	 labels: "original_name:Converted Total Discount scope:shared data_type:union refName:TransactionItemCreateUpdate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionItemCreateUpdate property:converted_total_discount originalName:Converted Total Discount"
+DEBUG	discriminated: Renamed to "TransactionItemBuilder_Converted Total Discount" 
+	 labels: "original_name:Converted Total Discount scope:shared data_type:union refName:TransactionItemBuilder" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionItemBuilder property:converted_total_discount originalName:Converted Total Discount"
+DEBUG	discriminated: Renamed to "TransactionUpdate_Converted Total Discount" 
+	 labels: "original_name:Converted Total Discount scope:shared data_type:union refName:TransactionUpdate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionUpdate property:converted_total_discount originalName:Converted Total Discount"
+DEBUG	
+
+--- Renaming 4 types with name "Converted Subtotal" ---
+DEBUG	discriminated: Renamed to "TransactionCreate_Converted Subtotal" 
+	 labels: "original_name:Converted Subtotal scope:shared data_type:union refName:TransactionCreate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionCreate property:converted_subtotal originalName:Converted Subtotal"
+DEBUG	discriminated: Renamed to "TransactionItemCreateUpdate_Converted Subtotal" 
+	 labels: "original_name:Converted Subtotal scope:shared data_type:union refName:TransactionItemCreateUpdate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionItemCreateUpdate property:converted_subtotal originalName:Converted Subtotal"
+DEBUG	discriminated: Renamed to "TransactionItemBuilder_Converted Subtotal" 
+	 labels: "original_name:Converted Subtotal scope:shared data_type:union refName:TransactionItemBuilder" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionItemBuilder property:converted_subtotal originalName:Converted Subtotal"
+DEBUG	discriminated: Renamed to "TransactionUpdate_Converted Subtotal" 
+	 labels: "original_name:Converted Subtotal scope:shared data_type:union refName:TransactionUpdate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionUpdate property:converted_subtotal originalName:Converted Subtotal"
+DEBUG	
+
+--- Renaming 2 types with name "Converted Total Tax Liability Amount" ---
+DEBUG	discriminated: Renamed to "TransactionCreate_Converted Total Tax Liability Amount" 
+	 labels: "original_name:Converted Total Tax Liability Amount scope:shared data_type:union refName:TransactionCreate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionCreate property:converted_total_tax_liability_amount originalName:Converted Total Tax Liability Amount"
+DEBUG	discriminated: Renamed to "TransactionUpdate_Converted Total Tax Liability Amount" 
+	 labels: "original_name:Converted Total Tax Liability Amount scope:shared data_type:union refName:TransactionUpdate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionUpdate property:converted_total_tax_liability_amount originalName:Converted Total Tax Liability Amount"
+DEBUG	
+
+--- Renaming 3 types with name "Quantity" ---
+DEBUG	discriminated: Renamed to "TransactionItemCreateUpdate_Quantity" 
+	 labels: "original_name:Quantity scope:shared data_type:union refName:TransactionItemCreateUpdate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionItemCreateUpdate property:quantity originalName:Quantity"
+DEBUG	discriminated: Renamed to "TransactionItemBuilder_Quantity" 
+	 labels: "original_name:Quantity scope:shared data_type:union refName:TransactionItemBuilder" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionItemBuilder property:quantity originalName:Quantity"
+DEBUG	discriminated: Renamed to "CreditNoteItemCreateUpdate_Quantity" 
+	 labels: "original_name:Quantity scope:shared data_type:union refName:CreditNoteItemCreateUpdate" 
+	 registrationID: "scope:shared refType:Schemas refName:CreditNoteItemCreateUpdate property:quantity originalName:Quantity"
+DEBUG	
+
+--- Renaming 4 types with name "Amount" ---
+DEBUG	discriminated: Renamed to "TransactionItemCreateUpdate_Amount" 
+	 labels: "original_name:Amount scope:shared data_type:union refName:TransactionItemCreateUpdate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionItemCreateUpdate property:amount originalName:Amount"
+DEBUG	discriminated: Renamed to "TaxItemBuilder_Amount" 
+	 labels: "original_name:Amount scope:shared data_type:union refName:TaxItemBuilder" 
+	 registrationID: "scope:shared refType:Schemas refName:TaxItemBuilder property:amount originalName:Amount"
+DEBUG	discriminated: Renamed to "TransactionItemBuilder_Amount" 
+	 labels: "original_name:Amount scope:shared data_type:union refName:TransactionItemBuilder" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionItemBuilder property:amount originalName:Amount"
+DEBUG	discriminated: Renamed to "CreditNoteItemCreateUpdate_Amount" 
+	 labels: "original_name:Amount scope:shared data_type:union refName:CreditNoteItemCreateUpdate" 
+	 registrationID: "scope:shared refType:Schemas refName:CreditNoteItemCreateUpdate property:amount originalName:Amount"
+DEBUG	
+
+--- Renaming 4 types with name "Tax Amount Imported" ---
+DEBUG	discriminated: Renamed to "TransactionItemCreateUpdate_Tax Amount Imported" 
+	 labels: "original_name:Tax Amount Imported scope:shared data_type:union refName:TransactionItemCreateUpdate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionItemCreateUpdate property:tax_amount_imported originalName:Tax Amount Imported"
+DEBUG	discriminated: Renamed to "TransactionItemBuilder_Tax Amount Imported" 
+	 labels: "original_name:Tax Amount Imported scope:shared data_type:union refName:TransactionItemBuilder" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionItemBuilder property:tax_amount_imported originalName:Tax Amount Imported"
+DEBUG	discriminated: Renamed to "CreditNoteCreate_Tax Amount Imported" 
+	 labels: "original_name:Tax Amount Imported scope:shared data_type:union refName:CreditNoteCreate" 
+	 registrationID: "scope:shared refType:Schemas refName:CreditNoteCreate property:tax_amount_imported originalName:Tax Amount Imported"
+DEBUG	discriminated: Renamed to "CreditNoteItemCreateUpdate_Tax Amount Imported" 
+	 labels: "original_name:Tax Amount Imported scope:shared data_type:union refName:CreditNoteItemCreateUpdate" 
+	 registrationID: "scope:shared refType:Schemas refName:CreditNoteItemCreateUpdate property:tax_amount_imported originalName:Tax Amount Imported"
+DEBUG	
+
+--- Renaming 2 types with name "Tax Amount Calculated" ---
+DEBUG	discriminated: Renamed to "TransactionItemCreateUpdate_Tax Amount Calculated" 
+	 labels: "original_name:Tax Amount Calculated scope:shared data_type:union refName:TransactionItemCreateUpdate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionItemCreateUpdate property:tax_amount_calculated originalName:Tax Amount Calculated"
+DEBUG	discriminated: Renamed to "TransactionItemBuilder_Tax Amount Calculated" 
+	 labels: "original_name:Tax Amount Calculated scope:shared data_type:union refName:TransactionItemBuilder" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionItemBuilder property:tax_amount_calculated originalName:Tax Amount Calculated"
+DEBUG	
+
+--- Renaming 3 types with name "Converted Amount" ---
+DEBUG	discriminated: Renamed to "TransactionItemCreateUpdate_Converted Amount" 
+	 labels: "original_name:Converted Amount scope:shared data_type:union refName:TransactionItemCreateUpdate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionItemCreateUpdate property:converted_amount originalName:Converted Amount"
+DEBUG	discriminated: Renamed to "TaxItemBuilder_Converted Amount" 
+	 labels: "original_name:Converted Amount scope:shared data_type:union refName:TaxItemBuilder" 
+	 registrationID: "scope:shared refType:Schemas refName:TaxItemBuilder property:converted_amount originalName:Converted Amount"
+DEBUG	discriminated: Renamed to "TransactionItemBuilder_Converted Amount" 
+	 labels: "original_name:Converted Amount scope:shared data_type:union refName:TransactionItemBuilder" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionItemBuilder property:converted_amount originalName:Converted Amount"
+DEBUG	
+
+--- Renaming 2 types with name "Converted Tax Amount Imported" ---
+DEBUG	discriminated: Renamed to "TransactionItemCreateUpdate_Converted Tax Amount Imported" 
+	 labels: "original_name:Converted Tax Amount Imported scope:shared data_type:union refName:TransactionItemCreateUpdate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionItemCreateUpdate property:converted_tax_amount_imported originalName:Converted Tax Amount Imported"
+DEBUG	discriminated: Renamed to "TransactionItemBuilder_Converted Tax Amount Imported" 
+	 labels: "original_name:Converted Tax Amount Imported scope:shared data_type:union refName:TransactionItemBuilder" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionItemBuilder property:converted_tax_amount_imported originalName:Converted Tax Amount Imported"
+DEBUG	
+
+--- Renaming 2 types with name "Converted Tax Amount Calculated" ---
+DEBUG	discriminated: Renamed to "TransactionItemCreateUpdate_Converted Tax Amount Calculated" 
+	 labels: "original_name:Converted Tax Amount Calculated scope:shared data_type:union refName:TransactionItemCreateUpdate" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionItemCreateUpdate property:converted_tax_amount_calculated originalName:Converted Tax Amount Calculated"
+DEBUG	discriminated: Renamed to "TransactionItemBuilder_Converted Tax Amount Calculated" 
+	 labels: "original_name:Converted Tax Amount Calculated scope:shared data_type:union refName:TransactionItemBuilder" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionItemBuilder property:converted_tax_amount_calculated originalName:Converted Tax Amount Calculated"
+DEBUG	
+
+--- Renaming 2 types with name "Product Category" ---
+DEBUG	discriminated: Renamed to "ProductRead_Product Category" 
+	 labels: "original_name:Product Category scope:shared data_type:union refName:ProductRead" 
+	 registrationID: "scope:shared refType:Schemas refName:ProductRead property:product_category originalName:Product Category"
+DEBUG	discriminated: Renamed to "ProductCreateManual_Product Category" 
+	 labels: "original_name:Product Category scope:shared data_type:union refName:ProductCreateManual" 
+	 registrationID: "scope:shared refType:Schemas refName:ProductCreateManual property:product_category originalName:Product Category"
+DEBUG	
+
+--- Renaming 3 types with name "Product Subcategory" ---
+DEBUG	discriminated: Renamed to "ProductRead_Product Subcategory" 
+	 labels: "original_name:Product Subcategory scope:shared data_type:union refName:ProductRead" 
+	 registrationID: "scope:shared refType:Schemas refName:ProductRead property:product_subcategory originalName:Product Subcategory"
+DEBUG	discriminated: Renamed to "ProductCreateManual_Product Subcategory" 
+	 labels: "original_name:Product Subcategory scope:shared data_type:union refName:ProductCreateManual" 
+	 registrationID: "scope:shared refType:Schemas refName:ProductCreateManual property:product_subcategory originalName:Product Subcategory"
+DEBUG	
+
+--- Renaming 2 types with name "type" ---
+DEBUG	discriminated: Renamed to "TransactionEstimateRequest_type" 
+	 labels: "original_name:type scope:shared data_type:enum refName:TransactionEstimateRequest property:address" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionEstimateRequest property:addresses originalName:type"
+DEBUG	discriminated: Renamed to "TransactionEstimateResponse_type" 
+	 labels: "original_name:type scope:shared data_type:enum refName:TransactionEstimateResponse property:address" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionEstimateResponse property:addresses originalName:type"
+DEBUG	
+
+--- Renaming 2 types with name "address" ---
+DEBUG	discriminated: Renamed to "TransactionEstimateRequest_address" 
+	 labels: "original_name:address scope:shared refName:TransactionEstimateRequest" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionEstimateRequest originalName:address"
+DEBUG	discriminated: Renamed to "TransactionEstimateResponse_address" 
+	 labels: "original_name:address scope:shared refName:TransactionEstimateResponse" 
+	 registrationID: "scope:shared refType:Schemas refName:TransactionEstimateResponse originalName:address"
+DEBUG	
+
+--- Renaming 2 types with name "country" ---
+DEBUG	discriminated: Renamed to "get_customers_v1_country" 
+	 labels: "original_name:country operation:get_customers_v1 operationTag:Customers data_type:union parameter:queryParam" 
+	 registrationID: "scope:operations operationTag:Customers operation:get_customers_v1 parameter:queryParam originalName:country"
+DEBUG	discriminated: Renamed to "get_transactions_v1_transactions_get_country" 
+	 labels: "original_name:country operation:get_transactions_v1_transactions_get operationTag:Transactions data_type:union parameter:queryParam" 
+	 registrationID: "scope:operations operationTag:Transactions operation:get_transactions_v1_transactions_get parameter:queryParam originalName:country"
+DEBUG	
+
+Sdk (SDK empty)
+AddressValidation (SDK empty)
+AddressBase (phone: string, street_1: string, street_2: string ...)
+ CountryCodeEnum (enum: AF, AX, AL ...)
+SearchV1AddressValidationSearchPostResponse (ContentType: string, StatusCode: int32, RawResponse: response ...)
+  AddressSearchResponse (address_submitted: AddressSubmittedResponse, response_address: AddressResponseData, verification_status: string ...)
+   AddressSubmittedResponse (street_1: string, street_2: string, city: string ...)
+   AddressResponseData (street_1: string, street_2: string, city: string ...)
+ErrorResponse (error)
+BackendSrcAddressValidationResponsesValidationErrorResponse (error)
+  BackendSrcAddressValidationResponsesValidationErrorItem (type: string, loc: array, msg: string ...)
+SearchV1AddressValidationSearchPostSecurity (APIKeyHeader: string, HTTPBearer: string)
+SuggestionsV1AddressValidationSuggestionsPostRequest (x-organization-id: string, ValidationAddress: ValidationAddress)
+ ValidationAddress (line1: string, line2: string, line3: string ...)
+SuggestionsV1AddressValidationSuggestionsPostResponse (ContentType: string, StatusCode: int32, RawResponse: response ...)
+SuggestionsV1AddressValidationSuggestionsPostSecurity (APIKeyHeader: string, HTTPBearer: string)
+Customers (SDK empty)
+GetCustomersV1Request (search_query: string, country: array, state: string ...)
+  GetCustomersV1Country (union)
+GetCustomersV1Response (ContentType: string, StatusCode: int32, RawResponse: response ...)
+ PageCustomerRead (items: array, total: integer, page: integer ...)
+   CustomerRead (phone: string, street_1: string, street_2: string ...)
+    StatusEnum (enum: ACTIVE, ARCHIVED)
+    SourceEnum (enum: BIGCOMMERCE, CHARGEBEE, SHOPIFY ...)
+    AddressStatus (enum: UNVERIFIED, INVALID, PARTIALLY_VERIFIED ...)
+BackendSrcCustomersResponsesValidationErrorResponse (error)
+  BackendSrcCustomersResponsesValidationErrorItem (type: string, loc: array, msg: string ...)
+GetCustomersV1Security (APIKeyHeader: string, HTTPBearer: string)
+CreateCustomerV1CustomersPostRequest (x-organization-id: string, CustomerCreate: CustomerCreate)
+ CustomerCreate (phone: string, street_1: string, street_2: string ...)
+CreateCustomerV1CustomersPostResponse (ContentType: string, StatusCode: int32, RawResponse: response ...)
+CreateCustomerV1CustomersPostSecurity (APIKeyHeader: string, HTTPBearer: string)
+GetCustomerByIdV1CustomersCustomerIdGetRequest (customer_id: string, x-organization-id: string)
+GetCustomerByIdV1CustomersCustomerIdGetResponse (ContentType: string, StatusCode: int32, RawResponse: response ...)
+HttpValidationError (error)
+  ValidationError (loc: array, msg: string, type: string)
+    Loc (union)
+GetCustomerByIdV1CustomersCustomerIdGetSecurity (APIKeyHeader: string, HTTPBearer: string)
+UpdateCustomerV1CustomersCustomerIdPutRequest (customer_id: string, x-organization-id: string, CustomerUpdate: CustomerUpdate)
+ CustomerUpdate (phone: string, street_1: string, street_2: string ...)
+UpdateCustomerV1CustomersCustomerIdPutResponse (ContentType: string, StatusCode: int32, RawResponse: response ...)
+UpdateCustomerV1CustomersCustomerIdPutSecurity (APIKeyHeader: string, HTTPBearer: string)
+GetCustomerByExternalIdV1CustomersExternalExternalIdGetRequest (external_id: string, x-organization-id: string)
+GetCustomerByExternalIdV1CustomersExternalExternalIdGetResponse (ContentType: string, StatusCode: int32, RawResponse: response ...)
+GetCustomerByExternalIdV1CustomersExternalExternalIdGetSecurity (APIKeyHeader: string, HTTPBearer: string)
+GetTransactionsByCustomerIdV1CustomersCustomerIdTransactionsGetRequest (customer_id: string, x-organization-id: string)
+GetTransactionsByCustomerIdV1CustomersCustomerIdTransactionsGetResponse (ContentType: string, StatusCode: int32, RawResponse: response ...)
+  TransactionRead (requires_exemption: ExemptionRequired, organization_id: string, external_id: string ...)
+   ExemptionRequired (jurisdiction: string, customer_id: string, organization_id: string ...)
+    ExemptionType (enum: customer, wholesale, transaction)
+    ExemptionStatus (enum: ACTIVE, INACTIVE, EXPIRED ...)
+   TransactionStatusEnum (enum: PENDING, COMMITTED, CANCELLED ...)
+   TransactionRefundStatus (enum: FULLY_REFUNDED, PARTIALLY_REFUNDED)
+   TransactionExemptStatusEnum (enum: NOT_EXEMPT, PARTIALLY_EXEMPT, FULLY_EXEMPT)
+    Exemption (id: string, created_at: date-time, updated_at: date-time ...)
+   TaxLiabilitySourceEnum (enum: CALCULATED, COLLECTED)
+   CurrencyEnum (enum: AED, AFN, ALL ...)
+   ProcessingStatusEnum (enum: NEW, UPDATED, QUEUED ...)
+    TransactionAddressReadOutput (phone: string, street_1: string, street_2: string ...)
+     AddressType (enum: BILL_TO, SHIP_TO, SHIP_FROM ...)
+    TransactionItemRead (external_id: string, organization_id: string, date: date-time ...)
+     TaxExemptionEnum (enum: PRODUCT, TRANSACTION, CUSTOMER ...)
+      TaxItemRead (rule_id: string, rate: string, amount: string ...)
+       TaxItemTypeEnum (enum: IMPORTED, CALCULATED)
+       JurisdictionType (enum: COUNTRY, FEDERAL, STATE ...)
+   TransactionTypeEnum (enum: SALE, FULL_CREDIT_NOTE, PARTIAL_CREDIT_NOTE ...)
+GetTransactionsByCustomerIdV1CustomersCustomerIdTransactionsGetSecurity (APIKeyHeader: string, HTTPBearer: string)
+CreateTransactionByCustomerIdV1CustomersCustomerIdTransactionsPostRequest (customer_id: string, x-organization-id: string, TransactionCreate: TransactionCreate)
+ TransactionCreate (requires_exemption: ExemptionRequired, organization_id: string, external_id: string ...)
+  TransactionCreateTotalAmount (union)
+  TransactionCreateTotalTaxAmountImported (union)
+  TransactionCreateTaxRateImported (union)
+  TransactionCreateTotalTaxAmountCalculated (union)
+  TransactionCreateTaxRateCalculated (union)
+  TransactionCreateTotalTaxLiabilityAmount (union)
+  TransactionCreateTaxableAmount (union)
+  TransactionCreateConvertedTotalAmount (union)
+  TransactionCreateConvertedTotalTaxAmountImported (union)
+  TransactionCreateConvertedTotalTaxAmountCalculated (union)
+  TransactionCreateConversionRate (union)
+  TransactionCreateConvertedTaxableAmount (union)
+  TransactionCreateConvertedTotalDiscount (union)
+  TransactionCreateConvertedSubtotal (union)
+  TransactionCreateConvertedTotalTaxLiabilityAmount (union)
+   TransactionAddressBuilder (phone: string, street_1: string, street_2: string ...)
+   TransactionItemCreateUpdate (external_id: string, organization_id: string, date: date-time ...)
+    TransactionItemCreateUpdateQuantity (union)
+    TransactionItemCreateUpdateAmount (union)
+    TransactionItemCreateUpdateTaxAmountImported (union)
+    TransactionItemCreateUpdateTaxRateImported (union)
+    TransactionItemCreateUpdateTaxAmountCalculated (union)
+    TransactionItemCreateUpdateTaxRateCalculated (union)
+    TransactionItemCreateUpdateConvertedAmount (union)
+    TransactionItemCreateUpdateConvertedTaxableAmount (union)
+    TransactionItemCreateUpdateConvertedTaxAmountImported (union)
+    TransactionItemCreateUpdateConvertedTaxAmountCalculated (union)
+    TransactionItemCreateUpdateConvertedTotalDiscount (union)
+    TransactionItemCreateUpdateConvertedSubtotal (union)
+    TransactionItemCreateUpdateTaxableAmount (union)
+     TaxItemBuilder (rule_id: string, rate: union, amount: union ...)
+      Rate (union)
+      TaxItemBuilderAmount (union)
+      TaxItemBuilderConvertedAmount (union)
+    DiscountBuilder (external_id: string, applied_to: AppliedTo, discount_amount: union)
+     AppliedTo (enum: TRANSACTION, TRANSACTION_ITEM)
+     DiscountAmount (union)
+CreateTransactionByCustomerIdV1CustomersCustomerIdTransactionsPostResponse (ContentType: string, StatusCode: int32, RawResponse: response ...)
+CreateTransactionByCustomerIdV1CustomersCustomerIdTransactionsPostSecurity (APIKeyHeader: string, HTTPBearer: string)
+Exemptions (SDK empty)
+GetExemptionsV1ExemptionsGetRequest (status__in: string, country_code: array, jurisdiction: string ...)
+  CountryCode (union)
+GetExemptionsV1ExemptionsGetResponse (ContentType: string, StatusCode: int32, RawResponse: response ...)
+ FastapiPaginationDefaultPageExemptionRead2 (items: array, total: integer, page: integer ...)
+   BackendSrcExemptionsModelsExemptionRead (exemption_type: ExemptionType, jurisdiction: string, country_code: CountryCodeEnum ...)
+BackendSrcExemptionsResponsesValidationErrorResponse (error)
+  BackendSrcExemptionsResponsesValidationErrorItem (type: string, loc: array, msg: string ...)
+GetExemptionsV1ExemptionsGetSecurity (APIKeyHeader: string, HTTPBearer: string)
+CreateExemptionV1ExemptionsPostRequest (x-organization-id: string, ExemptionCreate: ExemptionCreate)
+ ExemptionCreate (exemption_type: ExemptionType, jurisdiction: string, country_code: CountryCodeEnum ...)
+CreateExemptionV1ExemptionsPostResponse (ContentType: string, StatusCode: int32, RawResponse: response ...)
+ BackendSrcExemptionsSerializersExemptionRead (country_code: CountryCodeEnum, jurisdiction: string, start_date: date ...)
+   AttachmentRead (related_entity_id: string, related_entity_type: RelatedEntityType, id: string)
+    RelatedEntityType (enum: EXEMPTION, REGISTRATION, FILING ...)
+CreateExemptionV1ExemptionsPostSecurity (APIKeyHeader: string, HTTPBearer: string)
+GetExemptionByIdV1ExemptionsExemptionIdGetRequest (exemption_id: string, x-organization-id: string)
+GetExemptionByIdV1ExemptionsExemptionIdGetResponse (ContentType: string, StatusCode: int32, RawResponse: response ...)
+GetExemptionByIdV1ExemptionsExemptionIdGetSecurity (APIKeyHeader: string, HTTPBearer: string)
+UploadExemptionCertificateV1ExemptionsExemptionIdAttachmentsPostRequest (exemption_id: string, x-organization-id: string, Body_upload_exemption_certificate_v1_exemptions__exemption_id__attachments_post: Body_upload_exemption_certificate_v1_exemptions__exemption_id__attachments_post)
+ BodyUploadExemptionCertificateV1ExemptionsExemptionIdAttachmentsPost (file: class)
+  File (fileName: string, content: bytes)
+UploadExemptionCertificateV1ExemptionsExemptionIdAttachmentsPostResponse (ContentType: string, StatusCode: int32, RawResponse: response ...)
+UploadExemptionCertificateV1ExemptionsExemptionIdAttachmentsPostSecurity (APIKeyHeader: string, HTTPBearer: string)
+GetAttachmentsForExemptionV1ExemptionsExemptionIdAttachmentsGetRequest (exemption_id: string, x-organization-id: string)
+GetAttachmentsForExemptionV1ExemptionsExemptionIdAttachmentsGetResponse (ContentType: string, StatusCode: int32, RawResponse: response ...)
+GetAttachmentsForExemptionV1ExemptionsExemptionIdAttachmentsGetSecurity (APIKeyHeader: string, HTTPBearer: string)
+Nexus (SDK empty)
+GetNexusForOrgV1NexusGetRequest (status__in: string, state_code: string, country_code__in: string ...)
+GetNexusForOrgV1NexusGetResponse (ContentType: string, StatusCode: int32, RawResponse: response ...)
+ PageNexusResponse (items: array, total: integer, page: integer ...)
+   NexusResponse (processing_status: NexusStatusEnum, status: NexusStateEnum, country_code: CountryCodeEnum ...)
+    NexusStatusEnum (enum: NEEDS_RERUN, UP_TO_DATE, NOT_READY)
+    NexusStateEnum (enum: EXPOSED, APPROACHING, PENDING_REGISTRATION ...)
+    TreatmentEnum (enum: INCLUDED, EXCLUDED, DEPENDS ...)
+    SalesOrTransactionsEnum (enum: EITHER, SALES, BOTH ...)
+    PeriodModelEnum (enum: CURRENT_OR_PREVIOUS, PRECEDING_YEAR_FROM_OCTOBER, CALENDAR_YEAR ...)
+    RegistrationsRegimeEnum (enum: STANDARD, SIMPLIFIED)
+    NexusTypeEnum (enum: CANADA_FEDERAL, EU_AGGREGATOR, STATE ...)
+GetNexusForOrgV1NexusGetSecurity (APIKeyHeader: string, HTTPBearer: string)
+Products (SDK empty)
+GetProductsV1ProductsGetRequest (query: string, status__in: string, product_category__in: string ...)
+GetProductsV1ProductsGetResponse (ContentType: string, StatusCode: int32, RawResponse: response ...)
+ PageProductRead (items: array, total: integer, page: integer ...)
+   ProductRead (id: string, external_id: string, sku: array ...)
+    Code (union)
+     ProductCodeEnum (enum: CODE_0000, CODE_1001, CODE_1002 ...)
+    ProductStatusEnum (enum: APPROVED, PARTIALLY_APPROVED, PENDING)
+    ProductReadProductCategory (union)
+     ProductCategoryEnum (enum: PHYSICAL, DIGITAL, SERVICE ...)
+    ProductReadProductSubcategory (union)
+     ProductSubCategoryEnum (enum: UNKNOWN, SAAS, DIGITAL_GENERAL ...)
+BackendSrcProductsResponsesValidationErrorResponse (error)
+  BackendSrcProductsResponsesValidationErrorItem (type: string, loc: array, msg: string ...)
+GetProductsV1ProductsGetSecurity (APIKeyHeader: string, HTTPBearer: string)
+CreateProductV1ProductsPostRequest (x-organization-id: string, ProductCreateManual: ProductCreateManual)
+ ProductCreateManual (external_id: string, name: string, description: string ...)
+  ProductCreateManualProductCategory (union)
+  ProductCreateManualProductSubcategory (union)
+CreateProductV1ProductsPostResponse (ContentType: string, StatusCode: int32, RawResponse: response ...)
+CreateProductV1ProductsPostSecurity (APIKeyHeader: string, HTTPBearer: string)
+GetProductByIdV1ProductsProductIdGetRequest (product_id: string, x-organization-id: string)
+GetProductByIdV1ProductsProductIdGetResponse (ContentType: string, StatusCode: int32, RawResponse: response ...)
+GetProductByIdV1ProductsProductIdGetSecurity (APIKeyHeader: string, HTTPBearer: string)
+UpdateProductV1ProductsProductIdPutRequest (product_id: string, x-organization-id: string, RequestBody: union)
+ Product (union)
+  ProductUpdate (id: string, external_id: string, sku: array ...)
+  ProductUpdateV2 (name: string, status: ProductStatusEnum, product_category: string ...)
+UpdateProductV1ProductsProductIdPutResponse (ContentType: string, StatusCode: int32, RawResponse: response ...)
+UpdateProductV1ProductsProductIdPutSecurity (APIKeyHeader: string, HTTPBearer: string)
+GetProductCategoriesV1ProductsCategoriesGetRequest (x-organization-id: string)
+GetProductCategoriesV1ProductsCategoriesGetResponse (ContentType: string, StatusCode: int32, RawResponse: response ...)
+  ProductCategories (name: string, subcategories: array)
+    ProductSubCategory (name: string, description: string, example: string ...)
+GetProductCategoriesV1ProductsCategoriesGetSecurity (APIKeyHeader: string, HTTPBearer: string)
+Transactions (SDK empty)
+GetTransactionsV1TransactionsGetRequest (state_code: string, transaction_type: string, transaction_source: string ...)
+  GetTransactionsV1TransactionsGetCountry (union)
+GetTransactionsV1TransactionsGetResponse (ContentType: string, StatusCode: int32, RawResponse: response ...)
+ PageTransactionRead (items: array, total: integer, page: integer ...)
+BackendSrcTransactionsResponsesValidationErrorResponse (error)
+  BackendSrcTransactionsResponsesValidationErrorItem (type: string, loc: array, msg: string ...)
+GetTransactionsV1TransactionsGetSecurity (APIKeyHeader: string, HTTPBearer: string)
+CreateTransactionV1TransactionsPostRequest (x-organization-id: string, TransactionPublicRequest: TransactionPublicRequest)
+ TransactionPublicRequest (requires_exemption: ExemptionRequired, organization_id: string, external_id: string ...)
+  TransactionPublicRequestTotalAmount (union)
+  TransactionPublicRequestTotalTaxAmountImported (union)
+  TransactionPublicRequestTaxRateImported (union)
+  TransactionPublicRequestTotalTaxAmountCalculated (union)
+  TransactionPublicRequestTaxRateCalculated (union)
+  TransactionPublicRequestTotalTaxLiabilityAmount (union)
+  TransactionPublicRequestTaxableAmount (union)
+   TransactionAddressPublic (phone: string, street_1: string, street_2: string ...)
+   TransactionItemBuilder (external_id: string, organization_id: string, date: date-time ...)
+    TransactionItemBuilderQuantity (union)
+    TransactionItemBuilderAmount (union)
+    TransactionItemBuilderTaxAmountImported (union)
+    TransactionItemBuilderTaxRateImported (union)
+    TransactionItemBuilderTaxAmountCalculated (union)
+    TransactionItemBuilderTaxRateCalculated (union)
+    TransactionItemBuilderConvertedAmount (union)
+    TransactionItemBuilderConvertedTaxableAmount (union)
+    TransactionItemBuilderConvertedTaxAmountImported (union)
+    TransactionItemBuilderConvertedTaxAmountCalculated (union)
+    TransactionItemBuilderConvertedTotalDiscount (union)
+    TransactionItemBuilderConvertedSubtotal (union)
+    TransactionItemBuilderTaxableAmount (union)
+  Customer (union)
+   CustomerBaseBase (phone: string, street_1: string, street_2: string ...)
+   TransactionImportCustomer (phone: string, street_1: string, street_2: string ...)
+CreateTransactionV1TransactionsPostResponse (ContentType: string, StatusCode: int32, RawResponse: response ...)
+CreateTransactionV1TransactionsPostSecurity (APIKeyHeader: string, HTTPBearer: string)
+GetTransactionByExternalIdV1TransactionsExternalExternalIdGetRequest (external_id: string, x-organization-id: string)
+GetTransactionByExternalIdV1TransactionsExternalExternalIdGetResponse (ContentType: string, StatusCode: int32, RawResponse: response ...)
+GetTransactionByExternalIdV1TransactionsExternalExternalIdGetSecurity (APIKeyHeader: string, HTTPBearer: string)
+UpdateTransactionV1TransactionsTransactionIdPutRequest (transaction_id: string, x-organization-id: string, TransactionUpdate: TransactionUpdate)
+ TransactionUpdate (requires_exemption: ExemptionRequired, organization_id: string, external_id: string ...)
+  TransactionUpdateTotalAmount (union)
+  TransactionUpdateTotalTaxAmountImported (union)
+  TransactionUpdateTaxRateImported (union)
+  TransactionUpdateTotalTaxAmountCalculated (union)
+  TransactionUpdateTaxRateCalculated (union)
+  TransactionUpdateTotalTaxLiabilityAmount (union)
+  TransactionUpdateTaxableAmount (union)
+  TransactionUpdateConvertedTotalAmount (union)
+  TransactionUpdateConvertedTotalTaxAmountImported (union)
+  TransactionUpdateConvertedTotalTaxAmountCalculated (union)
+  TransactionUpdateConversionRate (union)
+  TransactionUpdateConvertedTaxableAmount (union)
+  TransactionUpdateConvertedTotalDiscount (union)
+  TransactionUpdateConvertedSubtotal (union)
+  TransactionUpdateConvertedTotalTaxLiabilityAmount (union)
+UpdateTransactionV1TransactionsTransactionIdPutResponse (ContentType: string, StatusCode: int32, RawResponse: response ...)
+UpdateTransactionV1TransactionsTransactionIdPutSecurity (APIKeyHeader: string, HTTPBearer: string)
+GetTransactionByIdV1TransactionsTransactionIdGetRequest (transaction_id: string, x-organization-id: string)
+GetTransactionByIdV1TransactionsTransactionIdGetResponse (ContentType: string, StatusCode: int32, RawResponse: response ...)
+GetTransactionByIdV1TransactionsTransactionIdGetSecurity (APIKeyHeader: string, HTTPBearer: string)
+GetTransactionsByFilingIdV1TransactionsFilingsFilingIdGetRequest (filing_id: string, x-organization-id: string)
+GetTransactionsByFilingIdV1TransactionsFilingsFilingIdGetResponse (ContentType: string, StatusCode: int32, RawResponse: response ...)
+GetTransactionsByFilingIdV1TransactionsFilingsFilingIdGetSecurity (APIKeyHeader: string, HTTPBearer: string)
+CreateCreditNoteByTransactionIdV1TransactionsOriginalTransactionIdCreditNotesPostRequest (original_transaction_id: string, x-organization-id: string, CreditNoteCreate: CreditNoteCreate)
+ CreditNoteCreate (external_id: string, date: date-time, status: enum ...)
+  Status (enum: PENDING, CANCELLED, COMMITTED)
+  CreditNoteCreateTotalAmount (union)
+  CreditNoteCreateTaxAmountImported (union)
+  CreditNoteCreateTaxRateImported (union)
+  CreditNoteCreateTaxableAmount (union)
+   CreditNoteItemCreateUpdate (external_id: string, date: date-time, description: string ...)
+    CreditNoteItemCreateUpdateQuantity (union)
+    CreditNoteItemCreateUpdateAmount (union)
+    CreditNoteItemCreateUpdateTaxAmountImported (union)
+    CreditNoteItemCreateUpdateTaxRateImported (union)
+    CreditNoteItemCreateUpdateTaxableAmount (union)
+CreateCreditNoteByTransactionIdV1TransactionsOriginalTransactionIdCreditNotesPostResponse (ContentType: string, StatusCode: int32, RawResponse: response ...)
+CreateCreditNoteByTransactionIdV1TransactionsOriginalTransactionIdCreditNotesPostSecurity (APIKeyHeader: string, HTTPBearer: string)
+UpdateCreditNoteByTransactionIdV1TransactionsOriginalTransactionIdCreditNotesCreditNoteIdPutRequest (original_transaction_id: string, credit_note_id: string, x-organization-id: string ...)
+UpdateCreditNoteByTransactionIdV1TransactionsOriginalTransactionIdCreditNotesCreditNoteIdPutResponse (ContentType: string, StatusCode: int32, RawResponse: response ...)
+UpdateCreditNoteByTransactionIdV1TransactionsOriginalTransactionIdCreditNotesCreditNoteIdPutSecurity (APIKeyHeader: string, HTTPBearer: string)
+TaxEstimation (SDK empty)
+EstimateTaxV1TaxEstimatePostRequest (simulate_nexus_met: boolean, x-organization-id: string, TransactionEstimateRequest: TransactionEstimateRequest)
+ TransactionEstimateRequest (date: date-time, external_id: string, total_amount: union ...)
+  TotalAmountOfTheTransaction,AfterDiscounts (union)
+  CustomerBaseInput (phone: string, street_1: string, street_2: string ...)
+   TransactionEstimateRequestAddress (type: enum, phone: string, street_1: string ...)
+    TransactionEstimateRequestType (enum: SHIP_TO, BILL_TO)
+   TransactionItemEstimateBase (external_id: string, date: date-time, description: string ...)
+    QuantityOfTheProduct (union)
+    TotalAmountOfThisTransactionItem,AfterDiscounts (union)
+EstimateTaxV1TaxEstimatePostResponse (ContentType: string, StatusCode: int32, RawResponse: response ...)
+ PageTransactionEstimateResponse (items: array, total: integer, page: integer ...)
+   TransactionEstimateResponse (date: date-time, external_id: string, total_amount: string ...)
+    CustomerBaseOutput (phone: string, street_1: string, street_2: string ...)
+     TransactionEstimateResponseAddress (type: enum, phone: string, street_1: string ...)
+      TransactionEstimateResponseType (enum: SHIP_TO, BILL_TO)
+     TransactionItemEstimateResponse (external_id: string, date: date-time, description: string ...)
+       TaxItemEstimate (rate: string, name: string, amount: string ...)
+        TaxItemReturnReasonEnum (enum: NO_RULE_FOUND, RULE_FOUND_TAXABLE, RULE_FOUND_NOT_TAXABLE ...)
+BackendSrcTaxEstimationResponsesValidationErrorResponse (error)
+  BackendSrcTaxEstimationResponsesValidationErrorItem (type: string, loc: array, msg: string ...)
+EstimateTaxV1TaxEstimatePostSecurity (APIKeyHeader: string, HTTPBearer: string)
+Security (APIKeyHeader: string)
+

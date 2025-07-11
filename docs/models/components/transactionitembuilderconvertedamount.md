@@ -1,0 +1,4 @@
+# TransactionItemBuilderConvertedAmount
+
+Converted item amount.
+

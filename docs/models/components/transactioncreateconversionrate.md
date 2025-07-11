@@ -1,0 +1,4 @@
+# TransactionCreateConversionRate
+
+Currency conversion rate.
+

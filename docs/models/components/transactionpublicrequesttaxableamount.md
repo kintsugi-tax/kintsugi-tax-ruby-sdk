@@ -1,0 +1,4 @@
+# TransactionPublicRequestTaxableAmount
+
+Taxable amount.
+

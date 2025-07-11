@@ -1,0 +1,4 @@
+# TransactionPublicRequestTotalTaxAmountCalculated
+
+Calculated tax amount.
+

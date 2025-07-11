@@ -1,0 +1,274 @@
+overlay: 1.0.0
+x-speakeasy-jsonpath: rfc9535
+info:
+  title: Speakeasy Modifications
+  version: 0.0.2
+  x-speakeasy-metadata:
+    after: ""
+    before: ""
+    type: speakeasy-modifications
+actions:
+  - target: $["paths"]["/v1/products/{product_id}"]["get"]
+    update:
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      after: sdk.products.get()
+      before: sdk.Products.get_product_by_id_v1_products__product_id__get()
+      created_at: 1752088793616
+      reviewed_at: 1752088815110
+      type: method-name
+  - target: $["paths"]["/v1/address_validation/suggestions"]["post"]
+    update:
+      x-speakeasy-group: addressValidation
+      x-speakeasy-name-override: suggestions
+    x-speakeasy-metadata:
+      after: sdk.addressValidation.suggestions()
+      before: sdk.Address Validation.suggestions_v1_address_validation_suggestions_post()
+      created_at: 1752088793616
+      reviewed_at: 1752088815110
+      type: method-name
+  - target: $["paths"]["/v1/products/{product_id}"]["put"]
+    update:
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      after: sdk.products.update()
+      before: sdk.Products.update_product_v1_products__product_id__put()
+      created_at: 1752088793616
+      reviewed_at: 1752088815110
+      type: method-name
+  - target: $["paths"]["/v1/products/categories/"]["get"]
+    update:
+      x-speakeasy-name-override: listCategories
+    x-speakeasy-metadata:
+      after: sdk.products.listCategories()
+      before: sdk.Products.get_product_categories_v1_products_categories__get()
+      created_at: 1752088793616
+      reviewed_at: 1752088815110
+      type: method-name
+  - target: $["paths"]["/v1/transactions/{transaction_id}"]["put"]
+    update:
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      after: sdk.transactions.update()
+      before: sdk.Transactions.update_transaction_v1_transactions__transaction_id__put()
+      created_at: 1752088793616
+      reviewed_at: 1752088815110
+      type: method-name
+  - target: $["paths"]["/v1/customers/{customer_id}"]["get"]
+    update:
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      after: sdk.customers.get()
+      before: sdk.Customers.get_customer_by_id_v1_customers__customer_id__get()
+      created_at: 1752088793616
+      reviewed_at: 1752088815110
+      type: method-name
+  - target: $["paths"]["/v1/transactions"]["get"]
+    update:
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      after: sdk.transactions.list()
+      before: sdk.Transactions.get_transactions_v1_transactions_get()
+      created_at: 1752088793616
+      reviewed_at: 1752088815110
+      type: method-name
+  - target: $["paths"]["/v1/exemptions/{exemption_id}/attachments"]["get"]
+    update:
+      x-speakeasy-name-override: getAttachments
+    x-speakeasy-metadata:
+      after: sdk.exemptions.getAttachments()
+      before: sdk.Exemptions.get_attachments_for_exemption_v1_exemptions__exemption_id__attachments_get()
+      created_at: 1752088793616
+      reviewed_at: 1752088815110
+      type: method-name
+  - target: $["paths"]["/v1/products/"]["get"]
+    update:
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      after: sdk.products.list()
+      before: sdk.Products.get_products_v1_products__get()
+      created_at: 1752088793616
+      reviewed_at: 1752088815110
+      type: method-name
+  - target: $["paths"]["/v1/exemptions/{exemption_id}/attachments"]["post"]
+    update:
+      x-speakeasy-name-override: uploadCertificate
+    x-speakeasy-metadata:
+      after: sdk.exemptions.uploadCertificate()
+      before: sdk.Exemptions.upload_exemption_certificate_v1_exemptions__exemption_id__attachments_post()
+      created_at: 1752088793616
+      reviewed_at: 1752088815110
+      type: method-name
+  - target: $["paths"]["/v1/transactions/{original_transaction_id}/credit_notes"]["post"]
+    update:
+      x-speakeasy-name-override: createCreditNote
+    x-speakeasy-metadata:
+      after: sdk.transactions.createCreditNote()
+      before: sdk.Transactions.create_credit_note_by_transaction_id_v1_transactions__original_transaction_id__credit_notes_post()
+      created_at: 1752088793616
+      reviewed_at: 1752088815110
+      type: method-name
+  - target: $["paths"]["/v1/exemptions"]["post"]
+    update:
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      after: sdk.exemptions.create()
+      before: sdk.Exemptions.create_exemption_v1_exemptions_post()
+      created_at: 1752088793616
+      reviewed_at: 1752088815110
+      type: method-name
+  - target: $["paths"]["/v1/transactions"]["post"]
+    update:
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      after: sdk.transactions.create()
+      before: sdk.Transactions.create_transaction_v1_transactions_post()
+      created_at: 1752088793616
+      reviewed_at: 1752088815110
+      type: method-name
+  - target: $["paths"]["/v1/products/"]["post"]
+    update:
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      after: sdk.products.create()
+      before: sdk.Products.create_product_v1_products__post()
+      created_at: 1752088793616
+      reviewed_at: 1752088815110
+      type: method-name
+  - target: $["paths"]["/v1/customers/{customer_id}/transactions"]["get"]
+    update:
+      x-speakeasy-name-override: getTransactions
+    x-speakeasy-metadata:
+      after: sdk.customers.getTransactions()
+      before: sdk.Customers.get_transactions_by_customer_id_v1_customers__customer_id__transactions_get()
+      created_at: 1752088793616
+      reviewed_at: 1752088815110
+      type: method-name
+  - target: $["paths"]["/v1/customers"]["get"]
+    update:
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      after: sdk.customers.list()
+      before: sdk.Customers.get_customers_v1()
+      created_at: 1752088793616
+      reviewed_at: 1752088815111
+      type: method-name
+  - target: $["paths"]["/v1/transactions/external/{external_id}"]["get"]
+    update:
+      x-speakeasy-name-override: getByExternalId
+    x-speakeasy-metadata:
+      after: sdk.transactions.getByExternalId()
+      before: sdk.Transactions.get_transaction_by_external_id_v1_transactions_external__external_id__get()
+      created_at: 1752088793616
+      reviewed_at: 1752088815111
+      type: method-name
+  - target: $["paths"]["/v1/transactions/{transaction_id}"]["get"]
+    update:
+      x-speakeasy-name-override: getById
+    x-speakeasy-metadata:
+      after: sdk.transactions.getById()
+      before: sdk.Transactions.get_transaction_by_id_v1_transactions__transaction_id__get()
+      created_at: 1752088793616
+      reviewed_at: 1752088815111
+      type: method-name
+  - target: $["paths"]["/v1/customers"]["post"]
+    update:
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      after: sdk.customers.create()
+      before: sdk.Customers.create_customer_v1_customers_post()
+      created_at: 1752088793616
+      reviewed_at: 1752088815111
+      type: method-name
+  - target: $["paths"]["/v1/address_validation/search"]["post"]
+    update:
+      x-speakeasy-group: addressValidation
+      x-speakeasy-name-override: search
+    x-speakeasy-metadata:
+      after: sdk.addressValidation.search()
+      before: sdk.Address Validation.search_v1_address_validation_search_post()
+      created_at: 1752088793616
+      reviewed_at: 1752088815111
+      type: method-name
+  - target: $["paths"]["/v1/nexus"]["get"]
+    update:
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      after: sdk.nexus.list()
+      before: sdk.Nexus.get_nexus_for_org_v1_nexus_get()
+      created_at: 1752088793616
+      reviewed_at: 1752088815111
+      type: method-name
+  - target: $["paths"]["/v1/transactions/{original_transaction_id}/credit_notes/{credit_note_id}"]["put"]
+    update:
+      x-speakeasy-name-override: updateCreditNote
+    x-speakeasy-metadata:
+      after: sdk.transactions.updateCreditNote()
+      before: sdk.Transactions.update_credit_note_by_transaction_id_v1_transactions__original_transaction_id__credit_notes__credit_note_id__put()
+      created_at: 1752088793616
+      reviewed_at: 1752088815111
+      type: method-name
+  - target: $["paths"]["/v1/exemptions/{exemption_id}"]["get"]
+    update:
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      after: sdk.exemptions.get()
+      before: sdk.Exemptions.get_exemption_by_id_v1_exemptions__exemption_id__get()
+      created_at: 1752088793616
+      reviewed_at: 1752088815111
+      type: method-name
+  - target: $["paths"]["/v1/customers/{customer_id}"]["put"]
+    update:
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      after: sdk.customers.update()
+      before: sdk.Customers.update_customer_v1_customers__customer_id__put()
+      created_at: 1752088793616
+      reviewed_at: 1752088815111
+      type: method-name
+  - target: $["paths"]["/v1/customers/external/{external_id}"]["get"]
+    update:
+      x-speakeasy-name-override: getByExternalId
+    x-speakeasy-metadata:
+      after: sdk.customers.getByExternalId()
+      before: sdk.Customers.get_customer_by_external_id_v1_customers_external__external_id__get()
+      created_at: 1752088793616
+      reviewed_at: 1752088815111
+      type: method-name
+  - target: $["paths"]["/v1/customers/{customer_id}/transactions"]["post"]
+    update:
+      x-speakeasy-name-override: createTransaction
+    x-speakeasy-metadata:
+      after: sdk.customers.createTransaction()
+      before: sdk.Customers.create_transaction_by_customer_id_v1_customers__customer_id__transactions_post()
+      created_at: 1752088793616
+      reviewed_at: 1752088815111
+      type: method-name
+  - target: $["paths"]["/v1/tax/estimate"]["post"]
+    update:
+      x-speakeasy-group: taxEstimation
+      x-speakeasy-name-override: estimateTax
+    x-speakeasy-metadata:
+      after: sdk.taxEstimation.estimateTax()
+      before: sdk.Tax Estimation.estimate_tax_v1_tax_estimate_post()
+      created_at: 1752088793616
+      reviewed_at: 1752088815111
+      type: method-name
+  - target: $["paths"]["/v1/transactions/filings/{filing_id}"]["get"]
+    update:
+      x-speakeasy-name-override: getByFilingId
+    x-speakeasy-metadata:
+      after: sdk.transactions.getByFilingId()
+      before: sdk.Transactions.get_transactions_by_filing_id_v1_transactions_filings__filing_id__get()
+      created_at: 1752088793616
+      reviewed_at: 1752088815111
+      type: method-name
+  - target: $["paths"]["/v1/exemptions"]["get"]
+    update:
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      after: sdk.exemptions.list()
+      before: sdk.Exemptions.get_exemptions_v1_exemptions_get()
+      created_at: 1752088793616
+      reviewed_at: 1752088815111
+      type: method-name

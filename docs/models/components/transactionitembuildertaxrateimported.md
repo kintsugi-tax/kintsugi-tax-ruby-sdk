@@ -1,0 +1,4 @@
+# TransactionItemBuilderTaxRateImported
+
+Imported tax rate.
+

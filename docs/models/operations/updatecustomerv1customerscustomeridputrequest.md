@@ -1,0 +1,10 @@
+# UpdateCustomerV1CustomersCustomerIdPutRequest
+
+
+## Fields
+
+| Field                                                                       | Type                                                                        | Required                                                                    | Description                                                                 | Example                                                                     |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `customer_id`                                                               | *::String*                                                                  | :heavy_check_mark:                                                          | Unique identifier of the customer to be retrieved.                          |                                                                             |
+| `x_organization_id`                                                         | *T.nilable(::String)*                                                       | :heavy_check_mark:                                                          | The unique identifier for the organization making the request               | org_12345                                                                   |
+| `customer_update`                                                           | [Models::Components::CustomerUpdate](../../models/shared/customerupdate.md) | :heavy_check_mark:                                                          | N/A                                                                         |                                                                             |

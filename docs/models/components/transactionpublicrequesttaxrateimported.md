@@ -1,0 +1,4 @@
+# TransactionPublicRequestTaxRateImported
+
+Imported tax rate.
+

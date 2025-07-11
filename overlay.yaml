@@ -1,0 +1,165 @@
+overlay: 1.0.0
+x-speakeasy-jsonpath: rfc9535
+info:
+  title: Kintsugi Tax Platform API Overlay - Allowlist 
+  version: 1.0.0
+actions:
+  # =============================================================================
+  # ALLOWLIST APPROACH - SECURE BY DEFAULT
+  # =============================================================================
+  # Step 1: Mark all desired endpoints with x-public: true
+  # Step 2: Remove all paths that don't have x-public: true
+  # This ensures only explicitly allowed endpoints are exposed in SDKs
+  # =============================================================================
+
+  # === ADDRESS VALIDATION ENDPOINTS ===
+  - target: $.paths['/v1/address_validation/search'].post
+    update:
+      x-public: true
+      
+  - target: $.paths['/v1/address_validation/suggestions'].post
+    update:
+      x-public: true
+
+  # === CUSTOMERS ENDPOINTS ===
+  - target: $.paths['/v1/customers'].get
+    update:
+      x-public: true
+      
+  - target: $.paths['/v1/customers'].post
+    update:
+      x-public: true
+      
+  - target: $.paths['/v1/customers/{customer_id}'].get
+    update:
+      x-public: true
+      
+  - target: $.paths['/v1/customers/{customer_id}'].put
+    update:
+      x-public: true
+      
+  - target: $.paths['/v1/customers/external/{external_id}'].get
+    update:
+      x-public: true
+      
+  - target: $.paths['/v1/customers/{customer_id}/transactions'].get
+    update:
+      x-public: true
+      
+  - target: $.paths['/v1/customers/{customer_id}/transactions'].post
+    update:
+      x-public: true
+
+  # === EXEMPTIONS ENDPOINTS ===
+  - target: $.paths['/v1/exemptions'].get
+    update:
+      x-public: true
+      
+  - target: $.paths['/v1/exemptions'].post
+    update:
+      x-public: true
+      
+  - target: $.paths['/v1/exemptions/{exemption_id}'].get
+    update:
+      x-public: true
+      
+  - target: $.paths['/v1/exemptions/{exemption_id}/attachments'].post
+    update:
+      x-public: true
+      
+  - target: $.paths['/v1/exemptions/{exemption_id}/attachments'].get
+    update:
+      x-public: true
+
+  # === NEXUS ENDPOINTS ===
+  - target: $.paths['/v1/nexus'].get
+    update:
+      x-public: true
+
+  # === PRODUCTS ENDPOINTS ===
+  - target: $.paths['/v1/products/'].get
+    update:
+      x-public: true
+      
+  - target: $.paths['/v1/products/'].post
+    update:
+      x-public: true
+      
+  - target: $.paths['/v1/products/{product_id}'].get
+    update:
+      x-public: true
+      
+  - target: $.paths['/v1/products/{product_id}'].put
+    update:
+      x-public: true
+      
+  - target: $.paths['/v1/products/categories/'].get
+    update:
+      x-public: true
+
+  # === TRANSACTIONS ENDPOINTS ===
+  - target: $.paths['/v1/transactions'].get
+    update:
+      x-public: true
+      
+  - target: $.paths['/v1/transactions'].post
+    update:
+      x-public: true
+      
+  - target: $.paths['/v1/transactions/external/{external_id}'].get
+    update:
+      x-public: true
+      
+  - target: $.paths['/v1/transactions/{transaction_id}'].put
+    update:
+      x-public: true
+      
+  - target: $.paths['/v1/transactions/{transaction_id}'].get
+    update:
+      x-public: true
+      
+  - target: $.paths['/v1/transactions/filings/{filing_id}'].get
+    update:
+      x-public: true
+      
+  - target: $.paths['/v1/transactions/{original_transaction_id}/credit_notes'].post
+    update:
+      x-public: true
+      
+  - target: $.paths['/v1/transactions/{original_transaction_id}/credit_notes/{credit_note_id}'].put
+    update:
+      x-public: true
+
+  # === TAX ESTIMATION ENDPOINTS ===
+  - target: $.paths['/v1/tax/estimate'].post
+    update:
+      x-public: true
+
+  # =============================================================================
+  # STEP 2: Explicitly remove problematic marketplace endpoints
+  # =============================================================================
+  - target: $.paths['/v1/marketplaces/{source_type}']
+    remove: true
+    
+  - target: $.paths['/v1/marketplaces/{marketplace_id}']
+    remove: true
+    
+  - target: $.paths['/v1/marketplaces/{marketplace_id}/transactions']
+    remove: true
+
+  # =============================================================================
+  # STEP 3: Remove all other paths that don't have x-public: true
+  # =============================================================================
+  - target: $.paths.*[?@['x-public'] != true]
+    remove: true
+
+# =============================================================================
+# SECURITY BENEFITS:
+# =============================================================================
+# 1. Default deny - any new endpoint is automatically excluded
+# 2. Explicit allow - only marked endpoints are exposed
+# 3. RFC 9535 JSONPath - industry standard, more robust filtering
+# 4. Future-resistant - new admin/internal endpoints won't leak
+# 5. Easy to audit - clear list of what's publicly exposed
+# 6. Maintainable - adding new public endpoints requires explicit action
+# =============================================================================
