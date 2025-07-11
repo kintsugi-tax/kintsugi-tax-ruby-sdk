@@ -8,6 +8,15 @@ generation:
     nameResolutionDec2023: false
     parameterOrderingFeb2024: false
     requestResponseComponentNamesFeb2024: false
+  operationNameOverrides:
+    createCreditNoteByTransactionIdV1TransactionsOriginalTransactionIdCreditNotesPost: createCreditNote
+    updateCreditNoteByTransactionIdV1TransactionsOriginalTransactionIdCreditNotesCreditNoteIdPut: updateCreditNote
+    createTransactionByCustomerIdV1CustomersCustomerIdTransactionsPost: createTransactionByCustomer
+    getTransactionsByCustomerIdV1CustomersCustomerIdTransactionsGet: getTransactionsByCustomer
+    getTransactionsByFilingIdV1TransactionsFilingsFilingIdGet: getTransactionsByFiling
+    getTransactionByExternalIdV1TransactionsExternalExternalIdGet: getTransactionByExternalId
+    uploadExemptionCertificateV1ExemptionsExemptionIdAttachmentsPost: uploadExemptionCert
+    getAttachmentsForExemptionV1ExemptionsExemptionIdAttachmentsGet: getExemptionAttachments
 ruby:
   version: 5.4.0
   additionalDependencies: {}
@@ -28,21 +37,4 @@ ruby:
   maxMethodParams: 0
   packageName: open_api_sdk
   responseFormat: flat
-  templateVersion: v2
-  nameOverrides:
-    - operationId: ^createCreditNoteByTransactionId.*
-      methodName: createCreditNote
-    - operationId: ^updateCreditNoteByTransactionId.*
-      methodName: updateCreditNote
-    - operationId: ^createTransactionByCustomerId.*
-      methodName: createTransactionByCustomer
-    - operationId: ^getTransactionsByCustomerId.*
-      methodName: getTransactionsByCustomer
-    - operationId: ^getTransactionsByFilingId.*
-      methodName: getTransactionsByFiling
-    - operationId: ^getTransactionByExternalId.*
-      methodName: getTransactionByExternalId
-    - operationId: ^uploadExemptionCertificate.*
-      methodName: uploadExemptionCert
-    - operationId: ^getAttachmentsForExemption.*
-      methodName: getExemptionAttachments 
+  templateVersion: v2 
