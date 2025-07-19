@@ -1,0 +1,25 @@
+speakeasyVersion: 1.583.0
+sources:
+    kintsugi-overlay:
+        sourceNamespace: kintsugi-overlay
+        sourceRevisionDigest: sha256:6d1edbd4e69bb56d78b2b2b9659f181f82677748301b5675f071dacf0b690a43
+        sourceBlobDigest: sha256:810385eb8cb449850101d1c9bb76805fb675a8a3649587a7d172233aafe36a7b
+        tags:
+            - latest
+            - speakeasy-sdk-regen-1752278714
+            - 1.0.0
+targets: {}
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        kintsugi-overlay:
+            inputs:
+                - location: https://api.trykintsugi.com/openapi.json
+            overlays:
+                - location: ./overlay.yaml
+                - location: .speakeasy/speakeasy-modifications-overlay.yaml
+            output: output.yaml
+            registry:
+                location: registry.speakeasyapi.dev/kintsugi-ai/tax-platform/kintsugi-overlay
+    targets: {}
