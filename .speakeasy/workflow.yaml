@@ -10,18 +10,4 @@ sources:
         output: output.yaml
         registry:
             location: registry.speakeasyapi.dev/kintsugi-ai/tax-platform/kintsugi-overlay
-targets:
-    # Ruby SDK temporarily disabled due to TooLongFileName gem build errors
-    # This is a known limitation of the Ruby gem packaging system with long filenames
-    # ruby:
-    #     target: ruby
-    #     source: kintsugi-overlay
-    #     publish:
-    #         rubygems:
-    #             token: $rubygems_auth_token
-    #     codeSamples:
-    #         registry:
-    #             location: registry.speakeasyapi.dev/kintsugi-ai/tax-platform/kintsugi-overlay-ruby-code-samples
-    #         labelOverride:
-    #             fixedValue: Ruby (SDK)
-    #         blocking: false 
+targets: {}
