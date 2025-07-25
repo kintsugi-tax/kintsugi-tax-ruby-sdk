@@ -1,12 +1,12 @@
-speakeasyVersion: 1.586.0
+speakeasyVersion: 1.589.0
 sources:
     kintsugi-overlay:
         sourceNamespace: kintsugi-overlay
-        sourceRevisionDigest: sha256:4d94c203c155091140dbdc30cfa7ee43b05f5906581431ff7b7a34fad2f4d1c3
-        sourceBlobDigest: sha256:52c5ba1444d1a17da9545834790998b19bd65b6f616abdc2f4fbfb6f30c110db
+        sourceRevisionDigest: sha256:ab76d1aefcd74ef41be0161a1b181d1a1e059726cdf60192e29ccb2bebe5cf27
+        sourceBlobDigest: sha256:873a50ebc14eef46c69e0acddb078320831bb77245dcbf6b742ecad95a088a90
         tags:
             - latest
-            - speakeasy-sdk-regen-1753202005
+            - speakeasy-sdk-regen-1753229152
             - 1.0.0
 targets: {}
 workflow:

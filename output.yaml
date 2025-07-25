@@ -12011,6 +12011,7 @@ components:
         - "TRADE_SHOW_PRESENCE"
         - "DIGITAL_INFRASTRUCTURE_LOCALIZED"
         - "PERMANENT_ESTABLISHMENT"
+        - "ENTER_CONTRACTS_WITH_LOCALS"
       title: "PhysicalNexusCategory"
     "PhysicalNexusCreate":
       properties:
@@ -18792,6 +18793,7 @@ components:
         - "INCLUDED"
         - "EXCLUDED"
         - "DEPENDS"
+        - "INCLUDE_IF_PRESENCE"
         - "YES_SALES_NO_TRANSACTIONS"
       title: "TreatmentEnum"
     "UiOrganizationCreate":
