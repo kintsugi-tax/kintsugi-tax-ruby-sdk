@@ -11,8 +11,6 @@ sources:
         registry:
             location: registry.speakeasyapi.dev/kintsugi-ai/tax-platform/kintsugi-overlay
 targets:
-    Ruby SDK temporarily disabled due to TooLongFileName gem build errors
-    This is a known limitation of the Ruby gem packaging system with long filenames
     ruby:
         target: ruby
         source: kintsugi-overlay
