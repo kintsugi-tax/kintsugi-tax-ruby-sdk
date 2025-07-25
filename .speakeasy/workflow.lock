@@ -15,7 +15,7 @@ workflow:
     sources:
         kintsugi-overlay:
             inputs:
-                - location: https://api.trykintsugi.com/openapi.json
+                - location: https://api-doc.trykintsugi.com/openapi.json
             overlays:
                 - location: ./overlay.yaml
                 - location: .speakeasy/speakeasy-modifications-overlay.yaml
