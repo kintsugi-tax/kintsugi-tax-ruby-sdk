@@ -122,21 +122,92 @@ actions:
     update:
       x-public: true
       
-  # === MODIFY EXISTING CREDIT NOTE OPERATIONS TO BE SHORTER ===
-  # Keep original paths but drastically shorten operationIds and summaries
-  - target: $.paths['/v1/transactions/{original_transaction_id}/credit_notes'].post
+  # === COPY OPERATIONS TO SHORTER PATHS AND REMOVE LONG ONES ===
+  # Strategy: Copy the full operation objects to much shorter paths
+  
+  # First, let's add the operations to a shorter path
+  - target: $.paths['/v1/credits']
     update:
-      operationId: "createCredit"
-      summary: "Create Credit"
-      x-speakeasy-name-override: "createCredit"
-      x-public: true
-      
-  - target: $.paths['/v1/transactions/{original_transaction_id}/credit_notes/{credit_note_id}'].put
+      post: 
+        tags: ["Transactions"]
+        summary: "Create Credit"
+        description: "Create a new credit note for a specific transaction."
+        operationId: createCredit
+        x-speakeasy-name-override: createCredit
+        x-public: true
+        parameters:
+          - name: original_transaction_id
+            in: query
+            required: true
+            description: "The transaction ID to create credit note for"
+            schema:
+              type: string
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreditNoteCreate"
+        responses:
+          "200":
+            description: "Credit note created successfully"
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/TransactionRead"
+          "422":
+            description: "Validation Error"
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTPValidationError"
+        security:
+          - APIKeyHeader-CustomHeader: []
+
+  - target: $.paths['/v1/credits/{credit_id}']
     update:
-      operationId: "updateCredit"
-      summary: "Update Credit"
-      x-speakeasy-name-override: "updateCredit"
-      x-public: true
+      put:
+        tags: ["Transactions"]
+        summary: "Update Credit"
+        description: "Update an existing credit note."
+        operationId: updateCredit
+        x-speakeasy-name-override: updateCredit
+        x-public: true
+        parameters:
+          - name: credit_id
+            in: path
+            required: true
+            description: "The credit note ID"
+            schema:
+              type: string
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreditNoteCreate"
+        responses:
+          "200":
+            description: "Credit note updated successfully"
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/TransactionRead"
+          "422":
+            description: "Validation Error"
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTPValidationError"
+        security:
+          - APIKeyHeader-CustomHeader: []
+          
+  # Now remove the problematic long paths
+  - target: $.paths['/v1/transactions/{original_transaction_id}/credit_notes']
+    remove: true
+    
+  - target: $.paths['/v1/transactions/{original_transaction_id}/credit_notes/{credit_note_id}']
+    remove: true
 
 
 
