@@ -101,16 +101,8 @@ actions:
       created_at: 1752088793616
       reviewed_at: 1752088815110
       type: method-name
-  - target: $["paths"]["/v1/transactions/{original_transaction_id}/credit_notes"]["post"]
-    update:
-      operationId: createCredit
-      x-speakeasy-name-override: createCredit
-    x-speakeasy-metadata:
-      after: sdk.transactions.createCreditNote()
-      before: sdk.Transactions.create_credit_note_by_transaction_id_v1_transactions__original_transaction_id__credit_notes_post()
-      created_at: 1752088793616
-      reviewed_at: 1752088815110
-      type: method-name
+
+
   - target: $["paths"]["/v1/exemptions"]["post"]
     update:
       x-speakeasy-name-override: create
@@ -204,16 +196,7 @@ actions:
       created_at: 1752088793616
       reviewed_at: 1752088815111
       type: method-name
-  - target: $["paths"]["/v1/transactions/{original_transaction_id}/credit_notes/{credit_note_id}"]["put"]
-    update:
-      operationId: updateCredit
-      x-speakeasy-name-override: updateCredit
-    x-speakeasy-metadata:
-      after: sdk.transactions.updateCreditNote()
-      before: sdk.Transactions.update_credit_note_by_transaction_id_v1_transactions__original_transaction_id__credit_notes__credit_note_id__put()
-      created_at: 1752088793616
-      reviewed_at: 1752088815111
-      type: method-name
+
   - target: $["paths"]["/v1/exemptions/{exemption_id}"]["get"]
     update:
       x-speakeasy-name-override: get

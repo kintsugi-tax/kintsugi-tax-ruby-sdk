@@ -122,13 +122,13 @@ actions:
     update:
       x-public: true
       
-  - target: $.paths['/v1/transactions/{original_transaction_id}/credit_notes'].post
-    update:
-      x-public: true
-      
-  - target: $.paths['/v1/transactions/{original_transaction_id}/credit_notes/{credit_note_id}'].put
-    update:
-      x-public: true
+  # === REMOVE PROBLEMATIC LONG PATHS ===
+  # These paths generate filenames that are too long for Ruby gems
+  - target: $.paths['/v1/transactions/{original_transaction_id}/credit_notes']
+    remove: true
+    
+  - target: $.paths['/v1/transactions/{original_transaction_id}/credit_notes/{credit_note_id}']
+    remove: true
 
   # === TAX ESTIMATION ENDPOINTS ===
   - target: $.paths['/v1/tax/estimate'].post

@@ -1,0 +1,652 @@
+45s
+Run speakeasy-api/sdk-generation-action@v15
+  
+/usr/bin/docker run --name ghcriospeakeasyapisdkgenerationactionv15_fdc5f4 --label 26127e --workdir /github/workspace --rm -e "INPUT_SPEAKEASY_VERSION" -e "INPUT_GITHUB_ACCESS_TOKEN" -e "INPUT_MODE" -e "INPUT_FORCE" -e "INPUT_SIGNED_COMMITS" -e "INPUT_SPEAKEASY_API_KEY" -e "INPUT_PR_CREATION_PAT" -e "INPUT_OUTPUT_TESTS" -e "INPUT_SPEAKEASY_SERVER_URL" -e "INPUT_WORKING_DIRECTORY" -e "INPUT_OPENAPI_DOC_AUTH_TOKEN" -e "INPUT_TARGET" -e "INPUT_REGISTRY_TAGS" -e "INPUT_PUSH_CODE_SAMPLES_ONLY" -e "INPUT_SET_VERSION" -e "INPUT_CLI_ENVIRONMENT_VARIABLES" -e "INPUT_PNPM_VERSION" -e "INPUT_POETRY_VERSION" -e "INPUT_GITHUB_REPOSITORY" -e "INPUT_SOURCES" -e "INPUT_CODE_SAMPLES" -e "INPUT_MAX_SUGGESTIONS" -e "INPUT_ACTION" -e "INPUT_BRANCH_NAME" -e "INPUT_CLI_OUTPUT" -e "INPUT_PREVIOUS_GEN_VERSION" -e "INPUT_OPENAI_API_KEY" -e "INPUT_GPG_FINGERPRINT" -e "INPUT_TARGET_DIRECTORY" -e "INPUT_REGISTRY_NAME" -e "INPUT_SKIP_TESTING" -e "SPEAKEASY_API_KEY" -e "SPEAKEASY_SERVER_URL" -e "OPENAI_API_KEY" -e "OPENAPI_DOC_
+INFO:  Cloning repo: https://github.com/kintsugi-tax/kintsugi-tax-ruby-sdk from ref: refs/heads/main
+Enumerating objects: 937, done.
+Counting objects:   0% (1/937)
+Counting objects:   1% (10/937)
+Counting objects:   2% (19/937)
+Counting objects:   3% (29/937)
+Counting objects:   4% (38/937)
+Counting objects:   5% (47/937)
+Counting objects:   6% (57/937)
+Counting objects:   7% (66/937)
+Counting objects:   8% (75/937)
+Counting objects:   9% (85/937)
+Counting objects:  10% (94/937)
+Counting objects:  11% (104/937)
+Counting objects:  12% (113/937)
+Counting objects:  13% (122/937)
+Counting objects:  14% (132/937)
+Counting objects:  15% (141/937)
+Counting objects:  16% (150/937)
+Counting objects:  17% (160/937)
+Counting objects:  18% (169/937)
+Counting objects:  19% (179/937)
+Counting objects:  20% (188/937)
+Counting objects:  21% (197/937)
+Counting objects:  22% (207/937)
+Counting objects:  23% (216/937)
+Counting objects:  24% (225/937)
+Counting objects:  25% (235/937)
+Counting objects:  26% (244/937)
+Counting objects:  27% (253/937)
+Counting objects:  28% (263/937)
+Counting objects:  29% (272/937)
+Counting objects:  30% (282/937)
+Counting objects:  31% (291/937)
+Counting objects:  32% (300/937)
+Counting objects:  33% (310/937)
+Counting objects:  34% (319/937)
+Counting objects:  35% (328/937)
+Counting objects:  36% (338/937)
+Counting objects:  37% (347/937)
+Counting objects:  38% (357/937)
+Counting objects:  39% (366/937)
+Counting objects:  40% (375/937)
+Counting objects:  41% (385/937)
+Counting objects:  42% (394/937)
+Counting objects:  43% (403/937)
+Counting objects:  44% (413/937)
+Counting objects:  45% (422/937)
+Counting objects:  46% (432/937)
+Counting objects:  47% (441/937)
+Counting objects:  48% (450/937)
+Counting objects:  49% (460/937)
+Counting objects:  50% (469/937)
+Counting objects:  51% (478/937)
+Counting objects:  52% (488/937)
+Counting objects:  53% (497/937)
+Counting objects:  54% (506/937)
+Counting objects:  55% (516/937)
+Counting objects:  56% (525/937)
+Counting objects:  57% (535/937)
+Counting objects:  58% (544/937)
+Counting objects:  59% (553/937)
+Counting objects:  60% (563/937)
+Counting objects:  61% (572/937)
+Counting objects:  62% (581/937)
+Counting objects:  63% (591/937)
+Counting objects:  64% (600/937)
+Counting objects:  65% (610/937)
+Counting objects:  66% (619/937)
+Counting objects:  67% (628/937)
+Counting objects:  68% (638/937)
+Counting objects:  69% (647/937)
+Counting objects:  70% (656/937)
+Counting objects:  71% (666/937)
+Counting objects:  72% (675/937)
+Counting objects:  73% (685/937)
+Counting objects:  74% (694/937)
+Counting objects:  75% (703/937)
+Counting objects:  76% (713/937)
+Counting objects:  77% (722/937)
+Counting objects:  78% (731/937)
+Counting objects:  79% (741/937)
+Counting objects:  80% (750/937)
+Counting objects:  81% (759/937)
+Counting objects:  82% (769/937)
+Counting objects:  83% (778/937)
+Counting objects:  84% (788/937)
+Counting objects:  85% (797/937)
+Counting objects:  86% (806/937)
+Counting objects:  87% (816/937)
+Counting objects:  88% (825/937)
+Counting objects:  89% (834/937)
+Counting objects:  90% (844/937)
+Counting objects:  91% (853/937)
+Counting objects:  92% (863/937)
+Counting objects:  93% (872/937)
+Counting objects:  94% (881/937)
+Counting objects:  95% (891/937)
+Counting objects:  96% (900/937)
+Counting objects:  97% (909/937)
+Counting objects:  98% (919/937)
+Counting objects:  99% (928/937)
+Counting objects: 100% (937/937)
+Counting objects: 100% (937/937), done.
+Compressing objects:   0% (1/282)
+Compressing objects:   1% (3/282)
+Compressing objects:   2% (6/282)
+Compressing objects:   3% (9/282)
+Compressing objects:   4% (12/282)
+Compressing objects:   5% (15/282)
+Compressing objects:   6% (17/282)
+Compressing objects:   7% (20/282)
+Compressing objects:   8% (23/282)
+Compressing objects:   9% (26/282)
+Compressing objects:  10% (29/282)
+Compressing objects:  11% (32/282)
+Compressing objects:  12% (34/282)
+Compressing objects:  13% (37/282)
+Compressing objects:  14% (40/282)
+Compressing objects:  15% (43/282)
+Compressing objects:  16% (46/282)
+Compressing objects:  17% (48/282)
+Compressing objects:  18% (51/282)
+Compressing objects:  19% (54/282)
+Compressing objects:  20% (57/282)
+Compressing objects:  21% (60/282)
+Compressing objects:  22% (63/282)
+Compressing objects:  23% (65/282)
+Compressing objects:  24% (68/282)
+Compressing objects:  25% (71/282)
+Compressing objects:  26% (74/282)
+Compressing objects:  27% (77/282)
+Compressing objects:  28% (79/282)
+Compressing objects:  29% (82/282)
+Compressing objects:  30% (85/282)
+Compressing objects:  31% (88/282)
+Compressing objects:  32% (91/282)
+Compressing objects:  33% (94/282)
+Compressing objects:  34% (96/282)
+Compressing objects:  35% (99/282)
+Compressing objects:  36% (102/282)
+Compressing objects:  37% (105/282)
+Compressing objects:  38% (108/282)
+Compressing objects:  39% (110/282)
+Compressing objects:  40% (113/282)
+Compressing objects:  41% (116/282)
+Compressing objects:  42% (119/282)
+Compressing objects:  43% (122/282)
+Compressing objects:  44% (125/282)
+Compressing objects:  45% (127/282)
+Compressing objects:  46% (130/282)
+Compressing objects:  47% (133/282)
+Compressing objects:  48% (136/282)
+Compressing objects:  49% (139/282)
+Compressing objects:  50% (141/282)
+Compressing objects:  51% (144/282)
+Compressing objects:  52% (147/282)
+Compressing objects:  53% (150/282)
+Compressing objects:  54% (153/282)
+Compressing objects:  55% (156/282)
+Compressing objects:  56% (158/282)
+Compressing objects:  57% (161/282)
+Compressing objects:  58% (164/282)
+Compressing objects:  59% (167/282)
+Compressing objects:  60% (170/282)
+Compressing objects:  61% (173/282)
+Compressing objects:  62% (175/282)
+Compressing objects:  63% (178/282)
+Compressing objects:  64% (181/282)
+Compressing objects:  65% (184/282)
+Compressing objects:  66% (187/282)
+Compressing objects:  67% (189/282)
+Compressing objects:  68% (192/282)
+Compressing objects:  69% (195/282)
+Compressing objects:  70% (198/282)
+Compressing objects:  71% (201/282)
+Compressing objects:  72% (204/282)
+Compressing objects:  73% (206/282)
+Compressing objects:  74% (209/282)
+Compressing objects:  75% (212/282)
+Compressing objects:  76% (215/282)
+Compressing objects:  77% (218/282)
+Compressing objects:  78% (220/282)
+Compressing objects:  79% (223/282)
+Compressing objects:  80% (226/282)
+Compressing objects:  81% (229/282)
+Compressing objects:  82% (232/282)
+Compressing objects:  83% (235/282)
+Compressing objects:  84% (237/282)
+Compressing objects:  85% (240/282)
+Compressing objects:  86% (243/282)
+Compressing objects:  87% (246/282)
+Compressing objects:  88% (249/282)
+Compressing objects:  89% (251/282)
+Compressing objects:  90% (254/282)
+Compressing objects:  91% (257/282)
+Compressing objects:  92% (260/282)
+Compressing objects:  93% (263/282)
+Compressing objects:  94% (266/282)
+Compressing objects:  95% (268/282)
+Compressing objects:  96% (271/282)
+Compressing objects:  97% (274/282)
+Compressing objects:  98% (277/282)
+Compressing objects:  99% (280/282)
+Compressing objects: 100% (282/282)
+Compressing objects: 100% (282/282), done.
+Total 937 (delta 626), reused 937 (delta 626), pack-reused 0 (from 0)
+Downloading speakeasy cli version:  v1.592.1
+Extracted speakeasy cli to:  /bin
+INFO:  Existing PR not found
+INFO:  Creating branch speakeasy-sdk-regen-1753893452
+Generating ruby SDK in /github/workspace/repo
+force input enabled - setting SPEAKEASY_FORCE_GENERATION=true
+INFO:  Setting outputs:
+publish_ruby=true
+INFO:  Deleting branch speakeasy-sdk-regen-1753893452
+Error: error running workflow: error running speakeasy command: speakeasy run -t ruby --installationURLs {"ruby":"https://github.com/kintsugi-tax/kintsugi-tax-ruby-sdk"} --repo-subdirs {"ruby":""} -r https://github.com/kintsugi-tax/kintsugi-tax-ruby-sdk.git --skip-testing - exit status 1
+ Running with latest Speakeasy version
+                                     
+                 
+» Target: ruby...
+                 
+INFO    Running target ruby (ruby)...
+                             
+» Source: kintsugi-overlay...
+                             
+INFO    Running Source kintsugi-overlay...
+                                
+» Downloading remote document...
+                                
+INFO    Downloaded https://api-doc.trykintsugi.com/openapi.json to /github/workspace/repo/.speakeasy/temp/downloaded_oyhcwUhiTj.json
+                      
+» Applying Overlays...
+                      
+INFO    Applying 2 overlays into /github/workspace/repo/.speakeasy/temp/overlay_pBdSZVErYQ.yaml...
+                       
+» Apply 2 overlay(s)...
+                       
+Successfully applied 2 overlays into /github/workspace/repo/.speakeasy/temp/overlay_pBdSZVErYQ.yaml
+                        
+» Validating Document...
+                        
+INFO    Linting OpenAPI document...
+INFO    Using ruleset speakeasy-generation
+INFO    No global security found, hoisting most used operation security to global level	{"schemes":["APIKeyHeader-CustomHeader"]}
+INFO    Lint report available to view at: https://app.speakeasy.com/org/kintsugi-ai/tax-platform/linting-report/5a54dff01aad6651de55efb821fedea9
+INFO    validation hint: [line 1] retries - Retries should be configured
+INFO    validation hint: [line 97] pagination - Pagination might be supported by this operation
+INFO    validation hint: [line 454] pagination - Pagination might be supported by this operation
+INFO    validation hint: [line 772] pagination - Pagination might be supported by this operation
+INFO    validation hint: [line 844] pagination - Pagination might be supported by this operation
+INFO    validation hint: [line 1129] pagination - Pagination might be supported by this operation
+INFO    validation hint: [line 12028] duplicate-schemas - 2 duplicates of enum "SHIP_TO, BILL_TO" at lines[12028,12116]
+INFO    validation hint: [line 13633] duplicate-schemas - 9 duplicates of schema "Ctx" at lines[13633,14327,14415,14503,14545,14587,14629,14671,14713]
+WARN    validation warn: [line 3562] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 3621] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 3674] validate-consts-defaults - default value '1.0' does not match type number
+WARN    validation warn: [line 3678] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 4627] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 5543] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 5547] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 5551] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 5555] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 5559] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 5563] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 5567] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 5571] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 5575] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 5579] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 5593] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 9739] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 11715] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 11743] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 11747] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 11751] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 11755] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 11759] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 11764] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 11871] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 11899] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 11903] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 11907] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 11911] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 11915] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 11920] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 12007] validate-consts-defaults - default value '0.0' does not match type number
+WARN    validation warn: [line 12332] validate-consts-defaults - default value '1.0' does not match type number
+WARN    validation warn: [line 12336] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 12340] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 12344] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 12348] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 12352] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 12376] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 12430] validate-consts-defaults - default value '1.0' does not match type number
+WARN    validation warn: [line 12434] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 12438] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 12442] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 12446] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 12450] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 12474] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 12521] validate-consts-defaults - default value '1.0' does not match type number
+WARN    validation warn: [line 12768] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 12796] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 12800] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 12804] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 12808] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 12812] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 12817] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 13105] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 13133] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 13137] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 13141] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 13145] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 13149] validate-consts-defaults - default value '0.00' does not match type number
+WARN    validation warn: [line 13154] validate-consts-defaults - default value '0.00' does not match type number
+INFO    
+OpenAPI document linting complete. 0 errors, 61 warnings, 8 hints
+Warning: OpenAPI document valid with warnings ⚠
+                       
+» Diagnosing OpenAPI...
+                       
+                             
+» Tracking OpenAPI Changes...
+                             
+                                
+» Snapshotting Resolved Layer...
+                                
+                             
+» Storing OpenAPI Revision...
+                             
+                        
+» Validating gen.yaml...
+                        
+INFO    
+Validating gen.yaml for target ruby...
+                        
+» Generating Ruby SDK...
+                        
+INFO    Generating SDK for ruby...
+Setup Environment
+Load and Validate Document
+Generate SDK
+Cleanup Orphaned Files
+Update Lock File
+Compile SDK
+                  
+  » Compile SDK...
+                  
+  Step: Compile SDK started
+  INFO    Running command: gem build	{"path":"/github/workspace/repo"}
+  WARN    failed running commands: 
+  WARNING:  no summary specified
+  WARNING:  open-ended dependency on faraday (>= 0) is not recommended
+    use a bounded requirement, such as "~> x.y"
+  WARNING:  open-ended dependency on faraday-multipart (>= 0) is not recommended
+    use a bounded requirement, such as "~> x.y"
+  WARNING:  open-ended dependency on sorbet-runtime (>= 0) is not recommended
+    use a bounded requirement, such as "~> x.y"
+  WARNING:  open-ended dependency on minitest (>= 0, development) is not recommended
+    use a bounded requirement, such as "~> x.y"
+  WARNING:  open-ended dependency on minitest-focus (>= 0, development) is not recommended
+    use a bounded requirement, such as "~> x.y"
+  WARNING:  open-ended dependency on rake (>= 0, development) is not recommended
+    use a bounded requirement, such as "~> x.y"
+  WARNING:  open-ended dependency on sorbet (>= 0, development) is not recommended
+    use a bounded requirement, such as "~> x.y"
+  WARNING:  You have specified the uri:
+    https://github.com/kintsugi-tax/kintsugi-tax-ruby-sdk.git
+  for all of the following keys:
+    homepage_uri
+    source_code_uri
+    documentation_uri
+  Only the first one will be shown on rubygems.org
+  WARNING:  See https://guides.rubygems.org/specification-reference/ for help
+  ERROR:  While executing gem ... (Gem::Package::TooLongFileName)
+      File "lib/open_api_sdk/models/operations/create_credit_note_by_transaction_id_v1_transactions_original_transaction_id_credit_notes_post_request.rb" has a too long name (Gem::Package::TooLongFileName)
+  	/usr/lib/ruby/3.3.0/rubygems/package/tar_writer.rb:321:in split_name'                                                   
+      /usr/lib/ruby/3.3.0/rubygems/package/tar_writer.rb:210:in add_file_simple'
+  	/usr/lib/ruby/3.3.0/rubygems/package.rb:268:in block in add_files'                                
+      /usr/lib/ruby/3.3.0/rubygems/package.rb:259:in each'
+  	/usr/lib/ruby/3.3.0/rubygems/package.rb:259:in add_files'                                         
+      /usr/lib/ruby/3.3.0/rubygems/package.rb:247:in block (3 levels) in add_contents'
+  	/usr/lib/ruby/3.3.0/rubygems/package/tar_writer.rb:81:in new'                                               
+      /usr/lib/ruby/3.3.0/rubygems/package.rb:246:in block (2 levels) in add_contents'
+  	/usr/lib/ruby/3.3.0/rubygems/package.rb:494:in gzip_to'                                           
+      /usr/lib/ruby/3.3.0/rubygems/package.rb:245:in block in add_contents'
+  	/usr/lib/ruby/3.3.0/rubygems/package/tar_writer.rb:176:in block in add_file_signed'                                     
+      /usr/lib/ruby/3.3.0/rubygems/package/tar_writer.rb:154:in block (2 levels) in add_file_digest'
+  	/usr/lib/ruby/3.3.0/rubygems/package/digest_io.rb:37:in wrap'                                                         
+      /usr/lib/ruby/3.3.0/rubygems/package/tar_writer.rb:153:in block in add_file_digest'
+  	/usr/lib/ruby/3.3.0/rubygems/package/tar_writer.rb:109:in add_file'                                                     
+      /usr/lib/ruby/3.3.0/rubygems/package/tar_writer.rb:152:in add_file_digest'
+  	/usr/lib/ruby/3.3.0/rubygems/package/tar_writer.rb:175:in add_file_signed'                                   
+      /usr/lib/ruby/3.3.0/rubygems/package.rb:244:in add_contents'
+  	/usr/lib/ruby/3.3.0/rubygems/package.rb:308:in block (2 levels) in build'                                   
+      /usr/lib/ruby/3.3.0/rubygems/package/tar_writer.rb:81:in new'
+  	/usr/lib/ruby/3.3.0/rubygems/package.rb:306:in block in build'                                               
+      /usr/lib/ruby/3.3.0/rubygems/package/file_source.rb:26:in open'
+  	/usr/lib/ruby/3.3.0/rubygems/package/file_source.rb:26:in with_write_io'                                     
+      /usr/lib/ruby/3.3.0/rubygems/package.rb:305:in build'
+  	/usr/lib/ruby/3.3.0/rubygems/package.rb:136:in build'                                                           
+      /usr/lib/ruby/3.3.0/rubygems/commands/build_command.rb:94:in build_package'
+  	/usr/lib/ruby/3.3.0/rubygems/commands/build_command.rb:84:in build_gem'                                                       
+      /usr/lib/ruby/3.3.0/rubygems/commands/build_command.rb:75:in execute'
+  	/usr/lib/ruby/3.3.0/rubygems/command.rb:326:in invoke_with_build_args'                                    
+      /usr/lib/ruby/3.3.0/rubygems/command_manager.rb:253:in invoke_command'
+  	/usr/lib/ruby/3.3.0/rubygems/command_manager.rb:194:in process_args'                                              
+      /usr/lib/ruby/3.3.0/rubygems/command_manager.rb:152:in run'
+  	/usr/lib/ruby/3.3.0/rubygems/gem_runner.rb:56:in run'                   
+      /usr/bin/gem:12:in <main>'
+  Error: exit status 1
+  Step Failed: Compile SDK
+  Step Failed: Workflow
+  Step Failed: Target: ruby
+  Step Failed: Generating Ruby SDK
+  Error: failed to generate SDKs for ruby ✖
+  Failed to run with Speakeasy version 1.592.1: failed to run with version 1.592.1: exit status 1
+                                                                                                 
+  Rerunning with previous successful version
+  Downloading Speakeasy version 1.586.0
+                                       
+                   
+  » Target: ruby...
+                   
+  INFO    Running target ruby (ruby)...
+                               
+  » Source: kintsugi-overlay...
+                               
+  INFO    Running Source kintsugi-overlay...
+                                  
+  » Downloading remote document...
+                                  
+  INFO    Downloaded https://api-doc.trykintsugi.com/openapi.json to /github/workspace/repo/.speakeasy/temp/downloaded_DPnPeYJwwH.json
+                        
+  » Applying Overlays...
+                        
+  INFO    Applying 2 overlays into /github/workspace/repo/.speakeasy/temp/overlay_tXCrQhDBXc.yaml...
+                         
+  » Apply 2 overlay(s)...
+                         
+  Successfully applied 2 overlays into /github/workspace/repo/.speakeasy/temp/overlay_tXCrQhDBXc.yaml
+                          
+  » Validating Document...
+                          
+  INFO    Linting OpenAPI document...
+  INFO    Using ruleset speakeasy-generation
+  INFO    No global security found, hoisting most used operation security to global level	{"schemes":["APIKeyHeader-CustomHeader"]}
+  INFO    Lint report available to view at: https://app.speakeasy.com/org/kintsugi-ai/tax-platform/linting-report/13c47fd5d6a32d14acb561a4db68e551
+  INFO    validation hint: [line 1] retries - Retries should be configured
+  INFO    validation hint: [line 97] pagination - Pagination might be supported by this operation
+  INFO    validation hint: [line 454] pagination - Pagination might be supported by this operation
+  INFO    validation hint: [line 772] pagination - Pagination might be supported by this operation
+  INFO    validation hint: [line 844] pagination - Pagination might be supported by this operation
+  INFO    validation hint: [line 1129] pagination - Pagination might be supported by this operation
+  INFO    validation hint: [line 12028] duplicate-schemas - 2 duplicates of enum "SHIP_TO, BILL_TO" at lines[12028,12116]
+  INFO    validation hint: [line 13633] duplicate-schemas - 9 duplicates of schema "Ctx" at lines[13633,14327,14415,14503,14545,14587,14629,14671,14713]
+  WARN    validation warn: [line 3562] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 3621] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 3674] validate-consts-defaults - default value '1.0' does not match type number
+  WARN    validation warn: [line 3678] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 4627] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 5543] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 5547] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 5551] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 5555] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 5559] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 5563] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 5567] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 5571] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 5575] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 5579] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 5593] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 9739] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 11715] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 11743] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 11747] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 11751] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 11755] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 11759] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 11764] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 11871] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 11899] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 11903] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 11907] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 11911] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 11915] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 11920] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 12007] validate-consts-defaults - default value '0.0' does not match type number
+  WARN    validation warn: [line 12332] validate-consts-defaults - default value '1.0' does not match type number
+  WARN    validation warn: [line 12336] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 12340] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 12344] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 12348] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 12352] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 12376] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 12430] validate-consts-defaults - default value '1.0' does not match type number
+  WARN    validation warn: [line 12434] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 12438] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 12442] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 12446] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 12450] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 12474] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 12521] validate-consts-defaults - default value '1.0' does not match type number
+  WARN    validation warn: [line 12768] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 12796] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 12800] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 12804] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 12808] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 12812] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 12817] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 13105] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 13133] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 13137] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 13141] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 13145] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 13149] validate-consts-defaults - default value '0.00' does not match type number
+  WARN    validation warn: [line 13154] validate-consts-defaults - default value '0.00' does not match type number
+  INFO    
+  OpenAPI document linting complete. 0 errors, 61 warnings, 8 hints
+  Warning: OpenAPI document valid with warnings ⚠
+                         
+  » Diagnosing OpenAPI...
+                         
+                               
+  » Tracking OpenAPI Changes...
+                               
+                                  
+  » Snapshotting Resolved Layer...
+                                  
+                               
+  » Storing OpenAPI Revision...
+                               
+                          
+  » Validating gen.yaml...
+                          
+  INFO    
+  Validating gen.yaml for target ruby...
+                          
+  » Generating Ruby SDK...
+                          
+  INFO    Generating SDK for ruby...
+Setup Environment
+Load and Validate Document
+Generate SDK
+Cleanup Orphaned Files
+Update Lock File
+Compile SDK
+                  
+  » Compile SDK...
+                  
+  Step: Compile SDK started
+  INFO    Running command: gem build	{"path":"/github/workspace/repo"}
+  WARN    failed running commands: 
+  WARNING:  no summary specified
+  WARNING:  open-ended dependency on faraday (>= 0) is not recommended
+    use a bounded requirement, such as "~> x.y"
+  WARNING:  open-ended dependency on faraday-multipart (>= 0) is not recommended
+    use a bounded requirement, such as "~> x.y"
+  WARNING:  open-ended dependency on sorbet-runtime (>= 0) is not recommended
+    use a bounded requirement, such as "~> x.y"
+  WARNING:  open-ended dependency on minitest (>= 0, development) is not recommended
+    use a bounded requirement, such as "~> x.y"
+  WARNING:  open-ended dependency on minitest-focus (>= 0, development) is not recommended
+    use a bounded requirement, such as "~> x.y"
+  WARNING:  open-ended dependency on rake (>= 0, development) is not recommended
+    use a bounded requirement, such as "~> x.y"
+  WARNING:  open-ended dependency on sorbet (>= 0, development) is not recommended
+    use a bounded requirement, such as "~> x.y"
+  WARNING:  You have specified the uri:
+    https://github.com/kintsugi-tax/kintsugi-tax-ruby-sdk.git
+  for all of the following keys:
+    homepage_uri
+    source_code_uri
+    documentation_uri
+  Only the first one will be shown on rubygems.org
+  WARNING:  See https://guides.rubygems.org/specification-reference/ for help
+  ERROR:  While executing gem ... (Gem::Package::TooLongFileName)
+      File "lib/open_api_sdk/models/operations/create_credit_note_by_transaction_id_v1_transactions_original_transaction_id_credit_notes_post_request.rb" has a too long name (Gem::Package::TooLongFileName)
+  	/usr/lib/ruby/3.3.0/rubygems/package/tar_writer.rb:321:in split_name'                                                   
+      /usr/lib/ruby/3.3.0/rubygems/package/tar_writer.rb:210:in add_file_simple'
+  	/usr/lib/ruby/3.3.0/rubygems/package.rb:268:in block in add_files'                                
+      /usr/lib/ruby/3.3.0/rubygems/package.rb:259:in each'
+  	/usr/lib/ruby/3.3.0/rubygems/package.rb:259:in add_files'                                         
+      /usr/lib/ruby/3.3.0/rubygems/package.rb:247:in block (3 levels) in add_contents'
+  	/usr/lib/ruby/3.3.0/rubygems/package/tar_writer.rb:81:in new'                                               
+      /usr/lib/ruby/3.3.0/rubygems/package.rb:246:in block (2 levels) in add_contents'
+  	/usr/lib/ruby/3.3.0/rubygems/package.rb:494:in gzip_to'                                           
+      /usr/lib/ruby/3.3.0/rubygems/package.rb:245:in block in add_contents'
+  	/usr/lib/ruby/3.3.0/rubygems/package/tar_writer.rb:176:in block in add_file_signed'                                     
+      /usr/lib/ruby/3.3.0/rubygems/package/tar_writer.rb:154:in block (2 levels) in add_file_digest'
+  	/usr/lib/ruby/3.3.0/rubygems/package/digest_io.rb:37:in wrap'                                                         
+      /usr/lib/ruby/3.3.0/rubygems/package/tar_writer.rb:153:in block in add_file_digest'
+  	/usr/lib/ruby/3.3.0/rubygems/package/tar_writer.rb:109:in add_file'                                                     
+      /usr/lib/ruby/3.3.0/rubygems/package/tar_writer.rb:152:in add_file_digest'
+  	/usr/lib/ruby/3.3.0/rubygems/package/tar_writer.rb:175:in add_file_signed'                                   
+      /usr/lib/ruby/3.3.0/rubygems/package.rb:244:in add_contents'
+  	/usr/lib/ruby/3.3.0/rubygems/package.rb:308:in block (2 levels) in build'                                   
+      /usr/lib/ruby/3.3.0/rubygems/package/tar_writer.rb:81:in new'
+  	/usr/lib/ruby/3.3.0/rubygems/package.rb:306:in block in build'                                               
+      /usr/lib/ruby/3.3.0/rubygems/package/file_source.rb:26:in open'
+  	/usr/lib/ruby/3.3.0/rubygems/package/file_source.rb:26:in with_write_io'                                     
+      /usr/lib/ruby/3.3.0/rubygems/package.rb:305:in build'
+  	/usr/lib/ruby/3.3.0/rubygems/package.rb:136:in build'                                                           
+      /usr/lib/ruby/3.3.0/rubygems/commands/build_command.rb:94:in build_package'
+  	/usr/lib/ruby/3.3.0/rubygems/commands/build_command.rb:84:in build_gem'                                                       
+      /usr/lib/ruby/3.3.0/rubygems/commands/build_command.rb:75:in execute'
+  	/usr/lib/ruby/3.3.0/rubygems/command.rb:326:in invoke_with_build_args'                                    
+      /usr/lib/ruby/3.3.0/rubygems/command_manager.rb:253:in invoke_command'
+  	/usr/lib/ruby/3.3.0/rubygems/command_manager.rb:194:in process_args'                                              
+      /usr/lib/ruby/3.3.0/rubygems/command_manager.rb:152:in run'
+  	/usr/lib/ruby/3.3.0/rubygems/gem_runner.rb:56:in run'                   
+      /usr/bin/gem:12:in <main>'
+  Error: exit status 1
+  Step Failed: Compile SDK
+  Step Failed: Workflow
+  Step Failed: Target: ruby
+  Step Failed: Generating Ruby SDK
+  Error: failed to generate SDKs for ruby ✖
+  Error: failed to run with version 1.586.0: exit status 1
+   - Running with latest Speakeasy version
+                                       
+                   
+  » Target: ruby...
+                   
+  INFO    Running target ruby (ruby)...
+                               
+  » Source: kintsugi-overlay...
+                               
+  INFO    Running Source kintsugi-overlay...
+                                  
+  » Downloading remote document...
+                                  
+  INFO    Downloaded https://api-doc.trykintsugi.com/openapi.json to /github/workspace/repo/.speakeasy/temp/downloaded_oyhcwUhiTj.json
+                        
+  » Applying Overlays...
+                        
+  INFO    Applying 2 overlays into /github/workspace/repo/.speakeasy/temp/overlay_pBdSZVErYQ.yaml...
+                         
+  » Apply 2 overlay(s)...
+                         
+  Successfully applied 2 overlays into /github/workspace/repo/.speakeasy/temp/overlay_pBdSZVErYQ.yaml
+                          
+  » Validating Document...
+                          
+  INFO    Linting OpenAPI document...
+  INFO    Using ruleset speakeasy-generation
+  INFO    No global security found, hoisting most used operation security to global level	{"schemes":["APIKeyHeader-CustomHeader"]}
+  INFO    Lint report available to view at: https://app.speakeasy.com/org/kintsugi-ai/tax-platform/linting-report/5a54dff01aad6651de55efb821fedea9
