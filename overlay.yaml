@@ -159,7 +159,7 @@ actions:
               content:
                 application/json:
                   schema:
-                    $ref: "#/components/schemas/ValidationErrorResponse"
+                    $ref: "#/components/schemas/HTTPValidationError"
           security:
             - APIKeyHeader-CustomHeader: []
       '/v1/credits/{credit_id}':
@@ -182,7 +182,7 @@ actions:
             content:
               application/json:
                 schema:
-                  $ref: "#/components/schemas/CreditNoteUpdate"
+                  $ref: "#/components/schemas/CreditNoteCreate"
           responses:
             "200":
               description: "Credit note updated successfully"
@@ -195,7 +195,7 @@ actions:
               content:
                 application/json:
                   schema:
-                    $ref: "#/components/schemas/ValidationErrorResponse"
+                    $ref: "#/components/schemas/HTTPValidationError"
           security:
             - APIKeyHeader-CustomHeader: []
 
