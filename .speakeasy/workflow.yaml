@@ -1,0 +1,25 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    kintsugi-overlay:
+        inputs:
+            - location: https://api-doc.trykintsugi.com/openapi.json
+        overlays:
+            - location: ./overlay.yaml
+            - location: .speakeasy/speakeasy-modifications-overlay.yaml
+        output: output.yaml
+        registry:
+            location: registry.speakeasyapi.dev/kintsugi-ai/tax-platform/kintsugi-overlay
+targets:
+    ruby:
+        target: ruby
+        source: kintsugi-overlay
+        publish:
+            rubygems:
+                token: $rubygems_auth_token
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/kintsugi-ai/tax-platform/kintsugi-overlay-ruby-code-samples
+            labelOverride:
+                fixedValue: Ruby (SDK)
+            blocking: false 

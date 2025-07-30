@@ -1,0 +1,43 @@
+configVersion: 2.0.0
+generation:
+  sdkClassName: OpenApiSDK
+  maintainOpenApiOrder: true
+  usageSnippets:
+    optionalPropertyRendering: withExample
+  fixes:
+    nameResolutionDec2023: false
+    parameterOrderingFeb2024: false
+    requestResponseComponentNamesFeb2024: false
+  operationNameOverrides:
+    createCredit: createCreditNote
+    updateCredit: updateCreditNote
+    create_transaction_by_customer_id_v1_customers__customer_id__transactions_post: createTransactionByCustomer
+    get_transactions_by_customer_id_v1_customers__customer_id__transactions_get: getTransactionsByCustomer
+    get_transactions_by_filing_id_v1_transactions_filings__filing_id__get: getTransactionsByFiling
+    get_transaction_by_external_id_v1_transactions_external__external_id__get: getTransactionByExternalId
+    upload_exemption_certificate_v1_exemptions__exemption_id__attachments_post: uploadExemptionCert
+    get_attachments_for_exemption_v1_exemptions__exemption_id__attachments_get: getExemptionAttachments
+ruby:
+  version: 5.4.0
+  additionalDependencies: {}
+  author: Kintsugi
+  clientServerStatusCodesAsUnions: true
+  description: Ruby SDK for Kintsugi Tax Platform
+  flattenGlobalSecurity: true
+  gemName: kintsugi-tax
+  module: KintsugiSDK
+  imports:
+    option: openapi
+    paths:
+      callbacks: models/callbacks
+      errors: models/errors
+      operations: models/ops
+      shared: models/shared
+      webhooks: models/webhooks
+  inputTypes: false
+  maxMethodParams: 0
+  packageName: kintsugi_sdk
+  responseFormat: flat
+  templateVersion: v2
+  maxFileNameLength: 20
+  disableCompilation: true 

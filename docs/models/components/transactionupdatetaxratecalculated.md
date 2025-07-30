@@ -1,0 +1,4 @@
+# TransactionUpdateTaxRateCalculated
+
+Calculated tax rate.
+

@@ -1,0 +1,4 @@
+# TransactionUpdateConversionRate
+
+Currency conversion rate.
+

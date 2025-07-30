@@ -1,0 +1,12 @@
+# PageCustomerRead
+
+
+## Fields
+
+| Field                                                                             | Type                                                                              | Required                                                                          | Description                                                                       |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `items`                                                                           | T::Array<[Models::Components::CustomerRead](../../models/shared/customerread.md)> | :heavy_check_mark:                                                                | N/A                                                                               |
+| `total`                                                                           | *T.nilable(::Integer)*                                                            | :heavy_check_mark:                                                                | N/A                                                                               |
+| `page`                                                                            | *T.nilable(::Integer)*                                                            | :heavy_check_mark:                                                                | N/A                                                                               |
+| `size`                                                                            | *T.nilable(::Integer)*                                                            | :heavy_check_mark:                                                                | N/A                                                                               |
+| `pages`                                                                           | *T.nilable(::Integer)*                                                            | :heavy_minus_sign:                                                                | N/A                                                                               |

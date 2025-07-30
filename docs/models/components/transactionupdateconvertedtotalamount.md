@@ -1,0 +1,4 @@
+# TransactionUpdateConvertedTotalAmount
+
+Converted total amount.
+
