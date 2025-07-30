@@ -122,90 +122,21 @@ actions:
     update:
       x-public: true
       
-  # === CREATE NEW SHORTER PATHS FOR CREDIT NOTES ===
-  # Add new shorter paths with full operation definitions
-  - target: $.paths
+  # === MODIFY EXISTING CREDIT NOTE OPERATIONS TO BE SHORTER ===
+  # Keep original paths but drastically shorten operationIds and summaries
+  - target: $.paths['/v1/transactions/{original_transaction_id}/credit_notes'].post
     update:
-      '/v1/credits':
-        post:
-          tags: ["Transactions"]
-          summary: "Create Credit Note"
-          description: "Create a new credit note for a specific transaction."
-          operationId: "createCredit"
-          x-speakeasy-name-override: "createCredit"
-          x-public: true
-          parameters:
-            - name: original_transaction_id
-              in: query
-              required: true
-              description: "The original transaction ID"
-              schema:
-                type: string
-          requestBody:
-            required: true
-            content:
-              application/json:
-                schema:
-                  $ref: "#/components/schemas/CreditNoteCreate"
-          responses:
-            "200":
-              description: "Credit note created successfully"
-              content:
-                application/json:
-                  schema:
-                    $ref: "#/components/schemas/TransactionRead"
-            "422":
-              description: "Validation Error"
-              content:
-                application/json:
-                  schema:
-                    $ref: "#/components/schemas/HTTPValidationError"
-          security:
-            - APIKeyHeader-CustomHeader: []
-      '/v1/credits/{credit_id}':
-        put:
-          tags: ["Transactions"]
-          summary: "Update Credit Note"
-          description: "Update an existing credit note."
-          operationId: "updateCredit"
-          x-speakeasy-name-override: "updateCredit"
-          x-public: true
-          parameters:
-            - name: credit_id
-              in: path
-              required: true
-              description: "The credit note ID"
-              schema:
-                type: string
-          requestBody:
-            required: true
-            content:
-              application/json:
-                schema:
-                  $ref: "#/components/schemas/CreditNoteCreate"
-          responses:
-            "200":
-              description: "Credit note updated successfully"
-              content:
-                application/json:
-                  schema:
-                    $ref: "#/components/schemas/TransactionRead"
-            "422":
-              description: "Validation Error"
-              content:
-                application/json:
-                  schema:
-                    $ref: "#/components/schemas/HTTPValidationError"
-          security:
-            - APIKeyHeader-CustomHeader: []
-
-  # === REMOVE PROBLEMATIC LONG PATHS ===
-  # Remove the original long paths to prevent filename issues
-  - target: $.paths['/v1/transactions/{original_transaction_id}/credit_notes']
-    remove: true
-    
-  - target: $.paths['/v1/transactions/{original_transaction_id}/credit_notes/{credit_note_id}']
-    remove: true
+      operationId: "createCredit"
+      summary: "Create Credit"
+      x-speakeasy-name-override: "createCredit"
+      x-public: true
+      
+  - target: $.paths['/v1/transactions/{original_transaction_id}/credit_notes/{credit_note_id}'].put
+    update:
+      operationId: "updateCredit"
+      summary: "Update Credit"
+      x-speakeasy-name-override: "updateCredit"
+      x-public: true
 
 
 
