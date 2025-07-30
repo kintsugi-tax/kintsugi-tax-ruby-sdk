@@ -9,6 +9,8 @@ generation:
     parameterOrderingFeb2024: false
     requestResponseComponentNamesFeb2024: false
   operationNameOverrides:
+    createCredit: createCreditNote
+    updateCredit: updateCreditNote
     create_transaction_by_customer_id_v1_customers__customer_id__transactions_post: createTransactionByCustomer
     get_transactions_by_customer_id_v1_customers__customer_id__transactions_get: getTransactionsByCustomer
     get_transactions_by_filing_id_v1_transactions_filings__filing_id__get: getTransactionsByFiling
