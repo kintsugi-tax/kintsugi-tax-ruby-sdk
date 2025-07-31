@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    openapi (0.1.1)
+    kintsugi_sdk (5.4.0)
       faraday
       faraday-multipart
       faraday-retry
@@ -116,7 +116,7 @@ PLATFORMS
 
 DEPENDENCIES
   minitest
-  openapi!
+  kintsugi_sdk!
   rubocop (~> 1.60.2)
   sorbet-runtime
   tapioca

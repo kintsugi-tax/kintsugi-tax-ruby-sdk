@@ -17,13 +17,14 @@ This API validates and enriches address information
 
 ### Example Usage
 
+<!-- UsageSnippet language="ruby" operationID="search_v1_address_validation_search_post" method="post" path="/v1/address_validation/search" -->
 ```ruby
-require 'openapi'
+require 'kintsugi_sdk'
 
-Models = ::OpenApiSDK::Models
-s = ::OpenApiSDK::SDK.new
+Models = ::KintsugiSDK::Models
+s = ::KintsugiSDK::OpenApiSDK.new
 
-req = Models::Components::AddressBase.new(
+req = Models::Shared::AddressBase.new(
   phone: '555-123-4567',
   street_1: '1600 Amphitheatre Parkway',
   street_2: 'Building 40',
@@ -31,15 +32,15 @@ req = Models::Components::AddressBase.new(
   county: 'Santa Clara',
   state: 'CA',
   postal_code: '94043',
-  country: Models::Components::CountryCodeEnum::US,
+  country: Models::Shared::CountryCodeEnum::US,
   full_address: '1600 Amphitheatre Parkway, Mountain View, CA 94043',
 )
 
-res = s.address_validation.search(request: req, security: Models::Operations::SearchV1AddressValidationSearchPostSecurity.new(
+res = s.address_validation.search(request: req, security: Models::Ops::SearchV1AddressValidationSearchPostSecurity.new(
     api_key_header: '<YOUR_API_KEY_HERE>',
   ))
 
-unless res.response_200_search_v1_address_validation_search_post.nil?
+unless res.nil?
   # handle response
 end
 
@@ -47,14 +48,14 @@ end
 
 ### Parameters
 
-| Parameter                                                                                                                                 | Type                                                                                                                                      | Required                                                                                                                                  | Description                                                                                                                               |
-| ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                                                 | [Models::Components::AddressBase](../../models/shared/addressbase.md)                                                                     | :heavy_check_mark:                                                                                                                        | The request object to use for the request.                                                                                                |
-| `security`                                                                                                                                | [Models::Operations::SearchV1AddressValidationSearchPostSecurity](../../models/operations/searchv1addressvalidationsearchpostsecurity.md) | :heavy_check_mark:                                                                                                                        | The security requirements to use for the request.                                                                                         |
+| Parameter                                                                                                                   | Type                                                                                                                        | Required                                                                                                                    | Description                                                                                                                 |
+| --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                                   | [Models::Shared::AddressBase](../../models/shared/addressbase.md)                                                           | :heavy_check_mark:                                                                                                          | The request object to use for the request.                                                                                  |
+| `security`                                                                                                                  | [Models::Ops::SearchV1AddressValidationSearchPostSecurity](../../models/ops/searchv1addressvalidationsearchpostsecurity.md) | :heavy_check_mark:                                                                                                          | The security requirements to use for the request.                                                                           |
 
 ### Response
 
-**[T.nilable(Models::Operations::SearchV1AddressValidationSearchPostResponse)](../../models/operations/searchv1addressvalidationsearchpostresponse.md)**
+**[T.nilable(T::Array[Models::Shared::AddressSearchResponse])](../../models/operations/.md)**
 
 ### Errors
 
@@ -75,28 +76,33 @@ This API endpoint provides address suggestions based on
 
 ### Example Usage
 
+<!-- UsageSnippet language="ruby" operationID="suggestions_v1_address_validation_suggestions_post" method="post" path="/v1/address_validation/suggestions" -->
 ```ruby
-require 'openapi'
+require 'kintsugi_sdk'
 
-Models = ::OpenApiSDK::Models
-s = ::OpenApiSDK::SDK.new
+Models = ::KintsugiSDK::Models
+s = ::KintsugiSDK::OpenApiSDK.new(
+      security: Models::Shared::Security.new(
+        api_key_header: '<YOUR_API_KEY_HERE>',
+        custom_header: '<YOUR_API_KEY_HERE>',
+      ),
+    )
 
-res = s.address_validation.suggestions(security: Models::Operations::SuggestionsV1AddressValidationSuggestionsPostSecurity.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-  ), x_organization_id: 'org_12345', validation_address: Models::Components::ValidationAddress.new(
+req = Models::Shared::ValidationAddress.new(
   line1: '1600 Amphitheatre Parkway',
   line2: '',
   line3: '',
   city: 'Mountain View',
   state: 'CA',
-  country: 'US',
   postal_code: '94043',
   id: 215,
   county: '',
   full_address: '1600 Amphitheatre Parkway, Mountain View, CA 94043',
-))
+)
 
-unless res.any.nil?
+res = s.address_validation.suggestions(request: req)
+
+unless res.nil?
   # handle response
 end
 
@@ -104,15 +110,13 @@ end
 
 ### Parameters
 
-| Parameter                                                                                                                                                     | Type                                                                                                                                                          | Required                                                                                                                                                      | Description                                                                                                                                                   | Example                                                                                                                                                       |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                                                    | [Models::Operations::SuggestionsV1AddressValidationSuggestionsPostSecurity](../../models/operations/suggestionsv1addressvalidationsuggestionspostsecurity.md) | :heavy_check_mark:                                                                                                                                            | The security requirements to use for the request.                                                                                                             |                                                                                                                                                               |
-| `x_organization_id`                                                                                                                                           | *T.nilable(::String)*                                                                                                                                         | :heavy_check_mark:                                                                                                                                            | The unique identifier for the organization making the request                                                                                                 | org_12345                                                                                                                                                     |
-| `validation_address`                                                                                                                                          | [Models::Components::ValidationAddress](../../models/shared/validationaddress.md)                                                                             | :heavy_check_mark:                                                                                                                                            | N/A                                                                                                                                                           |                                                                                                                                                               |
+| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `request`                                                                     | [Models::Shared::ValidationAddress](../../models/shared/validationaddress.md) | :heavy_check_mark:                                                            | The request object to use for the request.                                    |
 
 ### Response
 
-**[T.nilable(Models::Operations::SuggestionsV1AddressValidationSuggestionsPostResponse)](../../models/operations/suggestionsv1addressvalidationsuggestionspostresponse.md)**
+**[T.nilable(::Object)](../../models/operations/.md)**
 
 ### Errors
 

@@ -1,0 +1,11 @@
+# AddressSearchResponse
+
+
+## Fields
+
+| Field                                                                                       | Type                                                                                        | Required                                                                                    | Description                                                                                 |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `address_submitted`                                                                         | [Models::Shared::AddressSubmittedResponse](../../models/shared/addresssubmittedresponse.md) | :heavy_check_mark:                                                                          | N/A                                                                                         |
+| `response_address`                                                                          | [Models::Shared::AddressResponseData](../../models/shared/addressresponsedata.md)           | :heavy_check_mark:                                                                          | N/A                                                                                         |
+| `verification_status`                                                                       | *::String*                                                                                  | :heavy_check_mark:                                                                          | Indicates if the address was VERIFIED, PARTIALLY_VERIFIED, INVALID, UNVERIFIABLE, BLANK     |
+| `enrich_fields`                                                                             | T::Array<*::String*>                                                                        | :heavy_check_mark:                                                                          | List of additional fields added to enrich the address                                       |

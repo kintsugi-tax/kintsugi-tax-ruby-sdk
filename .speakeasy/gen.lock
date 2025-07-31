@@ -1,0 +1,870 @@
+lockVersion: 2.0.0
+id: 42356d7a-ce0a-4cdf-bb17-e774a6ae7cfc
+management:
+  docChecksum: 47e623afcb0b4f5f78e8a42fd3347425
+  docVersion: 1.0.0
+  speakeasyVersion: 1.595.0
+  generationVersion: 2.670.1
+  releaseVersion: 5.4.0
+  configChecksum: ff6c0f61f23c6234919f6157a9b5394f
+  published: true
+features:
+  ruby:
+    constsAndDefaults: 0.1.1
+    core: 3.9.6
+    deprecations: 2.81.2
+    globalSecurity: 2.81.8
+    globalServerURLs: 2.82.4
+    groups: 2.81.2
+    methodSecurity: 2.82.2
+    nameOverrides: 2.81.2
+    responseFormat: 0.1.0
+generatedFiles:
+  - .gitattributes
+  - .rubocop.yml
+  - Gemfile
+  - Gemfile.lock
+  - Rakefile
+  - USAGE.md
+  - docs/models/errors/backendsrcaddressvalidationresponsesvalidationerrorresponse.md
+  - docs/models/errors/backendsrccustomersresponsesvalidationerrorresponse.md
+  - docs/models/errors/backendsrcexemptionsresponsesvalidationerrorresponse.md
+  - docs/models/errors/backendsrcproductsresponsesvalidationerrorresponse.md
+  - docs/models/errors/backendsrctaxestimationresponsesvalidationerrorresponse.md
+  - docs/models/errors/backendsrctransactionsresponsesvalidationerrorresponse.md
+  - docs/models/errors/errorresponse.md
+  - docs/models/errors/httpvalidationerror.md
+  - docs/models/ops/createtransactionbycustomerrequest.md
+  - docs/models/ops/estimatetaxv1taxestimatepostrequest.md
+  - docs/models/ops/getcustomerbyexternalidv1customersexternalexternalidgetrequest.md
+  - docs/models/ops/getcustomerbyidv1customerscustomeridgetrequest.md
+  - docs/models/ops/getcustomersv1request.md
+  - docs/models/ops/getexemptionattachmentsrequest.md
+  - docs/models/ops/getexemptionbyidv1exemptionsexemptionidgetrequest.md
+  - docs/models/ops/getexemptionsv1exemptionsgetrequest.md
+  - docs/models/ops/getnexusfororgv1nexusgetrequest.md
+  - docs/models/ops/getproductbyidv1productsproductidgetrequest.md
+  - docs/models/ops/getproductsv1productsgetrequest.md
+  - docs/models/ops/gettransactionbyexternalidrequest.md
+  - docs/models/ops/gettransactionbyidv1transactionstransactionidgetrequest.md
+  - docs/models/ops/gettransactionsbycustomerrequest.md
+  - docs/models/ops/gettransactionsbyfilingrequest.md
+  - docs/models/ops/gettransactionsv1transactionsgetrequest.md
+  - docs/models/ops/searchv1addressvalidationsearchpostsecurity.md
+  - docs/models/ops/updatecustomerv1customerscustomeridputrequest.md
+  - docs/models/ops/updateproductv1productsproductidputrequest.md
+  - docs/models/ops/updatetransactionv1transactionstransactionidputrequest.md
+  - docs/models/ops/uploadexemptioncertrequest.md
+  - docs/models/shared/addressbase.md
+  - docs/models/shared/addresses.md
+  - docs/models/shared/addressresponsedata.md
+  - docs/models/shared/addresssearchresponse.md
+  - docs/models/shared/addressstatus.md
+  - docs/models/shared/addresssubmittedresponse.md
+  - docs/models/shared/addresstype.md
+  - docs/models/shared/appliedto.md
+  - docs/models/shared/attachmentread.md
+  - docs/models/shared/backendsrcaddressvalidationresponsesvalidationerroritem.md
+  - docs/models/shared/backendsrccustomersresponsesvalidationerroritem.md
+  - docs/models/shared/backendsrcexemptionsmodelsexemptionread.md
+  - docs/models/shared/backendsrcexemptionsresponsesvalidationerroritem.md
+  - docs/models/shared/backendsrcexemptionsserializersexemptionread.md
+  - docs/models/shared/backendsrcproductsresponsesvalidationerroritem.md
+  - docs/models/shared/backendsrctaxestimationresponsesvalidationerroritem.md
+  - docs/models/shared/backendsrctransactionsresponsesvalidationerroritem.md
+  - docs/models/shared/bodyuploadexemptioncertificatev1exemptionsexemptionidattachmentspost.md
+  - docs/models/shared/countrycodeenum.md
+  - docs/models/shared/currencyenum.md
+  - docs/models/shared/customerbase.md
+  - docs/models/shared/customerbasebase.md
+  - docs/models/shared/customerbasepublic.md
+  - docs/models/shared/customercreate.md
+  - docs/models/shared/customerread.md
+  - docs/models/shared/customerupdate.md
+  - docs/models/shared/discountbuilder.md
+  - docs/models/shared/exemption.md
+  - docs/models/shared/exemptioncreate.md
+  - docs/models/shared/exemptionrequired.md
+  - docs/models/shared/exemptionstatus.md
+  - docs/models/shared/exemptiontype.md
+  - docs/models/shared/fastapipaginationdefaultpageexemptionread2.md
+  - docs/models/shared/file.md
+  - docs/models/shared/jurisdictiontype.md
+  - docs/models/shared/nexusresponse.md
+  - docs/models/shared/nexusstateenum.md
+  - docs/models/shared/nexusstatusenum.md
+  - docs/models/shared/nexustypeenum.md
+  - docs/models/shared/pagecustomerread.md
+  - docs/models/shared/pagenexusresponse.md
+  - docs/models/shared/pageproductread.md
+  - docs/models/shared/pagetransactionestimateresponse.md
+  - docs/models/shared/pagetransactionread.md
+  - docs/models/shared/periodmodelenum.md
+  - docs/models/shared/processingstatusenum.md
+  - docs/models/shared/productcategories.md
+  - docs/models/shared/productcategoryenum.md
+  - docs/models/shared/productcodeenum.md
+  - docs/models/shared/productcreatemanual.md
+  - docs/models/shared/productread.md
+  - docs/models/shared/productstatusenum.md
+  - docs/models/shared/productsubcategory.md
+  - docs/models/shared/productsubcategoryenum.md
+  - docs/models/shared/productupdate.md
+  - docs/models/shared/registration.md
+  - docs/models/shared/registrationsregimeenum.md
+  - docs/models/shared/relatedentitytype.md
+  - docs/models/shared/salesortransactionsenum.md
+  - docs/models/shared/security.md
+  - docs/models/shared/sourceenum.md
+  - docs/models/shared/statusenum.md
+  - docs/models/shared/taxexemptionenum.md
+  - docs/models/shared/taxitembuilder.md
+  - docs/models/shared/taxitemestimate.md
+  - docs/models/shared/taxitemread.md
+  - docs/models/shared/taxitemreturnreasonenum.md
+  - docs/models/shared/taxitemtypeenum.md
+  - docs/models/shared/taxliabilitysourceenum.md
+  - docs/models/shared/transactionaddressbuilder.md
+  - docs/models/shared/transactionaddresspublic.md
+  - docs/models/shared/transactionaddressreadoutput.md
+  - docs/models/shared/transactioncreate.md
+  - docs/models/shared/transactionestimatepublicrequest.md
+  - docs/models/shared/transactionestimateresponse.md
+  - docs/models/shared/transactionestimateresponseaddresses.md
+  - docs/models/shared/transactionestimateresponsetype.md
+  - docs/models/shared/transactionexemptstatusenum.md
+  - docs/models/shared/transactionitembuilder.md
+  - docs/models/shared/transactionitemcreateupdate.md
+  - docs/models/shared/transactionitemestimatebase.md
+  - docs/models/shared/transactionitemestimateresponse.md
+  - docs/models/shared/transactionitemread.md
+  - docs/models/shared/transactionpublicrequest.md
+  - docs/models/shared/transactionread.md
+  - docs/models/shared/transactionrefundstatus.md
+  - docs/models/shared/transactionstatusenum.md
+  - docs/models/shared/transactiontypeenum.md
+  - docs/models/shared/transactionupdate.md
+  - docs/models/shared/treatmentenum.md
+  - docs/models/shared/type.md
+  - docs/models/shared/validationaddress.md
+  - docs/models/shared/validationerror.md
+  - docs/sdks/addressvalidation/README.md
+  - docs/sdks/customers/README.md
+  - docs/sdks/exemptions/README.md
+  - docs/sdks/nexus/README.md
+  - docs/sdks/openapisdk/README.md
+  - docs/sdks/products/README.md
+  - docs/sdks/taxestimation/README.md
+  - docs/sdks/transactions/README.md
+  - extra.rbi
+  - kintsugi_sdk.gemspec
+  - lib/crystalline.rb
+  - lib/crystalline/metadata_fields.rb
+  - lib/crystalline/module.rb
+  - lib/crystalline/types.rb
+  - lib/crystalline/utils.rb
+  - lib/kintsugi_sdk.rb
+  - lib/kintsugi_sdk/addressvalidation.rb
+  - lib/kintsugi_sdk/customers.rb
+  - lib/kintsugi_sdk/exemptions.rb
+  - lib/kintsugi_sdk/models/callbacks.rb
+  - lib/kintsugi_sdk/models/errors.rb
+  - lib/kintsugi_sdk/models/errors/apierror.rb
+  - lib/kintsugi_sdk/models/errors/apierror.rbi
+  - lib/kintsugi_sdk/models/errors/backend_src_address_validation_responses_validationerrorresponse.rb
+  - lib/kintsugi_sdk/models/errors/backend_src_address_validation_responses_validationerrorresponse.rbi
+  - lib/kintsugi_sdk/models/errors/backend_src_customers_responses_validationerrorresponse.rb
+  - lib/kintsugi_sdk/models/errors/backend_src_customers_responses_validationerrorresponse.rbi
+  - lib/kintsugi_sdk/models/errors/backend_src_exemptions_responses_validationerrorresponse.rb
+  - lib/kintsugi_sdk/models/errors/backend_src_exemptions_responses_validationerrorresponse.rbi
+  - lib/kintsugi_sdk/models/errors/backend_src_products_responses_validationerrorresponse.rb
+  - lib/kintsugi_sdk/models/errors/backend_src_products_responses_validationerrorresponse.rbi
+  - lib/kintsugi_sdk/models/errors/backend_src_tax_estimation_responses_validationerrorresponse.rb
+  - lib/kintsugi_sdk/models/errors/backend_src_tax_estimation_responses_validationerrorresponse.rbi
+  - lib/kintsugi_sdk/models/errors/backend_src_transactions_responses_validationerrorresponse.rb
+  - lib/kintsugi_sdk/models/errors/backend_src_transactions_responses_validationerrorresponse.rbi
+  - lib/kintsugi_sdk/models/errors/errorresponse.rb
+  - lib/kintsugi_sdk/models/errors/errorresponse.rbi
+  - lib/kintsugi_sdk/models/errors/httpvalidationerror.rb
+  - lib/kintsugi_sdk/models/errors/httpvalidationerror.rbi
+  - lib/kintsugi_sdk/models/ops.rb
+  - lib/kintsugi_sdk/models/ops/createtransactionbycustomer_request.rb
+  - lib/kintsugi_sdk/models/ops/createtransactionbycustomer_request.rbi
+  - lib/kintsugi_sdk/models/ops/estimate_tax_v1_tax_estimate_post_request.rb
+  - lib/kintsugi_sdk/models/ops/estimate_tax_v1_tax_estimate_post_request.rbi
+  - lib/kintsugi_sdk/models/ops/get_customer_by_external_id_v1_customers_external_external_id_get_request.rb
+  - lib/kintsugi_sdk/models/ops/get_customer_by_external_id_v1_customers_external_external_id_get_request.rbi
+  - lib/kintsugi_sdk/models/ops/get_customer_by_id_v1_customers_customer_id_get_request.rb
+  - lib/kintsugi_sdk/models/ops/get_customer_by_id_v1_customers_customer_id_get_request.rbi
+  - lib/kintsugi_sdk/models/ops/get_customers_v1_request.rb
+  - lib/kintsugi_sdk/models/ops/get_customers_v1_request.rbi
+  - lib/kintsugi_sdk/models/ops/get_exemption_by_id_v1_exemptions_exemption_id_get_request.rb
+  - lib/kintsugi_sdk/models/ops/get_exemption_by_id_v1_exemptions_exemption_id_get_request.rbi
+  - lib/kintsugi_sdk/models/ops/get_exemptions_v1_exemptions_get_request.rb
+  - lib/kintsugi_sdk/models/ops/get_exemptions_v1_exemptions_get_request.rbi
+  - lib/kintsugi_sdk/models/ops/get_nexus_for_org_v1_nexus_get_request.rb
+  - lib/kintsugi_sdk/models/ops/get_nexus_for_org_v1_nexus_get_request.rbi
+  - lib/kintsugi_sdk/models/ops/get_product_by_id_v1_products_product_id_get_request.rb
+  - lib/kintsugi_sdk/models/ops/get_product_by_id_v1_products_product_id_get_request.rbi
+  - lib/kintsugi_sdk/models/ops/get_products_v1_products_get_request.rb
+  - lib/kintsugi_sdk/models/ops/get_products_v1_products_get_request.rbi
+  - lib/kintsugi_sdk/models/ops/get_transaction_by_id_v1_transactions_transaction_id_get_request.rb
+  - lib/kintsugi_sdk/models/ops/get_transaction_by_id_v1_transactions_transaction_id_get_request.rbi
+  - lib/kintsugi_sdk/models/ops/get_transactions_v1_transactions_get_request.rb
+  - lib/kintsugi_sdk/models/ops/get_transactions_v1_transactions_get_request.rbi
+  - lib/kintsugi_sdk/models/ops/getexemptionattachments_request.rb
+  - lib/kintsugi_sdk/models/ops/getexemptionattachments_request.rbi
+  - lib/kintsugi_sdk/models/ops/gettransactionbyexternalid_request.rb
+  - lib/kintsugi_sdk/models/ops/gettransactionbyexternalid_request.rbi
+  - lib/kintsugi_sdk/models/ops/gettransactionsbycustomer_request.rb
+  - lib/kintsugi_sdk/models/ops/gettransactionsbycustomer_request.rbi
+  - lib/kintsugi_sdk/models/ops/gettransactionsbyfiling_request.rb
+  - lib/kintsugi_sdk/models/ops/gettransactionsbyfiling_request.rbi
+  - lib/kintsugi_sdk/models/ops/search_v1_address_validation_search_post_security.rb
+  - lib/kintsugi_sdk/models/ops/search_v1_address_validation_search_post_security.rbi
+  - lib/kintsugi_sdk/models/ops/update_customer_v1_customers_customer_id_put_request.rb
+  - lib/kintsugi_sdk/models/ops/update_customer_v1_customers_customer_id_put_request.rbi
+  - lib/kintsugi_sdk/models/ops/update_product_v1_products_product_id_put_request.rb
+  - lib/kintsugi_sdk/models/ops/update_product_v1_products_product_id_put_request.rbi
+  - lib/kintsugi_sdk/models/ops/update_transaction_v1_transactions_transaction_id_put_request.rb
+  - lib/kintsugi_sdk/models/ops/update_transaction_v1_transactions_transaction_id_put_request.rbi
+  - lib/kintsugi_sdk/models/ops/uploadexemptioncert_request.rb
+  - lib/kintsugi_sdk/models/ops/uploadexemptioncert_request.rbi
+  - lib/kintsugi_sdk/models/shared.rb
+  - lib/kintsugi_sdk/models/shared/addressbase.rb
+  - lib/kintsugi_sdk/models/shared/addressbase.rbi
+  - lib/kintsugi_sdk/models/shared/addresses.rb
+  - lib/kintsugi_sdk/models/shared/addresses.rbi
+  - lib/kintsugi_sdk/models/shared/addressresponsedata.rb
+  - lib/kintsugi_sdk/models/shared/addressresponsedata.rbi
+  - lib/kintsugi_sdk/models/shared/addresssearchresponse.rb
+  - lib/kintsugi_sdk/models/shared/addresssearchresponse.rbi
+  - lib/kintsugi_sdk/models/shared/addressstatus.rb
+  - lib/kintsugi_sdk/models/shared/addressstatus.rbi
+  - lib/kintsugi_sdk/models/shared/addresssubmittedresponse.rb
+  - lib/kintsugi_sdk/models/shared/addresssubmittedresponse.rbi
+  - lib/kintsugi_sdk/models/shared/addresstype.rb
+  - lib/kintsugi_sdk/models/shared/addresstype.rbi
+  - lib/kintsugi_sdk/models/shared/appliedto.rb
+  - lib/kintsugi_sdk/models/shared/appliedto.rbi
+  - lib/kintsugi_sdk/models/shared/attachmentread.rb
+  - lib/kintsugi_sdk/models/shared/attachmentread.rbi
+  - lib/kintsugi_sdk/models/shared/backend_src_address_validation_responses_validationerroritem.rb
+  - lib/kintsugi_sdk/models/shared/backend_src_address_validation_responses_validationerroritem.rbi
+  - lib/kintsugi_sdk/models/shared/backend_src_customers_responses_validationerroritem.rb
+  - lib/kintsugi_sdk/models/shared/backend_src_customers_responses_validationerroritem.rbi
+  - lib/kintsugi_sdk/models/shared/backend_src_exemptions_models_exemptionread.rb
+  - lib/kintsugi_sdk/models/shared/backend_src_exemptions_models_exemptionread.rbi
+  - lib/kintsugi_sdk/models/shared/backend_src_exemptions_responses_validationerroritem.rb
+  - lib/kintsugi_sdk/models/shared/backend_src_exemptions_responses_validationerroritem.rbi
+  - lib/kintsugi_sdk/models/shared/backend_src_exemptions_serializers_exemptionread.rb
+  - lib/kintsugi_sdk/models/shared/backend_src_exemptions_serializers_exemptionread.rbi
+  - lib/kintsugi_sdk/models/shared/backend_src_products_responses_validationerroritem.rb
+  - lib/kintsugi_sdk/models/shared/backend_src_products_responses_validationerroritem.rbi
+  - lib/kintsugi_sdk/models/shared/backend_src_tax_estimation_responses_validationerroritem.rb
+  - lib/kintsugi_sdk/models/shared/backend_src_tax_estimation_responses_validationerroritem.rbi
+  - lib/kintsugi_sdk/models/shared/backend_src_transactions_responses_validationerroritem.rb
+  - lib/kintsugi_sdk/models/shared/backend_src_transactions_responses_validationerroritem.rbi
+  - lib/kintsugi_sdk/models/shared/body_upload_exemption_certificate_v1_exemptions_exemption_id_attachments_post.rb
+  - lib/kintsugi_sdk/models/shared/body_upload_exemption_certificate_v1_exemptions_exemption_id_attachments_post.rbi
+  - lib/kintsugi_sdk/models/shared/countrycodeenum.rb
+  - lib/kintsugi_sdk/models/shared/countrycodeenum.rbi
+  - lib/kintsugi_sdk/models/shared/currencyenum.rb
+  - lib/kintsugi_sdk/models/shared/currencyenum.rbi
+  - lib/kintsugi_sdk/models/shared/customerbase.rb
+  - lib/kintsugi_sdk/models/shared/customerbase.rbi
+  - lib/kintsugi_sdk/models/shared/customerbasebase.rb
+  - lib/kintsugi_sdk/models/shared/customerbasebase.rbi
+  - lib/kintsugi_sdk/models/shared/customerbasepublic.rb
+  - lib/kintsugi_sdk/models/shared/customerbasepublic.rbi
+  - lib/kintsugi_sdk/models/shared/customercreate.rb
+  - lib/kintsugi_sdk/models/shared/customercreate.rbi
+  - lib/kintsugi_sdk/models/shared/customerread.rb
+  - lib/kintsugi_sdk/models/shared/customerread.rbi
+  - lib/kintsugi_sdk/models/shared/customerupdate.rb
+  - lib/kintsugi_sdk/models/shared/customerupdate.rbi
+  - lib/kintsugi_sdk/models/shared/discountbuilder.rb
+  - lib/kintsugi_sdk/models/shared/discountbuilder.rbi
+  - lib/kintsugi_sdk/models/shared/exemption.rb
+  - lib/kintsugi_sdk/models/shared/exemption.rbi
+  - lib/kintsugi_sdk/models/shared/exemptioncreate.rb
+  - lib/kintsugi_sdk/models/shared/exemptioncreate.rbi
+  - lib/kintsugi_sdk/models/shared/exemptionrequired.rb
+  - lib/kintsugi_sdk/models/shared/exemptionrequired.rbi
+  - lib/kintsugi_sdk/models/shared/exemptionstatus.rb
+  - lib/kintsugi_sdk/models/shared/exemptionstatus.rbi
+  - lib/kintsugi_sdk/models/shared/exemptiontype.rb
+  - lib/kintsugi_sdk/models/shared/exemptiontype.rbi
+  - lib/kintsugi_sdk/models/shared/fastapi_pagination_default_page_exemptionread_2.rb
+  - lib/kintsugi_sdk/models/shared/fastapi_pagination_default_page_exemptionread_2.rbi
+  - lib/kintsugi_sdk/models/shared/file.rb
+  - lib/kintsugi_sdk/models/shared/file.rbi
+  - lib/kintsugi_sdk/models/shared/jurisdictiontype.rb
+  - lib/kintsugi_sdk/models/shared/jurisdictiontype.rbi
+  - lib/kintsugi_sdk/models/shared/nexusresponse.rb
+  - lib/kintsugi_sdk/models/shared/nexusresponse.rbi
+  - lib/kintsugi_sdk/models/shared/nexusstateenum.rb
+  - lib/kintsugi_sdk/models/shared/nexusstateenum.rbi
+  - lib/kintsugi_sdk/models/shared/nexusstatusenum.rb
+  - lib/kintsugi_sdk/models/shared/nexusstatusenum.rbi
+  - lib/kintsugi_sdk/models/shared/nexustypeenum.rb
+  - lib/kintsugi_sdk/models/shared/nexustypeenum.rbi
+  - lib/kintsugi_sdk/models/shared/page_customerread_.rb
+  - lib/kintsugi_sdk/models/shared/page_customerread_.rbi
+  - lib/kintsugi_sdk/models/shared/page_nexusresponse_.rb
+  - lib/kintsugi_sdk/models/shared/page_nexusresponse_.rbi
+  - lib/kintsugi_sdk/models/shared/page_productread_.rb
+  - lib/kintsugi_sdk/models/shared/page_productread_.rbi
+  - lib/kintsugi_sdk/models/shared/page_transactionestimateresponse_.rb
+  - lib/kintsugi_sdk/models/shared/page_transactionestimateresponse_.rbi
+  - lib/kintsugi_sdk/models/shared/page_transactionread_.rb
+  - lib/kintsugi_sdk/models/shared/page_transactionread_.rbi
+  - lib/kintsugi_sdk/models/shared/periodmodelenum.rb
+  - lib/kintsugi_sdk/models/shared/periodmodelenum.rbi
+  - lib/kintsugi_sdk/models/shared/processingstatusenum.rb
+  - lib/kintsugi_sdk/models/shared/processingstatusenum.rbi
+  - lib/kintsugi_sdk/models/shared/productcategories.rb
+  - lib/kintsugi_sdk/models/shared/productcategories.rbi
+  - lib/kintsugi_sdk/models/shared/productcategoryenum.rb
+  - lib/kintsugi_sdk/models/shared/productcategoryenum.rbi
+  - lib/kintsugi_sdk/models/shared/productcodeenum.rb
+  - lib/kintsugi_sdk/models/shared/productcodeenum.rbi
+  - lib/kintsugi_sdk/models/shared/productcreatemanual.rb
+  - lib/kintsugi_sdk/models/shared/productcreatemanual.rbi
+  - lib/kintsugi_sdk/models/shared/productread.rb
+  - lib/kintsugi_sdk/models/shared/productread.rbi
+  - lib/kintsugi_sdk/models/shared/productstatusenum.rb
+  - lib/kintsugi_sdk/models/shared/productstatusenum.rbi
+  - lib/kintsugi_sdk/models/shared/productsubcategory.rb
+  - lib/kintsugi_sdk/models/shared/productsubcategory.rbi
+  - lib/kintsugi_sdk/models/shared/productsubcategoryenum.rb
+  - lib/kintsugi_sdk/models/shared/productsubcategoryenum.rbi
+  - lib/kintsugi_sdk/models/shared/productupdate.rb
+  - lib/kintsugi_sdk/models/shared/productupdate.rbi
+  - lib/kintsugi_sdk/models/shared/registration.rb
+  - lib/kintsugi_sdk/models/shared/registration.rbi
+  - lib/kintsugi_sdk/models/shared/registrationsregimeenum.rb
+  - lib/kintsugi_sdk/models/shared/registrationsregimeenum.rbi
+  - lib/kintsugi_sdk/models/shared/relatedentitytype.rb
+  - lib/kintsugi_sdk/models/shared/relatedentitytype.rbi
+  - lib/kintsugi_sdk/models/shared/salesortransactionsenum.rb
+  - lib/kintsugi_sdk/models/shared/salesortransactionsenum.rbi
+  - lib/kintsugi_sdk/models/shared/security.rb
+  - lib/kintsugi_sdk/models/shared/security.rbi
+  - lib/kintsugi_sdk/models/shared/sourceenum.rb
+  - lib/kintsugi_sdk/models/shared/sourceenum.rbi
+  - lib/kintsugi_sdk/models/shared/statusenum.rb
+  - lib/kintsugi_sdk/models/shared/statusenum.rbi
+  - lib/kintsugi_sdk/models/shared/taxexemptionenum.rb
+  - lib/kintsugi_sdk/models/shared/taxexemptionenum.rbi
+  - lib/kintsugi_sdk/models/shared/taxitembuilder.rb
+  - lib/kintsugi_sdk/models/shared/taxitembuilder.rbi
+  - lib/kintsugi_sdk/models/shared/taxitemestimate.rb
+  - lib/kintsugi_sdk/models/shared/taxitemestimate.rbi
+  - lib/kintsugi_sdk/models/shared/taxitemread.rb
+  - lib/kintsugi_sdk/models/shared/taxitemread.rbi
+  - lib/kintsugi_sdk/models/shared/taxitemreturnreasonenum.rb
+  - lib/kintsugi_sdk/models/shared/taxitemreturnreasonenum.rbi
+  - lib/kintsugi_sdk/models/shared/taxitemtypeenum.rb
+  - lib/kintsugi_sdk/models/shared/taxitemtypeenum.rbi
+  - lib/kintsugi_sdk/models/shared/taxliabilitysourceenum.rb
+  - lib/kintsugi_sdk/models/shared/taxliabilitysourceenum.rbi
+  - lib/kintsugi_sdk/models/shared/transactionaddressbuilder.rb
+  - lib/kintsugi_sdk/models/shared/transactionaddressbuilder.rbi
+  - lib/kintsugi_sdk/models/shared/transactionaddresspublic.rb
+  - lib/kintsugi_sdk/models/shared/transactionaddresspublic.rbi
+  - lib/kintsugi_sdk/models/shared/transactionaddressread_output.rb
+  - lib/kintsugi_sdk/models/shared/transactionaddressread_output.rbi
+  - lib/kintsugi_sdk/models/shared/transactioncreate.rb
+  - lib/kintsugi_sdk/models/shared/transactioncreate.rbi
+  - lib/kintsugi_sdk/models/shared/transactionestimatepublicrequest.rb
+  - lib/kintsugi_sdk/models/shared/transactionestimatepublicrequest.rbi
+  - lib/kintsugi_sdk/models/shared/transactionestimateresponse.rb
+  - lib/kintsugi_sdk/models/shared/transactionestimateresponse.rbi
+  - lib/kintsugi_sdk/models/shared/transactionestimateresponse_addresses.rb
+  - lib/kintsugi_sdk/models/shared/transactionestimateresponse_addresses.rbi
+  - lib/kintsugi_sdk/models/shared/transactionestimateresponse_type.rb
+  - lib/kintsugi_sdk/models/shared/transactionestimateresponse_type.rbi
+  - lib/kintsugi_sdk/models/shared/transactionexemptstatusenum.rb
+  - lib/kintsugi_sdk/models/shared/transactionexemptstatusenum.rbi
+  - lib/kintsugi_sdk/models/shared/transactionitembuilder.rb
+  - lib/kintsugi_sdk/models/shared/transactionitembuilder.rbi
+  - lib/kintsugi_sdk/models/shared/transactionitemcreateupdate.rb
+  - lib/kintsugi_sdk/models/shared/transactionitemcreateupdate.rbi
+  - lib/kintsugi_sdk/models/shared/transactionitemestimatebase.rb
+  - lib/kintsugi_sdk/models/shared/transactionitemestimatebase.rbi
+  - lib/kintsugi_sdk/models/shared/transactionitemestimateresponse.rb
+  - lib/kintsugi_sdk/models/shared/transactionitemestimateresponse.rbi
+  - lib/kintsugi_sdk/models/shared/transactionitemread.rb
+  - lib/kintsugi_sdk/models/shared/transactionitemread.rbi
+  - lib/kintsugi_sdk/models/shared/transactionpublicrequest.rb
+  - lib/kintsugi_sdk/models/shared/transactionpublicrequest.rbi
+  - lib/kintsugi_sdk/models/shared/transactionread.rb
+  - lib/kintsugi_sdk/models/shared/transactionread.rbi
+  - lib/kintsugi_sdk/models/shared/transactionrefundstatus.rb
+  - lib/kintsugi_sdk/models/shared/transactionrefundstatus.rbi
+  - lib/kintsugi_sdk/models/shared/transactionstatusenum.rb
+  - lib/kintsugi_sdk/models/shared/transactionstatusenum.rbi
+  - lib/kintsugi_sdk/models/shared/transactiontypeenum.rb
+  - lib/kintsugi_sdk/models/shared/transactiontypeenum.rbi
+  - lib/kintsugi_sdk/models/shared/transactionupdate.rb
+  - lib/kintsugi_sdk/models/shared/transactionupdate.rbi
+  - lib/kintsugi_sdk/models/shared/treatmentenum.rb
+  - lib/kintsugi_sdk/models/shared/treatmentenum.rbi
+  - lib/kintsugi_sdk/models/shared/type.rb
+  - lib/kintsugi_sdk/models/shared/type.rbi
+  - lib/kintsugi_sdk/models/shared/validationaddress.rb
+  - lib/kintsugi_sdk/models/shared/validationaddress.rbi
+  - lib/kintsugi_sdk/models/shared/validationerror.rb
+  - lib/kintsugi_sdk/models/shared/validationerror.rbi
+  - lib/kintsugi_sdk/nexus.rb
+  - lib/kintsugi_sdk/openapisdk.rb
+  - lib/kintsugi_sdk/products.rb
+  - lib/kintsugi_sdk/sdk_hooks/hooks.rb
+  - lib/kintsugi_sdk/sdk_hooks/types.rb
+  - lib/kintsugi_sdk/sdkconfiguration.rb
+  - lib/kintsugi_sdk/sdkconfiguration.rbi
+  - lib/kintsugi_sdk/taxestimation.rb
+  - lib/kintsugi_sdk/transactions.rb
+  - lib/kintsugi_sdk/utils/forms.rb
+  - lib/kintsugi_sdk/utils/headers.rb
+  - lib/kintsugi_sdk/utils/query_params.rb
+  - lib/kintsugi_sdk/utils/request_bodies.rb
+  - lib/kintsugi_sdk/utils/retries.rb
+  - lib/kintsugi_sdk/utils/security.rb
+  - lib/kintsugi_sdk/utils/url.rb
+  - lib/kintsugi_sdk/utils/utils.rb
+  - sorbet/config
+  - sorbet/rbi/annotations/.gitattributes
+  - sorbet/rbi/gems/.gitattributes
+  - sorbet/tapioca/config.yml
+  - sorbet/tapioca/require.rb
+examples:
+  search_v1_address_validation_search_post:
+    speakeasy-default-search-v1-address-validation-search-post:
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: [{"address_submitted": {}, "response_address": {}, "verification_status": "<value>", "enrich_fields": ["<value 1>", "<value 2>"]}]
+        "401":
+          application/json: {"detail": "<value>"}
+        "422":
+          application/json: {"detail": []}
+        "500":
+          application/json: {"detail": "<value>"}
+  suggestions_v1_address_validation_suggestions_post:
+    speakeasy-default-suggestions-v1-address-validation-suggestions-post:
+      requestBody:
+        application/json: {"country": "US", "postalCode": ""}
+      responses:
+        "200":
+          application/json: "<value>"
+        "401":
+          application/json: {"detail": "<value>"}
+        "422":
+          application/json: {"detail": [{"type": "<value>", "loc": ["<value 1>", "<value 2>"], "msg": "<value>", "input": "<value>", "ctx": {"key": "<value>", "key1": "<value>", "key2": "<value>"}}]}
+        "500":
+          application/json: {"detail": "<value>"}
+  get_customers_v1:
+    speakeasy-default-get-customers-v1:
+      parameters:
+        query:
+          search_query: "John"
+          country: ["US"]
+          state: "CA"
+          source__in: "SHOPIFY,API"
+          order_by: "created_at,street_1,street_2,city,state,postal_code,country,status"
+          page: 1
+          size: 50
+      responses:
+        "200":
+          application/json: {"items": [{"id": "<id>", "organization_id": "<id>"}], "total": 757850, "page": 719000, "size": 237986}
+        "401":
+          application/json: {"detail": "<value>"}
+        "422":
+          application/json: {"detail": []}
+        "500":
+          application/json: {"detail": "<value>"}
+  create_customer_v1_customers_post:
+    speakeasy-default-create-customer-v1-customers-post:
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {"id": "<id>", "organization_id": "<id>"}
+        "401":
+          application/json: {"detail": "<value>"}
+        "422":
+          application/json: {"detail": []}
+        "500":
+          application/json: {"detail": "<value>"}
+  get_customer_by_id_v1_customers__customer_id__get:
+    speakeasy-default-get-customer-by-id-v1-customers-customer-id-get:
+      parameters:
+        path:
+          customer_id: "cust_abc123"
+      responses:
+        "200":
+          application/json: {"id": "<id>", "organization_id": "<id>"}
+        "422":
+          application/json: {}
+  update_customer_v1_customers__customer_id__put:
+    speakeasy-default-update-customer-v1-customers-customer-id-put:
+      parameters:
+        path:
+          customer_id: "<id>"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {"id": "<id>", "organization_id": "<id>"}
+        "401":
+          application/json: {"detail": "<value>"}
+        "422":
+          application/json: {"detail": [{"type": "<value>", "loc": ["<value 1>"], "msg": "<value>", "input": "<value>", "ctx": {"key": "<value>"}}]}
+        "500":
+          application/json: {"detail": "<value>"}
+  get_customer_by_external_id_v1_customers_external__external_id__get:
+    speakeasy-default-get-customer-by-external-id-v1-customers-external-external-id-get:
+      parameters:
+        path:
+          external_id: "external_12345"
+      responses:
+        "200":
+          application/json: {"id": "<id>", "organization_id": "<id>"}
+        "422":
+          application/json: {}
+  getTransactionsByCustomer:
+    speakeasy-default-get-transactions-by-customer:
+      parameters:
+        path:
+          customer_id: "<id>"
+      responses:
+        "200":
+          application/json: [{"organization_id": "<id>", "external_id": "<id>", "date": "2025-01-31T02:37:17.664Z", "total_amount": "0.00", "marketplace": false, "total_tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "total_tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "total_tax_liability_amount": "0.00", "taxable_amount": "0.00", "locked": false, "id": "<id>", "addresses": [{"type": "BILL_TO"}], "transaction_items": [{"organization_id": "<id>", "date": "2023-05-06T21:03:02.196Z", "external_product_id": "<id>", "quantity": "1.0", "amount": "0.00", "tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "taxable_amount": "0.00", "exempt": false, "id": "<id>", "tax_items": [{"rule_id": "0000", "rate": "<value>", "amount": "509.35", "name": "<value>"}]}], "type": "SALE"}]
+        "422":
+          application/json: {}
+  createTransactionByCustomer:
+    speakeasy-default-create-transaction-by-customer:
+      parameters:
+        path:
+          customer_id: "<id>"
+      requestBody:
+        application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-04-30T23:54:13.835Z", "total_amount": 0, "marketplace": false, "total_tax_amount_imported": 0, "tax_rate_imported": 0, "total_tax_amount_calculated": 0, "tax_rate_calculated": 0, "total_tax_liability_amount": 0, "taxable_amount": 0, "locked": false, "addresses": [], "transaction_items": [{"organization_id": "<id>", "date": "2023-12-30T23:49:45.106Z", "external_product_id": "<id>", "quantity": 1, "amount": 0, "tax_amount_imported": 0, "tax_rate_imported": 0, "tax_amount_calculated": 0, "tax_rate_calculated": 0, "taxable_amount": 0, "exempt": false}]}
+      responses:
+        "200":
+          application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-12-17T07:53:07.575Z", "total_amount": "0.00", "marketplace": false, "total_tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "total_tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "total_tax_liability_amount": "0.00", "taxable_amount": "0.00", "locked": false, "id": "<id>", "addresses": [{"type": "BILL_FROM"}], "transaction_items": [{"organization_id": "<id>", "date": "2024-05-23T13:08:03.463Z", "external_product_id": "<id>", "quantity": "1.0", "amount": "0.00", "tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "taxable_amount": "0.00", "exempt": false, "id": "<id>", "tax_items": []}], "type": "FULL_CREDIT_NOTE"}
+        "422":
+          application/json: {}
+  get_exemptions_v1_exemptions_get:
+    speakeasy-default-get-exemptions-v1-exemptions-get:
+      parameters:
+        query:
+          search_query: "John"
+          status__in: "ACTIVE,INACTIVE,EXPIRED"
+          country_code: ["US"]
+          jurisdiction: "CA"
+          start_date: "2024-01-01"
+          end_date: "2024-01-01"
+          customer_id: "cust_1234"
+          transaction_id: "trans_1234"
+          order_by: "end_date,FEIN,sales_tax_id,status"
+          page: 1
+          size: 50
+      responses:
+        "200":
+          application/json: {"items": [], "total": 656809, "page": 809509, "size": 363701}
+        "401":
+          application/json: {"detail": "<value>"}
+        "422":
+          application/json: {"detail": [{"type": "<value>", "loc": [], "msg": "<value>", "input": "<value>", "ctx": {"key": "<value>", "key1": "<value>", "key2": "<value>"}}]}
+        "500":
+          application/json: {"detail": "<value>"}
+  create_exemption_v1_exemptions_post:
+    speakeasy-default-create-exemption-v1-exemptions-post:
+      requestBody:
+        application/json: {"exemption_type": "customer", "start_date": "2023-03-27", "customer_id": "<id>", "reseller": false, "FEIN": "<value>", "sales_tax_id": "<id>", "status": "ACTIVE"}
+      responses:
+        "200":
+          application/json: {"start_date": "2025-05-21", "reseller": false, "id": "<id>", "exemption_type": "transaction", "status": "ARCHIVED"}
+        "401":
+          application/json: {"detail": "<value>"}
+        "422":
+          application/json: {"detail": [{"type": "<value>", "loc": ["<value 1>"], "msg": "<value>", "input": "<value>", "ctx": {"key": "<value>"}}]}
+        "500":
+          application/json: {"detail": "<value>"}
+  get_exemption_by_id_v1_exemptions__exemption_id__get:
+    speakeasy-default-get-exemption-by-id-v1-exemptions-exemption-id-get:
+      parameters:
+        path:
+          exemption_id: "<id>"
+      responses:
+        "200":
+          application/json: {"exemption_type": "transaction", "start_date": "2024-02-13", "reseller": false, "id": "<id>"}
+        "404":
+          application/json: {"detail": "<value>"}
+        "422":
+          application/json: {"detail": []}
+        "500":
+          application/json: {"detail": "<value>"}
+  uploadExemptionCert:
+    speakeasy-default-upload-exemption-cert:
+      parameters:
+        path:
+          exemption_id: "<id>"
+      requestBody:
+        multipart/form-data: {"file": "x-file: example.file"}
+      responses:
+        "200":
+          application/json: {"related_entity_id": "<id>", "related_entity_type": "FILING_PAYMENT", "id": "<id>"}
+        "401":
+          application/json: {"detail": "<value>"}
+        "422":
+          application/json: {"detail": []}
+        "500":
+          application/json: {"detail": "<value>"}
+  getExemptionAttachments:
+    speakeasy-default-get-exemption-attachments:
+      parameters:
+        path:
+          exemption_id: "<id>"
+      responses:
+        "200":
+          application/json: [{"related_entity_id": "<id>", "related_entity_type": "EXEMPTION", "id": "<id>"}]
+        "401":
+          application/json: {"detail": "<value>"}
+        "422":
+          application/json: {"detail": []}
+  get_nexus_for_org_v1_nexus_get:
+    speakeasy-default-get-nexus-for-org-v1-nexus-get:
+      parameters:
+        query:
+          status__in: "APPROACHING,NOT_EXPOSED,PENDING_REGISTRATION,EXPOSED,APPROACHING,REGISTERED"
+          order_by: "state_code,country_code"
+          page: 1
+          size: 50
+      responses:
+        "200":
+          application/json: {"items": [{"country_code": "CN", "state_code": "<value>", "state_name": "<value>", "treatment_of_exempt_transactions": "YES_SALES_NO_TRANSACTIONS", "trigger": "<value>", "sales_or_transactions": "SALES", "threshold_sales": 476092, "threshold_transactions": 673561, "start_date": "2023-06-08", "transaction_count": 0, "transactions_amount": "0.00", "previous_transaction_count": 0, "previous_transactions_amount": "0.00", "calculated_tax_liability": "0.00", "imported_tax_liability": "0.00", "tax_liability": "0.00", "nexus_met": false, "economic_nexus_met": false, "physical_nexus_met": false, "collected_tax_nexus_met": false, "collected_tax_enabled": false, "period_model": "PRECEDING_YEAR", "period_start_date": "2025-11-23", "period_end_date": "2024-12-20", "previous_period_start_date": "<value>", "previous_period_end_date": "<value>", "earliest_collected_date": "2018-01-01T00:00:00", "vda_eligible": false, "id": "<id>", "created_at": "2023-10-25T14:47:36.968Z", "updated_at": "2025-12-03T07:26:11.468Z", "organization_id": "<id>", "is_vda_eligible": true, "nexus_type": "EU_MEMBER_STATE", "total_transactions": 116288, "total_transactions_included": 856257, "total_transactions_exempted": 666387, "total_transactions_marketplace": 747391, "marketplace_included": false}], "total": 218796, "page": 800733, "size": 990975}
+        "422":
+          application/json: {}
+  get_products_v1_products__get:
+    speakeasy-default-get-products-v1-products-get:
+      parameters:
+        query:
+          page: 1
+          size: 50
+      responses:
+        "200":
+          application/json: {"items": [{"id": "<id>", "external_id": "<id>", "sku": ["<value 1>"], "code": "CODE_3005", "name": "<value>", "description": "finally ugh but apropos", "status": "PARTIALLY_APPROVED", "product_category": "SERVICE", "product_subcategory": "CATERING", "tax_exempt": true, "source": "APPLE_APP_STORE", "connection_id": "<id>", "classification_failed": true}], "total": 316520, "page": 158694, "size": 961}
+        "401":
+          application/json: {"detail": "<value>"}
+        "422":
+          application/json: {"detail": [{"type": "<value>", "loc": ["<value 1>", "<value 2>"], "msg": "<value>", "input": "<value>", "ctx": {"key": "<value>", "key1": "<value>"}}]}
+        "500":
+          application/json: {"detail": "<value>"}
+  create_product_v1_products__post:
+    speakeasy-default-create-product-v1-products-post:
+      requestBody:
+        application/json: {"external_id": "<id>", "name": "<value>", "product_category": "UNKNOWN", "product_subcategory": "MERCHANDISE_VENDING_MACHINE", "tax_exempt": true}
+      responses:
+        "200":
+          application/json: {"id": "<id>", "external_id": "<id>", "sku": ["<value 1>", "<value 2>"], "code": "CODE_3025", "name": "<value>", "description": "flight deploy pulverize", "status": "APPROVED", "product_category": "PHYSICAL", "product_subcategory": "MEDICAL_SERVICES", "tax_exempt": false, "source": "BIGCOMMERCE", "connection_id": "<id>", "classification_failed": true}
+        "401":
+          application/json: {"detail": "<value>"}
+        "422":
+          application/json: {"detail": [{"type": "<value>", "loc": ["<value 1>", "<value 2>"], "msg": "<value>", "input": "<value>", "ctx": {}}]}
+        "500":
+          application/json: {"detail": "<value>"}
+  get_product_by_id_v1_products__product_id__get:
+    speakeasy-default-get-product-by-id-v1-products-product-id-get:
+      parameters:
+        path:
+          product_id: "<id>"
+      responses:
+        "200":
+          application/json: {"id": "<id>", "external_id": "<id>", "sku": [], "code": "CODE_3012", "name": "<value>", "description": "reapply inasmuch officially until", "status": "PARTIALLY_APPROVED", "product_category": "UNKNOWN", "product_subcategory": "MACHINERY", "tax_exempt": true, "source": "ZUORA", "connection_id": "<id>", "classification_failed": true}
+        "401":
+          application/json: {"detail": "<value>"}
+        "422":
+          application/json: {"detail": [{"type": "<value>", "loc": ["<value 1>", "<value 2>"], "msg": "<value>", "input": "<value>", "ctx": {"key": "<value>"}}]}
+        "500":
+          application/json: {"detail": "<value>"}
+  update_product_v1_products__product_id__put:
+    speakeasy-default-update-product-v1-products-product-id-put:
+      parameters:
+        path:
+          product_id: "<id>"
+      requestBody:
+        application/json: {"name": "<value>", "product_category": "PHYSICAL", "product_subcategory": "CATERING", "tax_exempt": true, "classification_failed": false}
+      responses:
+        "200":
+          application/json: {"id": "<id>", "external_id": "<id>", "sku": ["<value 1>"], "code": "CODE_2006", "name": "<value>", "description": "etch yellowish barring delete customise fixed hard-to-find however", "status": "APPROVED", "product_category": "SERVICE", "product_subcategory": "ORAL_HYGIENE", "tax_exempt": false, "source": "PINTEREST", "connection_id": "<id>", "classification_failed": false}
+        "401":
+          application/json: {"detail": "<value>"}
+        "422":
+          application/json: {"detail": []}
+        "500":
+          application/json: {"detail": "<value>"}
+  get_product_categories_v1_products_categories__get:
+    speakeasy-default-get-product-categories-v1-products-categories-get:
+      responses:
+        "200":
+          application/json: [{"name": "<value>", "subcategories": []}]
+        "422":
+          application/json: {}
+  get_transactions_v1_transactions_get:
+    speakeasy-default-get-transactions-v1-transactions-get:
+      parameters:
+        query:
+          address_status__in: "UNVERIFIED,INVALID,PARTIALLY_VERIFIED,VERIFIED,UNVERIFIABLE"
+          order_by: "date,state,customer_name,status"
+          page: 1
+          size: 50
+      responses:
+        "200":
+          application/json: {"items": [], "total": 93605, "page": 198565, "size": 659955}
+        "401":
+          application/json: {"detail": "<value>"}
+        "422":
+          application/json: {"detail": [{"type": "<value>", "loc": ["<value 1>", "<value 2>", "<value 3>"], "msg": "<value>", "input": "<value>", "ctx": {"key": "<value>", "key1": "<value>"}}]}
+        "500":
+          application/json: {"detail": "<value>"}
+  create_transaction_v1_transactions_post:
+    speakeasy-default-create-transaction-v1-transactions-post:
+      requestBody:
+        application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-11-05T23:48:53.053Z", "total_amount": 0, "marketplace": false, "total_tax_amount_imported": 0, "tax_rate_imported": 0, "total_tax_amount_calculated": 0, "tax_rate_calculated": 0, "total_tax_liability_amount": 0, "taxable_amount": 0, "locked": false, "addresses": [], "transaction_items": [], "customer": {"organization_id": "<id>", "is_test_data": false}, "type": "TAX_REFUND"}
+      responses:
+        "202":
+          application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-09-11T11:08:29.048Z", "total_amount": "0.00", "marketplace": false, "total_tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "total_tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "total_tax_liability_amount": "0.00", "taxable_amount": "0.00", "locked": false, "id": "<id>", "addresses": [{"type": "SHIP_FROM"}], "transaction_items": [{"organization_id": "<id>", "date": "2024-12-26T12:17:10.468Z", "external_product_id": "<id>", "quantity": "1.0", "amount": "0.00", "tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "taxable_amount": "0.00", "exempt": false, "id": "<id>", "tax_items": []}], "type": "FULL_CREDIT_NOTE"}
+        "400":
+          application/json: {"detail": "<value>"}
+        "422":
+          application/json: {"detail": []}
+        "500":
+          application/json: {"detail": "<value>"}
+    duplicate_external_id:
+      requestBody:
+        application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-11-05T23:48:53.053Z", "total_amount": 0, "marketplace": false, "total_tax_amount_imported": 0, "tax_rate_imported": 0, "total_tax_amount_calculated": 0, "tax_rate_calculated": 0, "total_tax_liability_amount": 0, "taxable_amount": 0, "locked": false, "addresses": [], "transaction_items": [], "customer": {"organization_id": "<id>", "is_test_data": false}, "type": "TAX_REFUND"}
+      responses:
+        "400":
+          application/json: {"detail": "Duplicate external id (ORDER_XYZ_789) for the given transaction not allowed."}
+        "500":
+          application/json: {"detail": "Duplicate external id (ORDER_XYZ_789) for the given transaction not allowed."}
+    missing_product_external_id:
+      requestBody:
+        application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-11-05T23:48:53.053Z", "total_amount": 0, "marketplace": false, "total_tax_amount_imported": 0, "tax_rate_imported": 0, "total_tax_amount_calculated": 0, "tax_rate_calculated": 0, "total_tax_liability_amount": 0, "taxable_amount": 0, "locked": false, "addresses": [], "transaction_items": [], "customer": {"organization_id": "<id>", "is_test_data": false}, "type": "TAX_REFUND"}
+      responses:
+        "400":
+          application/json: {"detail": "[orgn_YourOrgIdHere] Product does not have an external id"}
+        "500":
+          application/json: {"detail": "[orgn_YourOrgIdHere] Product does not have an external id"}
+    connection_mismatch:
+      requestBody:
+        application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-11-05T23:48:53.053Z", "total_amount": 0, "marketplace": false, "total_tax_amount_imported": 0, "tax_rate_imported": 0, "total_tax_amount_calculated": 0, "tax_rate_calculated": 0, "total_tax_liability_amount": 0, "taxable_amount": 0, "locked": false, "addresses": [], "transaction_items": [], "customer": {"organization_id": "<id>", "is_test_data": false}, "type": "TAX_REFUND"}
+      responses:
+        "400":
+          application/json: {"detail": "Connection mismatch between transaction and customer"}
+        "500":
+          application/json: {"detail": "Connection mismatch between transaction and customer"}
+    invalid_address:
+      requestBody:
+        application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-11-05T23:48:53.053Z", "total_amount": 0, "marketplace": false, "total_tax_amount_imported": 0, "tax_rate_imported": 0, "total_tax_amount_calculated": 0, "tax_rate_calculated": 0, "total_tax_liability_amount": 0, "taxable_amount": 0, "locked": false, "addresses": [], "transaction_items": [], "customer": {"organization_id": "<id>", "is_test_data": false}, "type": "TAX_REFUND"}
+      responses:
+        "400":
+          application/json: {"detail": "Address validation failed: missing required fields"}
+        "500":
+          application/json: {"detail": "Address validation failed: missing required fields"}
+    missing_org_id:
+      requestBody:
+        application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-11-05T23:48:53.053Z", "total_amount": 0, "marketplace": false, "total_tax_amount_imported": 0, "tax_rate_imported": 0, "total_tax_amount_calculated": 0, "tax_rate_calculated": 0, "total_tax_liability_amount": 0, "taxable_amount": 0, "locked": false, "addresses": [], "transaction_items": [], "customer": {"organization_id": "<id>", "is_test_data": false}, "type": "TAX_REFUND"}
+      responses:
+        "422":
+          application/json: {"detail": [{"type": "missing", "loc": ["header", "x-organization-id"], "msg": "Field required", "input": "<value>", "ctx": {"key": "<value>"}}]}
+    missing_required_field:
+      requestBody:
+        application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-11-05T23:48:53.053Z", "total_amount": 0, "marketplace": false, "total_tax_amount_imported": 0, "tax_rate_imported": 0, "total_tax_amount_calculated": 0, "tax_rate_calculated": 0, "total_tax_liability_amount": 0, "taxable_amount": 0, "locked": false, "addresses": [], "transaction_items": [], "customer": {"organization_id": "<id>", "is_test_data": false}, "type": "TAX_REFUND"}
+      responses:
+        "422":
+          application/json: {"detail": [{"type": "missing", "loc": ["body", "external_id"], "msg": "Field required", "input": "<value>", "ctx": {"key": "<value>"}}]}
+    invalid_enum_value:
+      requestBody:
+        application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-11-05T23:48:53.053Z", "total_amount": 0, "marketplace": false, "total_tax_amount_imported": 0, "tax_rate_imported": 0, "total_tax_amount_calculated": 0, "tax_rate_calculated": 0, "total_tax_liability_amount": 0, "taxable_amount": 0, "locked": false, "addresses": [], "transaction_items": [], "customer": {"organization_id": "<id>", "is_test_data": false}, "type": "TAX_REFUND"}
+      responses:
+        "422":
+          application/json: {"detail": [{"type": "enum", "loc": ["body", "currency"], "msg": "Input should be 'USD', 'CAD', 'EUR'...", "input": "INVALID", "ctx": {"expected": "one of USD, CAD, EUR..."}}]}
+    invalid_date_format:
+      requestBody:
+        application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-11-05T23:48:53.053Z", "total_amount": 0, "marketplace": false, "total_tax_amount_imported": 0, "tax_rate_imported": 0, "total_tax_amount_calculated": 0, "tax_rate_calculated": 0, "total_tax_liability_amount": 0, "taxable_amount": 0, "locked": false, "addresses": [], "transaction_items": [], "customer": {"organization_id": "<id>", "is_test_data": false}, "type": "TAX_REFUND"}
+      responses:
+        "422":
+          application/json: {"detail": [{"type": "datetime_parsing", "loc": ["body", "date"], "msg": "Input should be a valid datetime, invalid format", "input": "2023-13-45", "ctx": {"key": "<value>"}}]}
+  getTransactionByExternalId:
+    speakeasy-default-get-transaction-by-external-id:
+      parameters:
+        path:
+          external_id: "<id>"
+      responses:
+        "200":
+          application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-02-23T09:24:55.669Z", "total_amount": "0.00", "marketplace": false, "total_tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "total_tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "total_tax_liability_amount": "0.00", "taxable_amount": "0.00", "locked": false, "id": "<id>", "addresses": [], "transaction_items": [{"organization_id": "<id>", "date": "2024-11-23T03:24:58.603Z", "external_product_id": "<id>", "quantity": "1.0", "amount": "0.00", "tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "taxable_amount": "0.00", "exempt": false, "id": "<id>", "tax_items": []}], "type": "PARTIAL_CREDIT_NOTE"}
+        "401":
+          application/json: {"detail": "<value>"}
+        "422":
+          application/json: {"detail": [{"type": "<value>", "loc": ["<value 1>", "<value 2>", "<value 3>"], "msg": "<value>", "input": "<value>", "ctx": {"key": "<value>", "key1": "<value>", "key2": "<value>"}}]}
+        "500":
+          application/json: {"detail": "<value>"}
+  update_transaction_v1_transactions__transaction_id__put:
+    speakeasy-default-update-transaction-v1-transactions-transaction-id-put:
+      parameters:
+        path:
+          transaction_id: "<id>"
+      requestBody:
+        application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2024-09-25T05:56:56.167Z", "total_amount": 0, "marketplace": false, "total_tax_amount_imported": 0, "tax_rate_imported": 0, "total_tax_amount_calculated": 0, "tax_rate_calculated": 0, "total_tax_liability_amount": 0, "taxable_amount": 0, "locked": false, "addresses": [], "transaction_items": [], "customer": {}}
+      responses:
+        "200":
+          application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-04-19T12:47:57.416Z", "total_amount": "0.00", "marketplace": false, "total_tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "total_tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "total_tax_liability_amount": "0.00", "taxable_amount": "0.00", "locked": false, "id": "<id>", "addresses": [{"type": "SHIP_FROM"}], "transaction_items": [{"organization_id": "<id>", "date": "2025-10-27T18:30:02.836Z", "external_product_id": "<id>", "quantity": "1.0", "amount": "0.00", "tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "taxable_amount": "0.00", "exempt": false, "id": "<id>", "tax_items": [{"rule_id": "0000", "rate": "<value>", "amount": "699.74", "name": "<value>"}]}], "type": "SALE"}
+        "422":
+          application/json: {}
+  get_transaction_by_id_v1_transactions__transaction_id__get:
+    speakeasy-default-get-transaction-by-id-v1-transactions-transaction-id-get:
+      parameters:
+        path:
+          transaction_id: "<id>"
+      responses:
+        "200":
+          application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2024-08-13T05:12:45.031Z", "total_amount": "0.00", "marketplace": false, "total_tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "total_tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "total_tax_liability_amount": "0.00", "taxable_amount": "0.00", "locked": false, "id": "<id>", "addresses": [{"type": "BILL_TO"}], "transaction_items": [], "type": "ARCHIVE"}
+        "401":
+          application/json: {"detail": "<value>"}
+        "422":
+          application/json: {"detail": [{"type": "<value>", "loc": [], "msg": "<value>", "input": "<value>", "ctx": {}}]}
+        "500":
+          application/json: {"detail": "<value>"}
+  getTransactionsByFiling:
+    speakeasy-default-get-transactions-by-filing:
+      parameters:
+        path:
+          filing_id: "<id>"
+      responses:
+        "200":
+          application/json: [{"organization_id": "<id>", "external_id": "<id>", "date": "2023-08-24T22:51:56.365Z", "total_amount": "0.00", "marketplace": false, "total_tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "total_tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "total_tax_liability_amount": "0.00", "taxable_amount": "0.00", "locked": false, "id": "<id>", "addresses": [{"type": "BILL_FROM"}], "transaction_items": [], "type": "TAX_REFUND"}]
+        "401":
+          application/json: {"detail": "<value>"}
+        "422":
+          application/json: {"detail": []}
+        "500":
+          application/json: {"detail": "<value>"}
+  estimate_tax_v1_tax_estimate_post:
+    speakeasy-default-estimate-tax-v1-tax-estimate-post:
+      requestBody:
+        application/json: {"date": "2025-10-15T06:09:56.760Z", "external_id": "<id>", "total_amount": 0, "currency": "WST", "marketplace": false, "transaction_items": [{"date": "2025-01-28T01:30:14.219Z", "quantity": 1, "amount": 9056.18, "exempt": false}], "addresses": [{"type": "BILL_TO", "state": "Maryland", "postal_code": "76246-6992", "country": "Montserrat"}]}
+      responses:
+        "200":
+          application/json: {"items": [{"date": "2024-01-13T04:47:12.370Z", "external_id": "<id>", "total_amount": "0.0", "currency": "BND", "marketplace": false, "transaction_items": [{"date": "2025-08-20T01:32:00.299Z", "quantity": "1.0", "amount": "61.49", "exempt": false, "tax_amount": "0.00", "taxable_amount": "0.00", "tax_rate": "0.00"}], "addresses": [], "total_tax_amount_calculated": "0.00", "taxable_amount": "0.00", "tax_rate_calculated": "0.00", "nexus_met": false, "has_active_registration": false}], "total": 435684, "page": 820020, "size": 413328}
+        "401":
+          application/json: {"detail": "<value>"}
+        "422":
+          application/json: {"detail": [{"type": "<value>", "loc": ["<value 1>"], "msg": "<value>", "input": "<value>", "ctx": {"key": "<value>", "key1": "<value>", "key2": "<value>"}}]}
+        "500":
+          application/json: {"detail": "<value>"}
+examplesVersion: 1.0.2

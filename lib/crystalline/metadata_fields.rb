@@ -85,38 +85,38 @@ module Crystalline
           lookup = format_metadata.fetch(:letter_case, nil).call
           value = d[lookup]
           field_type = field.type
-          if T.nilable? field_type
+          if ::Crystalline::Utils.nilable? field_type
             if value == 'null'
               to_build[key] = nil
               next
             end
-            field_type = T.nilable_of(field_type)
+            field_type = ::Crystalline::Utils.nilable_of(field_type)
           end
           
           # If field is not nilable, and the value is not in the dict, raise a KeyError
-          raise KeyError, "key #{lookup} not found in hash" if value.nil? && !T.nilable?(field.type)
+          raise KeyError, "key #{lookup} not found in hash" if value.nil? && !::Crystalline::Utils.nilable?(field.type)
           # If field is nilable, and the value is not in the dict, just move to the next field
           next if value.nil?
 
-          if T.arr? field_type
-            inner_type = T.arr_of(field_type)
+          if Crystalline::Utils.arr? field_type
+            inner_type = Crystalline::Utils.arr_of(field_type)
             unmarshalled_array = value.map { |f| unmarshal_single(inner_type, f, format_metadata) }
             to_build[key] = unmarshalled_array
-          elsif T.hash? field_type
-            val_type = T.hash_of(field_type)
+          elsif Crystalline::Utils.hash? field_type
+            val_type = Crystalline::Utils.hash_of(field_type)
 
             # rubocop:disable Style/HashTransformValues
             unmarshalled_hash = value.map { |k, v| [k, unmarshal_single(val_type, v, format_metadata)] }.to_h
             # rubocop:enable Style/HashTransformValues
             to_build[key] = unmarshalled_hash
-          elsif T.union? field_type
+          elsif Crystalline::Utils.union? field_type
             discriminator = field.metadata.fetch(:discriminator, nil)
             if !discriminator.nil?
               type_to_deserialize = value.fetch(discriminator)
-              type_to_deserialize = T.get_union_types(field_type).find { |t| t.name.split('::').last == type_to_deserialize }              
+              type_to_deserialize = Crystalline::Utils.get_union_types(field_type).find { |t| t.name.split('::').last == type_to_deserialize }
               to_build[key] = Crystalline.unmarshal_json(value, type_to_deserialize)
             else
-              union_types = T.get_union_types(field_type)
+              union_types = Crystalline::Utils.get_union_types(field_type)
               union_types = union_types.sort_by { |klass| Crystalline.non_nilable_attr_count(klass) }
 
               union_types.each do |union_type|
@@ -167,7 +167,7 @@ module Crystalline
         field.to_dict
       else
         if ::Crystalline.needs_string_conversion field
-          ::Crystalline.val_to_string field
+          ::Crystalline.json_encode field
         else
           field
         end

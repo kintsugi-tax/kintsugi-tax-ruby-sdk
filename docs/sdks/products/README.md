@@ -17,21 +17,23 @@ Retrieve a paginated list of products based on filters and search query.
 
 ### Example Usage
 
+<!-- UsageSnippet language="ruby" operationID="get_products_v1_products__get" method="get" path="/v1/products/" -->
 ```ruby
-require 'openapi'
+require 'kintsugi_sdk'
 
-Models = ::OpenApiSDK::Models
-s = ::OpenApiSDK::SDK.new
+Models = ::KintsugiSDK::Models
+s = ::KintsugiSDK::OpenApiSDK.new(
+      security: Models::Shared::Security.new(
+        api_key_header: '<YOUR_API_KEY_HERE>',
+        custom_header: '<YOUR_API_KEY_HERE>',
+      ),
+    )
 
-req = Models::Operations::GetProductsV1ProductsGetRequest.new(
-  x_organization_id: 'org_12345',
-)
+req = Models::Ops::GetProductsV1ProductsGetRequest.new()
 
-res = s.products.list(request: req, security: Models::Operations::GetProductsV1ProductsGetSecurity.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-  ))
+res = s.products.list(request: req)
 
-unless res.page_product_read.nil?
+unless res.nil?
   # handle response
 end
 
@@ -39,14 +41,13 @@ end
 
 ### Parameters
 
-| Parameter                                                                                                           | Type                                                                                                                | Required                                                                                                            | Description                                                                                                         |
-| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                           | [Models::Operations::GetProductsV1ProductsGetRequest](../../models/operations/getproductsv1productsgetrequest.md)   | :heavy_check_mark:                                                                                                  | The request object to use for the request.                                                                          |
-| `security`                                                                                                          | [Models::Operations::GetProductsV1ProductsGetSecurity](../../models/operations/getproductsv1productsgetsecurity.md) | :heavy_check_mark:                                                                                                  | The security requirements to use for the request.                                                                   |
+| Parameter                                                                                                  | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                  | [Models::Ops::GetProductsV1ProductsGetRequest](../../models/operations/getproductsv1productsgetrequest.md) | :heavy_check_mark:                                                                                         | The request object to use for the request.                                                                 |
 
 ### Response
 
-**[T.nilable(Models::Operations::GetProductsV1ProductsGetResponse)](../../models/operations/getproductsv1productsgetresponse.md)**
+**[T.nilable(Models::Shared::PageProductRead)](../../models/operations/pageproductread.md)**
 
 ### Errors
 
@@ -65,26 +66,32 @@ The Create Product API allows users to manually create a new product
 
 ### Example Usage
 
+<!-- UsageSnippet language="ruby" operationID="create_product_v1_products__post" method="post" path="/v1/products/" -->
 ```ruby
-require 'openapi'
+require 'kintsugi_sdk'
 
-Models = ::OpenApiSDK::Models
-s = ::OpenApiSDK::SDK.new
+Models = ::KintsugiSDK::Models
+s = ::KintsugiSDK::OpenApiSDK.new(
+      security: Models::Shared::Security.new(
+        api_key_header: '<YOUR_API_KEY_HERE>',
+        custom_header: '<YOUR_API_KEY_HERE>',
+      ),
+    )
 
-res = s.products.create(security: Models::Operations::CreateProductV1ProductsPostSecurity.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-  ), x_organization_id: 'org_12345', product_create_manual: Models::Components::ProductCreateManual.new(
+req = Models::Shared::ProductCreateManual.new(
   external_id: 'prod_001',
   name: 'Sample Product',
   description: 'A description of the product',
-  status: Models::Components::ProductStatusEnum::APPROVED,
-  product_category: Models::Components::ProductCategoryEnum::PHYSICAL,
-  product_subcategory: Models::Components::ProductSubCategoryEnum::GENERAL_CLOTHING,
+  status: Models::Shared::ProductStatusEnum::APPROVED,
+  product_category: Models::Shared::ProductCategoryEnum::PHYSICAL,
+  product_subcategory: Models::Shared::ProductSubCategoryEnum::GENERAL_CLOTHING,
   tax_exempt: false,
-  source: Models::Components::SourceEnum::BIGCOMMERCE,
-))
+  source: Models::Shared::SourceEnum::BIGCOMMERCE,
+)
 
-unless res.product_read.nil?
+res = s.products.create(request: req)
+
+unless res.nil?
   # handle response
 end
 
@@ -92,15 +99,13 @@ end
 
 ### Parameters
 
-| Parameter                                                                                                                 | Type                                                                                                                      | Required                                                                                                                  | Description                                                                                                               | Example                                                                                                                   |
-| ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                | [Models::Operations::CreateProductV1ProductsPostSecurity](../../models/operations/createproductv1productspostsecurity.md) | :heavy_check_mark:                                                                                                        | The security requirements to use for the request.                                                                         |                                                                                                                           |
-| `x_organization_id`                                                                                                       | *T.nilable(::String)*                                                                                                     | :heavy_check_mark:                                                                                                        | The unique identifier for the organization making the request                                                             | org_12345                                                                                                                 |
-| `product_create_manual`                                                                                                   | [Models::Components::ProductCreateManual](../../models/shared/productcreatemanual.md)                                     | :heavy_check_mark:                                                                                                        | N/A                                                                                                                       |                                                                                                                           |
+| Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `request`                                                                         | [Models::Shared::ProductCreateManual](../../models/shared/productcreatemanual.md) | :heavy_check_mark:                                                                | The request object to use for the request.                                        |
 
 ### Response
 
-**[T.nilable(Models::Operations::CreateProductV1ProductsPostResponse)](../../models/operations/createproductv1productspostresponse.md)**
+**[T.nilable(Models::Shared::ProductRead)](../../models/operations/productread.md)**
 
 ### Errors
 
@@ -119,17 +124,25 @@ The Get Product By ID API retrieves detailed information about
 
 ### Example Usage
 
+<!-- UsageSnippet language="ruby" operationID="get_product_by_id_v1_products__product_id__get" method="get" path="/v1/products/{product_id}" -->
 ```ruby
-require 'openapi'
+require 'kintsugi_sdk'
 
-Models = ::OpenApiSDK::Models
-s = ::OpenApiSDK::SDK.new
+Models = ::KintsugiSDK::Models
+s = ::KintsugiSDK::OpenApiSDK.new(
+      security: Models::Shared::Security.new(
+        api_key_header: '<YOUR_API_KEY_HERE>',
+        custom_header: '<YOUR_API_KEY_HERE>',
+      ),
+    )
 
-res = s.products.get(security: Models::Operations::GetProductByIdV1ProductsProductIdGetSecurity.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-  ), product_id: '<id>', x_organization_id: 'org_12345')
+req = Models::Ops::GetProductByIdV1ProductsProductIdGetRequest.new(
+  product_id: '<id>',
+)
 
-unless res.product_read.nil?
+res = s.products.get(request: req)
+
+unless res.nil?
   # handle response
 end
 
@@ -137,15 +150,13 @@ end
 
 ### Parameters
 
-| Parameter                                                                                                                                   | Type                                                                                                                                        | Required                                                                                                                                    | Description                                                                                                                                 | Example                                                                                                                                     |
-| ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                                  | [Models::Operations::GetProductByIdV1ProductsProductIdGetSecurity](../../models/operations/getproductbyidv1productsproductidgetsecurity.md) | :heavy_check_mark:                                                                                                                          | The security requirements to use for the request.                                                                                           |                                                                                                                                             |
-| `product_id`                                                                                                                                | *::String*                                                                                                                                  | :heavy_check_mark:                                                                                                                          | The unique identifier for the product you want to retrieve.                                                                                 |                                                                                                                                             |
-| `x_organization_id`                                                                                                                         | *T.nilable(::String)*                                                                                                                       | :heavy_check_mark:                                                                                                                          | The unique identifier for the organization making the request                                                                               | org_12345                                                                                                                                   |
+| Parameter                                                                                                                          | Type                                                                                                                               | Required                                                                                                                           | Description                                                                                                                        |
+| ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                                          | [Models::Ops::GetProductByIdV1ProductsProductIdGetRequest](../../models/operations/getproductbyidv1productsproductidgetrequest.md) | :heavy_check_mark:                                                                                                                 | The request object to use for the request.                                                                                         |
 
 ### Response
 
-**[T.nilable(Models::Operations::GetProductByIdV1ProductsProductIdGetResponse)](../../models/operations/getproductbyidv1productsproductidgetresponse.md)**
+**[T.nilable(Models::Shared::ProductRead)](../../models/operations/productread.md)**
 
 ### Errors
 
@@ -163,26 +174,34 @@ The Update Product API allows users to modify the details of
 
 ### Example Usage
 
+<!-- UsageSnippet language="ruby" operationID="update_product_v1_products__product_id__put" method="put" path="/v1/products/{product_id}" -->
 ```ruby
-require 'openapi'
+require 'kintsugi_sdk'
 
-Models = ::OpenApiSDK::Models
-s = ::OpenApiSDK::SDK.new
+Models = ::KintsugiSDK::Models
+s = ::KintsugiSDK::OpenApiSDK.new(
+      security: Models::Shared::Security.new(
+        api_key_header: '<YOUR_API_KEY_HERE>',
+        custom_header: '<YOUR_API_KEY_HERE>',
+      ),
+    )
 
-res = s.products.update(security: Models::Operations::UpdateProductV1ProductsProductIdPutSecurity.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-  ), product_id: '<id>', x_organization_id: 'org_12345', request_body: Models::Components::ProductUpdateV2.new(
-  name: 'Updated Product Name',
-  status: Models::Components::ProductStatusEnum::APPROVED,
-  product_category: 'PHYSICAL',
-  product_subcategory: 'GENERAL_CLOTHING',
-  tax_exempt: false,
-  external_id: 'prod_001',
-  description: 'An updated description for the product',
-  classification_failed: false,
-))
+req = Models::Ops::UpdateProductV1ProductsProductIdPutRequest.new(
+  product_id: '<id>',
+  product_update: Models::Shared::ProductUpdate.new(
+    external_id: 'prod_001',
+    name: 'Updated Product Name',
+    description: 'An updated description for the product',
+    status: Models::Shared::ProductStatusEnum::APPROVED,
+    product_category: Models::Shared::ProductCategoryEnum::PHYSICAL,
+    product_subcategory: Models::Shared::ProductSubCategoryEnum::GENERAL_CLOTHING,
+    tax_exempt: false,
+  ),
+)
 
-unless res.product_read.nil?
+res = s.products.update(request: req)
+
+unless res.nil?
   # handle response
 end
 
@@ -190,16 +209,13 @@ end
 
 ### Parameters
 
-| Parameter                                                                                                                                 | Type                                                                                                                                      | Required                                                                                                                                  | Description                                                                                                                               | Example                                                                                                                                   |
-| ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                                | [Models::Operations::UpdateProductV1ProductsProductIdPutSecurity](../../models/operations/updateproductv1productsproductidputsecurity.md) | :heavy_check_mark:                                                                                                                        | The security requirements to use for the request.                                                                                         |                                                                                                                                           |
-| `product_id`                                                                                                                              | *::String*                                                                                                                                | :heavy_check_mark:                                                                                                                        | Unique identifier of the product to be updated.                                                                                           |                                                                                                                                           |
-| `x_organization_id`                                                                                                                       | *T.nilable(::String)*                                                                                                                     | :heavy_check_mark:                                                                                                                        | The unique identifier for the organization making the request                                                                             | org_12345                                                                                                                                 |
-| `request_body`                                                                                                                            | [T.any(Models::Components::ProductUpdate, Models::Components::ProductUpdateV2)](../../models/operations/product.md)                       | :heavy_check_mark:                                                                                                                        | N/A                                                                                                                                       |                                                                                                                                           |
+| Parameter                                                                                                                        | Type                                                                                                                             | Required                                                                                                                         | Description                                                                                                                      |
+| -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                                        | [Models::Ops::UpdateProductV1ProductsProductIdPutRequest](../../models/operations/updateproductv1productsproductidputrequest.md) | :heavy_check_mark:                                                                                                               | The request object to use for the request.                                                                                       |
 
 ### Response
 
-**[T.nilable(Models::Operations::UpdateProductV1ProductsProductIdPutResponse)](../../models/operations/updateproductv1productsproductidputresponse.md)**
+**[T.nilable(Models::Shared::ProductRead)](../../models/operations/productread.md)**
 
 ### Errors
 
@@ -218,32 +234,29 @@ The Get Product Categories API retrieves all
 
 ### Example Usage
 
+<!-- UsageSnippet language="ruby" operationID="get_product_categories_v1_products_categories__get" method="get" path="/v1/products/categories/" -->
 ```ruby
-require 'openapi'
+require 'kintsugi_sdk'
 
-Models = ::OpenApiSDK::Models
-s = ::OpenApiSDK::SDK.new
+Models = ::KintsugiSDK::Models
+s = ::KintsugiSDK::OpenApiSDK.new(
+      security: Models::Shared::Security.new(
+        api_key_header: '<YOUR_API_KEY_HERE>',
+        custom_header: '<YOUR_API_KEY_HERE>',
+      ),
+    )
 
-res = s.products.list_categories(security: Models::Operations::GetProductCategoriesV1ProductsCategoriesGetSecurity.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-  ), x_organization_id: 'org_12345')
+res = s.products.list_categories()
 
-unless res.response_get_product_categories_v1_products_categories_get.nil?
+unless res.nil?
   # handle response
 end
 
 ```
 
-### Parameters
-
-| Parameter                                                                                                                                                 | Type                                                                                                                                                      | Required                                                                                                                                                  | Description                                                                                                                                               | Example                                                                                                                                                   |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                                                | [Models::Operations::GetProductCategoriesV1ProductsCategoriesGetSecurity](../../models/operations/getproductcategoriesv1productscategoriesgetsecurity.md) | :heavy_check_mark:                                                                                                                                        | The security requirements to use for the request.                                                                                                         |                                                                                                                                                           |
-| `x_organization_id`                                                                                                                                       | *T.nilable(::String)*                                                                                                                                     | :heavy_check_mark:                                                                                                                                        | The unique identifier for the organization making the request                                                                                             | org_12345                                                                                                                                                 |
-
 ### Response
 
-**[T.nilable(Models::Operations::GetProductCategoriesV1ProductsCategoriesGetResponse)](../../models/operations/getproductcategoriesv1productscategoriesgetresponse.md)**
+**[T.nilable(T::Array[Models::Shared::ProductCategories])](../../models/operations/.md)**
 
 ### Errors
 

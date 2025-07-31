@@ -1,0 +1,14 @@
+# ExemptionRequired
+
+
+## Fields
+
+| Field                                                                     | Type                                                                      | Required                                                                  | Description                                                               |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `jurisdiction`                                                            | *T.nilable(::String)*                                                     | :heavy_minus_sign:                                                        | N/A                                                                       |
+| `customer_id`                                                             | *T.nilable(::String)*                                                     | :heavy_minus_sign:                                                        | N/A                                                                       |
+| `organization_id`                                                         | *::String*                                                                | :heavy_check_mark:                                                        | N/A                                                                       |
+| `exemption_type`                                                          | [Models::Shared::ExemptionType](../../models/shared/exemptiontype.md)     | :heavy_check_mark:                                                        | N/A                                                                       |
+| `start_date`                                                              | [Date](https://ruby-doc.org/stdlib-2.6.1/libdoc/date/rdoc/Date.html)      | :heavy_check_mark:                                                        | N/A                                                                       |
+| `status`                                                                  | [Models::Shared::ExemptionStatus](../../models/shared/exemptionstatus.md) | :heavy_check_mark:                                                        | N/A                                                                       |
+| `reseller`                                                                | *T::Boolean*                                                              | :heavy_check_mark:                                                        | N/A                                                                       |

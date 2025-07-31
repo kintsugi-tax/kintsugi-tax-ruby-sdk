@@ -20,12 +20,13 @@ Developer-friendly & type-safe Ruby SDK specifically catered to leverage Kintsug
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
 <!-- $toc-max-depth=2 -->
-* [Kintsugi Tax](#)
+* [Kintsugi Tax](#kintsugi-tax)
   * [SDK Installation](#sdk-installation)
   * [SDK Example Usage](#sdk-example-usage)
   * [Authentication](#authentication)
   * [Available Resources and Operations](#available-resources-and-operations)
   * [Error Handling](#error-handling)
+  * [Server Selection](#server-selection)
 * [Development](#development)
   * [Maturity](#maturity)
   * [Contributions](#contributions)
@@ -38,8 +39,7 @@ Developer-friendly & type-safe Ruby SDK specifically catered to leverage Kintsug
 The SDK can be installed using [RubyGems](https://rubygems.org/):
 
 ```bash
-gem install specific_install
-gem specific_install  
+gem install kintsugi_sdk
 ```
 <!-- End SDK Installation [installation] -->
 
@@ -49,12 +49,12 @@ gem specific_install
 ### Example
 
 ```ruby
-require 'openapi'
+require 'kintsugi_sdk'
 
-Models = ::OpenApiSDK::Models
-s = ::OpenApiSDK::SDK.new
+Models = ::KintsugiSDK::Models
+s = ::KintsugiSDK::OpenApiSDK.new
 
-req = Models::Components::AddressBase.new(
+req = Models::Shared::AddressBase.new(
   phone: '555-123-4567',
   street_1: '1600 Amphitheatre Parkway',
   street_2: 'Building 40',
@@ -62,15 +62,15 @@ req = Models::Components::AddressBase.new(
   county: 'Santa Clara',
   state: 'CA',
   postal_code: '94043',
-  country: Models::Components::CountryCodeEnum::US,
+  country: Models::Shared::CountryCodeEnum::US,
   full_address: '1600 Amphitheatre Parkway, Mountain View, CA 94043',
 )
 
-res = s.address_validation.search(request: req, security: Models::Operations::SearchV1AddressValidationSearchPostSecurity.new(
+res = s.address_validation.search(request: req, security: Models::Ops::SearchV1AddressValidationSearchPostSecurity.new(
     api_key_header: '<YOUR_API_KEY_HERE>',
   ))
 
-unless res.response_200_search_v1_address_validation_search_post.nil?
+unless res.nil?
   # handle response
 end
 
@@ -82,25 +82,55 @@ end
 
 ### Per-Client Security Schemes
 
-This SDK supports the following security scheme globally:
+This SDK supports the following security schemes globally:
 
 | Name             | Type   | Scheme  |
 | ---------------- | ------ | ------- |
 | `api_key_header` | apiKey | API key |
+| `custom_header`  | apiKey | API key |
 
-To authenticate with the API the `api_key_header` parameter must be set when initializing the SDK client instance. For example:
+You can set the security parameters through the `security` optional parameter when initializing the SDK client instance. The selected scheme will be used by default to authenticate with the API for all operations that support it. For example:
+```ruby
+require 'kintsugi_sdk'
 
+Models = ::KintsugiSDK::Models
+s = ::KintsugiSDK::OpenApiSDK.new(
+      security: Models::Shared::Security.new(
+        api_key_header: '<YOUR_API_KEY_HERE>',
+        custom_header: '<YOUR_API_KEY_HERE>',
+      ),
+    )
+
+req = Models::Shared::ValidationAddress.new(
+  line1: '1600 Amphitheatre Parkway',
+  line2: '',
+  line3: '',
+  city: 'Mountain View',
+  state: 'CA',
+  postal_code: '94043',
+  id: 215,
+  county: '',
+  full_address: '1600 Amphitheatre Parkway, Mountain View, CA 94043',
+)
+
+res = s.address_validation.suggestions(request: req)
+
+unless res.nil?
+  # handle response
+end
+
+```
 
 ### Per-Operation Security Schemes
 
 Some operations in this SDK require the security scheme to be specified at the request level. For example:
 ```ruby
-require 'openapi'
+require 'kintsugi_sdk'
 
-Models = ::OpenApiSDK::Models
-s = ::OpenApiSDK::SDK.new
+Models = ::KintsugiSDK::Models
+s = ::KintsugiSDK::OpenApiSDK.new
 
-req = Models::Components::AddressBase.new(
+req = Models::Shared::AddressBase.new(
   phone: '555-123-4567',
   street_1: '1600 Amphitheatre Parkway',
   street_2: 'Building 40',
@@ -108,15 +138,15 @@ req = Models::Components::AddressBase.new(
   county: 'Santa Clara',
   state: 'CA',
   postal_code: '94043',
-  country: Models::Components::CountryCodeEnum::US,
+  country: Models::Shared::CountryCodeEnum::US,
   full_address: '1600 Amphitheatre Parkway, Mountain View, CA 94043',
 )
 
-res = s.address_validation.search(request: req, security: Models::Operations::SearchV1AddressValidationSearchPostSecurity.new(
+res = s.address_validation.search(request: req, security: Models::Ops::SearchV1AddressValidationSearchPostSecurity.new(
     api_key_header: '<YOUR_API_KEY_HERE>',
   ))
 
-unless res.response_200_search_v1_address_validation_search_post.nil?
+unless res.nil?
   # handle response
 end
 
@@ -156,6 +186,7 @@ end
 
 * [list](docs/sdks/nexus/README.md#list) - Get Nexus For Org
 
+
 ### [products](docs/sdks/products/README.md)
 
 * [list](docs/sdks/products/README.md#list) - Get Products
@@ -163,7 +194,6 @@ end
 * [get](docs/sdks/products/README.md#get) - Get Product By Id
 * [update](docs/sdks/products/README.md#update) - Update Product
 * [list_categories](docs/sdks/products/README.md#list_categories) - Get Product Categories
-
 
 ### [tax_estimation](docs/sdks/taxestimation/README.md)
 
@@ -177,8 +207,6 @@ end
 * [update](docs/sdks/transactions/README.md#update) - Update Transaction
 * [get_by_id](docs/sdks/transactions/README.md#get_by_id) - Get Transaction By Id
 * [get_by_filing_id](docs/sdks/transactions/README.md#get_by_filing_id) - Get Transactions By Filing Id
-* [create_credit_note](docs/sdks/transactions/README.md#create_credit_note) - Create Credit Note By Transaction Id
-* [update_credit_note](docs/sdks/transactions/README.md#update_credit_note) - Update Credit Note By Transaction Id
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -209,13 +237,13 @@ When custom error responses are specified for an operation, the SDK may also thr
 ### Example
 
 ```ruby
-require 'openapi'
+require 'kintsugi_sdk'
 
-Models = ::OpenApiSDK::Models
-s = ::OpenApiSDK::SDK.new
+Models = ::KintsugiSDK::Models
+s = ::KintsugiSDK::OpenApiSDK.new
 
 begin
-    req = Models::Components::AddressBase.new(
+    req = Models::Shared::AddressBase.new(
       phone: '555-123-4567',
       street_1: '1600 Amphitheatre Parkway',
       street_2: 'Building 40',
@@ -223,15 +251,15 @@ begin
       county: 'Santa Clara',
       state: 'CA',
       postal_code: '94043',
-      country: Models::Components::CountryCodeEnum::US,
+      country: Models::Shared::CountryCodeEnum::US,
       full_address: '1600 Amphitheatre Parkway, Mountain View, CA 94043',
     )
 
-    res = s.address_validation.search(request: req, security: Models::Operations::SearchV1AddressValidationSearchPostSecurity.new(
+    res = s.address_validation.search(request: req, security: Models::Ops::SearchV1AddressValidationSearchPostSecurity.new(
         api_key_header: '<YOUR_API_KEY_HERE>',
       ))
 
-    unless res.response_200_search_v1_address_validation_search_post.nil?
+    unless res.nil?
       # handle response
     end
 rescue Models::Errors::ErrorResponse => e
@@ -250,6 +278,43 @@ end
 
 ```
 <!-- End Error Handling [errors] -->
+
+<!-- Start Server Selection [server] -->
+## Server Selection
+
+### Override Server URL Per-Client
+
+The default server can be overridden globally by passing a URL to the `server_url (String)` optional parameter when initializing the SDK client instance. For example:
+```ruby
+require 'kintsugi_sdk'
+
+Models = ::KintsugiSDK::Models
+s = ::KintsugiSDK::OpenApiSDK.new(
+      server_url: 'https://api.trykintsugi.com',
+    )
+
+req = Models::Shared::AddressBase.new(
+  phone: '555-123-4567',
+  street_1: '1600 Amphitheatre Parkway',
+  street_2: 'Building 40',
+  city: 'Mountain View',
+  county: 'Santa Clara',
+  state: 'CA',
+  postal_code: '94043',
+  country: Models::Shared::CountryCodeEnum::US,
+  full_address: '1600 Amphitheatre Parkway, Mountain View, CA 94043',
+)
+
+res = s.address_validation.search(request: req, security: Models::Ops::SearchV1AddressValidationSearchPostSecurity.new(
+    api_key_header: '<YOUR_API_KEY_HERE>',
+  ))
+
+unless res.nil?
+  # handle response
+end
+
+```
+<!-- End Server Selection [server] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 

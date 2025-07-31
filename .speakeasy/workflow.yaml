@@ -22,4 +22,4 @@ targets:
                 location: registry.speakeasyapi.dev/kintsugi-ai/tax-platform/kintsugi-overlay-ruby-code-samples
             labelOverride:
                 fixedValue: Ruby (SDK)
-            blocking: false 
+            blocking: false

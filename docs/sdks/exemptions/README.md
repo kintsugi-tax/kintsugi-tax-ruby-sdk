@@ -17,30 +17,33 @@ Retrieve a list of exemptions based on filters.
 
 ### Example Usage
 
+<!-- UsageSnippet language="ruby" operationID="get_exemptions_v1_exemptions_get" method="get" path="/v1/exemptions" -->
 ```ruby
-require 'openapi'
+require 'kintsugi_sdk'
 
-Models = ::OpenApiSDK::Models
-s = ::OpenApiSDK::SDK.new
+Models = ::KintsugiSDK::Models
+s = ::KintsugiSDK::OpenApiSDK.new(
+      security: Models::Shared::Security.new(
+        api_key_header: '<YOUR_API_KEY_HERE>',
+        custom_header: '<YOUR_API_KEY_HERE>',
+      ),
+    )
 
-req = Models::Operations::GetExemptionsV1ExemptionsGetRequest.new(
+req = Models::Ops::GetExemptionsV1ExemptionsGetRequest.new(
+  search_query: 'John',
   country_code: [
-    'U',
-    'S',
+
   ],
   jurisdiction: 'CA',
-  start_date: Date.parse('2024-01-01'),
-  end_date: Date.parse('2024-01-01'),
+  start_date: '2024-01-01',
+  end_date: '2024-01-01',
   customer_id: 'cust_1234',
   transaction_id: 'trans_1234',
-  x_organization_id: 'org_12345',
 )
 
-res = s.exemptions.list(request: req, security: Models::Operations::GetExemptionsV1ExemptionsGetSecurity.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-  ))
+res = s.exemptions.list(request: req)
 
-unless res.fastapi_pagination_default_page_exemption_read_2.nil?
+unless res.nil?
   # handle response
 end
 
@@ -48,14 +51,13 @@ end
 
 ### Parameters
 
-| Parameter                                                                                                                   | Type                                                                                                                        | Required                                                                                                                    | Description                                                                                                                 |
-| --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                                   | [Models::Operations::GetExemptionsV1ExemptionsGetRequest](../../models/operations/getexemptionsv1exemptionsgetrequest.md)   | :heavy_check_mark:                                                                                                          | The request object to use for the request.                                                                                  |
-| `security`                                                                                                                  | [Models::Operations::GetExemptionsV1ExemptionsGetSecurity](../../models/operations/getexemptionsv1exemptionsgetsecurity.md) | :heavy_check_mark:                                                                                                          | The security requirements to use for the request.                                                                           |
+| Parameter                                                                                                          | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                          | [Models::Ops::GetExemptionsV1ExemptionsGetRequest](../../models/operations/getexemptionsv1exemptionsgetrequest.md) | :heavy_check_mark:                                                                                                 | The request object to use for the request.                                                                         |
 
 ### Response
 
-**[T.nilable(Models::Operations::GetExemptionsV1ExemptionsGetResponse)](../../models/operations/getexemptionsv1exemptionsgetresponse.md)**
+**[T.nilable(Models::Shared::FastapiPaginationDefaultPageExemptionRead2)](../../models/operations/fastapipaginationdefaultpageexemptionread2.md)**
 
 ### Errors
 
@@ -74,29 +76,35 @@ The Create Exemption API allows you to create a new exemption record.
 
 ### Example Usage
 
+<!-- UsageSnippet language="ruby" operationID="create_exemption_v1_exemptions_post" method="post" path="/v1/exemptions" -->
 ```ruby
-require 'openapi'
+require 'kintsugi_sdk'
 
-Models = ::OpenApiSDK::Models
-s = ::OpenApiSDK::SDK.new
+Models = ::KintsugiSDK::Models
+s = ::KintsugiSDK::OpenApiSDK.new(
+      security: Models::Shared::Security.new(
+        api_key_header: '<YOUR_API_KEY_HERE>',
+        custom_header: '<YOUR_API_KEY_HERE>',
+      ),
+    )
 
-res = s.exemptions.create(security: Models::Operations::CreateExemptionV1ExemptionsPostSecurity.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-  ), x_organization_id: 'org_12345', exemption_create: Models::Components::ExemptionCreate.new(
-  exemption_type: Models::Components::ExemptionType::WHOLESALE,
+req = Models::Shared::ExemptionCreate.new(
+  exemption_type: Models::Shared::ExemptionType::WHOLESALE,
   jurisdiction: 'CA',
-  country_code: Models::Components::CountryCodeEnum::US,
+  country_code: Models::Shared::CountryCodeEnum::US,
   start_date: Date.parse('2024-01-01'),
-  end_date: Date.parse('2026-01-01'),
+  end_date: '2026-01-01',
   customer_id: 'cust_001',
   transaction_id: 'txn_123',
   reseller: true,
   fein: '12-3456789',
   sales_tax_id: 'ST-98765',
-  status: Models::Components::ExemptionStatus::ACTIVE,
-))
+  status: Models::Shared::ExemptionStatus::ACTIVE,
+)
 
-unless res.backend_src_exemptions_serializers_exemption_read.nil?
+res = s.exemptions.create(request: req)
+
+unless res.nil?
   # handle response
 end
 
@@ -104,15 +112,13 @@ end
 
 ### Parameters
 
-| Parameter                                                                                                                         | Type                                                                                                                              | Required                                                                                                                          | Description                                                                                                                       | Example                                                                                                                           |
-| --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                        | [Models::Operations::CreateExemptionV1ExemptionsPostSecurity](../../models/operations/createexemptionv1exemptionspostsecurity.md) | :heavy_check_mark:                                                                                                                | The security requirements to use for the request.                                                                                 |                                                                                                                                   |
-| `x_organization_id`                                                                                                               | *T.nilable(::String)*                                                                                                             | :heavy_check_mark:                                                                                                                | The unique identifier for the organization making the request                                                                     | org_12345                                                                                                                         |
-| `exemption_create`                                                                                                                | [Models::Components::ExemptionCreate](../../models/shared/exemptioncreate.md)                                                     | :heavy_check_mark:                                                                                                                | N/A                                                                                                                               |                                                                                                                                   |
+| Parameter                                                                 | Type                                                                      | Required                                                                  | Description                                                               |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `request`                                                                 | [Models::Shared::ExemptionCreate](../../models/shared/exemptioncreate.md) | :heavy_check_mark:                                                        | The request object to use for the request.                                |
 
 ### Response
 
-**[T.nilable(Models::Operations::CreateExemptionV1ExemptionsPostResponse)](../../models/operations/createexemptionv1exemptionspostresponse.md)**
+**[T.nilable(Models::Shared::BackendSrcExemptionsSerializersExemptionRead)](../../models/operations/backendsrcexemptionsserializersexemptionread.md)**
 
 ### Errors
 
@@ -132,17 +138,25 @@ The Get Exemption By ID API retrieves a specific exemption record by
 
 ### Example Usage
 
+<!-- UsageSnippet language="ruby" operationID="get_exemption_by_id_v1_exemptions__exemption_id__get" method="get" path="/v1/exemptions/{exemption_id}" -->
 ```ruby
-require 'openapi'
+require 'kintsugi_sdk'
 
-Models = ::OpenApiSDK::Models
-s = ::OpenApiSDK::SDK.new
+Models = ::KintsugiSDK::Models
+s = ::KintsugiSDK::OpenApiSDK.new(
+      security: Models::Shared::Security.new(
+        api_key_header: '<YOUR_API_KEY_HERE>',
+        custom_header: '<YOUR_API_KEY_HERE>',
+      ),
+    )
 
-res = s.exemptions.get(security: Models::Operations::GetExemptionByIdV1ExemptionsExemptionIdGetSecurity.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-  ), exemption_id: '<id>', x_organization_id: 'org_12345')
+req = Models::Ops::GetExemptionByIdV1ExemptionsExemptionIdGetRequest.new(
+  exemption_id: '<id>',
+)
 
-unless res.backend_src_exemptions_models_exemption_read.nil?
+res = s.exemptions.get(request: req)
+
+unless res.nil?
   # handle response
 end
 
@@ -150,15 +164,13 @@ end
 
 ### Parameters
 
-| Parameter                                                                                                                                               | Type                                                                                                                                                    | Required                                                                                                                                                | Description                                                                                                                                             | Example                                                                                                                                                 |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                                              | [Models::Operations::GetExemptionByIdV1ExemptionsExemptionIdGetSecurity](../../models/operations/getexemptionbyidv1exemptionsexemptionidgetsecurity.md) | :heavy_check_mark:                                                                                                                                      | The security requirements to use for the request.                                                                                                       |                                                                                                                                                         |
-| `exemption_id`                                                                                                                                          | *::String*                                                                                                                                              | :heavy_check_mark:                                                                                                                                      | The unique identifier for the exemption being retrieved.                                                                                                |                                                                                                                                                         |
-| `x_organization_id`                                                                                                                                     | *T.nilable(::String)*                                                                                                                                   | :heavy_check_mark:                                                                                                                                      | The unique identifier for the organization making the request                                                                                           | org_12345                                                                                                                                               |
+| Parameter                                                                                                                                      | Type                                                                                                                                           | Required                                                                                                                                       | Description                                                                                                                                    |
+| ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                                                      | [Models::Ops::GetExemptionByIdV1ExemptionsExemptionIdGetRequest](../../models/operations/getexemptionbyidv1exemptionsexemptionidgetrequest.md) | :heavy_check_mark:                                                                                                                             | The request object to use for the request.                                                                                                     |
 
 ### Response
 
-**[T.nilable(Models::Operations::GetExemptionByIdV1ExemptionsExemptionIdGetResponse)](../../models/operations/getexemptionbyidv1exemptionsexemptionidgetresponse.md)**
+**[T.nilable(Models::Shared::BackendSrcExemptionsModelsExemptionRead)](../../models/operations/backendsrcexemptionsmodelsexemptionread.md)**
 
 ### Errors
 
@@ -178,22 +190,31 @@ The Upload Exemption Certificate API allows you
 
 ### Example Usage
 
+<!-- UsageSnippet language="ruby" operationID="uploadExemptionCert" method="post" path="/v1/exemptions/{exemption_id}/attachments" -->
 ```ruby
-require 'openapi'
+require 'kintsugi_sdk'
 
-Models = ::OpenApiSDK::Models
-s = ::OpenApiSDK::SDK.new
+Models = ::KintsugiSDK::Models
+s = ::KintsugiSDK::OpenApiSDK.new(
+      security: Models::Shared::Security.new(
+        api_key_header: '<YOUR_API_KEY_HERE>',
+        custom_header: '<YOUR_API_KEY_HERE>',
+      ),
+    )
 
-res = s.exemptions.upload_certificate(security: Models::Operations::UploadExemptionCertificateV1ExemptionsExemptionIdAttachmentsPostSecurity.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-  ), exemption_id: '<id>', x_organization_id: 'org_12345', body_upload_exemption_certificate_v1_exemptions_exemption_id_attachments_post: Models::Components::BodyUploadExemptionCertificateV1ExemptionsExemptionIdAttachmentsPost.new(
-  file: Models::Components::File.new(
-    file_name: 'example.file',
-    content: File.binread("example.file"),
+req = Models::Ops::UploadExemptionCertRequest.new(
+  exemption_id: '<id>',
+  body_upload_exemption_certificate_v1_exemptions_exemption_id_attachments_post: Models::Shared::BodyUploadExemptionCertificateV1ExemptionsExemptionIdAttachmentsPost.new(
+    file: Models::Shared::File.new(
+      file_name: 'example.file',
+      content: File.binread("example.file"),
+    ),
   ),
-))
+)
 
-unless res.attachment_read.nil?
+res = s.exemptions.upload_certificate(request: req)
+
+unless res.nil?
   # handle response
 end
 
@@ -201,16 +222,13 @@ end
 
 ### Parameters
 
-| Parameter                                                                                                                                                                                           | Type                                                                                                                                                                                                | Required                                                                                                                                                                                            | Description                                                                                                                                                                                         | Example                                                                                                                                                                                             |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                                                                                          | [Models::Operations::UploadExemptionCertificateV1ExemptionsExemptionIdAttachmentsPostSecurity](../../models/operations/uploadexemptioncertificatev1exemptionsexemptionidattachmentspostsecurity.md) | :heavy_check_mark:                                                                                                                                                                                  | The security requirements to use for the request.                                                                                                                                                   |                                                                                                                                                                                                     |
-| `exemption_id`                                                                                                                                                                                      | *::String*                                                                                                                                                                                          | :heavy_check_mark:                                                                                                                                                                                  | The unique identifier for the exemption to which the attachment will be associated.                                                                                                                 |                                                                                                                                                                                                     |
-| `x_organization_id`                                                                                                                                                                                 | *T.nilable(::String)*                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                  | The unique identifier for the organization making the request                                                                                                                                       | org_12345                                                                                                                                                                                           |
-| `body_upload_exemption_certificate_v1_exemptions_exemption_id_attachments_post`                                                                                                                     | [Models::Components::BodyUploadExemptionCertificateV1ExemptionsExemptionIdAttachmentsPost](../../models/shared/bodyuploadexemptioncertificatev1exemptionsexemptionidattachmentspost.md)             | :heavy_check_mark:                                                                                                                                                                                  | N/A                                                                                                                                                                                                 |                                                                                                                                                                                                     |
+| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `request`                                                                                        | [Models::Ops::UploadExemptionCertRequest](../../models/operations/uploadexemptioncertrequest.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
 
 ### Response
 
-**[T.nilable(Models::Operations::UploadExemptionCertificateV1ExemptionsExemptionIdAttachmentsPostResponse)](../../models/operations/uploadexemptioncertificatev1exemptionsexemptionidattachmentspostresponse.md)**
+**[T.nilable(Models::Shared::AttachmentRead)](../../models/operations/attachmentread.md)**
 
 ### Errors
 
@@ -230,17 +248,25 @@ The Get Attachments for Exemption API retrieves all
 
 ### Example Usage
 
+<!-- UsageSnippet language="ruby" operationID="getExemptionAttachments" method="get" path="/v1/exemptions/{exemption_id}/attachments" -->
 ```ruby
-require 'openapi'
+require 'kintsugi_sdk'
 
-Models = ::OpenApiSDK::Models
-s = ::OpenApiSDK::SDK.new
+Models = ::KintsugiSDK::Models
+s = ::KintsugiSDK::OpenApiSDK.new(
+      security: Models::Shared::Security.new(
+        api_key_header: '<YOUR_API_KEY_HERE>',
+        custom_header: '<YOUR_API_KEY_HERE>',
+      ),
+    )
 
-res = s.exemptions.get_attachments(security: Models::Operations::GetAttachmentsForExemptionV1ExemptionsExemptionIdAttachmentsGetSecurity.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-  ), exemption_id: '<id>', x_organization_id: 'org_12345')
+req = Models::Ops::GetExemptionAttachmentsRequest.new(
+  exemption_id: '<id>',
+)
 
-unless res.response_200_get_attachments_for_exemption_v1_exemptions_exemption_id_attachments_get.nil?
+res = s.exemptions.get_attachments(request: req)
+
+unless res.nil?
   # handle response
 end
 
@@ -248,15 +274,13 @@ end
 
 ### Parameters
 
-| Parameter                                                                                                                                                                                         | Type                                                                                                                                                                                              | Required                                                                                                                                                                                          | Description                                                                                                                                                                                       | Example                                                                                                                                                                                           |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                                                                                        | [Models::Operations::GetAttachmentsForExemptionV1ExemptionsExemptionIdAttachmentsGetSecurity](../../models/operations/getattachmentsforexemptionv1exemptionsexemptionidattachmentsgetsecurity.md) | :heavy_check_mark:                                                                                                                                                                                | The security requirements to use for the request.                                                                                                                                                 |                                                                                                                                                                                                   |
-| `exemption_id`                                                                                                                                                                                    | *::String*                                                                                                                                                                                        | :heavy_check_mark:                                                                                                                                                                                | The unique identifier for the exemption<br/>        whose attachments are being retrieved.                                                                                                        |                                                                                                                                                                                                   |
-| `x_organization_id`                                                                                                                                                                               | *T.nilable(::String)*                                                                                                                                                                             | :heavy_check_mark:                                                                                                                                                                                | The unique identifier for the organization making the request                                                                                                                                     | org_12345                                                                                                                                                                                         |
+| Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                | [Models::Ops::GetExemptionAttachmentsRequest](../../models/operations/getexemptionattachmentsrequest.md) | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
 
 ### Response
 
-**[T.nilable(Models::Operations::GetAttachmentsForExemptionV1ExemptionsExemptionIdAttachmentsGetResponse)](../../models/operations/getattachmentsforexemptionv1exemptionsexemptionidattachmentsgetresponse.md)**
+**[T.nilable(T::Array[Models::Shared::AttachmentRead])](../../models/operations/.md)**
 
 ### Errors
 

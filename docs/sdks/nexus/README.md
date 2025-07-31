@@ -13,21 +13,23 @@ Get a list of all nexuses for the organization.
 
 ### Example Usage
 
+<!-- UsageSnippet language="ruby" operationID="get_nexus_for_org_v1_nexus_get" method="get" path="/v1/nexus" -->
 ```ruby
-require 'openapi'
+require 'kintsugi_sdk'
 
-Models = ::OpenApiSDK::Models
-s = ::OpenApiSDK::SDK.new
+Models = ::KintsugiSDK::Models
+s = ::KintsugiSDK::OpenApiSDK.new(
+      security: Models::Shared::Security.new(
+        api_key_header: '<YOUR_API_KEY_HERE>',
+        custom_header: '<YOUR_API_KEY_HERE>',
+      ),
+    )
 
-req = Models::Operations::GetNexusForOrgV1NexusGetRequest.new(
-  x_organization_id: 'org_12345',
-)
+req = Models::Ops::GetNexusForOrgV1NexusGetRequest.new()
 
-res = s.nexus.list(request: req, security: Models::Operations::GetNexusForOrgV1NexusGetSecurity.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-  ))
+res = s.nexus.list(request: req)
 
-unless res.page_nexus_response.nil?
+unless res.nil?
   # handle response
 end
 
@@ -35,14 +37,13 @@ end
 
 ### Parameters
 
-| Parameter                                                                                                           | Type                                                                                                                | Required                                                                                                            | Description                                                                                                         |
-| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                           | [Models::Operations::GetNexusForOrgV1NexusGetRequest](../../models/operations/getnexusfororgv1nexusgetrequest.md)   | :heavy_check_mark:                                                                                                  | The request object to use for the request.                                                                          |
-| `security`                                                                                                          | [Models::Operations::GetNexusForOrgV1NexusGetSecurity](../../models/operations/getnexusfororgv1nexusgetsecurity.md) | :heavy_check_mark:                                                                                                  | The security requirements to use for the request.                                                                   |
+| Parameter                                                                                                  | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                  | [Models::Ops::GetNexusForOrgV1NexusGetRequest](../../models/operations/getnexusfororgv1nexusgetrequest.md) | :heavy_check_mark:                                                                                         | The request object to use for the request.                                                                 |
 
 ### Response
 
-**[T.nilable(Models::Operations::GetNexusForOrgV1NexusGetResponse)](../../models/operations/getnexusfororgv1nexusgetresponse.md)**
+**[T.nilable(Models::Shared::PageNexusResponse)](../../models/operations/pagenexusresponse.md)**
 
 ### Errors
 

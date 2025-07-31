@@ -1,27 +1,27 @@
+.rbenv-gemsets
+**/.speakeasy/temp/
+**/.speakeasy/logs/
+bin/
+sorbet/
 # Ruby cache and build artifacts
 *.gem
 .bundle/
 vendor/
 tmp/
-
 # IDE and system files
 .DS_Store
 .vscode/
 .idea/
-
 # Logs
 *.log
 logs/
-
 # Speakeasy logs and temporary files
 .speakeasy/logs/
 .speakeasy/temp/
 speakeasyusagegen/
-
 # Environment files
 .env*
 !.env.example
-
 # OS generated files
 Thumbs.db
 *.swp
