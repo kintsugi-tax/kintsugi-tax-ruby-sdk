@@ -34,6 +34,8 @@ class KintsugiSDK::Models::Ops::GetTransactionsV1TransactionsGetRequest
   def marketplace=(str_); end
   def exempt_in(); end
   def exempt_in=(str_); end
+  def type(); end
+  def type=(str_); end
   def address_status_in(); end
   def address_status_in=(str_); end
   def order_by(); end

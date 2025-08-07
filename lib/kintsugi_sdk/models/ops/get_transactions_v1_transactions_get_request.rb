@@ -47,6 +47,9 @@ module KintsugiSDK
         # Filter transactions by exemption status.
         #         Multiple values can be passed as a comma-separated list (e.g., EXEMPT,TAXABLE).
         field :exempt_in, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'exempt__in', 'style': 'form', 'explode': true } }
+        # Filter transactions by type (e.g., SALE, FULL_CREDIT_NOTE,
+        #         PARTIAL_CREDIT_NOTE, ARCHIVE etc.).
+        field :type, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'type', 'style': 'form', 'explode': true } }
         # Filter by address status (e.g., UNVERIFIED, INVALID,
         #         PARTIALLY_VERIFIED, VERIFIED, UNVERIFIABLE).
         field :address_status_in, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'address_status__in', 'style': 'form', 'explode': true } }
@@ -58,8 +61,8 @@ module KintsugiSDK
         # Page size
         field :size, Crystalline::Nilable.new(::Integer), { 'query_param': { 'field_name': 'size', 'style': 'form', 'explode': true } }
 
-        sig { params(state_code: T.nilable(::String), transaction_type: T.nilable(::String), transaction_source: T.nilable(::String), search_query: T.nilable(::String), country: T.nilable(T::Array[Models::Shared::CountryCodeEnum]), state: T.nilable(::String), status: T.nilable(Models::Shared::TransactionStatusEnum), filing_id: T.nilable(::String), date_gte: T.nilable(::String), date_lte: T.nilable(::String), processing_status_in: T.nilable(::String), marketplace: T.nilable(T::Boolean), exempt_in: T.nilable(::String), address_status_in: T.nilable(::String), order_by: T.nilable(::String), page: T.nilable(::Integer), size: T.nilable(::Integer)).void }
-        def initialize(state_code: nil, transaction_type: nil, transaction_source: nil, search_query: nil, country: nil, state: nil, status: nil, filing_id: nil, date_gte: nil, date_lte: nil, processing_status_in: nil, marketplace: nil, exempt_in: nil, address_status_in: 'UNVERIFIED,INVALID,PARTIALLY_VERIFIED,VERIFIED,UNVERIFIABLE', order_by: 'date,state,customer_name,status', page: 1, size: 50)
+        sig { params(state_code: T.nilable(::String), transaction_type: T.nilable(::String), transaction_source: T.nilable(::String), search_query: T.nilable(::String), country: T.nilable(T::Array[Models::Shared::CountryCodeEnum]), state: T.nilable(::String), status: T.nilable(Models::Shared::TransactionStatusEnum), filing_id: T.nilable(::String), date_gte: T.nilable(::String), date_lte: T.nilable(::String), processing_status_in: T.nilable(::String), marketplace: T.nilable(T::Boolean), exempt_in: T.nilable(::String), type: T.nilable(::String), address_status_in: T.nilable(::String), order_by: T.nilable(::String), page: T.nilable(::Integer), size: T.nilable(::Integer)).void }
+        def initialize(state_code: nil, transaction_type: nil, transaction_source: nil, search_query: nil, country: nil, state: nil, status: nil, filing_id: nil, date_gte: nil, date_lte: nil, processing_status_in: nil, marketplace: nil, exempt_in: nil, type: nil, address_status_in: 'UNVERIFIED,INVALID,PARTIALLY_VERIFIED,VERIFIED,UNVERIFIABLE', order_by: 'date,state,customer_name,status', page: 1, size: 50)
           @state_code = state_code
           @transaction_type = transaction_type
           @transaction_source = transaction_source
@@ -73,6 +76,7 @@ module KintsugiSDK
           @processing_status_in = processing_status_in
           @marketplace = marketplace
           @exempt_in = exempt_in
+          @type = type
           @address_status_in = address_status_in
           @order_by = order_by
           @page = page
@@ -95,6 +99,7 @@ module KintsugiSDK
           return false unless @processing_status_in == other.processing_status_in
           return false unless @marketplace == other.marketplace
           return false unless @exempt_in == other.exempt_in
+          return false unless @type == other.type
           return false unless @address_status_in == other.address_status_in
           return false unless @order_by == other.order_by
           return false unless @page == other.page

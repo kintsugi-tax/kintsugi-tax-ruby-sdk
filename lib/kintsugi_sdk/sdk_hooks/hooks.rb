@@ -3,6 +3,7 @@
 # typed: true
 # frozen_string_literal: true
 
+require_relative './registration'
 require_relative './types'
 
 
@@ -17,6 +18,7 @@ module KintsugiSDK
         @before_request_hooks = T.let([], T::Array[AbstractSDKHook])
         @after_success_hooks = T.let([], T::Array[AbstractSDKHook])
         @after_error_hooks = T.let([], T::Array[AbstractSDKHook])
+        Registration.init_hooks self
       end
 
       sig { params(hook: AbstractSDKHook).void }

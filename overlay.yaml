@@ -1,7 +1,7 @@
 overlay: 1.0.0
 x-speakeasy-jsonpath: rfc9535
 info:
-  title: Kintsugi Tax Platform API Overlay - Allowlist 
+  title: Kintsugi Tax Platform API Overlay - Allowlist
   version: 1.0.0
 actions:
   # =============================================================================
@@ -11,12 +11,14 @@ actions:
   # Step 2: Remove all paths that don't have x-public: true
   # This ensures only explicitly allowed endpoints are exposed in SDKs
   # =============================================================================
+  # - target: $.paths.*.*.summary
+  #   remove: true
 
   # === ADDRESS VALIDATION ENDPOINTS ===
   - target: $.paths['/v1/address_validation/search'].post
     update:
       x-public: true
-      
+
   - target: $.paths['/v1/address_validation/suggestions'].post
     update:
       x-public: true
@@ -25,27 +27,27 @@ actions:
   - target: $.paths['/v1/customers'].get
     update:
       x-public: true
-      
+
   - target: $.paths['/v1/customers'].post
     update:
       x-public: true
-      
+
   - target: $.paths['/v1/customers/{customer_id}'].get
     update:
       x-public: true
-      
+
   - target: $.paths['/v1/customers/{customer_id}'].put
     update:
       x-public: true
-      
+
   - target: $.paths['/v1/customers/external/{external_id}'].get
     update:
       x-public: true
-      
+
   - target: $.paths['/v1/customers/{customer_id}/transactions'].get
     update:
       x-public: true
-      
+
   - target: $.paths['/v1/customers/{customer_id}/transactions'].post
     update:
       x-public: true
@@ -54,19 +56,19 @@ actions:
   - target: $.paths['/v1/exemptions'].get
     update:
       x-public: true
-      
+
   - target: $.paths['/v1/exemptions'].post
     update:
       x-public: true
-      
+
   - target: $.paths['/v1/exemptions/{exemption_id}'].get
     update:
       x-public: true
-      
+
   - target: $.paths['/v1/exemptions/{exemption_id}/attachments'].post
     update:
       x-public: true
-      
+
   - target: $.paths['/v1/exemptions/{exemption_id}/attachments'].get
     update:
       x-public: true
@@ -80,19 +82,19 @@ actions:
   - target: $.paths['/v1/products/'].get
     update:
       x-public: true
-      
+
   - target: $.paths['/v1/products/'].post
     update:
       x-public: true
-      
+
   - target: $.paths['/v1/products/{product_id}'].get
     update:
       x-public: true
-      
+
   - target: $.paths['/v1/products/{product_id}'].put
     update:
       x-public: true
-      
+
   - target: $.paths['/v1/products/categories/'].get
     update:
       x-public: true
@@ -101,34 +103,34 @@ actions:
   - target: $.paths['/v1/transactions'].get
     update:
       x-public: true
-      
+
   - target: $.paths['/v1/transactions'].post
     update:
       x-public: true
-      
+
   - target: $.paths['/v1/transactions/external/{external_id}'].get
     update:
       x-public: true
-      
+
   - target: $.paths['/v1/transactions/{transaction_id}'].put
     update:
       x-public: true
-      
+
   - target: $.paths['/v1/transactions/{transaction_id}'].get
     update:
       x-public: true
-      
+
   - target: $.paths['/v1/transactions/filings/{filing_id}'].get
     update:
       x-public: true
-      
+
   # === COPY OPERATIONS TO SHORTER PATHS AND REMOVE LONG ONES ===
   # Strategy: Copy the full operation objects to much shorter paths
-  
+
   # First, let's add the operations to a shorter path
   - target: $.paths['/v1/credits']
     update:
-      post: 
+      post:
         tags: ["Transactions"]
         summary: "Create Credit"
         description: "Create a new credit note for a specific transaction."
@@ -201,15 +203,13 @@ actions:
                   $ref: "#/components/schemas/HTTPValidationError"
         security:
           - APIKeyHeader-CustomHeader: []
-          
+
   # Now remove the problematic long paths
   - target: $.paths['/v1/transactions/{original_transaction_id}/credit_notes']
     remove: true
-    
+
   - target: $.paths['/v1/transactions/{original_transaction_id}/credit_notes/{credit_note_id}']
     remove: true
-
-
 
   # === TAX ESTIMATION ENDPOINTS ===
   - target: $.paths['/v1/tax/estimate'].post
@@ -221,10 +221,10 @@ actions:
   # =============================================================================
   - target: $.paths['/v1/marketplaces/{source_type}']
     remove: true
-    
+
   - target: $.paths['/v1/marketplaces/{marketplace_id}']
     remove: true
-    
+
   - target: $.paths['/v1/marketplaces/{marketplace_id}/transactions']
     remove: true
 
@@ -236,7 +236,7 @@ actions:
 
 # Ruby specific to avoid long method names
 # Note: Credit note operations are already handled by speakeasy-modifications-overlay.yaml
-# Note: Customer transaction operations are already handled by speakeasy-modifications-overlay.yaml  
+# Note: Customer transaction operations are already handled by speakeasy-modifications-overlay.yaml
 x-speakeasy-name-override: []
 # =============================================================================
 # SECURITY BENEFITS:
@@ -248,3 +248,4 @@ x-speakeasy-name-override: []
 # 5. Easy to audit - clear list of what's publicly exposed
 # 6. Maintainable - adding new public endpoints requires explicit action
 # =============================================================================
+
