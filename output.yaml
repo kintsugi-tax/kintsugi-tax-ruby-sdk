@@ -1854,6 +1854,9 @@ components:
           description: "Indicates if the filing was auto-approved. Defaults to false."
           default: false
           type: "boolean"
+        "paused_until_date":
+          description: "Indicates the date when filing will be unpaused."
+          type: "string"
         "amount_calculated":
           type: "string"
           title: "Amount Calculated"
@@ -2071,6 +2074,9 @@ components:
           type: "string"
         "password_metadata":
           description: "Security question or other password metadata."
+          type: "string"
+        "pin":
+          description: "The decrypted PIN for accessing the registration."
           type: "string"
         "registration_type": {"$ref": "#/components/schemas/RegistrationTypeEnum", "readOnly": true}
       type: "object"
@@ -2640,6 +2646,74 @@ components:
       required:
         - "products"
       title: "BulkApproveUpdateRequest"
+    "BulkFilingCreate":
+      properties:
+        "filings":
+          items: {"$ref": "#/components/schemas/JurisdictionFilings"}
+          type: "array"
+          title: "Filings"
+          description: "List of jurisdictions with their periods"
+      type: "object"
+      required:
+        - "filings"
+      title: "BulkFilingCreate"
+    "BulkFilingError":
+      properties:
+        "index":
+          type: "integer"
+          title: "Index"
+          description: "Index of the failed filing in the request"
+        "filing_data":
+          additionalProperties: true
+          type: "object"
+          title: "Filing Data"
+          description: "The filing data that failed"
+        "errors":
+          items:
+            additionalProperties:
+              type: "string"
+            type: "object"
+          type: "array"
+          title: "Errors"
+          description: "List of validation errors"
+      type: "object"
+      required:
+        - "index"
+        - "filing_data"
+        - "errors"
+      title: "BulkFilingError"
+    "BulkFilingResult":
+      properties:
+        "created_filings":
+          items: {"$ref": "#/components/schemas/FilingRead"}
+          type: "array"
+          title: "Created Filings"
+          description: "Successfully created filings"
+        "failed_filings":
+          items: {"$ref": "#/components/schemas/BulkFilingError"}
+          type: "array"
+          title: "Failed Filings"
+          description: "Failed filing attempts"
+        "total_created":
+          type: "integer"
+          title: "Total Created"
+          description: "Total number of filings created"
+        "total_failed":
+          type: "integer"
+          title: "Total Failed"
+          description: "Total number of filings that failed"
+        "total_requested":
+          type: "integer"
+          title: "Total Requested"
+          description: "Total number of filings requested"
+      type: "object"
+      required:
+        - "created_filings"
+        - "failed_filings"
+        - "total_created"
+        - "total_failed"
+        - "total_requested"
+      title: "BulkFilingResult"
     "CanadaRule":
       properties:
         "id":
@@ -4941,6 +5015,9 @@ components:
           description: "Indicates if the filing was auto-approved. Defaults to false."
           default: false
           type: "boolean"
+        "paused_until_date":
+          description: "Indicates the date when filing will be unpaused."
+          type: "string"
         "amount_calculated":
           type: "string"
           title: "Amount Calculated"
@@ -5041,6 +5118,22 @@ components:
         - "id"
         - "registration_id"
       title: "FilingAdminDetailsRead"
+    "FilingConfirmationRequest":
+      properties:
+        "payment_confirmation_id":
+          type: "string"
+        "return_confirmation_id":
+          type: "string"
+        "amount_adjusted":
+          type: "number"
+        "amount_fees":
+          type: "number"
+        "amount_penalties":
+          type: "number"
+        "amount_discounts":
+          type: "number"
+      type: "object"
+      title: "FilingConfirmationRequest"
     "FilingCountByJurisdiction":
       properties:
         "country_code": {"$ref": "#/components/schemas/CountryCodeEnum", "description": "Country code"}
@@ -5127,6 +5220,9 @@ components:
           description: "Indicates if the filing was auto-approved. Defaults to false."
           default: false
           type: "boolean"
+        "paused_until_date":
+          description: "Indicates the date when filing will be unpaused."
+          type: "string"
         "amount_calculated":
           type: "string"
           title: "Amount Calculated"
@@ -5257,6 +5353,22 @@ components:
           default: "0.00"
       type: "object"
       title: "FilingMetrics"
+    "FilingPeriod":
+      properties:
+        "start_date":
+          type: "string"
+          format: "date"
+          title: "Start Date"
+        "end_date":
+          type: "string"
+          format: "date"
+          title: "End Date"
+        "status": {"$ref": "#/components/schemas/FilingStatusEnum", "default": "UNFILED"}
+      type: "object"
+      required:
+        - "start_date"
+        - "end_date"
+      title: "FilingPeriod"
     "FilingRead":
       properties:
         "status": {"$ref": "#/components/schemas/FilingStatusEnum", "description": "Filing status. Possible values:\n                                    UNFILED, FILING, FILED.", "default": "UNFILED"}
@@ -5293,6 +5405,9 @@ components:
           description: "Indicates if the filing was auto-approved. Defaults to false."
           default: false
           type: "boolean"
+        "paused_until_date":
+          description: "Indicates the date when filing will be unpaused."
+          type: "string"
         "amount_calculated":
           type: "string"
           title: "Amount Calculated"
@@ -5389,6 +5504,7 @@ components:
         - "UNFILED"
         - "FILED"
         - "FILING"
+        - "PAUSED"
       title: "FilingStatusEnum"
     "FilingUpdateInternal":
       properties:
@@ -5426,6 +5542,9 @@ components:
           description: "Indicates if the filing was auto-approved. Defaults to false."
           default: false
           type: "boolean"
+        "paused_until_date":
+          description: "Indicates the date when filing will be unpaused."
+          type: "string"
         "amount_calculated":
           description: "The calculated amount for the filing. Defaults to 0.00."
           default: "0.00"
@@ -6097,6 +6216,28 @@ components:
         - "name"
       title: "Jurisdiction"
       description: "The tax jurisdiction details"
+    "JurisdictionFilings":
+      properties:
+        "registration_id":
+          type: "string"
+          title: "Registration Id"
+        "country_code": {"$ref": "#/components/schemas/CountryCodeEnum"}
+        "state_code":
+          type: "string"
+          title: "State Code"
+        "periods":
+          items: {"$ref": "#/components/schemas/FilingPeriod"}
+          type: "array"
+          maxItems: 10
+          title: "Periods"
+          description: "List of periods for this jurisdiction"
+      type: "object"
+      required:
+        - "registration_id"
+        - "country_code"
+        - "state_code"
+        - "periods"
+      title: "JurisdictionFilings"
     "JurisdictionType":
       type: "string"
       enum:
@@ -6138,6 +6279,34 @@ components:
         - "object"
         - "email"
       title: "LinkedCustomer"
+    "MXRule":
+      properties:
+        "id":
+          type: "string"
+          title: "Id"
+        "product_code": {"title": "Product Code", "$ref": "#/components/schemas/ProductCodeEnum"}
+        "start_date":
+          type: "string"
+          format: "date"
+          title: "Start Date"
+        "end_date":
+          type: "string"
+        "country": {"$ref": "#/components/schemas/CountryCodeEnum", "default": "MX"}
+        "state":
+          type: "string"
+          title: "State"
+          default: ""
+        "derived_rule_id":
+          type: "string"
+        "tax_rate":
+          type: "string"
+      type: "object"
+      required:
+        - "id"
+        - "product_code"
+        - "start_date"
+        - "end_date"
+      title: "MXRule"
     "MagentoAddress":
       properties:
         "line1":
@@ -7281,8 +7450,9 @@ components:
           default: false
           type: "boolean"
         "auto_file":
-          default: false
           type: "boolean"
+          title: "Auto File"
+          default: true
         "incorporation_country": {"$ref": "#/components/schemas/CountryCodeEnum"}
         "target_archive_date":
           type: "string"
@@ -7715,13 +7885,11 @@ components:
       properties:
         "disable_onboarding":
           type: "boolean"
-          title: "Disable Onboarding"
         "enable_eu_registration":
           type: "boolean"
+        "prefer_collected_tax_amounts":
+          type: "boolean"
       type: "object"
-      required:
-        - "disable_onboarding"
-        - "enable_eu_registration"
       title: "OrganizationSettingsReadUpdate"
     "OrganizationSettingsResponse":
       properties:
@@ -7737,6 +7905,9 @@ components:
         "enable_new_auto_filing_experience":
           type: "boolean"
           title: "Enable New Auto Filing Experience"
+        "prefer_collected_tax_amounts":
+          type: "boolean"
+          title: "Prefer Collected Tax Amounts"
       type: "object"
       required:
         - "disable_onboarding"
@@ -7744,6 +7915,7 @@ components:
         - "product_category_version"
         - "oss_scheme"
         - "enable_new_auto_filing_experience"
+        - "prefer_collected_tax_amounts"
       title: "OrganizationSettingsResponse"
     "OrganizationSourceEnum":
       type: "string"
@@ -8363,9 +8535,11 @@ components:
         - "MANUFACTURING_FACILITIES"
         - "SERVERS_DATA_CENTERS"
         - "TRADE_SHOW_PRESENCE"
+        - "TRADE_SHOW_PRESENCE_WITHOUT_SALES"
         - "DIGITAL_INFRASTRUCTURE_LOCALIZED"
         - "PERMANENT_ESTABLISHMENT"
         - "ENTER_CONTRACTS_WITH_LOCALS"
+        - "CONSIGNMENT_STOCK_ARRANGEMENTS"
       title: "PhysicalNexusCategory"
     "PhysicalNexusCreate":
       properties:
@@ -10490,9 +10664,8 @@ components:
     "ShopwareWebhookEventData":
       properties:
         "payload":
-          items: {"$ref": "#/components/schemas/ShopwareWebhookEventDataPayload"}
           type: "array"
-          title: "Payload"
+          items: {"$ref": "#/components/schemas/ShopwareWebhookEventDataPayload"}
         "event":
           type: "string"
           title: "Event"
@@ -11078,6 +11251,7 @@ components:
     "TaxItemTypeEnum":
       type: "string"
       enum:
+        - "IMPORTED_ORIGINAL"
         - "IMPORTED"
         - "CALCULATED"
       title: "TaxItemTypeEnum"
@@ -13142,6 +13316,10 @@ components:
         "auto_file":
           default: false
           type: "boolean"
+        "paused_until_date":
+          type: "string"
+        "pause_reason":
+          type: "string"
       type: "object"
       title: "UpdateFilingTemp"
       description: "This is a temporary serializer for the update filing endpoint.\nIt will be deprecated and with a filing approval endpoint."
