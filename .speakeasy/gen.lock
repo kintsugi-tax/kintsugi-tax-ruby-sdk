@@ -1,17 +1,19 @@
 lockVersion: 2.0.0
 id: 42356d7a-ce0a-4cdf-bb17-e774a6ae7cfc
 management:
-  docChecksum: a7524e82b5909e46d654456b7ff2f195
+  docChecksum: 64dbd15be407157dd84b17ab331a0dc0
   docVersion: 1.0.0
-  speakeasyVersion: 1.601.0
-  generationVersion: 2.680.0
-  releaseVersion: 5.5.0
-  configChecksum: 7fe0b4aa782743572a2c4c5cb73893ba
+  speakeasyVersion: 1.605.0
+  generationVersion: 2.684.0
+  releaseVersion: 5.5.1
+  configChecksum: 358f29d672fbc18154e251aaf36a8e60
+  repoURL: https://github.com/kintsugi-tax/kintsugi-tax-ruby-sdk.git
+  installationURL: https://github.com/kintsugi-tax/kintsugi-tax-ruby-sdk
   published: true
 features:
   ruby:
     constsAndDefaults: 0.1.1
-    core: 3.10.0
+    core: 3.10.1
     deprecations: 2.81.2
     globalSecurity: 2.81.8
     globalServerURLs: 2.82.4
