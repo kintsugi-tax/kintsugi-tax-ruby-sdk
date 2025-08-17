@@ -55,3 +55,4 @@
 | `FAIRE`            | FAIRE              |
 | `SHOPWARE`         | SHOPWARE           |
 | `ZOHO`             | ZOHO               |
+| `SAGE_INTACCT`     | SAGE_INTACCT       |
