@@ -9,7 +9,7 @@ module KintsugiSDK
     module Errors
     
 
-      class BackendSrcTaxEstimationResponsesValidationErrorResponse
+      class BackendSrcTaxEstimationResponsesValidationErrorResponse < StandardError
         extend T::Sig
         include Crystalline::MetadataFields
 

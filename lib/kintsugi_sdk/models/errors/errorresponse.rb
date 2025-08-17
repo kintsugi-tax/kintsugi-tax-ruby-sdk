@@ -9,7 +9,7 @@ module KintsugiSDK
     module Errors
     
 
-      class ErrorResponse
+      class ErrorResponse < StandardError
         extend T::Sig
         include Crystalline::MetadataFields
 

@@ -9,7 +9,7 @@ module KintsugiSDK
     module Errors
     
 
-      class BackendSrcCustomersResponsesValidationErrorResponse
+      class BackendSrcCustomersResponsesValidationErrorResponse < StandardError
         extend T::Sig
         include Crystalline::MetadataFields
 
