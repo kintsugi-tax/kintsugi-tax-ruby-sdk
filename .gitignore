@@ -27,3 +27,8 @@ Thumbs.db
 *.swp
 *.swo
 *~ 
+#ruby-specific for generator
+RUBY_SDK_FIXES.md
+generate_ruby_sdk.sh
+scripts/
+scripts/*

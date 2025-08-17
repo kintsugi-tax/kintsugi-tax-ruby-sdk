@@ -63,6 +63,7 @@ module KintsugiSDK
           FAIRE = new('FAIRE')
           SHOPWARE = new('SHOPWARE')
           ZOHO = new('ZOHO')
+          SAGE_INTACCT = new('SAGE_INTACCT')
         end
       end
     end

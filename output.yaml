@@ -2106,6 +2106,7 @@ components:
         - "shopware"
         - "xero"
         - "netsuite"
+        - "sage-intacct"
       title: "ApiDeckServiceEnum"
     "ApiKeyRequest":
       properties:
@@ -2170,6 +2171,41 @@ components:
         - "TRANSACTION"
         - "TRANSACTION_ITEM"
       title: "AppliedTo"
+    "AssigneeUser":
+      properties:
+        "user_id":
+          type: "string"
+          title: "User Id"
+        "email":
+          type: "string"
+          title: "Email"
+        "first_name":
+          type: "string"
+        "last_name":
+          type: "string"
+        "full_name":
+          type: "string"
+        "role":
+          type: "string"
+      type: "object"
+      required:
+        - "user_id"
+        - "email"
+      title: "AssigneeUser"
+    "AssigneeUsersResponse":
+      properties:
+        "users":
+          items: {"$ref": "#/components/schemas/AssigneeUser"}
+          type: "array"
+          title: "Users"
+        "total":
+          type: "integer"
+          title: "Total"
+      type: "object"
+      required:
+        - "users"
+        - "total"
+      title: "AssigneeUsersResponse"
     "Attachment":
       properties:
         "id":
@@ -10647,71 +10683,6 @@ components:
         - "url"
         - "shopId"
       title: "ShopwareTaxEstimateRequestSource"
-    "ShopwareWebhookEvent":
-      properties:
-        "data": {"$ref": "#/components/schemas/ShopwareWebhookEventData"}
-        "source": {"$ref": "#/components/schemas/ShopwareWebhookEventSource"}
-        "timestamp":
-          type: "string"
-          format: "date-time"
-          title: "Timestamp"
-      type: "object"
-      required:
-        - "data"
-        - "source"
-        - "timestamp"
-      title: "ShopwareWebhookEvent"
-    "ShopwareWebhookEventData":
-      properties:
-        "payload":
-          type: "array"
-          items: {"$ref": "#/components/schemas/ShopwareWebhookEventDataPayload"}
-        "event":
-          type: "string"
-          title: "Event"
-      type: "object"
-      required:
-        - "payload"
-        - "event"
-      title: "ShopwareWebhookEventData"
-    "ShopwareWebhookEventDataPayload":
-      properties:
-        "entity":
-          type: "string"
-          title: "Entity"
-        "operation":
-          type: "string"
-          title: "Operation"
-        "primaryKey":
-          type: "string"
-          title: "Primarykey"
-        "updatedFields":
-          type: "array"
-          items:
-            type: "string"
-      type: "object"
-      required:
-        - "entity"
-        - "operation"
-        - "primaryKey"
-      title: "ShopwareWebhookEventDataPayload"
-    "ShopwareWebhookEventSource":
-      properties:
-        "url":
-          type: "string"
-          title: "Url"
-        "appVersion":
-          type: "string"
-        "shopId":
-          type: "string"
-          title: "Shopid"
-        "eventId":
-          type: "string"
-      type: "object"
-      required:
-        - "url"
-        - "shopId"
-      title: "ShopwareWebhookEventSource"
     "SourceEnum":
       type: "string"
       enum:
@@ -10765,6 +10736,7 @@ components:
         - "FAIRE"
         - "SHOPWARE"
         - "ZOHO"
+        - "SAGE_INTACCT"
       title: "SourceEnum"
     "StatusEnum":
       type: "string"
