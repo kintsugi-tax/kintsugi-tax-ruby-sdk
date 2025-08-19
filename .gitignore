@@ -27,8 +27,6 @@ Thumbs.db
 *.swp
 *.swo
 *~ 
-#ruby-specific for generator
+# Note: Keep our enhancement files tracked in git
+# RUBY_SDK_FIXES.md - can ignore this legacy file
 RUBY_SDK_FIXES.md
-generate_ruby_sdk.sh
-scripts/
-scripts/*
