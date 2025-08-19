@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 # Post-generation script to add debug logging capabilities to the Ruby SDK
 # This script adds:
@@ -17,7 +18,7 @@ class DebugLoggingAdder
   end
 
   def run
-    puts "🔧 Adding debug logging capabilities to Ruby SDK..."
+    puts '🔧 Adding debug logging capabilities to Ruby SDK...'
     
     add_debug_config_to_sdk_configuration
     add_debug_initialization_to_openapisdk
@@ -30,7 +31,7 @@ class DebugLoggingAdder
   private
 
   def add_debug_config_to_sdk_configuration
-    puts "📁 Adding debug configuration to SDKConfiguration..."
+    puts '📁 Adding debug configuration to SDKConfiguration...'
     
     config_file = File.join(@sdk_path, 'lib/kintsugi_sdk/sdkconfiguration.rb')
     return unless File.exist?(config_file)
@@ -44,7 +45,7 @@ class DebugLoggingAdder
       content.gsub!(/(sig { returns\(T\.nilable\(Float\)\) }\s+attr_accessor :timeout)/, 
         "\\1\n\n    sig { returns(T.nilable(T::Boolean)) }\n    attr_accessor :debug_logging")
       
-      @fixes_applied << "Added debug_logging attribute to SDKConfiguration"
+      @fixes_applied << 'Added debug_logging attribute to SDKConfiguration'
     end
 
     # Add debug_logging parameter to initialize method signature
@@ -52,7 +53,7 @@ class DebugLoggingAdder
       content.gsub!(/(\s+params\(\s+client: T\.nilable\(Faraday::Connection\),[\s\S]*?server_idx: T\.nilable\(Integer\))(\s+\)\.void)/, 
         "\\1,\n        debug_logging: T.nilable(T::Boolean)\\2")
       
-      @fixes_applied << "Added debug_logging parameter to SDKConfiguration initialize signature"
+      @fixes_applied << 'Added debug_logging parameter to SDKConfiguration initialize signature'
     end
 
     # Add debug_logging parameter to initialize method
@@ -60,7 +61,7 @@ class DebugLoggingAdder
       content.gsub!(/(def initialize\(client, hooks, retry_config, timeout_ms, security, security_source, server_url, server_idx)(\))/, 
         "\\1, debug_logging = nil\\2")
       
-      @fixes_applied << "Added debug_logging parameter to SDKConfiguration initialize method"
+      @fixes_applied << 'Added debug_logging parameter to SDKConfiguration initialize method'
     end
 
     # Add debug_logging assignment in initialize method
@@ -69,7 +70,7 @@ class DebugLoggingAdder
       content.gsub!(/(def initialize.*?@user_agent = 'speakeasy-sdk\/ruby.*?')(\s+end)/m, 
         "\\1\n      @debug_logging = debug_logging.nil? ? (ENV['KINTSUGI_DEBUG'] == 'true') : debug_logging\\2")
       
-      @fixes_applied << "Added debug_logging assignment with environment variable fallback"
+      @fixes_applied << 'Added debug_logging assignment with environment variable fallback'
     end
 
     if content != original_content
@@ -78,7 +79,7 @@ class DebugLoggingAdder
   end
 
   def add_debug_initialization_to_openapisdk
-    puts "🏗️  Adding debug logging initialization to OpenApiSDK..."
+    puts '🏗️  Adding debug logging initialization to OpenApiSDK...'
     
     openapisdk_file = File.join(@sdk_path, 'lib/kintsugi_sdk/openapisdk.rb')
     return unless File.exist?(openapisdk_file)
@@ -91,7 +92,7 @@ class DebugLoggingAdder
       content.gsub!(/(\s+params\([\s\S]*?url_params: T\.nilable\(T::Hash\[Symbol, String\]\))(\s+\)\.void)/, 
         "\\1,\n        debug_logging: T.nilable(T::Boolean)\\2")
       
-      @fixes_applied << "Added debug_logging parameter to OpenApiSDK initialize signature"
+      @fixes_applied << 'Added debug_logging parameter to OpenApiSDK initialize signature'
     end
 
     # Add debug_logging parameter to initialize method
@@ -99,7 +100,7 @@ class DebugLoggingAdder
       content.gsub!(/(def initialize\(client: nil, retry_config: nil, timeout_ms: nil, security: nil, security_source: nil, server_idx: nil, server_url: nil, url_params: nil)(\))/, 
         "\\1, debug_logging: nil\\2")
       
-      @fixes_applied << "Added debug_logging parameter to OpenApiSDK initialize method"
+      @fixes_applied << 'Added debug_logging parameter to OpenApiSDK initialize method'
     end
 
     # Update SDKConfiguration call to include debug_logging
@@ -107,7 +108,7 @@ class DebugLoggingAdder
       content.gsub!(/(SDKConfiguration\.new\(\s+client,\s+hooks,\s+retry_config,\s+timeout_ms,\s+security,\s+security_source,\s+server_url,\s+server_idx)(\s+\))/, 
         "\\1,\n        debug_logging\\2")
       
-      @fixes_applied << "Updated SDKConfiguration call to include debug_logging"
+      @fixes_applied << 'Updated SDKConfiguration call to include debug_logging'
     end
 
     if content != original_content
@@ -116,7 +117,7 @@ class DebugLoggingAdder
   end
 
   def enable_faraday_logger
-    puts "🔄 Enabling Faraday logger middleware..."
+    puts '🔄 Enabling Faraday logger middleware...'
     
     openapisdk_file = File.join(@sdk_path, 'lib/kintsugi_sdk/openapisdk.rb')
     return unless File.exist?(openapisdk_file)
@@ -126,14 +127,13 @@ class DebugLoggingAdder
     
     # Store the debug_logging variable for use in the closure
     logger_setup = <<~RUBY
-          
-          # Store debug setting for use in Faraday configuration
-          debug_enabled = debug_logging == true || ENV['KINTSUGI_DEBUG'] == 'true'
-          
-          client ||= Faraday.new(**connection_options) do |f|
-            f.request :multipart, {}
-            f.response :logger, $stdout, { headers: true, bodies: true, errors: true } if debug_enabled
-          end
+      # Store debug setting for use in Faraday configuration
+      debug_enabled = debug_logging == true || ENV['KINTSUGI_DEBUG'] == 'true'
+
+      client ||= Faraday.new(**connection_options) do |f|
+        f.request :multipart, {}
+        f.response :logger, $stdout, { headers: true, bodies: true, errors: true } if debug_enabled
+      end
     RUBY
     
     # Replace the entire client creation block
@@ -142,12 +142,12 @@ class DebugLoggingAdder
     
     if content != original_content
       File.write(openapisdk_file, content)
-      @fixes_applied << "Enabled conditional Faraday logger in OpenApiSDK"
+      @fixes_applied << 'Enabled conditional Faraday logger in OpenApiSDK'
     end
   end
 
   def add_debug_logging_documentation
-    puts "📖 Adding debug logging documentation to README..."
+    puts '📖 Adding debug logging documentation to README...'
     
     readme_path = File.join(@sdk_path, 'README.md')
     return unless File.exist?(readme_path)
@@ -160,7 +160,7 @@ class DebugLoggingAdder
       content.gsub!(/(  \* \[Server Selection\]\(#server-selection\))(\s+\* \[Development\]\(#development\))/m, 
         "\\1\n  * [Debug Logging](#debug-logging)\\2")
       
-      @fixes_applied << "Added Debug Logging to table of contents"
+      @fixes_applied << 'Added Debug Logging to table of contents'
     end
     
     # Add debug logging section
@@ -272,7 +272,7 @@ class DebugLoggingAdder
           "\\1\n\n#{debug_section}\\2")
       end
       
-      @fixes_applied << "Added debug logging documentation section to README"
+      @fixes_applied << 'Added debug logging documentation section to README'
     end
     
     if content != original_content
@@ -281,36 +281,36 @@ class DebugLoggingAdder
   end
 
   def print_summary
-    puts "\n✅ Debug logging addition complete!"
+    puts '\n✅ Debug logging addition complete!'
     
     if @fixes_applied.any?
-      puts "\n🔧 Fixes applied:"
+      puts '\n🔧 Fixes applied:'
       @fixes_applied.each { |fix| puts "  • #{fix}" }
     else
-      puts "\n✨ No fixes needed - debug logging already configured!"
+      puts '\n✨ No fixes needed - debug logging already configured!'
     end
     
     if @errors_found.any?
-      puts "\n⚠️  Errors encountered:"
+      puts '\n⚠️  Errors encountered:'
       @errors_found.each { |error| puts "  • #{error}" }
     end
     
-    puts "\n📝 Debug logging capabilities added to Ruby SDK!"
-    puts "   Users can now enable debug logging by:"
-    puts "   1. Passing debug_logging: true to SDK initialization"
-    puts "   2. Setting KINTSUGI_DEBUG=true environment variable"
-    puts "   3. Both request and response bodies will be logged to stdout"
-    puts "   4. Complete documentation added to README.md"
+    puts '\n📝 Debug logging capabilities added to Ruby SDK!'
+    puts '   Users can now enable debug logging by:'
+    puts '   1. Passing debug_logging: true to SDK initialization'
+    puts '   2. Setting KINTSUGI_DEBUG=true environment variable'
+    puts '   3. Both request and response bodies will be logged to stdout'
+    puts '   4. Complete documentation added to README.md'
   end
 end
 
 # Run the debug logging adder if this script is executed directly
-if __FILE__ == $0
+if __FILE__ == $PROGRAM_NAME
   sdk_path = ARGV[0] || '.'
   
   unless Dir.exist?(File.join(sdk_path, 'lib/kintsugi_sdk'))
     puts "❌ Error: Ruby SDK not found at #{sdk_path}"
-    puts "Usage: #{$0} [path_to_ruby_sdk]"
+    puts "Usage: #{$PROGRAM_NAME} [path_to_ruby_sdk]"
     exit 1
   end
   

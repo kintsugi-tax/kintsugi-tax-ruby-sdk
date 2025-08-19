@@ -24,7 +24,15 @@ echo "   • Additional SDK enhancements"
 ruby scripts/post_generation_fixes.rb
 
 echo ""
-echo "🧪 Step 3: Validating SDK structure..."
+echo "🧹 Step 3: Auto-fixing RuboCop violations in generated files..."
+if command -v bundle >/dev/null 2>&1 && [ -f Gemfile ]; then
+    bundle exec rubocop lib/kintsugi_sdk/openapisdk.rb lib/kintsugi_sdk/sdkconfiguration.rb --auto-correct --format quiet 2>/dev/null || true
+else
+    echo "   ⚠️  Bundle not available, skipping RuboCop auto-fix"
+fi
+
+echo ""
+echo "🧪 Step 4: Validating SDK structure..."
 if [ -f "lib/kintsugi_sdk/openapisdk.rb" ] && [ -f "lib/kintsugi_sdk/sdkconfiguration.rb" ]; then
     echo "   ✅ Core SDK files present"
 else

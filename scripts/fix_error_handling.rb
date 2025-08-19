@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 # Post-generation script to fix Ruby SDK error handling issues
 # This script fixes the UncaughtThrowException problem by:
@@ -16,7 +17,7 @@ class ErrorHandlingFixer
   end
 
   def run
-    puts "🔧 Fixing Ruby SDK error handling..."
+    puts '🔧 Fixing Ruby SDK error handling...'
     
     fix_error_classes
     fix_throw_statements
@@ -28,7 +29,7 @@ class ErrorHandlingFixer
   private
 
   def fix_error_classes
-    puts "📁 Fixing error class inheritance..."
+    puts '📁 Fixing error class inheritance...'
     
     error_files = Dir.glob(File.join(@sdk_path, 'lib/kintsugi_sdk/models/errors/*.rb'))
     error_files.reject! { |f| f.end_with?('.rbi') }  # Skip type files
@@ -50,7 +51,7 @@ class ErrorHandlingFixer
   end
 
   def fix_throw_statements
-    puts "🔄 Replacing 'throw obj' with 'raise obj'..."
+    puts '🔄 Replacing \'throw obj\' with \'raise obj\'...'
     
     sdk_files = Dir.glob(File.join(@sdk_path, 'lib/kintsugi_sdk/*.rb'))
     sdk_files.reject! { |f| f.include?('models/') || f.include?('utils/') || f.include?('sdk_hooks/') }
@@ -71,7 +72,7 @@ class ErrorHandlingFixer
   end
 
   def fix_readme_documentation
-    puts "📖 Fixing README documentation..."
+    puts '📖 Fixing README documentation...'
     
     readme_path = File.join(@sdk_path, 'README.md')
     return unless File.exist?(readme_path)
@@ -98,37 +99,37 @@ class ErrorHandlingFixer
     
     if content != original_content
       File.write(readme_path, content)
-      @fixes_applied << "Fixed README.md error handling documentation"
+      @fixes_applied << 'Fixed README.md error handling documentation'
     end
   end
 
   def print_summary
-    puts "\n✅ Error handling fix complete!"
+    puts '\n✅ Error handling fix complete!'
     
     if @fixes_applied.any?
-      puts "\n🔧 Fixes applied:"
+      puts '\n🔧 Fixes applied:'
       @fixes_applied.each { |fix| puts "  • #{fix}" }
     else
-      puts "\n✨ No fixes needed - error handling already correct!"
+      puts '\n✨ No fixes needed - error handling already correct!'
     end
     
     if @errors_found.any?
-      puts "\n⚠️  Errors encountered:"
+      puts '\n⚠️  Errors encountered:'
       @errors_found.each { |error| puts "  • #{error}" }
     end
     
     puts "\n📝 The Ruby SDK now properly handles exceptions using 'raise' and 'rescue'."
-    puts "   Users can catch exceptions normally without UncaughtThrowException issues."
+    puts '   Users can catch exceptions normally without UncaughtThrowException issues.'
   end
 end
 
 # Run the fixer if this script is executed directly
-if __FILE__ == $0
+if __FILE__ == $PROGRAM_NAME
   sdk_path = ARGV[0] || '.'
   
   unless Dir.exist?(File.join(sdk_path, 'lib/kintsugi_sdk'))
     puts "❌ Error: Ruby SDK not found at #{sdk_path}"
-    puts "Usage: #{$0} [path_to_ruby_sdk]"
+    puts "Usage: #{$PROGRAM_NAME} [path_to_ruby_sdk]"
     exit 1
   end
   
