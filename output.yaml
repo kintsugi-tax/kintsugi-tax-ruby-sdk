@@ -2834,6 +2834,248 @@ components:
         - "object"
         - "masked_number"
       title: "Card"
+    "CartEstimateRequest":
+      properties:
+        "currency":
+          type: "string"
+        "cart_context":
+          type: "string"
+        "cart_contents":
+          items: {"$ref": "#/components/schemas/CartItem"}
+          type: "array"
+          title: "Cart Contents"
+        "applied_coupons":
+          items:
+            type: "string"
+          type: "array"
+          title: "Applied Coupons"
+        "shipping_methods":
+          items: {"$ref": "#/components/schemas/ShippingMethod"}
+          type: "array"
+          title: "Shipping Methods"
+        "has_calculated_shipping":
+          type: "boolean"
+        "totals": {"$ref": "#/components/schemas/CartTotals"}
+        "fees":
+          items: {"$ref": "#/components/schemas/FeeItem"}
+          type: "array"
+          title: "Fees"
+        "coupon_discount_totals":
+          additionalProperties:
+            type: "number"
+          type: "object"
+          title: "Coupon Discount Totals"
+        "coupon_discount_tax_totals":
+          additionalProperties:
+            type: "number"
+          type: "object"
+          title: "Coupon Discount Tax Totals"
+        "customer": {"$ref": "#/components/schemas/WooCustomer"}
+        "cart_hash":
+          type: "string"
+      type: "object"
+      title: "CartEstimateRequest"
+    "CartEstimateResponse":
+      properties:
+        "currency":
+          type: "string"
+        "items":
+          items: {"$ref": "#/components/schemas/CartItemResponse"}
+          type: "array"
+          title: "Items"
+        "fees":
+          items: {"$ref": "#/components/schemas/FeeItemResponse"}
+          type: "array"
+          title: "Fees"
+        "shipments":
+          items: {"$ref": "#/components/schemas/ShippingMethodResponse"}
+          type: "array"
+          title: "Shipments"
+        "totals": {"$ref": "#/components/schemas/CartTotalsResponse"}
+        "tax_rates":
+          items: {"$ref": "#/components/schemas/TaxBreakdownByJurisdiction"}
+          type: "array"
+          title: "Tax Rates"
+        "has_registration":
+          type: "boolean"
+          title: "Has Registration"
+      type: "object"
+      required:
+        - "has_registration"
+      title: "CartEstimateResponse"
+    "CartItem":
+      properties:
+        "key":
+          type: "string"
+          title: "Key"
+        "data_hash":
+          type: "string"
+        "product_id":
+          type: "integer"
+          title: "Product Id"
+        "variation_id":
+          type: "integer"
+          title: "Variation Id"
+          default: 0
+        "product_name":
+          type: "string"
+        "product_description":
+          type: "string"
+        "quantity":
+          type: "integer"
+          title: "Quantity"
+        "line_tax_data": {"$ref": "#/components/schemas/LineTaxData"}
+        "line_subtotal":
+          default: "0"
+          type: "number"
+        "line_subtotal_tax":
+          default: "0"
+          type: "number"
+        "line_total":
+          default: "0"
+          type: "number"
+        "line_tax":
+          default: "0"
+          type: "number"
+      type: "object"
+      required:
+        - "key"
+        - "product_id"
+        - "quantity"
+      title: "CartItem"
+    "CartItemResponse":
+      properties:
+        "key":
+          type: "string"
+          title: "Key"
+        "product_id":
+          type: "integer"
+          title: "Product Id"
+        "variation_id":
+          type: "integer"
+          title: "Variation Id"
+        "quantity":
+          type: "integer"
+          title: "Quantity"
+        "line_subtotal":
+          type: "string"
+          title: "Line Subtotal"
+        "line_subtotal_tax":
+          type: "string"
+          title: "Line Subtotal Tax"
+        "line_total":
+          type: "string"
+          title: "Line Total"
+        "line_tax":
+          type: "string"
+          title: "Line Tax"
+        "taxable_amount":
+          type: "string"
+          title: "Taxable Amount"
+        "combined_tax_rate":
+          type: "string"
+          title: "Combined Tax Rate"
+        "tax_rates":
+          items: {"$ref": "#/components/schemas/TaxRateBreakdown-Output"}
+          type: "array"
+          title: "Tax Rates"
+      type: "object"
+      required:
+        - "key"
+        - "product_id"
+        - "variation_id"
+        - "quantity"
+        - "line_subtotal"
+        - "line_subtotal_tax"
+        - "line_total"
+        - "line_tax"
+        - "taxable_amount"
+        - "combined_tax_rate"
+      title: "CartItemResponse"
+    "CartTotals":
+      properties:
+        "subtotal":
+          default: "0"
+          type: "number"
+        "subtotal_tax":
+          default: "0"
+          type: "number"
+        "shipping_total":
+          default: "0"
+          type: "number"
+        "shipping_tax":
+          default: "0"
+          type: "number"
+        "discount_total":
+          default: "0"
+          type: "number"
+        "discount_tax":
+          default: "0"
+          type: "number"
+        "cart_contents_total":
+          default: "0"
+          type: "number"
+        "cart_contents_tax":
+          default: "0"
+          type: "number"
+        "fee_total":
+          default: "0"
+          type: "number"
+        "fee_tax":
+          default: "0"
+          type: "number"
+        "total":
+          default: "0"
+          type: "number"
+        "total_tax":
+          default: "0"
+          type: "number"
+      type: "object"
+      title: "CartTotals"
+    "CartTotalsResponse":
+      properties:
+        "subtotal":
+          type: "string"
+          title: "Subtotal"
+          default: "0"
+        "subtotal_tax":
+          type: "string"
+          title: "Subtotal Tax"
+          default: "0"
+        "shipping_total":
+          type: "string"
+          title: "Shipping Total"
+          default: "0"
+        "shipping_tax":
+          type: "string"
+          title: "Shipping Tax"
+          default: "0"
+        "fee_total":
+          type: "string"
+          title: "Fee Total"
+          default: "0"
+        "fee_tax":
+          type: "string"
+          title: "Fee Tax"
+          default: "0"
+        "total":
+          type: "string"
+          title: "Total"
+          default: "0"
+        "total_tax":
+          type: "string"
+          title: "Total Tax"
+          default: "0"
+        "taxable_amount":
+          type: "string"
+          title: "Taxable Amount"
+          default: "0"
+        "combined_tax_rate":
+          type: "string"
+          title: "Combined Tax Rate"
+          default: "0"
+      type: "object"
+      title: "CartTotalsResponse"
     "ChangeRegimeStatusEnum":
       type: "string"
       enum:
@@ -3254,6 +3496,127 @@ components:
       required:
         - "billing_plan"
       title: "CheckoutNewItem"
+    "CheckoutOrderEstimateRequest":
+      properties:
+        "id":
+          type: "integer"
+          title: "Id"
+        "order_key":
+          type: "string"
+        "cart_hash":
+          type: "string"
+        "created_via":
+          type: "string"
+        "version":
+          type: "string"
+        "status":
+          type: "string"
+          title: "Status"
+        "currency":
+          type: "string"
+          title: "Currency"
+        "prices_include_tax":
+          type: "boolean"
+        "date_created": {"$ref": "#/components/schemas/DateTimeField"}
+        "date_modified": {"$ref": "#/components/schemas/DateTimeField"}
+        "date_completed": {"$ref": "#/components/schemas/DateTimeField"}
+        "date_paid": {"$ref": "#/components/schemas/DateTimeField"}
+        "discount_total":
+          default: "0"
+          type: "number"
+        "discount_tax":
+          default: "0"
+          type: "number"
+        "shipping_total":
+          default: "0"
+          type: "number"
+        "shipping_tax":
+          default: "0"
+          type: "number"
+        "cart_tax":
+          default: "0"
+          type: "number"
+        "total":
+          default: "0"
+          type: "number"
+        "total_tax":
+          default: "0"
+          type: "number"
+        "transaction_id":
+          type: "string"
+        "customer_id":
+          type: "integer"
+        "billing": {"$ref": "#/components/schemas/WooBillingAddress"}
+        "shipping": {"$ref": "#/components/schemas/WooShippingAddress"}
+        "items": {"$ref": "#/components/schemas/OrderItems-Input"}
+      type: "object"
+      required:
+        - "id"
+        - "status"
+        - "currency"
+      title: "CheckoutOrderEstimateRequest"
+    "CheckoutOrderEstimateResponse":
+      properties:
+        "id":
+          type: "integer"
+          title: "Id"
+        "order_key":
+          type: "string"
+        "currency":
+          type: "string"
+          title: "Currency"
+        "prices_include_tax":
+          type: "boolean"
+        "discount_total":
+          type: "string"
+          title: "Discount Total"
+          default: "0"
+        "discount_tax":
+          type: "string"
+          title: "Discount Tax"
+          default: "0"
+        "shipping_total":
+          type: "string"
+          title: "Shipping Total"
+          default: "0"
+        "shipping_tax":
+          type: "string"
+          title: "Shipping Tax"
+          default: "0"
+        "cart_tax":
+          type: "string"
+          title: "Cart Tax"
+          default: "0"
+        "total":
+          type: "string"
+          title: "Total"
+          default: "0"
+        "total_tax":
+          type: "string"
+          title: "Total Tax"
+          default: "0"
+        "taxable_amount":
+          type: "string"
+          title: "Taxable Amount"
+          default: "0"
+        "combined_tax_rate":
+          type: "string"
+          title: "Combined Tax Rate"
+          default: "0"
+        "items": {"$ref": "#/components/schemas/OrderItems-Output"}
+        "tax_rates":
+          items: {"$ref": "#/components/schemas/TaxBreakdownByJurisdiction"}
+          type: "array"
+          title: "Tax Rates"
+        "has_registration":
+          type: "boolean"
+          title: "Has Registration"
+      type: "object"
+      required:
+        - "id"
+        - "currency"
+        - "has_registration"
+      title: "CheckoutOrderEstimateResponse"
     "ConnectionRead":
       properties:
         "id":
@@ -3582,6 +3945,54 @@ components:
         - "XK"
         - "ZZ_EU"
       title: "CountryCodeEnum"
+    "CouponLineItem-Input":
+      properties:
+        "id":
+          type: "integer"
+          title: "Id"
+        "name":
+          type: "string"
+        "code":
+          type: "string"
+        "discount":
+          default: "0"
+          type: "number"
+        "discount_tax":
+          default: "0"
+          type: "number"
+        "meta_data":
+          items: {"$ref": "#/components/schemas/MetaData"}
+          type: "array"
+          title: "Meta Data"
+      type: "object"
+      required:
+        - "id"
+      title: "CouponLineItem"
+    "CouponLineItem-Output":
+      properties:
+        "id":
+          type: "integer"
+          title: "Id"
+        "name":
+          type: "string"
+        "code":
+          type: "string"
+        "discount":
+          type: "string"
+          title: "Discount"
+          default: "0"
+        "discount_tax":
+          type: "string"
+          title: "Discount Tax"
+          default: "0"
+        "meta_data":
+          items: {"$ref": "#/components/schemas/MetaData"}
+          type: "array"
+          title: "Meta Data"
+      type: "object"
+      required:
+        - "id"
+      title: "CouponLineItem"
     "CreditCreate":
       properties:
         "type": {"$ref": "#/components/schemas/CreditType"}
@@ -4651,6 +5062,21 @@ components:
         - "needs_tax_collection_enable_connections_count"
         - "needs_mark_as_tax_collecting_count"
       title: "DashboardOverviewTasksData"
+    "DateTimeField":
+      properties:
+        "offset":
+          type: "integer"
+        "offset_timestamp":
+          type: "integer"
+          title: "Offset Timestamp"
+        "timestamp":
+          type: "integer"
+          title: "Timestamp"
+      type: "object"
+      required:
+        - "offset_timestamp"
+        - "timestamp"
+      title: "DateTimeField"
     "DiscountBuilder":
       properties:
         "external_id":
@@ -4987,6 +5413,140 @@ components:
       required:
         - "start_date"
       title: "ExemptionUpdate"
+    "FeeItem":
+      properties:
+        "id":
+          type: "string"
+          title: "Id"
+        "name":
+          type: "string"
+          title: "Name"
+        "taxable":
+          type: "boolean"
+        "amount":
+          default: "0"
+          type: "number"
+        "total":
+          default: "0"
+          type: "number"
+        "tax":
+          default: "0"
+          type: "number"
+      type: "object"
+      required:
+        - "id"
+        - "name"
+      title: "FeeItem"
+    "FeeItemResponse":
+      properties:
+        "id":
+          type: "string"
+          title: "Id"
+        "name":
+          type: "string"
+          title: "Name"
+        "amount":
+          type: "string"
+          title: "Amount"
+          default: "0"
+        "fee_total":
+          type: "string"
+          title: "Fee Total"
+          default: "0"
+        "fee_tax":
+          type: "string"
+          title: "Fee Tax"
+          default: "0"
+        "taxable_amount":
+          type: "string"
+          title: "Taxable Amount"
+          default: "0"
+        "combined_tax_rate":
+          type: "string"
+          title: "Combined Tax Rate"
+          default: "0"
+        "tax_rates":
+          items: {"$ref": "#/components/schemas/TaxRateBreakdown-Output"}
+          type: "array"
+          title: "Tax Rates"
+      type: "object"
+      required:
+        - "id"
+        - "name"
+      title: "FeeItemResponse"
+    "FeeLineItem-Input":
+      properties:
+        "id":
+          type: "integer"
+          title: "Id"
+        "name":
+          type: "string"
+          title: "Name"
+        "tax_status":
+          type: "string"
+        "amount":
+          default: "0"
+          type: "number"
+        "total":
+          default: "0"
+          type: "number"
+        "total_tax":
+          default: "0"
+          type: "number"
+        "taxable_amount":
+          default: "0"
+          type: "number"
+        "combined_tax_rate":
+          default: "0"
+          type: "number"
+        "tax_rates":
+          items: {"$ref": "#/components/schemas/TaxRateBreakdown-Input"}
+          type: "array"
+          title: "Tax Rates"
+      type: "object"
+      required:
+        - "id"
+        - "name"
+      title: "FeeLineItem"
+    "FeeLineItem-Output":
+      properties:
+        "id":
+          type: "integer"
+          title: "Id"
+        "name":
+          type: "string"
+          title: "Name"
+        "tax_status":
+          type: "string"
+        "amount":
+          type: "string"
+          title: "Amount"
+          default: "0"
+        "total":
+          type: "string"
+          title: "Total"
+          default: "0"
+        "total_tax":
+          type: "string"
+          title: "Total Tax"
+          default: "0"
+        "taxable_amount":
+          type: "string"
+          title: "Taxable Amount"
+          default: "0"
+        "combined_tax_rate":
+          type: "string"
+          title: "Combined Tax Rate"
+          default: "0"
+        "tax_rates":
+          items: {"$ref": "#/components/schemas/TaxRateBreakdown-Output"}
+          type: "array"
+          title: "Tax Rates"
+      type: "object"
+      required:
+        - "id"
+        - "name"
+      title: "FeeLineItem"
     "FileUploadData":
       properties:
         "file_name":
@@ -6286,6 +6846,18 @@ components:
         - "OTHER"
         - "HYBRID"
       title: "JurisdictionType"
+    "LineTaxData":
+      properties:
+        "subtotal":
+          items: {}
+          type: "array"
+          title: "Subtotal"
+        "total":
+          items: {}
+          type: "array"
+          title: "Total"
+      type: "object"
+      title: "LineTaxData"
     "LinkedCustomer":
       properties:
         "customer_id":
@@ -6533,6 +7105,18 @@ components:
       required:
         - "marketplace"
       title: "MarketplaceUpdate"
+    "MetaData":
+      properties:
+        "id":
+          type: "integer"
+        "key":
+          type: "string"
+        "value":
+          anyOf:
+            - {}
+          title: "Value"
+      type: "object"
+      title: "MetaData"
     "MigrationRequest":
       properties:
         "migration_name":
@@ -6548,10 +7132,10 @@ components:
       title: "MigrationRequest"
     "ModifyProductCategorySubcategory":
       properties:
-        "existing_category": {"$ref": "#/components/schemas/ProductCategoryEnum"}
-        "existing_subcategory": {"$ref": "#/components/schemas/ProductSubCategoryEnum"}
-        "new_category": {"$ref": "#/components/schemas/ProductCategoryEnum"}
-        "new_subcategory": {"$ref": "#/components/schemas/ProductSubCategoryEnum"}
+        "existing_category": {"title": "Existing Category", "$ref": "#/components/schemas/ProductCategoryEnum"}
+        "existing_subcategory": {"title": "Existing Subcategory", "$ref": "#/components/schemas/ProductSubCategoryEnum"}
+        "new_category": {"title": "New Category", "$ref": "#/components/schemas/ProductCategoryEnum"}
+        "new_subcategory": {"title": "New Subcategory", "$ref": "#/components/schemas/ProductSubCategoryEnum"}
         "status_list":
           items: {"$ref": "#/components/schemas/ProductStatusEnum"}
           type: "array"
@@ -6673,7 +7257,7 @@ components:
         "collected_tax_enabled":
           type: "boolean"
           title: "Collected Tax Enabled"
-          default: false
+          default: true
         "period_model": {"$ref": "#/components/schemas/PeriodModelEnum"}
         "period_start_date":
           type: "string"
@@ -6885,6 +7469,138 @@ components:
         - "SKIPPED"
         - "FINISHED"
       title: "OnboardingStatus"
+    "OrderItems-Input":
+      properties:
+        "line_items":
+          items: {"$ref": "#/components/schemas/OrderLineItem-Input"}
+          type: "array"
+          title: "Line Items"
+        "shipping_lines":
+          items: {"$ref": "#/components/schemas/ShippingLineItem-Input"}
+          type: "array"
+          title: "Shipping Lines"
+        "fee_lines":
+          items: {"$ref": "#/components/schemas/FeeLineItem-Input"}
+          type: "array"
+          title: "Fee Lines"
+        "coupon_lines":
+          items: {"$ref": "#/components/schemas/CouponLineItem-Input"}
+          type: "array"
+          title: "Coupon Lines"
+      type: "object"
+      title: "OrderItems"
+    "OrderItems-Output":
+      properties:
+        "line_items":
+          items: {"$ref": "#/components/schemas/OrderLineItem-Output"}
+          type: "array"
+          title: "Line Items"
+        "shipping_lines":
+          items: {"$ref": "#/components/schemas/ShippingLineItem-Output"}
+          type: "array"
+          title: "Shipping Lines"
+        "fee_lines":
+          items: {"$ref": "#/components/schemas/FeeLineItem-Output"}
+          type: "array"
+          title: "Fee Lines"
+        "coupon_lines":
+          items: {"$ref": "#/components/schemas/CouponLineItem-Output"}
+          type: "array"
+          title: "Coupon Lines"
+      type: "object"
+      title: "OrderItems"
+    "OrderLineItem-Input":
+      properties:
+        "id":
+          type: "integer"
+          title: "Id"
+        "name":
+          type: "string"
+        "product_id":
+          type: "integer"
+          title: "Product Id"
+        "variation_id":
+          type: "integer"
+        "quantity":
+          type: "integer"
+          title: "Quantity"
+          default: 1
+        "subtotal":
+          default: "0"
+          type: "number"
+        "subtotal_tax":
+          default: "0"
+          type: "number"
+        "total":
+          default: "0"
+          type: "number"
+        "total_tax":
+          default: "0"
+          type: "number"
+        "taxable_amount":
+          default: "0"
+          type: "number"
+        "combined_tax_rate":
+          default: "0"
+          type: "number"
+        "tax_rates":
+          items: {"$ref": "#/components/schemas/TaxRateBreakdown-Input"}
+          type: "array"
+          title: "Tax Rates"
+      type: "object"
+      required:
+        - "id"
+        - "product_id"
+      title: "OrderLineItem"
+    "OrderLineItem-Output":
+      properties:
+        "id":
+          type: "integer"
+          title: "Id"
+        "name":
+          type: "string"
+        "product_id":
+          type: "integer"
+          title: "Product Id"
+        "variation_id":
+          type: "integer"
+        "quantity":
+          type: "integer"
+          title: "Quantity"
+          default: 1
+        "subtotal":
+          type: "string"
+          title: "Subtotal"
+          default: "0"
+        "subtotal_tax":
+          type: "string"
+          title: "Subtotal Tax"
+          default: "0"
+        "total":
+          type: "string"
+          title: "Total"
+          default: "0"
+        "total_tax":
+          type: "string"
+          title: "Total Tax"
+          default: "0"
+        "taxable_amount":
+          type: "string"
+          title: "Taxable Amount"
+          default: "0"
+        "combined_tax_rate":
+          type: "string"
+          title: "Combined Tax Rate"
+          default: "0"
+        "tax_rates":
+          items: {"$ref": "#/components/schemas/TaxRateBreakdown-Output"}
+          type: "array"
+          title: "Tax Rates"
+      type: "object"
+      required:
+        - "id"
+        - "product_id"
+      title: "OrderLineItem"
     "OrgCreated":
       properties:
         "event_type":
@@ -10418,6 +11134,122 @@ components:
         - "address"
       title: "Seller"
       description: "The details of the seller involved in the transaction\nincluding company code and address"
+    "ShippingLineItem-Input":
+      properties:
+        "id":
+          type: "integer"
+          title: "Id"
+        "name":
+          type: "string"
+        "method_id":
+          type: "string"
+        "method_title":
+          type: "string"
+        "instance_id":
+          type: "string"
+        "tax_status":
+          type: "string"
+        "total":
+          default: "0"
+          type: "number"
+        "total_tax":
+          default: "0"
+          type: "number"
+        "taxable_amount":
+          default: "0"
+          type: "number"
+        "combined_tax_rate":
+          default: "0"
+          type: "number"
+        "tax_rates":
+          items: {"$ref": "#/components/schemas/TaxRateBreakdown-Input"}
+          type: "array"
+          title: "Tax Rates"
+      type: "object"
+      required:
+        - "id"
+      title: "ShippingLineItem"
+    "ShippingLineItem-Output":
+      properties:
+        "id":
+          type: "integer"
+          title: "Id"
+        "name":
+          type: "string"
+        "method_id":
+          type: "string"
+        "method_title":
+          type: "string"
+        "instance_id":
+          type: "string"
+        "tax_status":
+          type: "string"
+        "total":
+          type: "string"
+          title: "Total"
+          default: "0"
+        "total_tax":
+          type: "string"
+          title: "Total Tax"
+          default: "0"
+        "taxable_amount":
+          type: "string"
+          title: "Taxable Amount"
+          default: "0"
+        "combined_tax_rate":
+          type: "string"
+          title: "Combined Tax Rate"
+          default: "0"
+        "tax_rates":
+          items: {"$ref": "#/components/schemas/TaxRateBreakdown-Output"}
+          type: "array"
+          title: "Tax Rates"
+      type: "object"
+      required:
+        - "id"
+      title: "ShippingLineItem"
+    "ShippingMethod":
+      properties:
+        "id":
+          type: "string"
+        "method_id":
+          type: "string"
+        "instance_id":
+          type: "integer"
+        "label":
+          type: "string"
+        "cost":
+          type: "number"
+        "tax_status":
+          type: "string"
+        "description":
+          type: "string"
+      type: "object"
+      title: "ShippingMethod"
+    "ShippingMethodResponse":
+      properties:
+        "id":
+          type: "string"
+        "method_id":
+          type: "string"
+        "instance_id":
+          type: "integer"
+        "cost":
+          type: "string"
+        "shipping_tax":
+          type: "string"
+        "taxable_amount":
+          type: "string"
+        "combined_tax_rate":
+          type: "string"
+        "shipping_total":
+          type: "string"
+        "tax_rates":
+          items: {"$ref": "#/components/schemas/TaxRateBreakdown-Output"}
+          type: "array"
+          title: "Tax Rates"
+      type: "object"
+      title: "ShippingMethodResponse"
     "ShopifyCreateUpdate":
       properties:
         "url":
@@ -10926,6 +11758,18 @@ components:
         - "unit_price"
         - "object"
       title: "SubscriptionItem"
+    "TaxBreakdownByJurisdiction":
+      properties:
+        "jurisdiction":
+          type: "string"
+        "amount":
+          type: "string"
+        "tax":
+          type: "string"
+        "rate":
+          type: "string"
+      type: "object"
+      title: "TaxBreakdownByJurisdiction"
     "TaxClass":
       properties:
         "class_id":
@@ -11324,6 +12168,34 @@ components:
       required:
         - "name"
       title: "TaxRate"
+    "TaxRateBreakdown-Input":
+      properties:
+        "rule_id":
+          type: "string"
+        "jurisdiction_type":
+          type: "string"
+        "jurisdiction_name":
+          type: "string"
+        "rate":
+          type: "number"
+        "amount":
+          type: "number"
+      type: "object"
+      title: "TaxRateBreakdown"
+    "TaxRateBreakdown-Output":
+      properties:
+        "rule_id":
+          type: "string"
+        "jurisdiction_type":
+          type: "string"
+        "jurisdiction_name":
+          type: "string"
+        "rate":
+          type: "string"
+        "amount":
+          type: "string"
+      type: "object"
+      title: "TaxRateBreakdown"
     "TaxTreatment":
       type: "string"
       enum:
@@ -13615,6 +14487,72 @@ components:
           type: "string"
       type: "object"
       title: "Webhook"
+    "WooBillingAddress":
+      properties:
+        "first_name":
+          type: "string"
+        "last_name":
+          type: "string"
+        "phone":
+          type: "string"
+        "company":
+          type: "string"
+        "address_1":
+          type: "string"
+        "address_2":
+          type: "string"
+        "city":
+          type: "string"
+        "state":
+          type: "string"
+        "postcode":
+          type: "string"
+        "country":
+          type: "string"
+        "email":
+          type: "string"
+      type: "object"
+      title: "WooBillingAddress"
+    "WooCustomer":
+      properties:
+        "id":
+          type: "integer"
+        "first_name":
+          type: "string"
+        "last_name":
+          type: "string"
+        "email":
+          type: "string"
+        "is_vat_exempt":
+          type: "boolean"
+        "billing_address": {"$ref": "#/components/schemas/WooBillingAddress"}
+        "shipping_address": {"$ref": "#/components/schemas/WooShippingAddress"}
+      type: "object"
+      title: "WooCustomer"
+    "WooShippingAddress":
+      properties:
+        "first_name":
+          type: "string"
+        "last_name":
+          type: "string"
+        "phone":
+          type: "string"
+        "company":
+          type: "string"
+        "address_1":
+          type: "string"
+        "address_2":
+          type: "string"
+        "city":
+          type: "string"
+        "state":
+          type: "string"
+        "postcode":
+          type: "string"
+        "country":
+          type: "string"
+      type: "object"
+      title: "WooShippingAddress"
     "backend__src__address_validation__responses__ValidationErrorItem":
       properties:
         "type":

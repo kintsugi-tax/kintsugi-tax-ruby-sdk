@@ -263,11 +263,14 @@ begin
       # handle response
     end
 rescue Models::Errors::ErrorResponse => e
-  # handle error response
-  puts "Error: #{e.detail}"
+  # handle e.container data
+  raise e
 rescue Models::Errors::BackendSrcAddressValidationResponsesValidationErrorResponse => e
-  # handle validation error response
-  puts "Validation Error: #{e.detail}"
+  # handle e.container data
+  raise e
+rescue Models::Errors::ErrorResponse => e
+  # handle e.container data
+  raise e
 rescue Errors::APIError => e
   # handle default exception
   raise e

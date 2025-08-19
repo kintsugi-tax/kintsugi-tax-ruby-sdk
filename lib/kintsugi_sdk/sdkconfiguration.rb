@@ -89,9 +89,9 @@ module KintsugiSDK
       end
       @language = 'ruby'
       @openapi_doc_version = '1.0.0'
-      @sdk_version = '5.5.2'
-      @gen_version = '2.684.0'
-      @user_agent = 'speakeasy-sdk/ruby 5.5.2 2.684.0 1.0.0 kintsugi_sdk'
+      @sdk_version = '5.5.3'
+      @gen_version = '2.686.7'
+      @user_agent = 'speakeasy-sdk/ruby 5.5.3 2.686.7 1.0.0 kintsugi_sdk'
     end
 
     sig { returns([String, T::Hash[Symbol, String]]) }

@@ -4,12 +4,18 @@ $LOAD_PATH.push File.expand_path('lib', __dir__)
 
 Gem::Specification.new do |s|
   s.name        = 'kintsugi_sdk'
-  s.version     = '5.5.2'
+  s.version     = '5.5.3'
   s.platform    = Gem::Platform::RUBY
   s.licenses    = ['Apache-2.0']
   s.summary     = ''
+  s.homepage    = 'https://github.com/kintsugi-tax/kintsugi-tax-ruby-sdk.git'
   s.description = 'Ruby SDK for Kintsugi Tax Platform'
   s.authors     = ['Kintsugi']
+  s.metadata    = {
+    'homepage_uri' => 'https://github.com/kintsugi-tax/kintsugi-tax-ruby-sdk.git',
+    'documentation_uri' => 'https://github.com/kintsugi-tax/kintsugi-tax-ruby-sdk.git',
+    'source_code_uri' => 'https://github.com/kintsugi-tax/kintsugi-tax-ruby-sdk.git'
+  }
 
   s.files         = Dir['{lib,test}/**/*']
   s.require_paths = ['lib']

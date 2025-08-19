@@ -1,13 +1,12 @@
 PATH
   remote: .
   specs:
-    kintsugi_sdk (5.5.2)
+    kintsugi_sdk (5.5.3)
+      base64 (>= 0.2.0, < 1.0)
       faraday
       faraday-multipart
-      faraday-retry
-      rack
-      rake
-      sorbet
+      faraday-retry (~> 2.2.1)
+      sorbet-runtime
 
 GEM
   remote: https://rubygems.org/
@@ -26,7 +25,6 @@ GEM
       net-http (>= 0.5.0)
     faraday-retry (2.2.1)
       faraday (~> 2.0)
-    janeway-jsonpath (0.6.0)
     json (2.8.2)
     language_server-protocol (3.17.0.4)
     lint_roller (1.1.0)
@@ -44,7 +42,6 @@ GEM
       racc
     prism (1.4.0)
     racc (1.8.1)
-    rack (3.1.11)
     rainbow (3.1.1)
     rake (13.2.1)
     rbi (0.3.6)
@@ -115,11 +112,14 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  minitest
   kintsugi_sdk!
-  rubocop (~> 1.60.2)
-  sorbet-runtime
-  tapioca
+  minitest
+  minitest-focus
+  rake
+  rubocop (~> 1.73.2)
+  rubocop-minitest (~> 0.37.1)
+  sorbet
+  tapioca (~> 0.16.11)
 
 BUNDLED WITH
-  2.5.23
+   2.5.23
