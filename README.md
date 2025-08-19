@@ -27,6 +27,7 @@ Developer-friendly & type-safe Ruby SDK specifically catered to leverage Kintsug
   * [Available Resources and Operations](#available-resources-and-operations)
   * [Error Handling](#error-handling)
   * [Server Selection](#server-selection)
+  * [Debug Logging](#debug-logging)
 * [Development](#development)
   * [Maturity](#maturity)
   * [Contributions](#contributions)
@@ -313,7 +314,99 @@ end
 ```
 <!-- End Server Selection [server] -->
 
-<!-- Placeholder for Future Speakeasy SDK Sections -->
+<!-- Start Debug Logging [debugging] -->
+## Debug Logging
+
+The SDK provides comprehensive debug logging capabilities to help you troubleshoot API requests and responses. When enabled, debug logging will output detailed information about HTTP requests and responses, including headers and body content.
+
+### Enabling Debug Logging
+
+You can enable debug logging in two ways:
+
+#### Method 1: SDK Initialization Parameter
+
+Pass `debug_logging: true` when initializing the SDK:
+
+```ruby
+require 'kintsugi_sdk'
+
+Models = ::KintsugiSDK::Models
+s = ::KintsugiSDK::OpenApiSDK.new(
+  debug_logging: true,
+  security: Models::Shared::Security.new(
+    api_key_header: '<YOUR_API_KEY_HERE>',
+  ),
+)
+
+# All API calls will now log request/response details
+req = Models::Shared::AddressBase.new(
+  phone: '555-123-4567',
+  street_1: '1600 Amphitheatre Parkway',
+  city: 'Mountain View',
+  state: 'CA',
+  postal_code: '94043',
+  country: Models::Shared::CountryCodeEnum::US,
+)
+
+res = s.address_validation.search(request: req)
+```
+
+#### Method 2: Environment Variable
+
+Set the `KINTSUGI_DEBUG` environment variable to `true`:
+
+```bash
+export KINTSUGI_DEBUG=true
+ruby your_script.rb
+```
+
+Or inline:
+
+```bash
+KINTSUGI_DEBUG=true ruby your_script.rb
+```
+
+### Debug Output
+
+When debug logging is enabled, you'll see detailed output like this:
+
+```
+D, [2024-01-15T10:30:45.123456 #12345] DEBUG -- : --> POST https://api.trykintsugi.com/v1/address-validation/search
+D, [2024-01-15T10:30:45.123456 #12345] DEBUG -- : Content-Type: "application/json"
+D, [2024-01-15T10:30:45.123456 #12345] DEBUG -- : Authorization: "Bearer ***"
+D, [2024-01-15T10:30:45.123456 #12345] DEBUG -- : 
+D, [2024-01-15T10:30:45.123456 #12345] DEBUG -- : {"phone":"555-123-4567","street_1":"1600 Amphitheatre Parkway"...}
+D, [2024-01-15T10:30:45.234567 #12345] DEBUG -- : 
+D, [2024-01-15T10:30:45.234567 #12345] DEBUG -- : <-- 200 https://api.trykintsugi.com/v1/address-validation/search
+D, [2024-01-15T10:30:45.234567 #12345] DEBUG -- : Content-Type: "application/json"
+D, [2024-01-15T10:30:45.234567 #12345] DEBUG -- : 
+D, [2024-01-15T10:30:45.234567 #12345] DEBUG -- : {"validated_address":{"street_1":"1600 Amphitheatre Pkwy"...}}
+```
+
+### Security Note
+
+⚠️ **Important**: Debug logging outputs request and response bodies, which may contain sensitive information like API keys, personal data, or other confidential information. Only enable debug logging in development environments and ensure debug logs are not exposed in production systems.
+
+### Disabling Debug Logging
+
+Debug logging is disabled by default. To explicitly disable it:
+
+```ruby
+s = ::KintsugiSDK::OpenApiSDK.new(
+  debug_logging: false,  # Explicitly disabled
+  security: Models::Shared::Security.new(
+    api_key_header: '<YOUR_API_KEY_HERE>',
+  ),
+)
+```
+
+Or unset the environment variable:
+
+```bash
+unset KINTSUGI_DEBUG
+```
+<!-- End Debug Logging [debugging] -->
+
 
 # Development
 

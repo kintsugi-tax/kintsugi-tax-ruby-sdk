@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    kintsugi_sdk (5.5.2)
+    kintsugi_sdk (5.5.3)
       faraday
       faraday-multipart
       faraday-retry

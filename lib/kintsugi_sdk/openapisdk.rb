@@ -27,10 +27,11 @@ module KintsugiSDK
         security_source: T.nilable(T.proc.returns(Models::Shared::Security)),
         server_idx: T.nilable(Integer),
         server_url: T.nilable(String),
-        url_params: T.nilable(T::Hash[Symbol, String])
+        url_params: T.nilable(T::Hash[Symbol, String]),
+        debug_logging: T.nilable(T::Boolean)
       ).void
     end
-    def initialize(client: nil, retry_config: nil, timeout_ms: nil, security: nil, security_source: nil, server_idx: nil, server_url: nil, url_params: nil)
+    def initialize(client: nil, retry_config: nil, timeout_ms: nil, security: nil, security_source: nil, server_idx: nil, server_url: nil, url_params: nil, debug_logging: nil)
       ## Instantiates the SDK configuring it with the provided parameters.
       # @param [T.nilable(Faraday::Connection)] client The faraday HTTP client to use for all operations
       # @param [T.nilable(::KintsugiSDK::Utils::RetryConfig)] retry_config The retry configuration to use for all operations
@@ -48,10 +49,13 @@ module KintsugiSDK
       }
       connection_options[:request][:timeout] = (timeout_ms.to_f / 1000) unless timeout_ms.nil?
 
-      client ||= Faraday.new(**connection_options) do |f|
-        f.request :multipart, {}
-        # f.response :logger, nil, { headers: true, bodies: true, errors: true }
-      end
+      # Store debug setting for use in Faraday configuration
+debug_enabled = debug_logging == true || ENV['KINTSUGI_DEBUG'] == 'true'
+
+client ||= Faraday.new(**connection_options) do |f|
+  f.request :multipart, {}
+  f.response :logger, $stdout, { headers: true, bodies: true, errors: true } if debug_enabled
+end
       
       if !server_url.nil?
         if !url_params.nil?

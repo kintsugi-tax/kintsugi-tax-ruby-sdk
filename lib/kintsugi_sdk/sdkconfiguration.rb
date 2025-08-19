@@ -34,6 +34,9 @@ module KintsugiSDK
     sig { returns(T.nilable(Float)) }
     attr_accessor :timeout
 
+    sig { returns(T.nilable(T::Boolean)) }
+    attr_accessor :debug_logging
+
     
     sig { returns(T.nilable(T.proc.returns(T.nilable(Models::Shared::Security)))) }
     attr_accessor :security_source
@@ -71,10 +74,11 @@ module KintsugiSDK
         security: T.nilable(Models::Shared::Security),
         security_source: T.nilable(T.proc.returns(Models::Shared::Security)),
         server_url: T.nilable(String),
-        server_idx: T.nilable(Integer)
+        server_idx: T.nilable(Integer),
+        debug_logging: T.nilable(T::Boolean)
       ).void
     end
-    def initialize(client, hooks, retry_config, timeout_ms, security, security_source, server_url, server_idx)
+    def initialize(client, hooks, retry_config, timeout_ms, security, security_source, server_url, server_idx, debug_logging = nil)
       @client = client
       @hooks = hooks
       @retry_config = retry_config
@@ -89,9 +93,10 @@ module KintsugiSDK
       end
       @language = 'ruby'
       @openapi_doc_version = '1.0.0'
-      @sdk_version = '5.5.2'
-      @gen_version = '2.684.0'
-      @user_agent = 'speakeasy-sdk/ruby 5.5.2 2.684.0 1.0.0 kintsugi_sdk'
+      @sdk_version = '5.5.3'
+      @gen_version = '2.686.7'
+      @user_agent = 'speakeasy-sdk/ruby 5.5.3 2.686.7 1.0.0 kintsugi_sdk'
+      @debug_logging = debug_logging.nil? ? (ENV['KINTSUGI_DEBUG'] == 'true') : debug_logging
     end
 
     sig { returns([String, T::Hash[Symbol, String]]) }
