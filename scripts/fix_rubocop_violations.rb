@@ -41,15 +41,15 @@ class RuboCopFixer
     if !content.start_with?('#!/usr/bin/env ruby')
       content = "#!/usr/bin/env ruby\n# frozen_string_literal: true\n\n#{content}"
     elsif !content.include?('# frozen_string_literal: true')
-      content.sub!(/^(#!\/usr\/bin\/env ruby)\n/, "\\1\n# frozen_string_literal: true\n")
+      content.sub!(%r{^(#!/usr/bin/env ruby)\n}, "\\1\n# frozen_string_literal: true\n")
     end
     
     # Fix string literals (double quotes to single quotes when no interpolation)
-    content.gsub!(/puts '([^'#]*)"/) { |match| "puts '#{$1}'" }
-    content.gsub!(/@fixes_applied << '([^'#]*)"/) { |match| "@fixes_applied << '#{$1}'" }
+    content.gsub!(/puts '([^'#]*)"/) { "puts '#{::Regexp.last_match(1)}'" }
+    content.gsub!(/@fixes_applied << '([^'#]*)"/) { "@fixes_applied << '#{::Regexp.last_match(1)}'" }
     
-    # Fix $PROGRAM_NAME to $PROGRAM_NAME
-    content.gsub!(/\$PROGRAM_NAME/, '$PROGRAM_NAME')
+    # Fix $0 to $PROGRAM_NAME
+    content.gsub!(/\$0/, '$PROGRAM_NAME')
     
     if content != original_content
       File.write(file, content)
@@ -68,7 +68,7 @@ class RuboCopFixer
     
     # Add RuboCop auto-fix step before validation
     unless content.include?('🧹 Step 3: Auto-fixing RuboCop violations')
-      rubocop_step = <<~STEP
+      rubocop_step = <<~'STEP'
 
 echo ""
 echo "🧹 Step 3: Auto-fixing RuboCop violations in generated files..."

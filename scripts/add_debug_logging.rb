@@ -42,24 +42,24 @@ class DebugLoggingAdder
     # Add debug_logging attribute
     unless content.include?('attr_accessor :debug_logging')
       # Add after the timeout accessor
-      content.gsub!(/(sig { returns\(T\.nilable\(Float\)\) }\s+attr_accessor :timeout)/, 
-        "\\1\n\n    sig { returns(T.nilable(T::Boolean)) }\n    attr_accessor :debug_logging")
+      content.gsub!(/(sig { returns\(T\.nilable\(Float\)\) }\s+attr_accessor :timeout)/,
+                    "\\1\n\n    sig { returns(T.nilable(T::Boolean)) }\n    attr_accessor :debug_logging")
       
       @fixes_applied << 'Added debug_logging attribute to SDKConfiguration'
     end
 
     # Add debug_logging parameter to initialize method signature
-    unless content.include?('debug_logging: T.nilable(T::Boolean)')
-      content.gsub!(/(\s+params\(\s+client: T\.nilable\(Faraday::Connection\),[\s\S]*?server_idx: T\.nilable\(Integer\))(\s+\)\.void)/, 
-        "\\1,\n        debug_logging: T.nilable(T::Boolean)\\2")
+        unless content.include?('debug_logging: T.nilable(T::Boolean)')
+      content.gsub!(/(\s+params\(\s+client: T\.nilable\(Faraday::Connection\),[\s\S]*?server_idx: T\.nilable\(Integer\))(\s+\)\.void)/,
+                    "\\1,\n        debug_logging: T.nilable(T::Boolean)\\2")
       
       @fixes_applied << 'Added debug_logging parameter to SDKConfiguration initialize signature'
     end
 
     # Add debug_logging parameter to initialize method
     unless content.include?('debug_logging = nil')
-      content.gsub!(/(def initialize\(client, hooks, retry_config, timeout_ms, security, security_source, server_url, server_idx)(\))/, 
-        "\\1, debug_logging = nil\\2")
+      content.gsub!(/(def initialize\(client, hooks, retry_config, timeout_ms, security, security_source, server_url, server_idx)(\))/,
+                    '\\1, debug_logging = nil\\2')
       
       @fixes_applied << 'Added debug_logging parameter to SDKConfiguration initialize method'
     end
@@ -97,8 +97,8 @@ class DebugLoggingAdder
 
     # Add debug_logging parameter to initialize method
     unless content.include?('debug_logging: nil')
-      content.gsub!(/(def initialize\(client: nil, retry_config: nil, timeout_ms: nil, security: nil, security_source: nil, server_idx: nil, server_url: nil, url_params: nil)(\))/, 
-        "\\1, debug_logging: nil\\2")
+      content.gsub!(/(def initialize\(client: nil, retry_config: nil, timeout_ms: nil, security: nil, security_source: nil, server_idx: nil, server_url: nil, url_params: nil)(\))/,
+                    '\\1, debug_logging: nil\\2')
       
       @fixes_applied << 'Added debug_logging parameter to OpenApiSDK initialize method'
     end
@@ -127,18 +127,18 @@ class DebugLoggingAdder
     
     # Store the debug_logging variable for use in the closure
     logger_setup = <<~RUBY
-      # Store debug setting for use in Faraday configuration
-      debug_enabled = debug_logging == true || ENV['KINTSUGI_DEBUG'] == 'true'
+        # Store debug setting for use in Faraday configuration
+        debug_enabled = debug_logging == true || ENV['KINTSUGI_DEBUG'] == 'true'
 
-      client ||= Faraday.new(**connection_options) do |f|
-        f.request :multipart, {}
-        f.response :logger, $stdout, { headers: true, bodies: true, errors: true } if debug_enabled
-      end
+        client ||= Faraday.new(**connection_options) do |f|
+          f.request :multipart, {}
+          f.response :logger, $stdout, { headers: true, bodies: true, errors: true } if debug_enabled
+        end
     RUBY
     
     # Replace the entire client creation block
-    content.gsub!(/client \|\|= Faraday\.new\(\*\*connection_options\) do \|f\|\s+f\.request :multipart, \{\}\s+# f\.response :logger, nil, \{ headers: true, bodies: true, errors: true \}\s+end/, 
-      logger_setup.strip)
+    content.gsub!(/client \|\|= Faraday\.new\(\*\*connection_options\) do \|f\|\s+f\.request :multipart, \{\}\s+# f\.response :logger, nil, \{ headers: true, bodies: true, errors: true \}\s+end/,
+                  logger_setup.strip)
     
     if content != original_content
       File.write(openapisdk_file, content)
@@ -264,8 +264,8 @@ class DebugLoggingAdder
     unless content.include?('<!-- Start Debug Logging [debugging] -->')
       # Try to find the placeholder first, otherwise insert before Development section
       if content.include?('<!-- Placeholder for Future Speakeasy SDK Sections -->')
-        content.gsub!(/<!-- Placeholder for Future Speakeasy SDK Sections -->\s*\n/, 
-          "#{debug_section}\n")
+        content.gsub!(/<!-- Placeholder for Future Speakeasy SDK Sections -->\s*\n/,
+                      "#{debug_section}\n")
       else
         # Insert before the Development section as fallback
         content.gsub!(/(<!-- End Server Selection \[server\] -->)\s*\n\s*(# Development)/m, 

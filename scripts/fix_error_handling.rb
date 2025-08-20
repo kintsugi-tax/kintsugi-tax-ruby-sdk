@@ -32,10 +32,10 @@ class ErrorHandlingFixer
     puts '📁 Fixing error class inheritance...'
     
     error_files = Dir.glob(File.join(@sdk_path, 'lib/kintsugi_sdk/models/errors/*.rb'))
-    error_files.reject! { |f| f.end_with?('.rbi') }  # Skip type files
+    error_files.reject! { |f| f.end_with?('.rbi') } # Skip type files
     
     error_files.each do |file|
-      next if File.basename(file) == 'apierror.rb'  # APIError already inherits from StandardError
+      next if File.basename(file) == 'apierror.rb' # APIError already inherits from StandardError
       
       content = File.read(file)
       original_content = content.dup
