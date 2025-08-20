@@ -93,9 +93,9 @@ module KintsugiSDK
       end
       @language = 'ruby'
       @openapi_doc_version = '1.0.0'
-      @sdk_version = '5.5.8'
+      @sdk_version = '5.5.9'
       @gen_version = '2.686.7'
-      @user_agent = 'speakeasy-sdk/ruby 5.5.8 2.686.7 1.0.0 kintsugi_sdk'
+      @user_agent = 'speakeasy-sdk/ruby 5.5.9 2.686.7 1.0.0 kintsugi_sdk'
       @debug_logging = debug_logging.nil? ? (ENV['KINTSUGI_DEBUG'] == 'true') : debug_logging
     end
 

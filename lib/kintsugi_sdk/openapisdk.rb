@@ -49,7 +49,7 @@ module KintsugiSDK
       }
       connection_options[:request][:timeout] = (timeout_ms.to_f / 1000) unless timeout_ms.nil?
 
-            debug_enabled = debug_logging == true || ENV['KINTSUGI_DEBUG'] == 'true'
+      debug_enabled = debug_logging == true || ENV['KINTSUGI_DEBUG'] == 'true'
 
       client ||= Faraday.new(**connection_options) do |f|
         f.request :multipart, {}
