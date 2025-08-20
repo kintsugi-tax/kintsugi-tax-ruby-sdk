@@ -17,6 +17,28 @@ module KintsugiSDK
     
 
 
+    sig { params(sdk_config: SDKConfiguration).void }
+    def initialize(sdk_config)
+      @sdk_configuration = sdk_config
+      
+    end
+
+    sig { params(base_url: String, url_variables: T.nilable(T::Hash[Symbol, T.any(String, T::Enum)])).returns(String) }
+    def get_url(base_url:, url_variables: nil)
+      sd_base_url, sd_options = @sdk_configuration.get_server_details
+
+      if base_url.nil?
+        base_url = sd_base_url
+      end
+
+      if url_variables.nil?
+        url_variables = sd_options
+      end
+
+      return Utils.template_url base_url, url_variables
+    end
+
+
     sig { params(request: Models::Ops::EstimateTaxV1TaxEstimatePostRequest, timeout_ms: T.nilable(Integer)).returns(Models::Shared::TransactionEstimateResponse) }
     def estimate_tax(request:, timeout_ms: nil)
       # estimate_tax - Estimate Tax
