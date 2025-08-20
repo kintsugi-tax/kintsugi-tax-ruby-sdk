@@ -49,13 +49,13 @@ module KintsugiSDK
       }
       connection_options[:request][:timeout] = (timeout_ms.to_f / 1000) unless timeout_ms.nil?
 
-      # Store debug setting for use in Faraday configuration
-debug_enabled = debug_logging == true || ENV['KINTSUGI_DEBUG'] == 'true'
+            # Store debug setting for use in Faraday configuration
+      debug_enabled = debug_logging == true || ENV['KINTSUGI_DEBUG'] == 'true'
 
-client ||= Faraday.new(**connection_options) do |f|
-  f.request :multipart, {}
-  f.response :logger, $stdout, { headers: true, bodies: true, errors: true } if debug_enabled
-end
+      client ||= Faraday.new(**connection_options) do |f|
+        f.request :multipart, {}
+        f.response :logger, $stdout, { headers: true, bodies: true, errors: true } if debug_enabled
+      end
       
       if !server_url.nil?
         if !url_params.nil?

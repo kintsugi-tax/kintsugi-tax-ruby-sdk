@@ -14,7 +14,7 @@ targets:
         sourceRevisionDigest: sha256:5ff7239d0cf82cb5076a205f8092e10599176cd1fed2123657d87281605874dd
         sourceBlobDigest: sha256:1bed6ed4c4b558b10798efad7f5a5d60627005d53174b652afa479867293c523
         codeSamplesNamespace: kintsugi-overlay-ruby-code-samples
-        codeSamplesRevisionDigest: sha256:267bc7024740cbf7bbf016965f3d40f3bdb2fb6f73d04cd593d92ba6ff87064c
+        codeSamplesRevisionDigest: sha256:ae6c10398d11c400cff4a5056e3b6ce64a31409a520acdd40ede9ef6a3fabfd8
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

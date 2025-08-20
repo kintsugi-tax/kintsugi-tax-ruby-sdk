@@ -21,7 +21,7 @@ echo "🔧 Step 2: Applying comprehensive post-generation fixes..."
 echo "   • Error handling improvements"
 echo "   • Debug logging capabilities"
 echo "   • Additional SDK enhancements"
-ruby scripts/post_generation_fixes.rb
+ruby ../sdk-tools/ruby/post_generation_fixes.rb .
 
 echo ""
 echo "🧹 Step 3: Auto-fixing RuboCop violations in generated files..."
