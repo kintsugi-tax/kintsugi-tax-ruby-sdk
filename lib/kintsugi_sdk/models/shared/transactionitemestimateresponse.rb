@@ -30,10 +30,12 @@ module KintsugiSDK
         field :product_description, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('product_description') } }
 
         field :product_source, Crystalline::Nilable.new(Models::Shared::SourceEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('product_source'), 'decoder': Utils.enum_from_string(Models::Shared::SourceEnum, true) } }
-
-        field :product_subcategory, Crystalline::Nilable.new(Models::Shared::ProductSubCategoryEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('product_subcategory'), 'decoder': Utils.enum_from_string(Models::Shared::ProductSubCategoryEnum, true) } }
-
-        field :product_category, Crystalline::Nilable.new(Models::Shared::ProductCategoryEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('product_category'), 'decoder': Utils.enum_from_string(Models::Shared::ProductCategoryEnum, true) } }
+        # Subcategory of the product. Required if product_category is used
+        #         in place of external_product_id.
+        field :product_subcategory, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('product_subcategory') } }
+        # Category of the product. Required if product_subcategory is used
+        #         in place of external_product_id.
+        field :product_category, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('product_category') } }
         # This enum is used to determine if a transaction is exempt from tax.
         field :exempt_reason, Crystalline::Nilable.new(Models::Shared::TaxExemptionEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('exempt_reason'), 'decoder': Utils.enum_from_string(Models::Shared::TaxExemptionEnum, true) } }
         # List of tax items applied to the transaction item.
@@ -49,7 +51,7 @@ module KintsugiSDK
         # The tax rate applied to the transaction item.
         field :tax_rate, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('tax_rate') } }
 
-        sig { params(date: ::DateTime, amount: ::String, external_id: T.nilable(::String), description: T.nilable(::String), external_product_id: T.nilable(::String), product_name: T.nilable(::String), product_description: T.nilable(::String), product_source: T.nilable(Models::Shared::SourceEnum), product_subcategory: T.nilable(Models::Shared::ProductSubCategoryEnum), product_category: T.nilable(Models::Shared::ProductCategoryEnum), exempt_reason: T.nilable(Models::Shared::TaxExemptionEnum), tax_items: T.nilable(T::Array[Models::Shared::TaxItemEstimate]), quantity: T.nilable(::String), exempt: T.nilable(T::Boolean), tax_amount: T.nilable(::String), taxable_amount: T.nilable(::String), tax_rate: T.nilable(::String)).void }
+        sig { params(date: ::DateTime, amount: ::String, external_id: T.nilable(::String), description: T.nilable(::String), external_product_id: T.nilable(::String), product_name: T.nilable(::String), product_description: T.nilable(::String), product_source: T.nilable(Models::Shared::SourceEnum), product_subcategory: T.nilable(::String), product_category: T.nilable(::String), exempt_reason: T.nilable(Models::Shared::TaxExemptionEnum), tax_items: T.nilable(T::Array[Models::Shared::TaxItemEstimate]), quantity: T.nilable(::String), exempt: T.nilable(T::Boolean), tax_amount: T.nilable(::String), taxable_amount: T.nilable(::String), tax_rate: T.nilable(::String)).void }
         def initialize(date:, amount:, external_id: nil, description: nil, external_product_id: nil, product_name: nil, product_description: nil, product_source: nil, product_subcategory: nil, product_category: nil, exempt_reason: nil, tax_items: nil, quantity: '1.0', exempt: false, tax_amount: '0.00', taxable_amount: '0.00', tax_rate: '0.00')
           @date = date
           @amount = amount

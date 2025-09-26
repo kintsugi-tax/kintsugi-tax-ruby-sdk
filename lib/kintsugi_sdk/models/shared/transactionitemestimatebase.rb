@@ -30,16 +30,18 @@ module KintsugiSDK
         field :product_description, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('product_description') } }
 
         field :product_source, Crystalline::Nilable.new(Models::Shared::SourceEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('product_source'), 'decoder': Utils.enum_from_string(Models::Shared::SourceEnum, true) } }
-
-        field :product_subcategory, Crystalline::Nilable.new(Models::Shared::ProductSubCategoryEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('product_subcategory'), 'decoder': Utils.enum_from_string(Models::Shared::ProductSubCategoryEnum, true) } }
-
-        field :product_category, Crystalline::Nilable.new(Models::Shared::ProductCategoryEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('product_category'), 'decoder': Utils.enum_from_string(Models::Shared::ProductCategoryEnum, true) } }
+        # Subcategory of the product. Required if product_category is used
+        #         in place of external_product_id.
+        field :product_subcategory, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('product_subcategory') } }
+        # Category of the product. Required if product_subcategory is used
+        #         in place of external_product_id.
+        field :product_category, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('product_category') } }
         # Defaults to 1.0. The quantity of the item.
         field :quantity, Crystalline::Nilable.new(::Float), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('quantity') } }
         # Defaults to false. Indicates whether the item is exempt from tax.
         field :exempt, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('exempt') } }
 
-        sig { params(date: ::DateTime, amount: ::Float, external_id: T.nilable(::String), description: T.nilable(::String), external_product_id: T.nilable(::String), product_name: T.nilable(::String), product_description: T.nilable(::String), product_source: T.nilable(Models::Shared::SourceEnum), product_subcategory: T.nilable(Models::Shared::ProductSubCategoryEnum), product_category: T.nilable(Models::Shared::ProductCategoryEnum), quantity: T.nilable(::Float), exempt: T.nilable(T::Boolean)).void }
+        sig { params(date: ::DateTime, amount: ::Float, external_id: T.nilable(::String), description: T.nilable(::String), external_product_id: T.nilable(::String), product_name: T.nilable(::String), product_description: T.nilable(::String), product_source: T.nilable(Models::Shared::SourceEnum), product_subcategory: T.nilable(::String), product_category: T.nilable(::String), quantity: T.nilable(::Float), exempt: T.nilable(T::Boolean)).void }
         def initialize(date:, amount:, external_id: nil, description: nil, external_product_id: nil, product_name: nil, product_description: nil, product_source: nil, product_subcategory: nil, product_category: nil, quantity: 1.0, exempt: false)
           @date = date
           @amount = amount

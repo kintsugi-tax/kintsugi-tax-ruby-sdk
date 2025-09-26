@@ -22,6 +22,8 @@ module KintsugiSDK
       autoload :CustomerBasePublic, 'kintsugi_sdk/models/shared/customerbasepublic.rb'
       autoload :CustomerCreate, 'kintsugi_sdk/models/shared/customercreate.rb'
       autoload :CustomerRead, 'kintsugi_sdk/models/shared/customerread.rb'
+      autoload :CustomerTaxRegistrationRead, 'kintsugi_sdk/models/shared/customertaxregistrationread.rb'
+      autoload :CustomerTaxTypeEnum, 'kintsugi_sdk/models/shared/customertaxtypeenum.rb'
       autoload :CustomerUpdate, 'kintsugi_sdk/models/shared/customerupdate.rb'
       autoload :DiscountBuilder, 'kintsugi_sdk/models/shared/discountbuilder.rb'
       autoload :Exemption, 'kintsugi_sdk/models/shared/exemption.rb'

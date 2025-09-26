@@ -38,4 +38,6 @@ class KintsugiSDK::Models::Shared::CustomerUpdate
   def address_status=(str_); end
   def external_id(); end
   def external_id=(str_); end
+  def external_friendly_id(); end
+  def external_friendly_id=(str_); end
 end

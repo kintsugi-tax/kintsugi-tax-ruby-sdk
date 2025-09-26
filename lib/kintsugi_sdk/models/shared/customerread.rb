@@ -51,9 +51,13 @@ module KintsugiSDK
         field :address_status, Crystalline::Nilable.new(Models::Shared::AddressStatus), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('address_status'), 'decoder': Utils.enum_from_string(Models::Shared::AddressStatus, true) } }
         # Registration number of the customer.
         field :registration_number, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('registration_number') } }
+        # External friendly identifier associated with the customer. We need it for netsuite.
+        field :external_friendly_id, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('external_friendly_id') } }
+        # Customer tax registrations associated with the customer.
+        field :customer_tax_registrations, Crystalline::Nilable.new(Crystalline::Array.new(Models::Shared::CustomerTaxRegistrationRead)), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('customer_tax_registrations') } }
 
-        sig { params(id: ::String, organization_id: ::String, phone: T.nilable(::String), street_1: T.nilable(::String), street_2: T.nilable(::String), city: T.nilable(::String), county: T.nilable(::String), state: T.nilable(::String), postal_code: T.nilable(::String), country: T.nilable(Models::Shared::CountryCodeEnum), full_address: T.nilable(::String), name: T.nilable(::String), external_id: T.nilable(::String), status: T.nilable(Models::Shared::StatusEnum), email: T.nilable(::String), source: T.nilable(Models::Shared::SourceEnum), connection_id: T.nilable(::String), address_status: T.nilable(Models::Shared::AddressStatus), registration_number: T.nilable(::String)).void }
-        def initialize(id:, organization_id:, phone: nil, street_1: nil, street_2: nil, city: nil, county: nil, state: nil, postal_code: nil, country: nil, full_address: nil, name: nil, external_id: nil, status: nil, email: nil, source: nil, connection_id: nil, address_status: nil, registration_number: nil)
+        sig { params(id: ::String, organization_id: ::String, phone: T.nilable(::String), street_1: T.nilable(::String), street_2: T.nilable(::String), city: T.nilable(::String), county: T.nilable(::String), state: T.nilable(::String), postal_code: T.nilable(::String), country: T.nilable(Models::Shared::CountryCodeEnum), full_address: T.nilable(::String), name: T.nilable(::String), external_id: T.nilable(::String), status: T.nilable(Models::Shared::StatusEnum), email: T.nilable(::String), source: T.nilable(Models::Shared::SourceEnum), connection_id: T.nilable(::String), address_status: T.nilable(Models::Shared::AddressStatus), registration_number: T.nilable(::String), external_friendly_id: T.nilable(::String), customer_tax_registrations: T.nilable(T::Array[Models::Shared::CustomerTaxRegistrationRead])).void }
+        def initialize(id:, organization_id:, phone: nil, street_1: nil, street_2: nil, city: nil, county: nil, state: nil, postal_code: nil, country: nil, full_address: nil, name: nil, external_id: nil, status: nil, email: nil, source: nil, connection_id: nil, address_status: nil, registration_number: nil, external_friendly_id: nil, customer_tax_registrations: nil)
           @id = id
           @organization_id = organization_id
           @phone = phone
@@ -73,6 +77,8 @@ module KintsugiSDK
           @connection_id = connection_id
           @address_status = address_status
           @registration_number = registration_number
+          @external_friendly_id = external_friendly_id
+          @customer_tax_registrations = customer_tax_registrations
         end
 
         sig { params(other: T.untyped).returns(T::Boolean) }
@@ -97,6 +103,8 @@ module KintsugiSDK
           return false unless @connection_id == other.connection_id
           return false unless @address_status == other.address_status
           return false unless @registration_number == other.registration_number
+          return false unless @external_friendly_id == other.external_friendly_id
+          return false unless @customer_tax_registrations == other.customer_tax_registrations
           true
         end
       end

@@ -14,6 +14,8 @@ class KintsugiSDK::Models::Ops::GetNexusForOrgV1NexusGetRequest
   def country_code_in=(str_); end
   def collected_tax_nexus_met(); end
   def collected_tax_nexus_met=(str_); end
+  def without_pagination(); end
+  def without_pagination=(str_); end
   def status_in(); end
   def status_in=(str_); end
   def order_by(); end

@@ -68,28 +68,6 @@ class KintsugiSDK::Models::Shared::TransactionUpdate
   def postal_code=(str_); end
   def tax_id(); end
   def tax_id=(str_); end
-  def address_status(); end
-  def address_status=(str_); end
-  def processing_status(); end
-  def processing_status=(str_); end
-  def destination_currency(); end
-  def destination_currency=(str_); end
-  def converted_total_amount(); end
-  def converted_total_amount=(str_); end
-  def converted_total_tax_amount_imported(); end
-  def converted_total_tax_amount_imported=(str_); end
-  def converted_total_tax_amount_calculated(); end
-  def converted_total_tax_amount_calculated=(str_); end
-  def conversion_rate(); end
-  def conversion_rate=(str_); end
-  def converted_taxable_amount(); end
-  def converted_taxable_amount=(str_); end
-  def converted_total_discount(); end
-  def converted_total_discount=(str_); end
-  def converted_subtotal(); end
-  def converted_subtotal=(str_); end
-  def converted_total_tax_liability_amount(); end
-  def converted_total_tax_liability_amount=(str_); end
   def total_amount(); end
   def total_amount=(str_); end
   def marketplace(); end

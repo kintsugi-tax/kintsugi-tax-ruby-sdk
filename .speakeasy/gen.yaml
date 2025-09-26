@@ -15,6 +15,7 @@ generation:
   auth:
     oAuth2ClientCredentialsEnabled: false
     oAuth2PasswordEnabled: false
+    hoistGlobalSecurity: true
   sdkHooksConfigAccess: true
   tests:
     generateTests: false
@@ -31,7 +32,7 @@ generation:
     updateCredit: updateCreditNote
     upload_exemption_certificate_v1_exemptions__exemption_id__attachments_post: uploadExemptionCert
 ruby:
-  version: 5.5.12
+  version: 5.5.14
   additionalDependencies: {}
   author: Kintsugi
   baseErrorName: OpenAPISDKError
@@ -55,7 +56,7 @@ ruby:
   inputTypes: false
   maxFileNameLength: 20
   maxMethodParams: 0
-  module: KintsugiSDK
+  module: KintsugiSdk
   outputModelSuffix: output
   packageName: kintsugi_sdk
   responseFormat: flat

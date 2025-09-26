@@ -112,8 +112,6 @@ class KintsugiSDK::Models::Shared::NexusResponse
   def physical_nexus_met=(str_); end
   def collected_tax_nexus_met(); end
   def collected_tax_nexus_met=(str_); end
-  def collected_tax_enabled(); end
-  def collected_tax_enabled=(str_); end
   def earliest_collected_date(); end
   def earliest_collected_date=(str_); end
   def vda_eligible(); end

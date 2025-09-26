@@ -14,6 +14,7 @@ module KintsugiSDK
 
         enums do
           BIGCOMMERCE = new('BIGCOMMERCE')
+          BUNNY = new('BUNNY')
           CHARGEBEE = new('CHARGEBEE')
           SHOPIFY = new('SHOPIFY')
           STRIPE = new('STRIPE')
@@ -47,6 +48,7 @@ module KintsugiSDK
           GUSTO = new('GUSTO')
           FACEBOOK = new('FACEBOOK')
           OTHER = new('OTHER')
+          ORDWAY = new('ORDWAY')
           INSTAGRAM = new('INSTAGRAM')
           PINTEREST = new('PINTEREST')
           WAYFAIR = new('WAYFAIR')
@@ -63,7 +65,8 @@ module KintsugiSDK
           FAIRE = new('FAIRE')
           SHOPWARE = new('SHOPWARE')
           ZOHO = new('ZOHO')
-          SAGE_INTACCT = new('SAGE_INTACCT')
+          SAGE_INTACCT = new('SAGE-INTACCT')
+          AIRWALLEX = new('AIRWALLEX')
         end
       end
     end

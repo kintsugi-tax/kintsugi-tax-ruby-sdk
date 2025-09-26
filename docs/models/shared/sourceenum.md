@@ -6,6 +6,7 @@
 | Name               | Value              |
 | ------------------ | ------------------ |
 | `BIGCOMMERCE`      | BIGCOMMERCE        |
+| `BUNNY`            | BUNNY              |
 | `CHARGEBEE`        | CHARGEBEE          |
 | `SHOPIFY`          | SHOPIFY            |
 | `STRIPE`           | STRIPE             |
@@ -39,6 +40,7 @@
 | `GUSTO`            | GUSTO              |
 | `FACEBOOK`         | FACEBOOK           |
 | `OTHER`            | OTHER              |
+| `ORDWAY`           | ORDWAY             |
 | `INSTAGRAM`        | INSTAGRAM          |
 | `PINTEREST`        | PINTEREST          |
 | `WAYFAIR`          | WAYFAIR            |
@@ -55,4 +57,5 @@
 | `FAIRE`            | FAIRE              |
 | `SHOPWARE`         | SHOPWARE           |
 | `ZOHO`             | ZOHO               |
-| `SAGE_INTACCT`     | SAGE_INTACCT       |
+| `SAGE_INTACCT`     | SAGE-INTACCT       |
+| `AIRWALLEX`        | AIRWALLEX          |

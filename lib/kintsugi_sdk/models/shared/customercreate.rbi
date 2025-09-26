@@ -42,4 +42,8 @@ class KintsugiSDK::Models::Shared::CustomerCreate
   def address_status=(str_); end
   def registration_number(); end
   def registration_number=(str_); end
+  def external_friendly_id(); end
+  def external_friendly_id=(str_); end
+  def customer_tax_registrations(); end
+  def customer_tax_registrations=(str_); end
 end

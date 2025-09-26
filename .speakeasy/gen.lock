@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 42356d7a-ce0a-4cdf-bb17-e774a6ae7cfc
 management:
-  docChecksum: 0fc0b52effab2dda8b90f608970ad3b5
+  docChecksum: 5543f603b3c7130c51956333226474f4
   docVersion: 1.0.0
-  speakeasyVersion: 1.606.0
-  generationVersion: 2.686.7
-  releaseVersion: 5.5.12
-  configChecksum: 38d89a390c3eca4faf39ba0889f8c89a
+  speakeasyVersion: 1.630.0
+  generationVersion: 2.716.10
+  releaseVersion: 5.5.14
+  configChecksum: aecc9f27137c33ef624f051c53379db9
   published: true
 features:
   ruby:
     constsAndDefaults: 0.1.1
-    core: 3.10.1
+    core: 3.10.3
     deprecations: 2.81.2
-    globalSecurity: 2.81.8
+    globalSecurity: 2.81.9
     globalServerURLs: 2.82.4
     groups: 2.81.2
     methodSecurity: 2.82.2
@@ -80,6 +80,8 @@ generatedFiles:
   - docs/models/shared/customerbasepublic.md
   - docs/models/shared/customercreate.md
   - docs/models/shared/customerread.md
+  - docs/models/shared/customertaxregistrationread.md
+  - docs/models/shared/customertaxtypeenum.md
   - docs/models/shared/customerupdate.md
   - docs/models/shared/discountbuilder.md
   - docs/models/shared/exemption.md
@@ -281,6 +283,10 @@ generatedFiles:
   - lib/kintsugi_sdk/models/shared/customercreate.rbi
   - lib/kintsugi_sdk/models/shared/customerread.rb
   - lib/kintsugi_sdk/models/shared/customerread.rbi
+  - lib/kintsugi_sdk/models/shared/customertaxregistrationread.rb
+  - lib/kintsugi_sdk/models/shared/customertaxregistrationread.rbi
+  - lib/kintsugi_sdk/models/shared/customertaxtypeenum.rb
+  - lib/kintsugi_sdk/models/shared/customertaxtypeenum.rbi
   - lib/kintsugi_sdk/models/shared/customerupdate.rb
   - lib/kintsugi_sdk/models/shared/customerupdate.rbi
   - lib/kintsugi_sdk/models/shared/discountbuilder.rb
@@ -644,9 +650,10 @@ examples:
           order_by: "state_code,country_code"
           page: 1
           size: 50
+          without_pagination: false
       responses:
         "200":
-          application/json: {"items": [{"country_code": "CN", "state_code": "<value>", "state_name": "<value>", "treatment_of_exempt_transactions": "YES_SALES_NO_TRANSACTIONS", "trigger": "<value>", "sales_or_transactions": "SALES", "threshold_sales": 476092, "threshold_transactions": 673561, "start_date": "2023-06-08", "transaction_count": 0, "transactions_amount": "0.00", "previous_transaction_count": 0, "previous_transactions_amount": "0.00", "calculated_tax_liability": "0.00", "imported_tax_liability": "0.00", "tax_liability": "0.00", "nexus_met": false, "economic_nexus_met": false, "physical_nexus_met": false, "collected_tax_nexus_met": false, "collected_tax_enabled": false, "period_model": "PRECEDING_YEAR", "period_start_date": "2025-11-23", "period_end_date": "2024-12-20", "previous_period_start_date": "<value>", "previous_period_end_date": "<value>", "earliest_collected_date": "2018-01-01T00:00:00", "vda_eligible": false, "id": "<id>", "created_at": "2023-10-25T14:47:36.968Z", "updated_at": "2025-12-03T07:26:11.468Z", "organization_id": "<id>", "is_vda_eligible": true, "nexus_type": "EU_MEMBER_STATE", "total_transactions": 116288, "total_transactions_included": 856257, "total_transactions_exempted": 666387, "total_transactions_marketplace": 747391, "marketplace_included": false}], "total": 218796, "page": 800733, "size": 990975}
+          application/json: {"items": [{"country_code": "CN", "state_code": "<value>", "state_name": "<value>", "treatment_of_exempt_transactions": "YES_SALES_NO_TRANSACTIONS", "trigger": "<value>", "sales_or_transactions": "SALES", "threshold_sales": 476092, "threshold_transactions": 673561, "start_date": "2023-06-08", "transaction_count": 0, "transactions_amount": "0.00", "previous_transaction_count": 0, "previous_transactions_amount": "0.00", "calculated_tax_liability": "0.00", "imported_tax_liability": "0.00", "tax_liability": "0.00", "nexus_met": false, "economic_nexus_met": false, "physical_nexus_met": false, "collected_tax_nexus_met": false, "period_model": "PRECEDING_YEAR", "period_start_date": "2025-11-23", "period_end_date": "2024-12-20", "previous_period_start_date": "<value>", "previous_period_end_date": "<value>", "earliest_collected_date": "2018-01-01T00:00:00", "vda_eligible": false, "id": "<id>", "created_at": "2023-10-25T14:47:36.968Z", "updated_at": "2025-12-03T07:26:11.468Z", "organization_id": "<id>", "is_vda_eligible": true, "nexus_type": "EU_MEMBER_STATE", "total_transactions": 116288, "total_transactions_included": 856257, "total_transactions_exempted": 666387, "total_transactions_marketplace": 747391, "marketplace_included": false}], "total": 218796, "page": 800733, "size": 990975}
         "422":
           application/json: {}
   get_products_v1_products__get:

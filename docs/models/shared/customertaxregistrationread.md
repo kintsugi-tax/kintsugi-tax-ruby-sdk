@@ -1,0 +1,13 @@
+# CustomerTaxRegistrationRead
+
+
+## Fields
+
+| Field                                                                             | Type                                                                              | Required                                                                          | Description                                                                       |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `id`                                                                              | *::String*                                                                        | :heavy_check_mark:                                                                | N/A                                                                               |
+| `customer_id`                                                                     | *::String*                                                                        | :heavy_check_mark:                                                                | N/A                                                                               |
+| `country_code`                                                                    | [Models::Shared::CountryCodeEnum](../../models/shared/countrycodeenum.md)         | :heavy_check_mark:                                                                | N/A                                                                               |
+| `tax_type`                                                                        | [Models::Shared::CustomerTaxTypeEnum](../../models/shared/customertaxtypeenum.md) | :heavy_check_mark:                                                                | Enum for customer tax registration types.                                         |
+| `tax_id`                                                                          | *::String*                                                                        | :heavy_check_mark:                                                                | N/A                                                                               |
+| `is_valid`                                                                        | *T::Boolean*                                                                      | :heavy_check_mark:                                                                | N/A                                                                               |

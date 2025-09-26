@@ -43,9 +43,11 @@ module KintsugiSDK
         field :address_status, Crystalline::Nilable.new(Models::Shared::AddressStatus), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('address_status'), 'decoder': Utils.enum_from_string(Models::Shared::AddressStatus, true) } }
         # External identifier associated with the customer
         field :external_id, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('external_id') } }
+        # External friendly identifier associated with the customer. We need it for netsuite.
+        field :external_friendly_id, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('external_friendly_id') } }
 
-        sig { params(phone: T.nilable(::String), street_1: T.nilable(::String), street_2: T.nilable(::String), city: T.nilable(::String), county: T.nilable(::String), state: T.nilable(::String), postal_code: T.nilable(::String), country: T.nilable(Models::Shared::CountryCodeEnum), full_address: T.nilable(::String), name: T.nilable(::String), status: T.nilable(Models::Shared::StatusEnum), email: T.nilable(::String), source: T.nilable(Models::Shared::SourceEnum), address_status: T.nilable(Models::Shared::AddressStatus), external_id: T.nilable(::String)).void }
-        def initialize(phone: nil, street_1: nil, street_2: nil, city: nil, county: nil, state: nil, postal_code: nil, country: nil, full_address: nil, name: nil, status: nil, email: nil, source: nil, address_status: nil, external_id: nil)
+        sig { params(phone: T.nilable(::String), street_1: T.nilable(::String), street_2: T.nilable(::String), city: T.nilable(::String), county: T.nilable(::String), state: T.nilable(::String), postal_code: T.nilable(::String), country: T.nilable(Models::Shared::CountryCodeEnum), full_address: T.nilable(::String), name: T.nilable(::String), status: T.nilable(Models::Shared::StatusEnum), email: T.nilable(::String), source: T.nilable(Models::Shared::SourceEnum), address_status: T.nilable(Models::Shared::AddressStatus), external_id: T.nilable(::String), external_friendly_id: T.nilable(::String)).void }
+        def initialize(phone: nil, street_1: nil, street_2: nil, city: nil, county: nil, state: nil, postal_code: nil, country: nil, full_address: nil, name: nil, status: nil, email: nil, source: nil, address_status: nil, external_id: nil, external_friendly_id: nil)
           @phone = phone
           @street_1 = street_1
           @street_2 = street_2
@@ -61,6 +63,7 @@ module KintsugiSDK
           @source = source
           @address_status = address_status
           @external_id = external_id
+          @external_friendly_id = external_friendly_id
         end
 
         sig { params(other: T.untyped).returns(T::Boolean) }
@@ -81,6 +84,7 @@ module KintsugiSDK
           return false unless @source == other.source
           return false unless @address_status == other.address_status
           return false unless @external_id == other.external_id
+          return false unless @external_friendly_id == other.external_friendly_id
           true
         end
       end
