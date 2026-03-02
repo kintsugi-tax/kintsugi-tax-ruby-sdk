@@ -7,7 +7,6 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class BodyUploadExemptionCertificateV1ExemptionsExemptionIdAttachmentsPost
         extend T::Sig

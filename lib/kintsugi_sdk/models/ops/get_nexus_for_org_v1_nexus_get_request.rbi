@@ -8,6 +8,8 @@ end
 
 
 class KintsugiSDK::Models::Ops::GetNexusForOrgV1NexusGetRequest
+  def disregard_view(); end
+  def disregard_view=(str_); end
   def state_code(); end
   def state_code=(str_); end
   def country_code_in(); end

@@ -7,14 +7,13 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class TransactionItemEstimateBase
         extend T::Sig
         include Crystalline::MetadataFields
 
         # The date of the transaction item.
-        field :date, ::DateTime, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('date'), required: true, 'decoder': Utils.datetime_from_iso_format(false) } }
+        field :date, ::DateTime, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('date'), required: true, 'decoder': ::KintsugiSDK::Utils.datetime_from_iso_format(false) } }
         # The total amount of the item.
         field :amount, ::Float, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('amount'), required: true } }
         # A unique identifier for the transaction item.
@@ -29,7 +28,7 @@ module KintsugiSDK
         # Description of the product. Used if creating a new product.
         field :product_description, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('product_description') } }
 
-        field :product_source, Crystalline::Nilable.new(Models::Shared::SourceEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('product_source'), 'decoder': Utils.enum_from_string(Models::Shared::SourceEnum, true) } }
+        field :product_source, Crystalline::Nilable.new(Models::Shared::SourceEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('product_source'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::SourceEnum, true) } }
         # Subcategory of the product. Required if product_category is used
         #         in place of external_product_id.
         field :product_subcategory, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('product_subcategory') } }

@@ -7,7 +7,6 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class TaxItemEstimate
         extend T::Sig
@@ -16,7 +15,7 @@ module KintsugiSDK
 
         field :name, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('name'), required: true } }
         # We use this to understand the response from get_tax_items
-        field :exempt_reason, Crystalline::Nilable.new(Models::Shared::TaxItemReturnReasonEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('exempt_reason'), 'decoder': Utils.enum_from_string(Models::Shared::TaxItemReturnReasonEnum, true) } }
+        field :exempt_reason, Crystalline::Nilable.new(Models::Shared::TaxItemReturnReasonEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('exempt_reason'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::TaxItemReturnReasonEnum, true) } }
 
         field :rule, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('rule') } }
 

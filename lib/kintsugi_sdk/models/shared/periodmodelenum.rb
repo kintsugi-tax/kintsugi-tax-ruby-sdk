@@ -7,11 +7,8 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class PeriodModelEnum < T::Enum
-
-
         enums do
           CURRENT_OR_PREVIOUS = new('CURRENT_OR_PREVIOUS')
           PRECEDING_YEAR_FROM_OCTOBER = new('PRECEDING_YEAR_FROM_OCTOBER')

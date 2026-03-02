@@ -74,6 +74,8 @@ class KintsugiSDK::Models::Shared::NexusResponse
   def earliest_transaction_date=(str_); end
   def most_recent_transaction_date(); end
   def most_recent_transaction_date=(str_); end
+  def find_threshold_crossing_transaction_state(); end
+  def find_threshold_crossing_transaction_state=(str_); end
   def predicted_month_from_today(); end
   def predicted_month_from_today=(str_); end
   def confidence_level(); end
@@ -90,6 +92,12 @@ class KintsugiSDK::Models::Shared::NexusResponse
   def registration=(str_); end
   def registration_regime(); end
   def registration_regime=(str_); end
+  def disregarded_at(); end
+  def disregarded_at=(str_); end
+  def disregarded_by(); end
+  def disregarded_by=(str_); end
+  def disregarded_nexus_types(); end
+  def disregarded_nexus_types=(str_); end
   def transaction_count(); end
   def transaction_count=(str_); end
   def transactions_amount(); end
@@ -116,4 +124,6 @@ class KintsugiSDK::Models::Shared::NexusResponse
   def earliest_collected_date=(str_); end
   def vda_eligible(); end
   def vda_eligible=(str_); end
+  def is_currently_disregarded(); end
+  def is_currently_disregarded=(str_); end
 end

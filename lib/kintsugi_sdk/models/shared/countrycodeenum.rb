@@ -7,11 +7,8 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class CountryCodeEnum < T::Enum
-
-
         enums do
           AF = new('AF')
           AX = new('AX')
@@ -123,6 +120,7 @@ module KintsugiSDK
           IM = new('IM')
           IL = new('IL')
           IT = new('IT')
+          CI = new('CI')
           JM = new('JM')
           JP = new('JP')
           JE = new('JE')

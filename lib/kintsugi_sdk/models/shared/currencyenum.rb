@@ -7,11 +7,8 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class CurrencyEnum < T::Enum
-
-
         enums do
           AED = new('AED')
           AFN = new('AFN')

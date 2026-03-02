@@ -7,7 +7,6 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class AddressBase
         extend T::Sig
@@ -28,7 +27,7 @@ module KintsugiSDK
         # ZIP or Postal code of the customer.
         field :postal_code, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('postal_code') } }
 
-        field :country, Crystalline::Nilable.new(Models::Shared::CountryCodeEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('country'), 'decoder': Utils.enum_from_string(Models::Shared::CountryCodeEnum, true) } }
+        field :country, Crystalline::Nilable.new(Models::Shared::CountryCodeEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('country'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::CountryCodeEnum, true) } }
         # Complete address string of the customer, which can be used as an alternative to individual fields.
         field :full_address, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('full_address') } }
 

@@ -7,7 +7,6 @@
 module KintsugiSDK
   module Models
     module Ops
-    
 
       class GetTransactionByIdV1TransactionsTransactionIdGetRequest
         extend T::Sig

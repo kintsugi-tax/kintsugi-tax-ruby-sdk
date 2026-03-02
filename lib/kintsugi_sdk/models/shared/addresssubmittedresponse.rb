@@ -7,7 +7,6 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class AddressSubmittedResponse
         extend T::Sig

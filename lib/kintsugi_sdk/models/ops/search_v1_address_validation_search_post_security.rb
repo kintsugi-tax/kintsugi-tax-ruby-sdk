@@ -7,7 +7,6 @@
 module KintsugiSDK
   module Models
     module Ops
-    
 
       class SearchV1AddressValidationSearchPostSecurity
         extend T::Sig

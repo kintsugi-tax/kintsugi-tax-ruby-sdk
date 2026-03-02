@@ -7,20 +7,21 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class ExemptionRequired
         extend T::Sig
         include Crystalline::MetadataFields
 
-
+        # Unique identifier of the organization. This field is deprecated, and should no longer be used. The value is populated through the 'x-organization-id' header.
+        #
+        # @deprecated true: This will be removed in a future release, please migrate away from it as soon as possible.
         field :organization_id, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('organization_id'), required: true } }
 
-        field :exemption_type, Models::Shared::ExemptionType, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('exemption_type'), required: true, 'decoder': Utils.enum_from_string(Models::Shared::ExemptionType, false) } }
+        field :exemption_type, Models::Shared::ExemptionType, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('exemption_type'), required: true, 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::ExemptionType, false) } }
 
-        field :start_date, ::DateTime, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('start_date'), required: true, 'decoder': Utils.datetime_from_iso_format(false) } }
+        field :start_date, ::DateTime, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('start_date'), required: true, 'decoder': ::KintsugiSDK::Utils.datetime_from_iso_format(false) } }
 
-        field :status, Models::Shared::ExemptionStatus, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('status'), required: true, 'decoder': Utils.enum_from_string(Models::Shared::ExemptionStatus, false) } }
+        field :status, Models::Shared::ExemptionStatus, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('status'), required: true, 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::ExemptionStatus, false) } }
 
         field :reseller, Crystalline::Boolean.new, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('reseller'), required: true } }
 

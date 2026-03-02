@@ -7,16 +7,15 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class ExemptionCreate
         extend T::Sig
         include Crystalline::MetadataFields
 
 
-        field :exemption_type, Models::Shared::ExemptionType, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('exemption_type'), required: true, 'decoder': Utils.enum_from_string(Models::Shared::ExemptionType, false) } }
+        field :exemption_type, Models::Shared::ExemptionType, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('exemption_type'), required: true, 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::ExemptionType, false) } }
         # Start date for the exemption validity period (YYYY-MM-DD format)
-        field :start_date, ::Date, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('start_date'), required: true, 'decoder': Utils.date_from_iso_format(false) } }
+        field :start_date, ::Date, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('start_date'), required: true, 'decoder': ::KintsugiSDK::Utils.date_from_iso_format(false) } }
         # Unique identifier for the customer associated with the exemption
         field :customer_id, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('customer_id'), required: true } }
         # Federal Employer Identification Number
@@ -24,11 +23,11 @@ module KintsugiSDK
         # Sales tax ID for the exemption
         field :sales_tax_id, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('sales_tax_id'), required: true } }
 
-        field :status, Models::Shared::ExemptionStatus, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('status'), required: true, 'decoder': Utils.enum_from_string(Models::Shared::ExemptionStatus, false) } }
+        field :status, Models::Shared::ExemptionStatus, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('status'), required: true, 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::ExemptionStatus, false) } }
         # The jurisdiction identifier for the exemption
         field :jurisdiction, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('jurisdiction') } }
 
-        field :country_code, Crystalline::Nilable.new(Models::Shared::CountryCodeEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('country_code'), 'decoder': Utils.enum_from_string(Models::Shared::CountryCodeEnum, true) } }
+        field :country_code, Crystalline::Nilable.new(Models::Shared::CountryCodeEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('country_code'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::CountryCodeEnum, true) } }
         # End date for the exemption validity period (YYYY-MM-DD format)
         field :end_date, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('end_date') } }
         # Unique identifier for the transaction, if applicable

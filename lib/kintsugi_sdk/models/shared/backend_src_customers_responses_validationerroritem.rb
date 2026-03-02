@@ -7,7 +7,6 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class BackendSrcCustomersResponsesValidationErrorItem
         extend T::Sig

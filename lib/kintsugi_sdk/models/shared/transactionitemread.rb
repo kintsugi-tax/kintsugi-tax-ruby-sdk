@@ -7,16 +7,17 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class TransactionItemRead
         extend T::Sig
         include Crystalline::MetadataFields
 
-        # Organization identifier.
+        # Unique identifier of the organization. This field is deprecated, and should no longer be used. The value is populated through the 'x-organization-id' header.
+        #
+        # @deprecated true: This will be removed in a future release, please migrate away from it as soon as possible.
         field :organization_id, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('organization_id'), required: true } }
         # Date/time of item.
-        field :date, ::DateTime, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('date'), required: true, 'decoder': Utils.datetime_from_iso_format(false) } }
+        field :date, ::DateTime, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('date'), required: true, 'decoder': ::KintsugiSDK::Utils.datetime_from_iso_format(false) } }
         # External product identifier.
         field :external_product_id, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('external_product_id'), required: true } }
         # The unique transaction item identifier.
@@ -36,9 +37,9 @@ module KintsugiSDK
         # Product description
         field :product_description, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('product_description') } }
 
-        field :original_currency, Crystalline::Nilable.new(Models::Shared::CurrencyEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('original_currency'), 'decoder': Utils.enum_from_string(Models::Shared::CurrencyEnum, true) } }
+        field :original_currency, Crystalline::Nilable.new(Models::Shared::CurrencyEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('original_currency'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::CurrencyEnum, true) } }
 
-        field :destination_currency, Crystalline::Nilable.new(Models::Shared::CurrencyEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('destination_currency'), 'decoder': Utils.enum_from_string(Models::Shared::CurrencyEnum, true) } }
+        field :destination_currency, Crystalline::Nilable.new(Models::Shared::CurrencyEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('destination_currency'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::CurrencyEnum, true) } }
         # Converted item amount.
         field :converted_amount, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('converted_amount') } }
         # Converted taxable amount.
@@ -52,7 +53,7 @@ module KintsugiSDK
         # Converted subtotal amount.
         field :converted_subtotal, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('converted_subtotal') } }
         # This enum is used to determine if a transaction is exempt from tax.
-        field :tax_exemption, Crystalline::Nilable.new(Models::Shared::TaxExemptionEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('tax_exemption'), 'decoder': Utils.enum_from_string(Models::Shared::TaxExemptionEnum, true) } }
+        field :tax_exemption, Crystalline::Nilable.new(Models::Shared::TaxExemptionEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('tax_exemption'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::TaxExemptionEnum, true) } }
         # Total discount amount applied to this transaction item.
         field :total_discount, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('total_discount') } }
         # Subtotal amount before any discount is applied.

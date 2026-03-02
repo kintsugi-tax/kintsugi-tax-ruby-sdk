@@ -7,11 +7,8 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class NexusStatusEnum < T::Enum
-
-
         enums do
           NEEDS_RERUN = new('NEEDS_RERUN')
           UP_TO_DATE = new('UP_TO_DATE')

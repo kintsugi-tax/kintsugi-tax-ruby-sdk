@@ -14,12 +14,11 @@ req = Models::Shared::AddressBase.new(
   state: 'CA',
   postal_code: '94043',
   country: Models::Shared::CountryCodeEnum::US,
-  full_address: '1600 Amphitheatre Parkway, Mountain View, CA 94043',
+  full_address: '1600 Amphitheatre Parkway, Mountain View, CA 94043'
 )
-
 res = s.address_validation.search(request: req, security: Models::Ops::SearchV1AddressValidationSearchPostSecurity.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-  ))
+  api_key_header: '<YOUR_API_KEY_HERE>'
+))
 
 unless res.nil?
   # handle response

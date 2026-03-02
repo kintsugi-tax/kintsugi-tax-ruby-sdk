@@ -7,7 +7,6 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class PageTransactionRead
         extend T::Sig
@@ -22,10 +21,10 @@ module KintsugiSDK
 
         field :size, ::Integer, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('size'), required: true } }
 
-        field :pages, Crystalline::Nilable.new(::Integer), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('pages') } }
+        field :pages, ::Integer, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('pages'), required: true } }
 
-        sig { params(items: T::Array[Models::Shared::TransactionRead], total: ::Integer, page: ::Integer, size: ::Integer, pages: T.nilable(::Integer)).void }
-        def initialize(items:, total:, page:, size:, pages: nil)
+        sig { params(items: T::Array[Models::Shared::TransactionRead], total: ::Integer, page: ::Integer, size: ::Integer, pages: ::Integer).void }
+        def initialize(items:, total:, page:, size:, pages:)
           @items = items
           @total = total
           @page = page

@@ -1,5 +1,4 @@
 # Exemptions
-(*exemptions*)
 
 ## Overview
 
@@ -23,11 +22,11 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-      security: Models::Shared::Security.new(
-        api_key_header: '<YOUR_API_KEY_HERE>',
-        custom_header: '<YOUR_API_KEY_HERE>',
-      ),
-    )
+  security: Models::Shared::Security.new(
+    api_key_header: '<YOUR_API_KEY_HERE>',
+    custom_header: '<YOUR_API_KEY_HERE>'
+  )
+)
 
 req = Models::Ops::GetExemptionsV1ExemptionsGetRequest.new(
   search_query: 'John',
@@ -38,9 +37,8 @@ req = Models::Ops::GetExemptionsV1ExemptionsGetRequest.new(
   start_date: '2024-01-01',
   end_date: '2024-01-01',
   customer_id: 'cust_1234',
-  transaction_id: 'trans_1234',
+  transaction_id: 'trans_1234'
 )
-
 res = s.exemptions.list(request: req)
 
 unless res.nil?
@@ -82,11 +80,11 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-      security: Models::Shared::Security.new(
-        api_key_header: '<YOUR_API_KEY_HERE>',
-        custom_header: '<YOUR_API_KEY_HERE>',
-      ),
-    )
+  security: Models::Shared::Security.new(
+    api_key_header: '<YOUR_API_KEY_HERE>',
+    custom_header: '<YOUR_API_KEY_HERE>'
+  )
+)
 
 req = Models::Shared::ExemptionCreate.new(
   exemption_type: Models::Shared::ExemptionType::WHOLESALE,
@@ -99,9 +97,8 @@ req = Models::Shared::ExemptionCreate.new(
   reseller: true,
   fein: '12-3456789',
   sales_tax_id: 'ST-98765',
-  status: Models::Shared::ExemptionStatus::ACTIVE,
+  status: Models::Shared::ExemptionStatus::ACTIVE
 )
-
 res = s.exemptions.create(request: req)
 
 unless res.nil?
@@ -144,16 +141,15 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-      security: Models::Shared::Security.new(
-        api_key_header: '<YOUR_API_KEY_HERE>',
-        custom_header: '<YOUR_API_KEY_HERE>',
-      ),
-    )
-
-req = Models::Ops::GetExemptionByIdV1ExemptionsExemptionIdGetRequest.new(
-  exemption_id: '<id>',
+  security: Models::Shared::Security.new(
+    api_key_header: '<YOUR_API_KEY_HERE>',
+    custom_header: '<YOUR_API_KEY_HERE>'
+  )
 )
 
+req = Models::Ops::GetExemptionByIdV1ExemptionsExemptionIdGetRequest.new(
+  exemption_id: '<id>'
+)
 res = s.exemptions.get(request: req)
 
 unless res.nil?
@@ -196,22 +192,21 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-      security: Models::Shared::Security.new(
-        api_key_header: '<YOUR_API_KEY_HERE>',
-        custom_header: '<YOUR_API_KEY_HERE>',
-      ),
-    )
+  security: Models::Shared::Security.new(
+    api_key_header: '<YOUR_API_KEY_HERE>',
+    custom_header: '<YOUR_API_KEY_HERE>'
+  )
+)
 
 req = Models::Ops::UploadExemptionCertRequest.new(
   exemption_id: '<id>',
   body_upload_exemption_certificate_v1_exemptions_exemption_id_attachments_post: Models::Shared::BodyUploadExemptionCertificateV1ExemptionsExemptionIdAttachmentsPost.new(
     file: Models::Shared::File.new(
       file_name: 'example.file',
-      content: File.binread("example.file"),
-    ),
-  ),
+      content: File.binread('example.file')
+    )
+  )
 )
-
 res = s.exemptions.upload_certificate(request: req)
 
 unless res.nil?
@@ -254,16 +249,15 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-      security: Models::Shared::Security.new(
-        api_key_header: '<YOUR_API_KEY_HERE>',
-        custom_header: '<YOUR_API_KEY_HERE>',
-      ),
-    )
-
-req = Models::Ops::GetExemptionAttachmentsRequest.new(
-  exemption_id: '<id>',
+  security: Models::Shared::Security.new(
+    api_key_header: '<YOUR_API_KEY_HERE>',
+    custom_header: '<YOUR_API_KEY_HERE>'
+  )
 )
 
+req = Models::Ops::GetExemptionAttachmentsRequest.new(
+  exemption_id: '<id>'
+)
 res = s.exemptions.get_attachments(request: req)
 
 unless res.nil?

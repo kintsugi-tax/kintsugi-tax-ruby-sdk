@@ -7,13 +7,11 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class SourceEnum < T::Enum
-
-
         enums do
           BIGCOMMERCE = new('BIGCOMMERCE')
+          BESTBUY = new('BESTBUY')
           BUNNY = new('BUNNY')
           CHARGEBEE = new('CHARGEBEE')
           SHOPIFY = new('SHOPIFY')
@@ -67,6 +65,11 @@ module KintsugiSDK
           ZOHO = new('ZOHO')
           SAGE_INTACCT = new('SAGE-INTACCT')
           AIRWALLEX = new('AIRWALLEX')
+          ORB = new('ORB')
+          ZENSKAR = new('ZENSKAR')
+          MICROSOFT_DYNAMICS_365 = new('MICROSOFT_DYNAMICS_365')
+          KICKSTARTER = new('KICKSTARTER')
+          INTERNAL_ERP = new('INTERNAL_ERP')
         end
       end
     end

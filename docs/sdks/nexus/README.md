@@ -1,5 +1,4 @@
 # Nexus
-(*nexus*)
 
 ## Overview
 
@@ -19,14 +18,13 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-      security: Models::Shared::Security.new(
-        api_key_header: '<YOUR_API_KEY_HERE>',
-        custom_header: '<YOUR_API_KEY_HERE>',
-      ),
-    )
+  security: Models::Shared::Security.new(
+    api_key_header: '<YOUR_API_KEY_HERE>',
+    custom_header: '<YOUR_API_KEY_HERE>'
+  )
+)
 
-req = Models::Ops::GetNexusForOrgV1NexusGetRequest.new()
-
+req = Models::Ops::GetNexusForOrgV1NexusGetRequest.new
 res = s.nexus.list(request: req)
 
 unless res.nil?

@@ -7,11 +7,8 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class NexusStateEnum < T::Enum
-
-
         enums do
           EXPOSED = new('EXPOSED')
           APPROACHING = new('APPROACHING')

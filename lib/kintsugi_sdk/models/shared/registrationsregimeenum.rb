@@ -7,11 +7,8 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class RegistrationsRegimeEnum < T::Enum
-
-
         enums do
           STANDARD = new('STANDARD')
           SIMPLIFIED = new('SIMPLIFIED')

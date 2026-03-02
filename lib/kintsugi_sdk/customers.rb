@@ -65,7 +65,7 @@ module KintsugiSDK
       hook_ctx = SDKHooks::HookContext.new(
         config: @sdk_configuration,
         base_url: base_url,
-        oauth2_scopes: [],
+        oauth2_scopes: nil,
         operation_id: 'get_customers_v1',
         security_source: @sdk_configuration.security_source
       )
@@ -197,7 +197,7 @@ module KintsugiSDK
       headers['content-type'] = req_content_type
       raise StandardError, 'request body is required' if data.nil? && form.nil?
 
-      if form
+      if form && !form.empty?
         body = Utils.encode_form(form)
       elsif Utils.match_content_type(req_content_type, 'application/x-www-form-urlencoded')
         body = URI.encode_www_form(T.cast(data, T::Hash[Symbol, Object]))
@@ -218,7 +218,7 @@ module KintsugiSDK
       hook_ctx = SDKHooks::HookContext.new(
         config: @sdk_configuration,
         base_url: base_url,
-        oauth2_scopes: [],
+        oauth2_scopes: nil,
         operation_id: 'create_customer_v1_customers_post',
         security_source: @sdk_configuration.security_source
       )
@@ -366,7 +366,7 @@ module KintsugiSDK
       hook_ctx = SDKHooks::HookContext.new(
         config: @sdk_configuration,
         base_url: base_url,
-        oauth2_scopes: [],
+        oauth2_scopes: nil,
         operation_id: 'get_customer_by_id_v1_customers__customer_id__get',
         security_source: @sdk_configuration.security_source
       )
@@ -475,7 +475,7 @@ module KintsugiSDK
       headers['content-type'] = req_content_type
       raise StandardError, 'request body is required' if data.nil? && form.nil?
 
-      if form
+      if form && !form.empty?
         body = Utils.encode_form(form)
       elsif Utils.match_content_type(req_content_type, 'application/x-www-form-urlencoded')
         body = URI.encode_www_form(T.cast(data, T::Hash[Symbol, Object]))
@@ -496,7 +496,7 @@ module KintsugiSDK
       hook_ctx = SDKHooks::HookContext.new(
         config: @sdk_configuration,
         base_url: base_url,
-        oauth2_scopes: [],
+        oauth2_scopes: nil,
         operation_id: 'update_customer_v1_customers__customer_id__put',
         security_source: @sdk_configuration.security_source
       )
@@ -644,7 +644,7 @@ module KintsugiSDK
       hook_ctx = SDKHooks::HookContext.new(
         config: @sdk_configuration,
         base_url: base_url,
-        oauth2_scopes: [],
+        oauth2_scopes: nil,
         operation_id: 'get_customer_by_external_id_v1_customers_external__external_id__get',
         security_source: @sdk_configuration.security_source
       )
@@ -761,7 +761,7 @@ module KintsugiSDK
       hook_ctx = SDKHooks::HookContext.new(
         config: @sdk_configuration,
         base_url: base_url,
-        oauth2_scopes: [],
+        oauth2_scopes: nil,
         operation_id: 'getTransactionsByCustomer',
         security_source: @sdk_configuration.security_source
       )
@@ -868,7 +868,7 @@ module KintsugiSDK
       headers['content-type'] = req_content_type
       raise StandardError, 'request body is required' if data.nil? && form.nil?
 
-      if form
+      if form && !form.empty?
         body = Utils.encode_form(form)
       elsif Utils.match_content_type(req_content_type, 'application/x-www-form-urlencoded')
         body = URI.encode_www_form(T.cast(data, T::Hash[Symbol, Object]))
@@ -889,7 +889,7 @@ module KintsugiSDK
       hook_ctx = SDKHooks::HookContext.new(
         config: @sdk_configuration,
         base_url: base_url,
-        oauth2_scopes: [],
+        oauth2_scopes: nil,
         operation_id: 'createTransactionByCustomer',
         security_source: @sdk_configuration.security_source
       )

@@ -7,12 +7,13 @@
 module KintsugiSDK
   module Models
     module Ops
-    
 
       class GetNexusForOrgV1NexusGetRequest
         extend T::Sig
         include Crystalline::MetadataFields
 
+        # Filter nexuses by disregard view: 'exposed' or 'disregarded'
+        field :disregard_view, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'disregard_view', 'style': 'form', 'explode': true } }
 
         field :state_code, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'state_code', 'style': 'form', 'explode': true } }
 
@@ -30,8 +31,9 @@ module KintsugiSDK
 
         field :size, Crystalline::Nilable.new(::Integer), { 'query_param': { 'field_name': 'size', 'style': 'form', 'explode': true } }
 
-        sig { params(state_code: T.nilable(::String), country_code_in: T.nilable(::String), collected_tax_nexus_met: T.nilable(T::Boolean), without_pagination: T.nilable(T::Boolean), status_in: T.nilable(::String), order_by: T.nilable(::String), page: T.nilable(::Integer), size: T.nilable(::Integer)).void }
-        def initialize(state_code: nil, country_code_in: nil, collected_tax_nexus_met: nil, without_pagination: false, status_in: 'APPROACHING,NOT_EXPOSED,PENDING_REGISTRATION,EXPOSED,APPROACHING,REGISTERED', order_by: 'state_code,country_code', page: 1, size: 50)
+        sig { params(disregard_view: T.nilable(::String), state_code: T.nilable(::String), country_code_in: T.nilable(::String), collected_tax_nexus_met: T.nilable(T::Boolean), without_pagination: T.nilable(T::Boolean), status_in: T.nilable(::String), order_by: T.nilable(::String), page: T.nilable(::Integer), size: T.nilable(::Integer)).void }
+        def initialize(disregard_view: nil, state_code: nil, country_code_in: nil, collected_tax_nexus_met: nil, without_pagination: false, status_in: 'APPROACHING,NOT_EXPOSED,PENDING_REGISTRATION,EXPOSED,APPROACHING,REGISTERED', order_by: 'state_code,country_code', page: 1, size: 50)
+          @disregard_view = disregard_view
           @state_code = state_code
           @country_code_in = country_code_in
           @collected_tax_nexus_met = collected_tax_nexus_met
@@ -45,6 +47,7 @@ module KintsugiSDK
         sig { params(other: T.untyped).returns(T::Boolean) }
         def ==(other)
           return false unless other.is_a? self.class
+          return false unless @disregard_view == other.disregard_view
           return false unless @state_code == other.state_code
           return false unless @country_code_in == other.country_code_in
           return false unless @collected_tax_nexus_met == other.collected_tax_nexus_met

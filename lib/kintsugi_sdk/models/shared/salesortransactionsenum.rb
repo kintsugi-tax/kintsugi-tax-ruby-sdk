@@ -7,11 +7,8 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class SalesOrTransactionsEnum < T::Enum
-
-
         enums do
           EITHER = new('EITHER')
           SALES = new('SALES')

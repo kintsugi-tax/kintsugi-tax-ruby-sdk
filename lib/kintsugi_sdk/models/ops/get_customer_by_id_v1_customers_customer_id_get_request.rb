@@ -7,7 +7,6 @@
 module KintsugiSDK
   module Models
     module Ops
-    
 
       class GetCustomerByIdV1CustomersCustomerIdGetRequest
         extend T::Sig

@@ -7,14 +7,13 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class TransactionAddressBuilder
         extend T::Sig
         include Crystalline::MetadataFields
 
 
-        field :type, Models::Shared::AddressType, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('type'), required: true, 'decoder': Utils.enum_from_string(Models::Shared::AddressType, false) } }
+        field :type, Models::Shared::AddressType, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('type'), required: true, 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::AddressType, false) } }
         # Phone number associated with the address.
         field :phone, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('phone') } }
         # Primary street address.
@@ -30,13 +29,13 @@ module KintsugiSDK
         # ZIP or Postal code of the customer.
         field :postal_code, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('postal_code') } }
 
-        field :country, Crystalline::Nilable.new(Models::Shared::CountryCodeEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('country'), 'decoder': Utils.enum_from_string(Models::Shared::CountryCodeEnum, true) } }
+        field :country, Crystalline::Nilable.new(Models::Shared::CountryCodeEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('country'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::CountryCodeEnum, true) } }
         # Complete address string of the customer, which can be used as an alternative to individual fields.
         field :full_address, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('full_address') } }
         # Optional additional enriched data for the address.
         field :enriched_fields, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('enriched_fields') } }
 
-        field :status, Crystalline::Nilable.new(Models::Shared::AddressStatus), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('status'), 'decoder': Utils.enum_from_string(Models::Shared::AddressStatus, true) } }
+        field :status, Crystalline::Nilable.new(Models::Shared::AddressStatus), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('status'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::AddressStatus, true) } }
 
         field :organization_id, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('organization_id') } }
 

@@ -7,7 +7,6 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class CustomerTaxRegistrationRead
         extend T::Sig
@@ -18,9 +17,9 @@ module KintsugiSDK
 
         field :customer_id, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('customer_id'), required: true } }
 
-        field :country_code, Models::Shared::CountryCodeEnum, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('country_code'), required: true, 'decoder': Utils.enum_from_string(Models::Shared::CountryCodeEnum, false) } }
+        field :country_code, Models::Shared::CountryCodeEnum, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('country_code'), required: true, 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::CountryCodeEnum, false) } }
         # Enum for customer tax registration types.
-        field :tax_type, Models::Shared::CustomerTaxTypeEnum, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('tax_type'), required: true, 'decoder': Utils.enum_from_string(Models::Shared::CustomerTaxTypeEnum, false) } }
+        field :tax_type, Models::Shared::CustomerTaxTypeEnum, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('tax_type'), required: true, 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::CustomerTaxTypeEnum, false) } }
 
         field :tax_id, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('tax_id'), required: true } }
 

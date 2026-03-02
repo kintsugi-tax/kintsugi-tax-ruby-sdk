@@ -7,11 +7,8 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class StatusEnum < T::Enum
-
-
         enums do
           ACTIVE = new('ACTIVE')
           ARCHIVED = new('ARCHIVED')

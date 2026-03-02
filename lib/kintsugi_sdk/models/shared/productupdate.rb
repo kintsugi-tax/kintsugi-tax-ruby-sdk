@@ -7,7 +7,6 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class ProductUpdate
         extend T::Sig
@@ -15,10 +14,14 @@ module KintsugiSDK
 
         # Name of the product.
         field :name, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('name'), required: true } }
-
-        field :product_category, Models::Shared::ProductCategoryEnum, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('product_category'), required: true, 'decoder': Utils.enum_from_string(Models::Shared::ProductCategoryEnum, false) } }
-
-        field :product_subcategory, Models::Shared::ProductSubCategoryEnum, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('product_subcategory'), required: true, 'decoder': Utils.enum_from_string(Models::Shared::ProductSubCategoryEnum, false) } }
+        # Main category of the product.
+        #     For example, Physical, Digital, etc. You can
+        #     retrieve supported categories from [GET /products/categories endpoint](/reference/api/products/get-product-categories)
+        field :product_category, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('product_category'), required: true } }
+        # Subcategory of the product.
+        #     For example, General Clothing, UNKNOWN, etc. You can
+        #     retrieve supported subcategories from [GET /products/categories endpoint](/reference/api/products/get-product-categories)
+        field :product_subcategory, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('product_subcategory'), required: true } }
         # Indicates whether the product is tax-exempt.
         field :tax_exempt, Crystalline::Boolean.new, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('tax_exempt'), required: true } }
         # The unique identifier of the product to be updated.
@@ -31,11 +34,11 @@ module KintsugiSDK
         # Description of the product.
         field :description, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('description') } }
 
-        field :status, Crystalline::Nilable.new(Models::Shared::ProductStatusEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('status'), 'decoder': Utils.enum_from_string(Models::Shared::ProductStatusEnum, true) } }
+        field :status, Crystalline::Nilable.new(Models::Shared::ProductStatusEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('status'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::ProductStatusEnum, true) } }
         # Indicates if the product classification failed.
         field :classification_failed, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('classification_failed') } }
 
-        sig { params(name: ::String, product_category: Models::Shared::ProductCategoryEnum, product_subcategory: Models::Shared::ProductSubCategoryEnum, tax_exempt: T::Boolean, id: T.nilable(::String), external_id: T.nilable(::String), sku: T.nilable(T::Array[::String]), description: T.nilable(::String), status: T.nilable(Models::Shared::ProductStatusEnum), classification_failed: T.nilable(T::Boolean)).void }
+        sig { params(name: ::String, product_category: ::String, product_subcategory: ::String, tax_exempt: T::Boolean, id: T.nilable(::String), external_id: T.nilable(::String), sku: T.nilable(T::Array[::String]), description: T.nilable(::String), status: T.nilable(Models::Shared::ProductStatusEnum), classification_failed: T.nilable(T::Boolean)).void }
         def initialize(name:, product_category:, product_subcategory:, tax_exempt:, id: nil, external_id: nil, sku: nil, description: nil, status: nil, classification_failed: false)
           @name = name
           @product_category = product_category

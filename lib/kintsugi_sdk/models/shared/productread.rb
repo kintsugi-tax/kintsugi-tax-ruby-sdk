@@ -7,7 +7,6 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class ProductRead
         extend T::Sig
@@ -20,27 +19,31 @@ module KintsugiSDK
 
         field :sku, Crystalline::Array.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('sku'), required: true } }
 
-        field :code, Models::Shared::ProductCodeEnum, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('code'), required: true, 'decoder': Utils.enum_from_string(Models::Shared::ProductCodeEnum, false) } }
+        field :code, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('code'), required: true } }
 
         field :name, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('name'), required: true } }
 
         field :description, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('description'), required: true } }
 
-        field :status, Models::Shared::ProductStatusEnum, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('status'), required: true, 'decoder': Utils.enum_from_string(Models::Shared::ProductStatusEnum, false) } }
-
-        field :product_category, Models::Shared::ProductCategoryEnum, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('product_category'), required: true, 'decoder': Utils.enum_from_string(Models::Shared::ProductCategoryEnum, false) } }
-
-        field :product_subcategory, Models::Shared::ProductSubCategoryEnum, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('product_subcategory'), required: true, 'decoder': Utils.enum_from_string(Models::Shared::ProductSubCategoryEnum, false) } }
+        field :status, Models::Shared::ProductStatusEnum, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('status'), required: true, 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::ProductStatusEnum, false) } }
+        # Main category of the product.
+        #         For example, Physical, Digital, etc. You can
+        #         retrieve supported categories from [GET /products/categories endpoint](/reference/api/products/get-product-categories)
+        field :product_category, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('product_category'), required: true } }
+        # Subcategory of the product.
+        #         For example, General Clothing, UNKNOWN, etc. You can
+        #         retrieve supported subcategories from [GET /products/categories endpoint](/reference/api/products/get-product-categories)
+        field :product_subcategory, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('product_subcategory'), required: true } }
 
         field :tax_exempt, Crystalline::Boolean.new, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('tax_exempt'), required: true } }
 
-        field :source, Models::Shared::SourceEnum, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('source'), required: true, 'decoder': Utils.enum_from_string(Models::Shared::SourceEnum, false) } }
+        field :source, Models::Shared::SourceEnum, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('source'), required: true, 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::SourceEnum, false) } }
 
         field :connection_id, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('connection_id'), required: true } }
 
         field :classification_failed, Crystalline::Boolean.new, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('classification_failed'), required: true } }
 
-        sig { params(id: ::String, external_id: ::String, sku: T::Array[::String], code: Models::Shared::ProductCodeEnum, name: ::String, description: ::String, status: Models::Shared::ProductStatusEnum, product_category: Models::Shared::ProductCategoryEnum, product_subcategory: Models::Shared::ProductSubCategoryEnum, tax_exempt: T::Boolean, source: Models::Shared::SourceEnum, connection_id: ::String, classification_failed: T::Boolean).void }
+        sig { params(id: ::String, external_id: ::String, sku: T::Array[::String], code: ::String, name: ::String, description: ::String, status: Models::Shared::ProductStatusEnum, product_category: ::String, product_subcategory: ::String, tax_exempt: T::Boolean, source: Models::Shared::SourceEnum, connection_id: ::String, classification_failed: T::Boolean).void }
         def initialize(id:, external_id:, sku:, code:, name:, description:, status:, product_category:, product_subcategory:, tax_exempt:, source:, connection_id:, classification_failed:)
           @id = id
           @external_id = external_id

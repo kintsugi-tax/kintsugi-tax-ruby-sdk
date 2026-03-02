@@ -7,11 +7,8 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class JurisdictionType < T::Enum
-
-
         enums do
           COUNTRY = new('COUNTRY')
           FEDERAL = new('FEDERAL')

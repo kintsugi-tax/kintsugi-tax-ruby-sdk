@@ -28,8 +28,6 @@ class KintsugiSDK::Models::Shared::TransactionPublicRequest
   def shop_date=(str_); end
   def shop_date_tz(); end
   def shop_date_tz=(str_); end
-  def status(); end
-  def status=(str_); end
   def description(); end
   def description=(str_); end
   def refund_status(); end
@@ -70,6 +68,8 @@ class KintsugiSDK::Models::Shared::TransactionPublicRequest
   def postal_code=(str_); end
   def tax_id(); end
   def tax_id=(str_); end
+  def status(); end
+  def status=(str_); end
   def total_amount(); end
   def total_amount=(str_); end
   def marketplace(); end

@@ -7,7 +7,6 @@
 module KintsugiSDK
   module Models
     module Ops
-    
 
       class EstimateTaxV1TaxEstimatePostRequest
         extend T::Sig
@@ -16,8 +15,8 @@ module KintsugiSDK
 
         field :transaction_estimate_public_request, Models::Shared::TransactionEstimatePublicRequest, { 'request': { 'media_type': 'application/json' } }
         # **Deprecated:** Use `simulate_active_registration` in the request body instead.
-        # 
-        # @deprecated  true: This will be removed in a future release, please migrate away from it as soon as possible.
+        #
+        # @deprecated true: This will be removed in a future release, please migrate away from it as soon as possible.
         field :simulate_nexus_met, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'query_param': { 'field_name': 'simulate_nexus_met', 'style': 'form', 'explode': true } }
 
         sig { params(transaction_estimate_public_request: Models::Shared::TransactionEstimatePublicRequest, simulate_nexus_met: T.nilable(T::Boolean)).void }

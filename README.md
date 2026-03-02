@@ -64,12 +64,11 @@ req = Models::Shared::AddressBase.new(
   state: 'CA',
   postal_code: '94043',
   country: Models::Shared::CountryCodeEnum::US,
-  full_address: '1600 Amphitheatre Parkway, Mountain View, CA 94043',
+  full_address: '1600 Amphitheatre Parkway, Mountain View, CA 94043'
 )
-
 res = s.address_validation.search(request: req, security: Models::Ops::SearchV1AddressValidationSearchPostSecurity.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-  ))
+  api_key_header: '<YOUR_API_KEY_HERE>'
+))
 
 unless res.nil?
   # handle response
@@ -96,11 +95,11 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-      security: Models::Shared::Security.new(
-        api_key_header: '<YOUR_API_KEY_HERE>',
-        custom_header: '<YOUR_API_KEY_HERE>',
-      ),
-    )
+  security: Models::Shared::Security.new(
+    api_key_header: '<YOUR_API_KEY_HERE>',
+    custom_header: '<YOUR_API_KEY_HERE>'
+  )
+)
 
 req = Models::Shared::ValidationAddress.new(
   line1: '1600 Amphitheatre Parkway',
@@ -111,9 +110,8 @@ req = Models::Shared::ValidationAddress.new(
   postal_code: '94043',
   id: 215,
   county: '',
-  full_address: '1600 Amphitheatre Parkway, Mountain View, CA 94043',
+  full_address: '1600 Amphitheatre Parkway, Mountain View, CA 94043'
 )
-
 res = s.address_validation.suggestions(request: req)
 
 unless res.nil?
@@ -140,12 +138,11 @@ req = Models::Shared::AddressBase.new(
   state: 'CA',
   postal_code: '94043',
   country: Models::Shared::CountryCodeEnum::US,
-  full_address: '1600 Amphitheatre Parkway, Mountain View, CA 94043',
+  full_address: '1600 Amphitheatre Parkway, Mountain View, CA 94043'
 )
-
 res = s.address_validation.search(request: req, security: Models::Ops::SearchV1AddressValidationSearchPostSecurity.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-  ))
+  api_key_header: '<YOUR_API_KEY_HERE>'
+))
 
 unless res.nil?
   # handle response
@@ -160,12 +157,12 @@ end
 <details open>
 <summary>Available methods</summary>
 
-### [address_validation](docs/sdks/addressvalidation/README.md)
+### [AddressValidation](docs/sdks/addressvalidation/README.md)
 
 * [search](docs/sdks/addressvalidation/README.md#search) - Search
 * [suggestions](docs/sdks/addressvalidation/README.md#suggestions) - Suggestions
 
-### [customers](docs/sdks/customers/README.md)
+### [Customers](docs/sdks/customers/README.md)
 
 * [list](docs/sdks/customers/README.md#list) - Get Customers
 * [create](docs/sdks/customers/README.md#create) - Create Customer
@@ -175,7 +172,7 @@ end
 * [get_transactions](docs/sdks/customers/README.md#get_transactions) - Get Transactions By Customer Id
 * [create_transaction](docs/sdks/customers/README.md#create_transaction) - Create Transaction By Customer Id
 
-### [exemptions](docs/sdks/exemptions/README.md)
+### [Exemptions](docs/sdks/exemptions/README.md)
 
 * [list](docs/sdks/exemptions/README.md#list) - Get Exemptions
 * [create](docs/sdks/exemptions/README.md#create) - Create Exemption
@@ -183,24 +180,20 @@ end
 * [upload_certificate](docs/sdks/exemptions/README.md#upload_certificate) - Upload Exemption Certificate
 * [get_attachments](docs/sdks/exemptions/README.md#get_attachments) - Get Attachments For Exemption
 
-### [nexus](docs/sdks/nexus/README.md)
+### [Nexus](docs/sdks/nexus/README.md)
 
 * [list](docs/sdks/nexus/README.md#list) - Get Nexus For Org
 
+### [Products](docs/sdks/products/README.md)
 
-### [products](docs/sdks/products/README.md)
-
-* [list](docs/sdks/products/README.md#list) - Get Products
-* [create](docs/sdks/products/README.md#create) - Create Product
 * [get](docs/sdks/products/README.md#get) - Get Product By Id
 * [update](docs/sdks/products/README.md#update) - Update Product
-* [list_categories](docs/sdks/products/README.md#list_categories) - Get Product Categories
 
-### [tax_estimation](docs/sdks/taxestimation/README.md)
+### [TaxEstimation](docs/sdks/taxestimation/README.md)
 
 * [estimate_tax](docs/sdks/taxestimation/README.md#estimate_tax) - Estimate Tax
 
-### [transactions](docs/sdks/transactions/README.md)
+### [Transactions](docs/sdks/transactions/README.md)
 
 * [list](docs/sdks/transactions/README.md#list) - Get Transactions
 * [create](docs/sdks/transactions/README.md#create) - Create Transaction
@@ -253,22 +246,24 @@ begin
       state: 'CA',
       postal_code: '94043',
       country: Models::Shared::CountryCodeEnum::US,
-      full_address: '1600 Amphitheatre Parkway, Mountain View, CA 94043',
+      full_address: '1600 Amphitheatre Parkway, Mountain View, CA 94043'
     )
-
     res = s.address_validation.search(request: req, security: Models::Ops::SearchV1AddressValidationSearchPostSecurity.new(
-        api_key_header: '<YOUR_API_KEY_HERE>',
-      ))
+      api_key_header: '<YOUR_API_KEY_HERE>'
+    ))
 
     unless res.nil?
       # handle response
     end
 rescue Models::Errors::ErrorResponse => e
-  # handle error response
-  puts "Error: #{e.detail}"
+  # handle e.container data
+  raise e
 rescue Models::Errors::BackendSrcAddressValidationResponsesValidationErrorResponse => e
-  # handle validation error response
-  puts "Validation Error: #{e.detail}"
+  # handle e.container data
+  raise e
+rescue Models::Errors::ErrorResponse => e
+  # handle e.container data
+  raise e
 rescue Errors::APIError => e
   # handle default exception
   raise e
@@ -288,8 +283,8 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-      server_url: 'https://api.trykintsugi.com',
-    )
+  server_url: 'https://api.trykintsugi.com'
+)
 
 req = Models::Shared::AddressBase.new(
   phone: '555-123-4567',
@@ -300,12 +295,11 @@ req = Models::Shared::AddressBase.new(
   state: 'CA',
   postal_code: '94043',
   country: Models::Shared::CountryCodeEnum::US,
-  full_address: '1600 Amphitheatre Parkway, Mountain View, CA 94043',
+  full_address: '1600 Amphitheatre Parkway, Mountain View, CA 94043'
 )
-
 res = s.address_validation.search(request: req, security: Models::Ops::SearchV1AddressValidationSearchPostSecurity.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-  ))
+  api_key_header: '<YOUR_API_KEY_HERE>'
+))
 
 unless res.nil?
   # handle response

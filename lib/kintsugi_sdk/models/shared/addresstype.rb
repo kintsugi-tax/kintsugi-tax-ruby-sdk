@@ -7,11 +7,8 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class AddressType < T::Enum
-
-
         enums do
           BILL_TO = new('BILL_TO')
           SHIP_TO = new('SHIP_TO')

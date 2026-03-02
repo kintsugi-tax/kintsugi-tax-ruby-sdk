@@ -7,7 +7,6 @@
 module KintsugiSDK
   module Models
     module Ops
-    
 
       class GetProductByIdV1ProductsProductIdGetRequest
         extend T::Sig

@@ -7,11 +7,8 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class AddressStatus < T::Enum
-
-
         enums do
           UNVERIFIED = new('UNVERIFIED')
           INVALID = new('INVALID')

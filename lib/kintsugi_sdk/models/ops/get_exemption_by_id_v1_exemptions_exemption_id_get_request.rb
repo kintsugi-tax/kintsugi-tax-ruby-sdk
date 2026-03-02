@@ -7,7 +7,6 @@
 module KintsugiSDK
   module Models
     module Ops
-    
 
       class GetExemptionByIdV1ExemptionsExemptionIdGetRequest
         extend T::Sig
