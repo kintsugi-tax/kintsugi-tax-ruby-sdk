@@ -7,11 +7,8 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class TreatmentEnum < T::Enum
-
-
         enums do
           INCLUDED = new('INCLUDED')
           EXCLUDED = new('EXCLUDED')

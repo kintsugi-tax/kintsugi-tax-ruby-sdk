@@ -1,5 +1,4 @@
 # TaxEstimation
-(*tax_estimation*)
 
 ## Overview
 
@@ -21,11 +20,11 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-      security: Models::Shared::Security.new(
-        api_key_header: '<YOUR_API_KEY_HERE>',
-        custom_header: '<YOUR_API_KEY_HERE>',
-      ),
-    )
+  security: Models::Shared::Security.new(
+    api_key_header: '<YOUR_API_KEY_HERE>',
+    custom_header: '<YOUR_API_KEY_HERE>'
+  )
+)
 
 req = Models::Ops::EstimateTaxV1TaxEstimatePostRequest.new(
   transaction_estimate_public_request: Models::Shared::TransactionEstimatePublicRequest.new(
@@ -38,14 +37,13 @@ req = Models::Ops::EstimateTaxV1TaxEstimatePostRequest.new(
         date: DateTime.iso8601('2024-10-28T10:00:00Z'),
         external_product_id: 'prod_abc',
         quantity: 2.0,
-        amount: 100.0,
+        amount: 100.0
       ),
       Models::Shared::TransactionItemEstimateBase.new(
         external_id: 'item_B',
         date: DateTime.iso8601('2024-10-28T10:00:00Z'),
         external_product_id: 'prod_xyz',
-        quantity: 1.0,
-        amount: 75.5,
+        amount: 75.5
       ),
     ],
     addresses: [
@@ -55,12 +53,11 @@ req = Models::Ops::EstimateTaxV1TaxEstimatePostRequest.new(
         city: 'Austin',
         state: 'TX',
         postal_code: '78701',
-        country: 'US',
+        country: 'US'
       ),
-    ],
-  ),
+    ]
+  )
 )
-
 res = s.tax_estimation.estimate_tax(request: req)
 
 unless res.nil?

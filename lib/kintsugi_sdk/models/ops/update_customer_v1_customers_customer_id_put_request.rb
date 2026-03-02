@@ -7,7 +7,6 @@
 module KintsugiSDK
   module Models
     module Ops
-    
 
       class UpdateCustomerV1CustomersCustomerIdPutRequest
         extend T::Sig

@@ -1,5 +1,0 @@
-# OpenApiSDK
-
-## Overview
-
-### Available Operations

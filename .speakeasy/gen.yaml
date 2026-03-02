@@ -12,11 +12,18 @@ generation:
     requestResponseComponentNamesFeb2024: false
     securityFeb2025: false
     sharedErrorComponentsApr2025: false
+    sharedNestedComponentsJan2026: false
+    nameOverrideFeb2026: false
   auth:
     oAuth2ClientCredentialsEnabled: false
     oAuth2PasswordEnabled: false
     hoistGlobalSecurity: true
   sdkHooksConfigAccess: true
+  schemas:
+    allOfMergeStrategy: shallowMerge
+  requestBodyFieldName: ""
+  versioningStrategy: automatic
+  persistentEdits: {}
   tests:
     generateTests: false
     generateNewTests: true
@@ -32,8 +39,10 @@ generation:
     updateCredit: updateCreditNote
     upload_exemption_certificate_v1_exemptions__exemption_id__attachments_post: uploadExemptionCert
 ruby:
-  version: 5.5.14
-  additionalDependencies: {}
+  version: 5.6.0
+  additionalDependencies:
+    development: {}
+    runtime: {}
   author: Kintsugi
   baseErrorName: OpenAPISDKError
   clientServerStatusCodesAsErrors: true
@@ -42,7 +51,10 @@ ruby:
   defaultErrorName: APIError
   description: Ruby SDK for Kintsugi Tax Platform
   disableCompilation: true
+  enableFormatting: false
   flattenGlobalSecurity: true
+  forwardCompatibleEnumsByDefault: false
+  forwardCompatibleUnionsByDefault: "false"
   gemName: kintsugi-tax
   imports:
     option: openapi
@@ -52,13 +64,16 @@ ruby:
       operations: models/ops
       shared: models/shared
       webhooks: models/webhooks
+  inferUnionDiscriminators: false
   inputModelSuffix: input
   inputTypes: false
   maxFileNameLength: 20
   maxMethodParams: 0
   module: KintsugiSdk
+  multipartArrayFormat: legacy
   outputModelSuffix: output
   packageName: kintsugi_sdk
   responseFormat: flat
   templateVersion: v2
   typingStrategy: sorbet
+  unionStrategy: left-to-right

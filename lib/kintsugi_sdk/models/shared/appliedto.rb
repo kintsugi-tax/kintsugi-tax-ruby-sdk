@@ -7,11 +7,8 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class AppliedTo < T::Enum
-
-
         enums do
           TRANSACTION = new('TRANSACTION')
           TRANSACTION_ITEM = new('TRANSACTION_ITEM')

@@ -7,7 +7,6 @@
 module KintsugiSDK
   module Models
     module Ops
-    
 
       class UpdateTransactionV1TransactionsTransactionIdPutRequest
         extend T::Sig

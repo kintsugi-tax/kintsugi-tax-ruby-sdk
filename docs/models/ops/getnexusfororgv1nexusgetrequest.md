@@ -3,13 +3,14 @@
 
 ## Fields
 
-| Field                                 | Type                                  | Required                              | Description                           |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| `without_pagination`                  | *T.nilable(T::Boolean)*               | :heavy_minus_sign:                    | Return all results without pagination |
-| `status_in`                           | *T.nilable(::String)*                 | :heavy_minus_sign:                    | N/A                                   |
-| `state_code`                          | *T.nilable(::String)*                 | :heavy_minus_sign:                    | N/A                                   |
-| `country_code_in`                     | *T.nilable(::String)*                 | :heavy_minus_sign:                    | N/A                                   |
-| `order_by`                            | *T.nilable(::String)*                 | :heavy_minus_sign:                    | N/A                                   |
-| `collected_tax_nexus_met`             | *T.nilable(T::Boolean)*               | :heavy_minus_sign:                    | N/A                                   |
-| `page`                                | *T.nilable(::Integer)*                | :heavy_minus_sign:                    | N/A                                   |
-| `size`                                | *T.nilable(::Integer)*                | :heavy_minus_sign:                    | N/A                                   |
+| Field                                                        | Type                                                         | Required                                                     | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `without_pagination`                                         | *T.nilable(T::Boolean)*                                      | :heavy_minus_sign:                                           | Return all results without pagination                        |
+| `disregard_view`                                             | *T.nilable(::String)*                                        | :heavy_minus_sign:                                           | Filter nexuses by disregard view: 'exposed' or 'disregarded' |
+| `status_in`                                                  | *T.nilable(::String)*                                        | :heavy_minus_sign:                                           | N/A                                                          |
+| `state_code`                                                 | *T.nilable(::String)*                                        | :heavy_minus_sign:                                           | N/A                                                          |
+| `country_code_in`                                            | *T.nilable(::String)*                                        | :heavy_minus_sign:                                           | N/A                                                          |
+| `order_by`                                                   | *T.nilable(::String)*                                        | :heavy_minus_sign:                                           | N/A                                                          |
+| `collected_tax_nexus_met`                                    | *T.nilable(T::Boolean)*                                      | :heavy_minus_sign:                                           | N/A                                                          |
+| `page`                                                       | *T.nilable(::Integer)*                                       | :heavy_minus_sign:                                           | N/A                                                          |
+| `size`                                                       | *T.nilable(::Integer)*                                       | :heavy_minus_sign:                                           | N/A                                                          |

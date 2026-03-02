@@ -7,11 +7,8 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class TransactionStatusEnum < T::Enum
-
-
         enums do
           PENDING = new('PENDING')
           COMMITTED = new('COMMITTED')

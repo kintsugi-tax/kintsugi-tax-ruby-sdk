@@ -7,11 +7,8 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class ExemptionStatus < T::Enum
-
-
         enums do
           ACTIVE = new('ACTIVE')
           INACTIVE = new('INACTIVE')

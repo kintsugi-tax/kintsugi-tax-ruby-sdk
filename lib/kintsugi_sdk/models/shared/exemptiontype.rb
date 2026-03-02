@@ -7,11 +7,8 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class ExemptionType < T::Enum
-
-
         enums do
           CUSTOMER = new('customer')
           WHOLESALE = new('wholesale')

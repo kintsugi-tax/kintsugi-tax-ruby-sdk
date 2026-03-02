@@ -7,7 +7,6 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class AttachmentRead
         extend T::Sig
@@ -17,7 +16,7 @@ module KintsugiSDK
         #         with the attachment.
         field :related_entity_id, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('related_entity_id'), required: true } }
 
-        field :related_entity_type, Models::Shared::RelatedEntityType, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('related_entity_type'), required: true, 'decoder': Utils.enum_from_string(Models::Shared::RelatedEntityType, false) } }
+        field :related_entity_type, Models::Shared::RelatedEntityType, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('related_entity_type'), required: true, 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::RelatedEntityType, false) } }
         # The unique identifier of the uploaded attachment (attachment ID).
         field :id, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('id'), required: true } }
 

@@ -7,11 +7,8 @@
 module KintsugiSDK
   module Models
     module Shared
-    
       # TaxExemptionEnum - This enum is used to determine if a transaction is exempt from tax.
       class TaxExemptionEnum < T::Enum
-
-
         enums do
           PRODUCT = new('PRODUCT')
           TRANSACTION = new('TRANSACTION')
@@ -24,6 +21,7 @@ module KintsugiSDK
           ZERO_VALUE_ITEM = new('ZERO_VALUE_ITEM')
           NO_RULE_FOUND = new('NO_RULE_FOUND')
           IMPORTED = new('IMPORTED')
+          ZERO_RATE_NOT_EXEMPT = new('ZERO_RATE_NOT_EXEMPT')
         end
       end
     end

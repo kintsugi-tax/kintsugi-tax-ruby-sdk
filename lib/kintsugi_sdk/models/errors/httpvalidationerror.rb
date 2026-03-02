@@ -7,7 +7,6 @@
 module KintsugiSDK
   module Models
     module Errors
-    
 
       class HTTPValidationError < StandardError
         extend T::Sig

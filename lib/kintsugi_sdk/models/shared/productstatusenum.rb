@@ -7,11 +7,8 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class ProductStatusEnum < T::Enum
-
-
         enums do
           APPROVED = new('APPROVED')
           PARTIALLY_APPROVED = new('PARTIALLY_APPROVED')

@@ -7,17 +7,16 @@
 module KintsugiSDK
   module Models
     module Shared
-    
       # TaxItemReturnReasonEnum - We use this to understand the response from get_tax_items
       class TaxItemReturnReasonEnum < T::Enum
-
-
         enums do
           NO_RULE_FOUND = new('NO_RULE_FOUND')
           RULE_FOUND_TAXABLE = new('RULE_FOUND_TAXABLE')
           RULE_FOUND_NOT_TAXABLE = new('RULE_FOUND_NOT_TAXABLE')
+          RULE_FOUND_TAXABLE_ZERO_RATE = new('RULE_FOUND_TAXABLE_ZERO_RATE')
           PRODUCT_EXEMPT = new('PRODUCT_EXEMPT')
           FROM_IMPORT = new('FROM_IMPORT')
+          RULE_EXCLUDED_IN_CALCULATION = new('RULE_EXCLUDED_IN_CALCULATION')
         end
       end
     end

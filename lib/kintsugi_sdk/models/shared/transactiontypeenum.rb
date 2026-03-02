@@ -7,11 +7,8 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class TransactionTypeEnum < T::Enum
-
-
         enums do
           SALE = new('SALE')
           FULL_CREDIT_NOTE = new('FULL_CREDIT_NOTE')

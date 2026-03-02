@@ -1,5 +1,4 @@
 # Transactions
-(*transactions*)
 
 ## Overview
 
@@ -25,14 +24,13 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-      security: Models::Shared::Security.new(
-        api_key_header: '<YOUR_API_KEY_HERE>',
-        custom_header: '<YOUR_API_KEY_HERE>',
-      ),
-    )
+  security: Models::Shared::Security.new(
+    api_key_header: '<YOUR_API_KEY_HERE>',
+    custom_header: '<YOUR_API_KEY_HERE>'
+  )
+)
 
-req = Models::Ops::GetTransactionsV1TransactionsGetRequest.new()
-
+req = Models::Ops::GetTransactionsV1TransactionsGetRequest.new
 res = s.transactions.list(request: req)
 
 unless res.nil?
@@ -64,54 +62,255 @@ end
 
 Create a transaction.
 
-### Example Usage
+### Example Usage: connection_mismatch
 
-<!-- UsageSnippet language="ruby" operationID="create_transaction_v1_transactions_post" method="post" path="/v1/transactions" -->
+<!-- UsageSnippet language="ruby" operationID="create_transaction_v1_transactions_post" method="post" path="/v1/transactions" example="connection_mismatch" -->
 ```ruby
 require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-      security: Models::Shared::Security.new(
-        api_key_header: '<YOUR_API_KEY_HERE>',
-        custom_header: '<YOUR_API_KEY_HERE>',
-      ),
-    )
-
-req = Models::Shared::TransactionPublicRequest.new(
-  organization_id: 'orgn_YourOrgIdHere',
-  external_id: 'YourUniqueOrder123',
-  date: DateTime.iso8601('2024-01-15T14:30:00Z'),
-  currency: Models::Shared::CurrencyEnum::USD,
-  source: Models::Shared::SourceEnum::API,
-  addresses: [
-    Models::Shared::TransactionAddressPublic.new(
-      street_1: '123 Main St',
-      city: 'San Francisco',
-      state: 'CA',
-      postal_code: '94107',
-      country: Models::Shared::CountryCodeEnum::US,
-      type: Models::Shared::AddressType::SHIP_TO,
-    ),
-  ],
-  transaction_items: [
-    Models::Shared::TransactionItemBuilder.new(
-      organization_id: 'orgn_YourOrgIdHere',
-      date: DateTime.iso8601('2024-01-15T14:30:00Z'),
-      external_product_id: 'SKU-ABC',
-      product: 'Example Widget',
-      quantity: 2.0,
-      amount: 50.0,
-    ),
-  ],
-  customer: Models::Shared::CustomerBaseBase.new(
-    name: 'John Doe',
-    external_id: 'Cust456',
-    organization_id: 'orgn_YourOrgIdHere',
-  ),
-  type: Models::Shared::TransactionTypeEnum::SALE,
+  security: Models::Shared::Security.new(
+    api_key_header: '<YOUR_API_KEY_HERE>',
+    custom_header: '<YOUR_API_KEY_HERE>'
+  )
 )
 
+req = Models::Shared::TransactionPublicRequest.new(
+  organization_id: '<id>',
+  external_id: '<id>',
+  date: DateTime.iso8601('2025-11-05T23:48:53.053Z'),
+  addresses: [],
+  transaction_items: [],
+  customer: Models::Shared::CustomerBaseBase.new(
+    organization_id: '<id>'
+  ),
+  type: Models::Shared::TransactionTypeEnum::TAX_REFUND
+)
+res = s.transactions.create(request: req)
+
+unless res.nil?
+  # handle response
+end
+
+```
+### Example Usage: duplicate_external_id
+
+<!-- UsageSnippet language="ruby" operationID="create_transaction_v1_transactions_post" method="post" path="/v1/transactions" example="duplicate_external_id" -->
+```ruby
+require 'kintsugi_sdk'
+
+Models = ::KintsugiSDK::Models
+s = ::KintsugiSDK::OpenApiSDK.new(
+  security: Models::Shared::Security.new(
+    api_key_header: '<YOUR_API_KEY_HERE>',
+    custom_header: '<YOUR_API_KEY_HERE>'
+  )
+)
+
+req = Models::Shared::TransactionPublicRequest.new(
+  organization_id: '<id>',
+  external_id: '<id>',
+  date: DateTime.iso8601('2025-11-05T23:48:53.053Z'),
+  addresses: [],
+  transaction_items: [],
+  customer: Models::Shared::CustomerBaseBase.new(
+    organization_id: '<id>'
+  ),
+  type: Models::Shared::TransactionTypeEnum::TAX_REFUND
+)
+res = s.transactions.create(request: req)
+
+unless res.nil?
+  # handle response
+end
+
+```
+### Example Usage: invalid_address
+
+<!-- UsageSnippet language="ruby" operationID="create_transaction_v1_transactions_post" method="post" path="/v1/transactions" example="invalid_address" -->
+```ruby
+require 'kintsugi_sdk'
+
+Models = ::KintsugiSDK::Models
+s = ::KintsugiSDK::OpenApiSDK.new(
+  security: Models::Shared::Security.new(
+    api_key_header: '<YOUR_API_KEY_HERE>',
+    custom_header: '<YOUR_API_KEY_HERE>'
+  )
+)
+
+req = Models::Shared::TransactionPublicRequest.new(
+  organization_id: '<id>',
+  external_id: '<id>',
+  date: DateTime.iso8601('2025-11-05T23:48:53.053Z'),
+  addresses: [],
+  transaction_items: [],
+  customer: Models::Shared::CustomerBaseBase.new(
+    organization_id: '<id>'
+  ),
+  type: Models::Shared::TransactionTypeEnum::TAX_REFUND
+)
+res = s.transactions.create(request: req)
+
+unless res.nil?
+  # handle response
+end
+
+```
+### Example Usage: invalid_date_format
+
+<!-- UsageSnippet language="ruby" operationID="create_transaction_v1_transactions_post" method="post" path="/v1/transactions" example="invalid_date_format" -->
+```ruby
+require 'kintsugi_sdk'
+
+Models = ::KintsugiSDK::Models
+s = ::KintsugiSDK::OpenApiSDK.new(
+  security: Models::Shared::Security.new(
+    api_key_header: '<YOUR_API_KEY_HERE>',
+    custom_header: '<YOUR_API_KEY_HERE>'
+  )
+)
+
+req = Models::Shared::TransactionPublicRequest.new(
+  organization_id: '<id>',
+  external_id: '<id>',
+  date: DateTime.iso8601('2025-11-05T23:48:53.053Z'),
+  addresses: [],
+  transaction_items: [],
+  customer: Models::Shared::CustomerBaseBase.new(
+    organization_id: '<id>'
+  ),
+  type: Models::Shared::TransactionTypeEnum::TAX_REFUND
+)
+res = s.transactions.create(request: req)
+
+unless res.nil?
+  # handle response
+end
+
+```
+### Example Usage: invalid_enum_value
+
+<!-- UsageSnippet language="ruby" operationID="create_transaction_v1_transactions_post" method="post" path="/v1/transactions" example="invalid_enum_value" -->
+```ruby
+require 'kintsugi_sdk'
+
+Models = ::KintsugiSDK::Models
+s = ::KintsugiSDK::OpenApiSDK.new(
+  security: Models::Shared::Security.new(
+    api_key_header: '<YOUR_API_KEY_HERE>',
+    custom_header: '<YOUR_API_KEY_HERE>'
+  )
+)
+
+req = Models::Shared::TransactionPublicRequest.new(
+  organization_id: '<id>',
+  external_id: '<id>',
+  date: DateTime.iso8601('2025-11-05T23:48:53.053Z'),
+  addresses: [],
+  transaction_items: [],
+  customer: Models::Shared::CustomerBaseBase.new(
+    organization_id: '<id>'
+  ),
+  type: Models::Shared::TransactionTypeEnum::TAX_REFUND
+)
+res = s.transactions.create(request: req)
+
+unless res.nil?
+  # handle response
+end
+
+```
+### Example Usage: missing_org_id
+
+<!-- UsageSnippet language="ruby" operationID="create_transaction_v1_transactions_post" method="post" path="/v1/transactions" example="missing_org_id" -->
+```ruby
+require 'kintsugi_sdk'
+
+Models = ::KintsugiSDK::Models
+s = ::KintsugiSDK::OpenApiSDK.new(
+  security: Models::Shared::Security.new(
+    api_key_header: '<YOUR_API_KEY_HERE>',
+    custom_header: '<YOUR_API_KEY_HERE>'
+  )
+)
+
+req = Models::Shared::TransactionPublicRequest.new(
+  organization_id: '<id>',
+  external_id: '<id>',
+  date: DateTime.iso8601('2025-11-05T23:48:53.053Z'),
+  addresses: [],
+  transaction_items: [],
+  customer: Models::Shared::CustomerBaseBase.new(
+    organization_id: '<id>'
+  ),
+  type: Models::Shared::TransactionTypeEnum::TAX_REFUND
+)
+res = s.transactions.create(request: req)
+
+unless res.nil?
+  # handle response
+end
+
+```
+### Example Usage: missing_product_external_id
+
+<!-- UsageSnippet language="ruby" operationID="create_transaction_v1_transactions_post" method="post" path="/v1/transactions" example="missing_product_external_id" -->
+```ruby
+require 'kintsugi_sdk'
+
+Models = ::KintsugiSDK::Models
+s = ::KintsugiSDK::OpenApiSDK.new(
+  security: Models::Shared::Security.new(
+    api_key_header: '<YOUR_API_KEY_HERE>',
+    custom_header: '<YOUR_API_KEY_HERE>'
+  )
+)
+
+req = Models::Shared::TransactionPublicRequest.new(
+  organization_id: '<id>',
+  external_id: '<id>',
+  date: DateTime.iso8601('2025-11-05T23:48:53.053Z'),
+  addresses: [],
+  transaction_items: [],
+  customer: Models::Shared::CustomerBaseBase.new(
+    organization_id: '<id>'
+  ),
+  type: Models::Shared::TransactionTypeEnum::TAX_REFUND
+)
+res = s.transactions.create(request: req)
+
+unless res.nil?
+  # handle response
+end
+
+```
+### Example Usage: missing_required_field
+
+<!-- UsageSnippet language="ruby" operationID="create_transaction_v1_transactions_post" method="post" path="/v1/transactions" example="missing_required_field" -->
+```ruby
+require 'kintsugi_sdk'
+
+Models = ::KintsugiSDK::Models
+s = ::KintsugiSDK::OpenApiSDK.new(
+  security: Models::Shared::Security.new(
+    api_key_header: '<YOUR_API_KEY_HERE>',
+    custom_header: '<YOUR_API_KEY_HERE>'
+  )
+)
+
+req = Models::Shared::TransactionPublicRequest.new(
+  organization_id: '<id>',
+  external_id: '<id>',
+  date: DateTime.iso8601('2025-11-05T23:48:53.053Z'),
+  addresses: [],
+  transaction_items: [],
+  customer: Models::Shared::CustomerBaseBase.new(
+    organization_id: '<id>'
+  ),
+  type: Models::Shared::TransactionTypeEnum::TAX_REFUND
+)
 res = s.transactions.create(request: req)
 
 unless res.nil?
@@ -152,16 +351,15 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-      security: Models::Shared::Security.new(
-        api_key_header: '<YOUR_API_KEY_HERE>',
-        custom_header: '<YOUR_API_KEY_HERE>',
-      ),
-    )
-
-req = Models::Ops::GetTransactionByExternalIdRequest.new(
-  external_id: '<id>',
+  security: Models::Shared::Security.new(
+    api_key_header: '<YOUR_API_KEY_HERE>',
+    custom_header: '<YOUR_API_KEY_HERE>'
+  )
 )
 
+req = Models::Ops::GetTransactionByExternalIdRequest.new(
+  external_id: '<id>'
+)
 res = s.transactions.get_by_external_id(request: req)
 
 unless res.nil?
@@ -201,11 +399,11 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-      security: Models::Shared::Security.new(
-        api_key_header: '<YOUR_API_KEY_HERE>',
-        custom_header: '<YOUR_API_KEY_HERE>',
-      ),
-    )
+  security: Models::Shared::Security.new(
+    api_key_header: '<YOUR_API_KEY_HERE>',
+    custom_header: '<YOUR_API_KEY_HERE>'
+  )
+)
 
 req = Models::Ops::UpdateTransactionV1TransactionsTransactionIdPutRequest.new(
   transaction_id: '<id>',
@@ -215,20 +413,19 @@ req = Models::Ops::UpdateTransactionV1TransactionsTransactionIdPutRequest.new(
     date: DateTime.iso8601('2025-04-02T17:36:59.814Z'),
     addresses: [
       Models::Shared::TransactionAddressBuilder.new(
-        type: Models::Shared::AddressType::BILL_TO,
+        type: Models::Shared::AddressType::BILL_TO
       ),
     ],
     transaction_items: [
       Models::Shared::TransactionItemCreateUpdate.new(
         organization_id: 'orgn_argaLQwMy2fJc',
         date: DateTime.iso8601('2025-04-02T17:36:59.814Z'),
-        external_product_id: '1186DUMMYITEM',
+        external_product_id: '1186DUMMYITEM'
       ),
     ],
-    customer: Models::Shared::CustomerUpdate.new(),
-  ),
+    customer: Models::Shared::CustomerUpdate.new
+  )
 )
-
 res = s.transactions.update(request: req)
 
 unless res.nil?
@@ -267,16 +464,15 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-      security: Models::Shared::Security.new(
-        api_key_header: '<YOUR_API_KEY_HERE>',
-        custom_header: '<YOUR_API_KEY_HERE>',
-      ),
-    )
-
-req = Models::Ops::GetTransactionByIdV1TransactionsTransactionIdGetRequest.new(
-  transaction_id: '<id>',
+  security: Models::Shared::Security.new(
+    api_key_header: '<YOUR_API_KEY_HERE>',
+    custom_header: '<YOUR_API_KEY_HERE>'
+  )
 )
 
+req = Models::Ops::GetTransactionByIdV1TransactionsTransactionIdGetRequest.new(
+  transaction_id: '<id>'
+)
 res = s.transactions.get_by_id(request: req)
 
 unless res.nil?
@@ -316,16 +512,15 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-      security: Models::Shared::Security.new(
-        api_key_header: '<YOUR_API_KEY_HERE>',
-        custom_header: '<YOUR_API_KEY_HERE>',
-      ),
-    )
-
-req = Models::Ops::GetTransactionsByFilingRequest.new(
-  filing_id: '<id>',
+  security: Models::Shared::Security.new(
+    api_key_header: '<YOUR_API_KEY_HERE>',
+    custom_header: '<YOUR_API_KEY_HERE>'
+  )
 )
 
+req = Models::Ops::GetTransactionsByFilingRequest.new(
+  filing_id: '<id>'
+)
 res = s.transactions.get_by_filing_id(request: req)
 
 unless res.nil?

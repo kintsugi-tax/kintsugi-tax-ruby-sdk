@@ -7,11 +7,8 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class TaxLiabilitySourceEnum < T::Enum
-
-
         enums do
           CALCULATED = new('CALCULATED')
           COLLECTED = new('COLLECTED')

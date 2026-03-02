@@ -7,11 +7,8 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class RelatedEntityType < T::Enum
-
-
         enums do
           EXEMPTION = new('EXEMPTION')
           REGISTRATION = new('REGISTRATION')

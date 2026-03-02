@@ -63,7 +63,7 @@ module KintsugiSDK
       hook_ctx = SDKHooks::HookContext.new(
         config: @sdk_configuration,
         base_url: base_url,
-        oauth2_scopes: [],
+        oauth2_scopes: nil,
         operation_id: 'get_exemptions_v1_exemptions_get',
         security_source: @sdk_configuration.security_source
       )
@@ -196,7 +196,7 @@ module KintsugiSDK
       headers['content-type'] = req_content_type
       raise StandardError, 'request body is required' if data.nil? && form.nil?
 
-      if form
+      if form && !form.empty?
         body = Utils.encode_form(form)
       elsif Utils.match_content_type(req_content_type, 'application/x-www-form-urlencoded')
         body = URI.encode_www_form(T.cast(data, T::Hash[Symbol, Object]))
@@ -217,7 +217,7 @@ module KintsugiSDK
       hook_ctx = SDKHooks::HookContext.new(
         config: @sdk_configuration,
         base_url: base_url,
-        oauth2_scopes: [],
+        oauth2_scopes: nil,
         operation_id: 'create_exemption_v1_exemptions_post',
         security_source: @sdk_configuration.security_source
       )
@@ -366,7 +366,7 @@ module KintsugiSDK
       hook_ctx = SDKHooks::HookContext.new(
         config: @sdk_configuration,
         base_url: base_url,
-        oauth2_scopes: [],
+        oauth2_scopes: nil,
         operation_id: 'get_exemption_by_id_v1_exemptions__exemption_id__get',
         security_source: @sdk_configuration.security_source
       )
@@ -504,7 +504,7 @@ module KintsugiSDK
       headers['content-type'] = req_content_type
       raise StandardError, 'request body is required' if data.nil? && form.nil?
 
-      if form
+      if form && !form.empty?
         body = Utils.encode_form(form)
       elsif Utils.match_content_type(req_content_type, 'application/x-www-form-urlencoded')
         body = URI.encode_www_form(T.cast(data, T::Hash[Symbol, Object]))
@@ -525,7 +525,7 @@ module KintsugiSDK
       hook_ctx = SDKHooks::HookContext.new(
         config: @sdk_configuration,
         base_url: base_url,
-        oauth2_scopes: [],
+        oauth2_scopes: nil,
         operation_id: 'uploadExemptionCert',
         security_source: @sdk_configuration.security_source
       )
@@ -674,7 +674,7 @@ module KintsugiSDK
       hook_ctx = SDKHooks::HookContext.new(
         config: @sdk_configuration,
         base_url: base_url,
-        oauth2_scopes: [],
+        oauth2_scopes: nil,
         operation_id: 'getExemptionAttachments',
         security_source: @sdk_configuration.security_source
       )

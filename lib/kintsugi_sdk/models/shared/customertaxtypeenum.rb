@@ -7,11 +7,8 @@
 module KintsugiSDK
   module Models
     module Shared
-    
       # CustomerTaxTypeEnum - Enum for customer tax registration types.
       class CustomerTaxTypeEnum < T::Enum
-
-
         enums do
           GST = new('gst')
           HST = new('hst')

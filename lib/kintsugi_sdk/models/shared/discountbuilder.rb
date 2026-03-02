@@ -7,21 +7,20 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class DiscountBuilder
         extend T::Sig
         include Crystalline::MetadataFields
 
 
-        field :applied_to, Models::Shared::AppliedTo, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('applied_to'), required: true, 'decoder': Utils.enum_from_string(Models::Shared::AppliedTo, false) } }
+        field :applied_to, Models::Shared::AppliedTo, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('applied_to'), required: true, 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::AppliedTo, false) } }
 
         field :external_id, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('external_id') } }
 
         field :discount_amount, Crystalline::Nilable.new(::Float), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('discount_amount') } }
 
         sig { params(applied_to: Models::Shared::AppliedTo, external_id: T.nilable(::String), discount_amount: T.nilable(::Float)).void }
-        def initialize(applied_to:, external_id: nil, discount_amount: 0.00)
+        def initialize(applied_to:, external_id: nil, discount_amount: 0.0)
           @applied_to = applied_to
           @external_id = external_id
           @discount_amount = discount_amount

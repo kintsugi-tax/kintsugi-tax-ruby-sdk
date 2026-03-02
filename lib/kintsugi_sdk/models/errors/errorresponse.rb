@@ -7,7 +7,6 @@
 module KintsugiSDK
   module Models
     module Errors
-    
 
       class ErrorResponse < StandardError
         extend T::Sig

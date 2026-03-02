@@ -7,7 +7,6 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class TaxItemRead
         extend T::Sig
@@ -22,15 +21,15 @@ module KintsugiSDK
 
         field :converted_amount, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('converted_amount') } }
 
-        field :currency, Crystalline::Nilable.new(Models::Shared::CurrencyEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('currency'), 'decoder': Utils.enum_from_string(Models::Shared::CurrencyEnum, true) } }
+        field :currency, Crystalline::Nilable.new(Models::Shared::CurrencyEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('currency'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::CurrencyEnum, true) } }
 
-        field :destination_currency, Crystalline::Nilable.new(Models::Shared::CurrencyEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('destination_currency'), 'decoder': Utils.enum_from_string(Models::Shared::CurrencyEnum, true) } }
+        field :destination_currency, Crystalline::Nilable.new(Models::Shared::CurrencyEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('destination_currency'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::CurrencyEnum, true) } }
 
         field :external_id, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('external_id') } }
 
-        field :type, Crystalline::Nilable.new(Models::Shared::TaxItemTypeEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('type'), 'decoder': Utils.enum_from_string(Models::Shared::TaxItemTypeEnum, true) } }
+        field :type, Crystalline::Nilable.new(Models::Shared::TaxItemTypeEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('type'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::TaxItemTypeEnum, true) } }
 
-        field :jurisdiction_type, Crystalline::Nilable.new(Models::Shared::JurisdictionType), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('jurisdiction_type'), 'decoder': Utils.enum_from_string(Models::Shared::JurisdictionType, true) } }
+        field :jurisdiction_type, Crystalline::Nilable.new(Models::Shared::JurisdictionType), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('jurisdiction_type'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::JurisdictionType, true) } }
 
         field :jurisdiction_name, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('jurisdiction_name') } }
         # The rule ID of the tax item

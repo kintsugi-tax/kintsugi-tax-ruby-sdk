@@ -7,11 +7,8 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class NexusTypeEnum < T::Enum
-
-
         enums do
           CANADA_FEDERAL = new('CANADA_FEDERAL')
           EU_AGGREGATOR = new('EU_AGGREGATOR')

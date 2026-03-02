@@ -7,16 +7,17 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class TransactionItemCreateUpdate
         extend T::Sig
         include Crystalline::MetadataFields
 
-        # Organization identifier.
+        # Unique identifier of the organization. This field is deprecated, and should no longer be used. The value is populated through the 'x-organization-id' header.
+        #
+        # @deprecated true: This will be removed in a future release, please migrate away from it as soon as possible.
         field :organization_id, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('organization_id'), required: true } }
         # Date/time of item.
-        field :date, ::DateTime, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('date'), required: true, 'decoder': Utils.datetime_from_iso_format(false) } }
+        field :date, ::DateTime, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('date'), required: true, 'decoder': ::KintsugiSDK::Utils.datetime_from_iso_format(false) } }
         # External product identifier.
         field :external_product_id, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('external_product_id'), required: true } }
         # External item identifier.
@@ -32,9 +33,9 @@ module KintsugiSDK
         # Product description
         field :product_description, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('product_description') } }
 
-        field :original_currency, Crystalline::Nilable.new(Models::Shared::CurrencyEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('original_currency'), 'decoder': Utils.enum_from_string(Models::Shared::CurrencyEnum, true) } }
+        field :original_currency, Crystalline::Nilable.new(Models::Shared::CurrencyEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('original_currency'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::CurrencyEnum, true) } }
 
-        field :destination_currency, Crystalline::Nilable.new(Models::Shared::CurrencyEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('destination_currency'), 'decoder': Utils.enum_from_string(Models::Shared::CurrencyEnum, true) } }
+        field :destination_currency, Crystalline::Nilable.new(Models::Shared::CurrencyEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('destination_currency'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::CurrencyEnum, true) } }
         # Converted item amount.
         field :converted_amount, Crystalline::Nilable.new(::Float), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('converted_amount') } }
         # Converted taxable amount.
@@ -48,7 +49,7 @@ module KintsugiSDK
         # Converted subtotal amount.
         field :converted_subtotal, Crystalline::Nilable.new(::Float), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('converted_subtotal') } }
         # This enum is used to determine if a transaction is exempt from tax.
-        field :tax_exemption, Crystalline::Nilable.new(Models::Shared::TaxExemptionEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('tax_exemption'), 'decoder': Utils.enum_from_string(Models::Shared::TaxExemptionEnum, true) } }
+        field :tax_exemption, Crystalline::Nilable.new(Models::Shared::TaxExemptionEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('tax_exemption'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::TaxExemptionEnum, true) } }
 
         field :tax_items, Crystalline::Nilable.new(Crystalline::Array.new(Models::Shared::TaxItemBuilder)), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('tax_items') } }
 
@@ -71,7 +72,7 @@ module KintsugiSDK
         field :exempt, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('exempt') } }
 
         sig { params(organization_id: ::String, date: ::DateTime, external_product_id: ::String, external_id: T.nilable(::String), description: T.nilable(::String), product: T.nilable(::String), product_id: T.nilable(::String), product_name: T.nilable(::String), product_description: T.nilable(::String), original_currency: T.nilable(Models::Shared::CurrencyEnum), destination_currency: T.nilable(Models::Shared::CurrencyEnum), converted_amount: T.nilable(::Float), converted_taxable_amount: T.nilable(::Float), converted_tax_amount_imported: T.nilable(::Float), converted_tax_amount_calculated: T.nilable(::Float), converted_total_discount: T.nilable(::Float), converted_subtotal: T.nilable(::Float), tax_exemption: T.nilable(Models::Shared::TaxExemptionEnum), tax_items: T.nilable(T::Array[Models::Shared::TaxItemBuilder]), discount_builder: T.nilable(Models::Shared::DiscountBuilder), quantity: T.nilable(::Float), amount: T.nilable(::Float), tax_amount_imported: T.nilable(::Float), tax_rate_imported: T.nilable(::Float), tax_amount_calculated: T.nilable(::Float), tax_rate_calculated: T.nilable(::Float), taxable_amount: T.nilable(::Float), exempt: T.nilable(T::Boolean)).void }
-        def initialize(organization_id:, date:, external_product_id:, external_id: nil, description: nil, product: nil, product_id: nil, product_name: nil, product_description: nil, original_currency: nil, destination_currency: nil, converted_amount: nil, converted_taxable_amount: nil, converted_tax_amount_imported: nil, converted_tax_amount_calculated: nil, converted_total_discount: nil, converted_subtotal: nil, tax_exemption: nil, tax_items: nil, discount_builder: nil, quantity: 1.0, amount: 0.00, tax_amount_imported: 0.00, tax_rate_imported: 0.00, tax_amount_calculated: 0.00, tax_rate_calculated: 0.00, taxable_amount: 0.00, exempt: false)
+        def initialize(organization_id:, date:, external_product_id:, external_id: nil, description: nil, product: nil, product_id: nil, product_name: nil, product_description: nil, original_currency: nil, destination_currency: nil, converted_amount: nil, converted_taxable_amount: nil, converted_tax_amount_imported: nil, converted_tax_amount_calculated: nil, converted_total_discount: nil, converted_subtotal: nil, tax_exemption: nil, tax_items: nil, discount_builder: nil, quantity: 1.0, amount: 0.0, tax_amount_imported: 0.0, tax_rate_imported: 0.0, tax_amount_calculated: 0.0, tax_rate_calculated: 0.0, taxable_amount: 0.0, exempt: false)
           @organization_id = organization_id
           @date = date
           @external_product_id = external_product_id

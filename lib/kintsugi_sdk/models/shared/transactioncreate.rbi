@@ -24,8 +24,6 @@ class KintsugiSDK::Models::Shared::TransactionCreate
   def shop_date=(str_); end
   def shop_date_tz(); end
   def shop_date_tz=(str_); end
-  def status(); end
-  def status=(str_); end
   def description(); end
   def description=(str_); end
   def refund_status(); end
@@ -66,6 +64,8 @@ class KintsugiSDK::Models::Shared::TransactionCreate
   def postal_code=(str_); end
   def tax_id(); end
   def tax_id=(str_); end
+  def status(); end
+  def status=(str_); end
   def address_status(); end
   def address_status=(str_); end
   def processing_status(); end

@@ -7,7 +7,6 @@
 module KintsugiSDK
   module Models
     module Ops
-    
 
       class UpdateProductV1ProductsProductIdPutRequest
         extend T::Sig

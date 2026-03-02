@@ -7,18 +7,17 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class TransactionEstimateResponse
         extend T::Sig
         include Crystalline::MetadataFields
 
         # The date of the transaction in ISO 8601 format (e.g., 2025-01-25T12:00:00Z).
-        field :date, ::DateTime, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('date'), required: true, 'decoder': Utils.datetime_from_iso_format(false) } }
+        field :date, ::DateTime, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('date'), required: true, 'decoder': ::KintsugiSDK::Utils.datetime_from_iso_format(false) } }
         # Unique identifier of this transaction in the source system.
         field :external_id, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('external_id'), required: true } }
 
-        field :currency, Models::Shared::CurrencyEnum, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('currency'), required: true, 'decoder': Utils.enum_from_string(Models::Shared::CurrencyEnum, false) } }
+        field :currency, Models::Shared::CurrencyEnum, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('currency'), required: true, 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::CurrencyEnum, false) } }
 
         field :transaction_items, Crystalline::Array.new(Models::Shared::TransactionItemEstimateResponse), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('transaction_items'), required: true } }
         # List of addresses related to the transaction. At least one BILL_TO or SHIP_TO address must be provided. The address will be validated during estimation, and the transaction may be rejected if the address does not pass validation. The SHIP_TO will be preferred to use for determining tax liability. **Deprecated:** Use of `address.status` in estimate api is ignored and will be removed in the future status will be considered UNVERIFIED by default and always validated
@@ -26,11 +25,9 @@ module KintsugiSDK
         # An optional description of the transaction.
         field :description, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('description') } }
 
-        field :source, Crystalline::Nilable.new(Models::Shared::SourceEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('source'), 'decoder': Utils.enum_from_string(Models::Shared::SourceEnum, true) } }
+        field :source, Crystalline::Nilable.new(Models::Shared::SourceEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('source'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::SourceEnum, true) } }
 
         field :customer, Crystalline::Nilable.new(Models::Shared::CustomerBase), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('customer') } }
-        # Total amount of the transaction.
-        field :total_amount, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('total_amount') } }
         # Indicates if the transaction involves a marketplace.
         field :marketplace, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('marketplace') } }
         # The total amount of tax determined for the transaction.
@@ -40,14 +37,14 @@ module KintsugiSDK
         # The calculated tax rate for the transaction.
         field :tax_rate_calculated, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('tax_rate_calculated') } }
         # Indicates if nexus was met for the transaction.**Deprecated:** Use `has_active_registration` instead.
-        # 
-        # @deprecated  true: This will be removed in a future release, please migrate away from it as soon as possible.
+        #
+        # @deprecated true: This will be removed in a future release, please migrate away from it as soon as possible.
         field :nexus_met, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('nexus_met') } }
         # Indicates if there is an active registration for the transaction.
         field :has_active_registration, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('has_active_registration') } }
 
-        sig { params(date: ::DateTime, external_id: ::String, currency: Models::Shared::CurrencyEnum, transaction_items: T::Array[Models::Shared::TransactionItemEstimateResponse], addresses: T::Array[Models::Shared::TransactionEstimateResponseAddresses], description: T.nilable(::String), source: T.nilable(Models::Shared::SourceEnum), customer: T.nilable(Models::Shared::CustomerBase), total_amount: T.nilable(::String), marketplace: T.nilable(T::Boolean), total_tax_amount_calculated: T.nilable(::String), taxable_amount: T.nilable(::String), tax_rate_calculated: T.nilable(::String), nexus_met: T.nilable(T::Boolean), has_active_registration: T.nilable(T::Boolean)).void }
-        def initialize(date:, external_id:, currency:, transaction_items:, addresses:, description: nil, source: nil, customer: nil, total_amount: '0.0', marketplace: false, total_tax_amount_calculated: '0.00', taxable_amount: '0.00', tax_rate_calculated: '0.00', nexus_met: false, has_active_registration: false)
+        sig { params(date: ::DateTime, external_id: ::String, currency: Models::Shared::CurrencyEnum, transaction_items: T::Array[Models::Shared::TransactionItemEstimateResponse], addresses: T::Array[Models::Shared::TransactionEstimateResponseAddresses], description: T.nilable(::String), source: T.nilable(Models::Shared::SourceEnum), customer: T.nilable(Models::Shared::CustomerBase), marketplace: T.nilable(T::Boolean), total_tax_amount_calculated: T.nilable(::String), taxable_amount: T.nilable(::String), tax_rate_calculated: T.nilable(::String), nexus_met: T.nilable(T::Boolean), has_active_registration: T.nilable(T::Boolean)).void }
+        def initialize(date:, external_id:, currency:, transaction_items:, addresses:, description: nil, source: nil, customer: nil, marketplace: false, total_tax_amount_calculated: '0.00', taxable_amount: '0.00', tax_rate_calculated: '0.00', nexus_met: false, has_active_registration: false)
           @date = date
           @external_id = external_id
           @currency = currency
@@ -56,7 +53,6 @@ module KintsugiSDK
           @description = description
           @source = source
           @customer = customer
-          @total_amount = total_amount
           @marketplace = marketplace
           @total_tax_amount_calculated = total_tax_amount_calculated
           @taxable_amount = taxable_amount
@@ -76,7 +72,6 @@ module KintsugiSDK
           return false unless @description == other.description
           return false unless @source == other.source
           return false unless @customer == other.customer
-          return false unless @total_amount == other.total_amount
           return false unless @marketplace == other.marketplace
           return false unless @total_tax_amount_calculated == other.total_tax_amount_calculated
           return false unless @taxable_amount == other.taxable_amount

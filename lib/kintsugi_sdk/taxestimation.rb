@@ -39,7 +39,7 @@ module KintsugiSDK
     end
 
 
-    sig { params(request: Models::Ops::EstimateTaxV1TaxEstimatePostRequest, timeout_ms: T.nilable(Integer)).returns(Models::Shared::TransactionEstimateResponse) }
+    sig { params(request: Models::Ops::EstimateTaxV1TaxEstimatePostRequest, timeout_ms: T.nilable(Integer)).returns(Models::Shared::PageTransactionEstimateResponse) }
     def estimate_tax(request:, timeout_ms: nil)
       # estimate_tax - Estimate Tax
       # The Estimate Tax API calculates the estimated tax for a specific
@@ -54,7 +54,7 @@ module KintsugiSDK
       headers['content-type'] = req_content_type
       raise StandardError, 'request body is required' if data.nil? && form.nil?
 
-      if form
+      if form && !form.empty?
         body = Utils.encode_form(form)
       elsif Utils.match_content_type(req_content_type, 'application/x-www-form-urlencoded')
         body = URI.encode_www_form(T.cast(data, T::Hash[Symbol, Object]))
@@ -76,7 +76,7 @@ module KintsugiSDK
       hook_ctx = SDKHooks::HookContext.new(
         config: @sdk_configuration,
         base_url: base_url,
-        oauth2_scopes: [],
+        oauth2_scopes: nil,
         operation_id: 'estimate_tax_v1_tax_estimate_post',
         security_source: @sdk_configuration.security_source
       )
@@ -136,7 +136,7 @@ module KintsugiSDK
             response: http_response
           )
           response_data = http_response.env.response_body
-          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Shared::TransactionEstimateResponse)
+          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Shared::PageTransactionEstimateResponse)
 
           return obj
         else

@@ -5,7 +5,6 @@
 
 require_relative './types'
 
-
 module KintsugiSDK
   module SDKHooks
     class Hooks

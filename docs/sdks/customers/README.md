@@ -1,5 +1,4 @@
 # Customers
-(*customers*)
 
 ## Overview
 
@@ -27,11 +26,11 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-      security: Models::Shared::Security.new(
-        api_key_header: '<YOUR_API_KEY_HERE>',
-        custom_header: '<YOUR_API_KEY_HERE>',
-      ),
-    )
+  security: Models::Shared::Security.new(
+    api_key_header: '<YOUR_API_KEY_HERE>',
+    custom_header: '<YOUR_API_KEY_HERE>'
+  )
+)
 
 req = Models::Ops::GetCustomersV1Request.new(
   search_query: 'John',
@@ -40,9 +39,8 @@ req = Models::Ops::GetCustomersV1Request.new(
   ],
   state: 'CA',
   source_in: 'SHOPIFY,API',
-  order_by: 'created_at,street_1,street_2,city,state,postal_code,country,status',
+  order_by: 'created_at,street_1,street_2,city,state,postal_code,country,status'
 )
-
 res = s.customers.list(request: req)
 
 unless res.nil?
@@ -83,11 +81,11 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-      security: Models::Shared::Security.new(
-        api_key_header: '<YOUR_API_KEY_HERE>',
-        custom_header: '<YOUR_API_KEY_HERE>',
-      ),
-    )
+  security: Models::Shared::Security.new(
+    api_key_header: '<YOUR_API_KEY_HERE>',
+    custom_header: '<YOUR_API_KEY_HERE>'
+  )
+)
 
 req = Models::Shared::CustomerCreate.new(
   phone: '987-654-3210',
@@ -103,9 +101,8 @@ req = Models::Shared::CustomerCreate.new(
   status: Models::Shared::StatusEnum::ARCHIVED,
   email: 'jane.smith@example.com',
   source: Models::Shared::SourceEnum::SHOPIFY,
-  address_status: Models::Shared::AddressStatus::PARTIALLY_VERIFIED,
+  address_status: Models::Shared::AddressStatus::PARTIALLY_VERIFIED
 )
-
 res = s.customers.create(request: req)
 
 unless res.nil?
@@ -147,16 +144,15 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-      security: Models::Shared::Security.new(
-        api_key_header: '<YOUR_API_KEY_HERE>',
-        custom_header: '<YOUR_API_KEY_HERE>',
-      ),
-    )
-
-req = Models::Ops::GetCustomerByIdV1CustomersCustomerIdGetRequest.new(
-  customer_id: 'cust_abc123',
+  security: Models::Shared::Security.new(
+    api_key_header: '<YOUR_API_KEY_HERE>',
+    custom_header: '<YOUR_API_KEY_HERE>'
+  )
 )
 
+req = Models::Ops::GetCustomerByIdV1CustomersCustomerIdGetRequest.new(
+  customer_id: 'cust_abc123'
+)
 res = s.customers.get(request: req)
 
 unless res.nil?
@@ -196,11 +192,11 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-      security: Models::Shared::Security.new(
-        api_key_header: '<YOUR_API_KEY_HERE>',
-        custom_header: '<YOUR_API_KEY_HERE>',
-      ),
-    )
+  security: Models::Shared::Security.new(
+    api_key_header: '<YOUR_API_KEY_HERE>',
+    custom_header: '<YOUR_API_KEY_HERE>'
+  )
+)
 
 req = Models::Ops::UpdateCustomerV1CustomersCustomerIdPutRequest.new(
   customer_id: '<id>',
@@ -219,10 +215,9 @@ req = Models::Ops::UpdateCustomerV1CustomersCustomerIdPutRequest.new(
     email: 'john.doe@example.com',
     source: Models::Shared::SourceEnum::SHOPIFY,
     address_status: Models::Shared::AddressStatus::VERIFIED,
-    external_id: 'cust_002',
-  ),
+    external_id: 'cust_002'
+  )
 )
-
 res = s.customers.update(request: req)
 
 unless res.nil?
@@ -264,16 +259,15 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-      security: Models::Shared::Security.new(
-        api_key_header: '<YOUR_API_KEY_HERE>',
-        custom_header: '<YOUR_API_KEY_HERE>',
-      ),
-    )
-
-req = Models::Ops::GetCustomerByExternalIdV1CustomersExternalExternalIdGetRequest.new(
-  external_id: 'external_12345',
+  security: Models::Shared::Security.new(
+    api_key_header: '<YOUR_API_KEY_HERE>',
+    custom_header: '<YOUR_API_KEY_HERE>'
+  )
 )
 
+req = Models::Ops::GetCustomerByExternalIdV1CustomersExternalExternalIdGetRequest.new(
+  external_id: 'external_12345'
+)
 res = s.customers.get_by_external_id(request: req)
 
 unless res.nil?
@@ -311,16 +305,15 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-      security: Models::Shared::Security.new(
-        api_key_header: '<YOUR_API_KEY_HERE>',
-        custom_header: '<YOUR_API_KEY_HERE>',
-      ),
-    )
-
-req = Models::Ops::GetTransactionsByCustomerRequest.new(
-  customer_id: '<id>',
+  security: Models::Shared::Security.new(
+    api_key_header: '<YOUR_API_KEY_HERE>',
+    custom_header: '<YOUR_API_KEY_HERE>'
+  )
 )
 
+req = Models::Ops::GetTransactionsByCustomerRequest.new(
+  customer_id: '<id>'
+)
 res = s.customers.get_transactions(request: req)
 
 unless res.nil?
@@ -358,11 +351,11 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-      security: Models::Shared::Security.new(
-        api_key_header: '<YOUR_API_KEY_HERE>',
-        custom_header: '<YOUR_API_KEY_HERE>',
-      ),
-    )
+  security: Models::Shared::Security.new(
+    api_key_header: '<YOUR_API_KEY_HERE>',
+    custom_header: '<YOUR_API_KEY_HERE>'
+  )
+)
 
 req = Models::Ops::CreateTransactionByCustomerRequest.new(
   customer_id: '<id>',
@@ -370,31 +363,16 @@ req = Models::Ops::CreateTransactionByCustomerRequest.new(
     organization_id: '<id>',
     external_id: '<id>',
     date: DateTime.iso8601('2025-04-30T23:54:13.835Z'),
-    total_amount: 0.0,
-    total_tax_amount_imported: 0.0,
-    tax_rate_imported: 0.0,
-    total_tax_amount_calculated: 0.0,
-    tax_rate_calculated: 0.0,
-    total_tax_liability_amount: 0.0,
-    taxable_amount: 0.0,
     addresses: [],
     transaction_items: [
       Models::Shared::TransactionItemCreateUpdate.new(
         organization_id: '<id>',
         date: DateTime.iso8601('2023-12-30T23:49:45.106Z'),
-        external_product_id: '<id>',
-        quantity: 1.0,
-        amount: 0.0,
-        tax_amount_imported: 0.0,
-        tax_rate_imported: 0.0,
-        tax_amount_calculated: 0.0,
-        tax_rate_calculated: 0.0,
-        taxable_amount: 0.0,
+        external_product_id: '<id>'
       ),
-    ],
-  ),
+    ]
+  )
 )
-
 res = s.customers.create_transaction(request: req)
 
 unless res.nil?

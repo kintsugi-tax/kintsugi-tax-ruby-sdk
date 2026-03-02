@@ -7,7 +7,6 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class TransactionEstimateResponseAddresses
         extend T::Sig
@@ -15,7 +14,7 @@ module KintsugiSDK
 
         # Type of the address. Must be either
         #                         SHIP_TO or BILL_TO.
-        field :type, Models::Shared::TransactionEstimateResponseType, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('type'), required: true, 'decoder': Utils.enum_from_string(Models::Shared::TransactionEstimateResponseType, false) } }
+        field :type, Models::Shared::TransactionEstimateResponseType, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('type'), required: true, 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::TransactionEstimateResponseType, false) } }
         # State or province of the address.
         field :state, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('state'), required: true } }
         # Postal code of the address.
@@ -35,8 +34,8 @@ module KintsugiSDK
         # Complete address string of the customer, which can be used as an alternative to individual fields.
         field :full_address, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('full_address') } }
         # Status of the address. Deprecated and ignored.
-        # 
-        # @deprecated  true: This will be removed in a future release, please migrate away from it as soon as possible.
+        #
+        # @deprecated true: This will be removed in a future release, please migrate away from it as soon as possible.
         field :status, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('status') } }
         # Additional enriched fields related to the address.
         field :enriched_fields, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('enriched_fields') } }

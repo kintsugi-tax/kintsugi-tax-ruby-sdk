@@ -24,8 +24,6 @@ class KintsugiSDK::Models::Shared::TransactionEstimateResponse
   def source=(str_); end
   def customer(); end
   def customer=(str_); end
-  def total_amount(); end
-  def total_amount=(str_); end
   def marketplace(); end
   def marketplace=(str_); end
   def total_tax_amount_calculated(); end

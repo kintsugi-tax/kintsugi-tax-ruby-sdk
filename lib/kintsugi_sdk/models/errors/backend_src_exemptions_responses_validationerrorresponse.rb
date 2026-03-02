@@ -7,7 +7,6 @@
 module KintsugiSDK
   module Models
     module Errors
-    
 
       class BackendSrcExemptionsResponsesValidationErrorResponse < StandardError
         extend T::Sig

@@ -19,7 +19,6 @@ module KintsugiSDK
       autoload :GetExemptionsV1ExemptionsGetRequest, 'kintsugi_sdk/models/ops/get_exemptions_v1_exemptions_get_request.rb'
       autoload :GetNexusForOrgV1NexusGetRequest, 'kintsugi_sdk/models/ops/get_nexus_for_org_v1_nexus_get_request.rb'
       autoload :GetProductByIdV1ProductsProductIdGetRequest, 'kintsugi_sdk/models/ops/get_product_by_id_v1_products_product_id_get_request.rb'
-      autoload :GetProductsV1ProductsGetRequest, 'kintsugi_sdk/models/ops/get_products_v1_products_get_request.rb'
       autoload :GetTransactionByIdV1TransactionsTransactionIdGetRequest, 'kintsugi_sdk/models/ops/get_transaction_by_id_v1_transactions_transaction_id_get_request.rb'
       autoload :GetTransactionsV1TransactionsGetRequest, 'kintsugi_sdk/models/ops/get_transactions_v1_transactions_get_request.rb'
       autoload :SearchV1AddressValidationSearchPostSecurity, 'kintsugi_sdk/models/ops/search_v1_address_validation_search_post_security.rb'

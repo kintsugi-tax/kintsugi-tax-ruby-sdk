@@ -7,11 +7,8 @@
 module KintsugiSDK
   module Models
     module Shared
-    
 
       class TaxItemTypeEnum < T::Enum
-
-
         enums do
           IMPORTED_ORIGINAL = new('IMPORTED_ORIGINAL')
           IMPORTED = new('IMPORTED')

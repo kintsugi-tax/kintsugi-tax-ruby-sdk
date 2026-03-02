@@ -7,7 +7,6 @@
 module KintsugiSDK
   module Models
     module Ops
-    
 
       class CreateTransactionByCustomerRequest
         extend T::Sig

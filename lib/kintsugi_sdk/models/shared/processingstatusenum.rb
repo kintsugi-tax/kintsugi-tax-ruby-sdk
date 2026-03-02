@@ -7,12 +7,9 @@
 module KintsugiSDK
   module Models
     module Shared
-    
       # ProcessingStatusEnum - Our transaction state, used to determine when/if a transaction needs additional
       # processing.
       class ProcessingStatusEnum < T::Enum
-
-
         enums do
           NEW = new('NEW')
           UPDATED = new('UPDATED')
@@ -27,6 +24,7 @@ module KintsugiSDK
           PENDING = new('PENDING')
           ARCHIVED = new('ARCHIVED')
           NEEDS_REFETCH = new('NEEDS_REFETCH')
+          EXCLUDED_IN_CALCULATION = new('EXCLUDED_IN_CALCULATION')
         end
       end
     end

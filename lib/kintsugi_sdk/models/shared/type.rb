@@ -7,12 +7,9 @@
 module KintsugiSDK
   module Models
     module Shared
-    
       # Type - Type of the address. Must be either
       #                         SHIP_TO or BILL_TO.
       class Type < T::Enum
-
-
         enums do
           SHIP_TO = new('SHIP_TO')
           BILL_TO = new('BILL_TO')
