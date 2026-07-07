@@ -1,5 +1,13 @@
 # PeriodModelEnum
 
+## Example Usage
+
+```ruby
+require "kintsugi_sdk"
+
+value = PeriodModelEnum::CURRENT_OR_PREVIOUS
+```
+
 
 ## Values
 

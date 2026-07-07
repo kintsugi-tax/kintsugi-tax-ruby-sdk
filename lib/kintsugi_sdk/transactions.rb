@@ -39,8 +39,10 @@ module KintsugiSDK
     end
 
 
-    sig { params(request: Models::Ops::GetTransactionsV1TransactionsGetRequest, timeout_ms: T.nilable(Integer)).returns(Models::Shared::PageTransactionRead) }
-    def list(request:, timeout_ms: nil)
+
+
+    sig { params(request: Models::Ops::GetTransactionsV1TransactionsGetRequest, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(Models::Shared::PageTransactionRead) }
+    def list(request:, timeout_ms: nil, http_headers: nil)
       # list - Get Transactions
       # The Get Transactions API retrieves a list of transactions with
       #     optional filtering, sorting, and pagination.
@@ -57,7 +59,7 @@ module KintsugiSDK
 
       timeout = (timeout_ms.to_f / 1000) unless timeout_ms.nil?
       timeout ||= @sdk_configuration.timeout
-      
+
 
       connection = @sdk_configuration.client
 
@@ -72,13 +74,16 @@ module KintsugiSDK
       error = T.let(nil, T.nilable(StandardError))
       http_response = T.let(nil, T.nilable(Faraday::Response))
       
-      
+
       begin
         http_response = T.must(connection).get(url) do |req|
           req.headers.merge!(headers)
           req.options.timeout = timeout unless timeout.nil?
           req.params = query_params
           Utils.configure_request_security(req, security)
+          http_headers&.each do |key, value|
+            req.headers[key.to_s] = value
+          end
 
           @sdk_configuration.hooks.before_request(
             hook_ctx: SDKHooks::BeforeRequestHookContext.new(
@@ -106,13 +111,13 @@ module KintsugiSDK
             response: http_response
           )
         end
-        
+
         if http_response.nil?
           raise error if !error.nil?
           raise 'no response'
         end
       end
-      
+
       content_type = http_response.headers.fetch('Content-Type', 'application/octet-stream')
       if Utils.match_status_code(http_response.status, ['200'])
         if Utils.match_content_type(content_type, 'application/json')
@@ -182,8 +187,8 @@ module KintsugiSDK
     end
 
 
-    sig { params(request: Models::Shared::TransactionPublicRequest, timeout_ms: T.nilable(Integer)).returns(Models::Shared::TransactionRead) }
-    def create(request:, timeout_ms: nil)
+    sig { params(request: Models::Shared::TransactionPublicRequest, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(Models::Shared::TransactionRead) }
+    def create(request:, timeout_ms: nil, http_headers: nil)
       # create - Create Transaction
       # Create a transaction.
       url, params = @sdk_configuration.get_server_details
@@ -209,7 +214,7 @@ module KintsugiSDK
 
       timeout = (timeout_ms.to_f / 1000) unless timeout_ms.nil?
       timeout ||= @sdk_configuration.timeout
-      
+
 
       connection = @sdk_configuration.client
 
@@ -224,13 +229,16 @@ module KintsugiSDK
       error = T.let(nil, T.nilable(StandardError))
       http_response = T.let(nil, T.nilable(Faraday::Response))
       
-      
+
       begin
         http_response = T.must(connection).post(url) do |req|
           req.body = body
           req.headers.merge!(headers)
           req.options.timeout = timeout unless timeout.nil?
           Utils.configure_request_security(req, security)
+          http_headers&.each do |key, value|
+            req.headers[key.to_s] = value
+          end
 
           @sdk_configuration.hooks.before_request(
             hook_ctx: SDKHooks::BeforeRequestHookContext.new(
@@ -258,13 +266,13 @@ module KintsugiSDK
             response: http_response
           )
         end
-        
+
         if http_response.nil?
           raise error if !error.nil?
           raise 'no response'
         end
       end
-      
+
       content_type = http_response.headers.fetch('Content-Type', 'application/octet-stream')
       if Utils.match_status_code(http_response.status, ['202'])
         if Utils.match_content_type(content_type, 'application/json')
@@ -334,8 +342,8 @@ module KintsugiSDK
     end
 
 
-    sig { params(request: Models::Ops::GetTransactionByExternalIdRequest, timeout_ms: T.nilable(Integer)).returns(Models::Shared::TransactionRead) }
-    def get_by_external_id(request:, timeout_ms: nil)
+    sig { params(request: Models::Ops::GetTransactionByExternalIdRequest, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(Models::Shared::TransactionRead) }
+    def get_by_external_id(request:, timeout_ms: nil, http_headers: nil)
       # get_by_external_id - Get Transaction By External Id
       # Retrieves a specific transaction based on its external ID.
       #     This allows users to fetch transaction details using an identifier from an external system.
@@ -356,7 +364,7 @@ module KintsugiSDK
 
       timeout = (timeout_ms.to_f / 1000) unless timeout_ms.nil?
       timeout ||= @sdk_configuration.timeout
-      
+
 
       connection = @sdk_configuration.client
 
@@ -371,12 +379,15 @@ module KintsugiSDK
       error = T.let(nil, T.nilable(StandardError))
       http_response = T.let(nil, T.nilable(Faraday::Response))
       
-      
+
       begin
         http_response = T.must(connection).get(url) do |req|
           req.headers.merge!(headers)
           req.options.timeout = timeout unless timeout.nil?
           Utils.configure_request_security(req, security)
+          http_headers&.each do |key, value|
+            req.headers[key.to_s] = value
+          end
 
           @sdk_configuration.hooks.before_request(
             hook_ctx: SDKHooks::BeforeRequestHookContext.new(
@@ -404,13 +415,13 @@ module KintsugiSDK
             response: http_response
           )
         end
-        
+
         if http_response.nil?
           raise error if !error.nil?
           raise 'no response'
         end
       end
-      
+
       content_type = http_response.headers.fetch('Content-Type', 'application/octet-stream')
       if Utils.match_status_code(http_response.status, ['200'])
         if Utils.match_content_type(content_type, 'application/json')
@@ -480,8 +491,8 @@ module KintsugiSDK
     end
 
 
-    sig { params(request: Models::Ops::UpdateTransactionV1TransactionsTransactionIdPutRequest, timeout_ms: T.nilable(Integer)).returns(Models::Shared::TransactionRead) }
-    def update(request:, timeout_ms: nil)
+    sig { params(request: Models::Ops::UpdateTransactionV1TransactionsTransactionIdPutRequest, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(Models::Shared::TransactionRead) }
+    def update(request:, timeout_ms: nil, http_headers: nil)
       # update - Update Transaction
       # Update a specific transaction by its ID.
       url, params = @sdk_configuration.get_server_details
@@ -512,7 +523,7 @@ module KintsugiSDK
 
       timeout = (timeout_ms.to_f / 1000) unless timeout_ms.nil?
       timeout ||= @sdk_configuration.timeout
-      
+
 
       connection = @sdk_configuration.client
 
@@ -527,13 +538,16 @@ module KintsugiSDK
       error = T.let(nil, T.nilable(StandardError))
       http_response = T.let(nil, T.nilable(Faraday::Response))
       
-      
+
       begin
         http_response = T.must(connection).put(url) do |req|
           req.body = body
           req.headers.merge!(headers)
           req.options.timeout = timeout unless timeout.nil?
           Utils.configure_request_security(req, security)
+          http_headers&.each do |key, value|
+            req.headers[key.to_s] = value
+          end
 
           @sdk_configuration.hooks.before_request(
             hook_ctx: SDKHooks::BeforeRequestHookContext.new(
@@ -561,13 +575,13 @@ module KintsugiSDK
             response: http_response
           )
         end
-        
+
         if http_response.nil?
           raise error if !error.nil?
           raise 'no response'
         end
       end
-      
+
       content_type = http_response.headers.fetch('Content-Type', 'application/octet-stream')
       if Utils.match_status_code(http_response.status, ['200'])
         if Utils.match_content_type(content_type, 'application/json')
@@ -609,8 +623,8 @@ module KintsugiSDK
     end
 
 
-    sig { params(request: Models::Ops::GetTransactionByIdV1TransactionsTransactionIdGetRequest, timeout_ms: T.nilable(Integer)).returns(Models::Shared::TransactionRead) }
-    def get_by_id(request:, timeout_ms: nil)
+    sig { params(request: Models::Ops::GetTransactionByIdV1TransactionsTransactionIdGetRequest, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(Models::Shared::TransactionRead) }
+    def get_by_id(request:, timeout_ms: nil, http_headers: nil)
       # get_by_id - Get Transaction By Id
       # The Get Transaction By Id API retrieves detailed information
       #     about a specific transaction by providing its unique transaction ID.
@@ -631,7 +645,7 @@ module KintsugiSDK
 
       timeout = (timeout_ms.to_f / 1000) unless timeout_ms.nil?
       timeout ||= @sdk_configuration.timeout
-      
+
 
       connection = @sdk_configuration.client
 
@@ -646,12 +660,15 @@ module KintsugiSDK
       error = T.let(nil, T.nilable(StandardError))
       http_response = T.let(nil, T.nilable(Faraday::Response))
       
-      
+
       begin
         http_response = T.must(connection).get(url) do |req|
           req.headers.merge!(headers)
           req.options.timeout = timeout unless timeout.nil?
           Utils.configure_request_security(req, security)
+          http_headers&.each do |key, value|
+            req.headers[key.to_s] = value
+          end
 
           @sdk_configuration.hooks.before_request(
             hook_ctx: SDKHooks::BeforeRequestHookContext.new(
@@ -679,13 +696,13 @@ module KintsugiSDK
             response: http_response
           )
         end
-        
+
         if http_response.nil?
           raise error if !error.nil?
           raise 'no response'
         end
       end
-      
+
       content_type = http_response.headers.fetch('Content-Type', 'application/octet-stream')
       if Utils.match_status_code(http_response.status, ['200'])
         if Utils.match_content_type(content_type, 'application/json')
@@ -755,8 +772,8 @@ module KintsugiSDK
     end
 
 
-    sig { params(request: Models::Ops::GetTransactionsByFilingRequest, timeout_ms: T.nilable(Integer)).returns(T::Array[Models::Shared::TransactionRead]) }
-    def get_by_filing_id(request:, timeout_ms: nil)
+    sig { params(request: Models::Ops::GetTransactionsByFilingRequest, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(T::Array[Models::Shared::TransactionRead]) }
+    def get_by_filing_id(request:, timeout_ms: nil, http_headers: nil)
       # get_by_filing_id - Get Transactions By Filing Id
       # Retrieve transactions by filing ID.
       url, params = @sdk_configuration.get_server_details
@@ -776,7 +793,7 @@ module KintsugiSDK
 
       timeout = (timeout_ms.to_f / 1000) unless timeout_ms.nil?
       timeout ||= @sdk_configuration.timeout
-      
+
 
       connection = @sdk_configuration.client
 
@@ -791,12 +808,15 @@ module KintsugiSDK
       error = T.let(nil, T.nilable(StandardError))
       http_response = T.let(nil, T.nilable(Faraday::Response))
       
-      
+
       begin
         http_response = T.must(connection).get(url) do |req|
           req.headers.merge!(headers)
           req.options.timeout = timeout unless timeout.nil?
           Utils.configure_request_security(req, security)
+          http_headers&.each do |key, value|
+            req.headers[key.to_s] = value
+          end
 
           @sdk_configuration.hooks.before_request(
             hook_ctx: SDKHooks::BeforeRequestHookContext.new(
@@ -824,13 +844,13 @@ module KintsugiSDK
             response: http_response
           )
         end
-        
+
         if http_response.nil?
           raise error if !error.nil?
           raise 'no response'
         end
       end
-      
+
       content_type = http_response.headers.fetch('Content-Type', 'application/octet-stream')
       if Utils.match_status_code(http_response.status, ['200'])
         if Utils.match_content_type(content_type, 'application/json')
@@ -898,5 +918,5 @@ module KintsugiSDK
 
       end
     end
-  end
+end
 end

@@ -2,6 +2,14 @@
 
 We use this to understand the response from get_tax_items
 
+## Example Usage
+
+```ruby
+require "kintsugi_sdk"
+
+value = TaxItemReturnReasonEnum::NO_RULE_FOUND
+```
+
 
 ## Values
 

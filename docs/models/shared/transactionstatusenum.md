@@ -1,5 +1,13 @@
 # TransactionStatusEnum
 
+## Example Usage
+
+```ruby
+require "kintsugi_sdk"
+
+value = TransactionStatusEnum::PENDING
+```
+
 
 ## Values
 

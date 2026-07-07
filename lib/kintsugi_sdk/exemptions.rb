@@ -39,8 +39,10 @@ module KintsugiSDK
     end
 
 
-    sig { params(request: Models::Ops::GetExemptionsV1ExemptionsGetRequest, timeout_ms: T.nilable(Integer)).returns(Models::Shared::FastapiPaginationDefaultPageExemptionRead2) }
-    def list(request:, timeout_ms: nil)
+
+
+    sig { params(request: Models::Ops::GetExemptionsV1ExemptionsGetRequest, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(Models::Shared::FastapiPaginationDefaultPageExemptionRead2) }
+    def list(request:, timeout_ms: nil, http_headers: nil)
       # list - Get Exemptions
       # Retrieve a list of exemptions based on filters.
       url, params = @sdk_configuration.get_server_details
@@ -56,7 +58,7 @@ module KintsugiSDK
 
       timeout = (timeout_ms.to_f / 1000) unless timeout_ms.nil?
       timeout ||= @sdk_configuration.timeout
-      
+
 
       connection = @sdk_configuration.client
 
@@ -71,13 +73,16 @@ module KintsugiSDK
       error = T.let(nil, T.nilable(StandardError))
       http_response = T.let(nil, T.nilable(Faraday::Response))
       
-      
+
       begin
         http_response = T.must(connection).get(url) do |req|
           req.headers.merge!(headers)
           req.options.timeout = timeout unless timeout.nil?
           req.params = query_params
           Utils.configure_request_security(req, security)
+          http_headers&.each do |key, value|
+            req.headers[key.to_s] = value
+          end
 
           @sdk_configuration.hooks.before_request(
             hook_ctx: SDKHooks::BeforeRequestHookContext.new(
@@ -105,13 +110,13 @@ module KintsugiSDK
             response: http_response
           )
         end
-        
+
         if http_response.nil?
           raise error if !error.nil?
           raise 'no response'
         end
       end
-      
+
       content_type = http_response.headers.fetch('Content-Type', 'application/octet-stream')
       if Utils.match_status_code(http_response.status, ['200'])
         if Utils.match_content_type(content_type, 'application/json')
@@ -181,8 +186,8 @@ module KintsugiSDK
     end
 
 
-    sig { params(request: Models::Shared::ExemptionCreate, timeout_ms: T.nilable(Integer)).returns(Models::Shared::BackendSrcExemptionsSerializersExemptionRead) }
-    def create(request:, timeout_ms: nil)
+    sig { params(request: Models::Shared::ExemptionCreate, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(Models::Shared::BackendSrcExemptionsSerializersExemptionRead) }
+    def create(request:, timeout_ms: nil, http_headers: nil)
       # create - Create Exemption
       # The Create Exemption API allows you to create a new exemption record.
       #     This includes defining details such as exemption type, jurisdiction,
@@ -210,7 +215,7 @@ module KintsugiSDK
 
       timeout = (timeout_ms.to_f / 1000) unless timeout_ms.nil?
       timeout ||= @sdk_configuration.timeout
-      
+
 
       connection = @sdk_configuration.client
 
@@ -225,13 +230,16 @@ module KintsugiSDK
       error = T.let(nil, T.nilable(StandardError))
       http_response = T.let(nil, T.nilable(Faraday::Response))
       
-      
+
       begin
         http_response = T.must(connection).post(url) do |req|
           req.body = body
           req.headers.merge!(headers)
           req.options.timeout = timeout unless timeout.nil?
           Utils.configure_request_security(req, security)
+          http_headers&.each do |key, value|
+            req.headers[key.to_s] = value
+          end
 
           @sdk_configuration.hooks.before_request(
             hook_ctx: SDKHooks::BeforeRequestHookContext.new(
@@ -259,13 +267,13 @@ module KintsugiSDK
             response: http_response
           )
         end
-        
+
         if http_response.nil?
           raise error if !error.nil?
           raise 'no response'
         end
       end
-      
+
       content_type = http_response.headers.fetch('Content-Type', 'application/octet-stream')
       if Utils.match_status_code(http_response.status, ['200'])
         if Utils.match_content_type(content_type, 'application/json')
@@ -335,8 +343,8 @@ module KintsugiSDK
     end
 
 
-    sig { params(request: Models::Ops::GetExemptionByIdV1ExemptionsExemptionIdGetRequest, timeout_ms: T.nilable(Integer)).returns(Models::Shared::BackendSrcExemptionsModelsExemptionRead) }
-    def get(request:, timeout_ms: nil)
+    sig { params(request: Models::Ops::GetExemptionByIdV1ExemptionsExemptionIdGetRequest, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(Models::Shared::BackendSrcExemptionsModelsExemptionRead) }
+    def get(request:, timeout_ms: nil, http_headers: nil)
       # get - Get Exemption By Id
       # The Get Exemption By ID API retrieves a specific exemption record by
       #     its unique ID. This API is useful for retrieving detailed information
@@ -359,7 +367,7 @@ module KintsugiSDK
 
       timeout = (timeout_ms.to_f / 1000) unless timeout_ms.nil?
       timeout ||= @sdk_configuration.timeout
-      
+
 
       connection = @sdk_configuration.client
 
@@ -374,12 +382,15 @@ module KintsugiSDK
       error = T.let(nil, T.nilable(StandardError))
       http_response = T.let(nil, T.nilable(Faraday::Response))
       
-      
+
       begin
         http_response = T.must(connection).get(url) do |req|
           req.headers.merge!(headers)
           req.options.timeout = timeout unless timeout.nil?
           Utils.configure_request_security(req, security)
+          http_headers&.each do |key, value|
+            req.headers[key.to_s] = value
+          end
 
           @sdk_configuration.hooks.before_request(
             hook_ctx: SDKHooks::BeforeRequestHookContext.new(
@@ -407,13 +418,13 @@ module KintsugiSDK
             response: http_response
           )
         end
-        
+
         if http_response.nil?
           raise error if !error.nil?
           raise 'no response'
         end
       end
-      
+
       content_type = http_response.headers.fetch('Content-Type', 'application/octet-stream')
       if Utils.match_status_code(http_response.status, ['200'])
         if Utils.match_content_type(content_type, 'application/json')
@@ -483,8 +494,8 @@ module KintsugiSDK
     end
 
 
-    sig { params(request: Models::Ops::UploadExemptionCertRequest, timeout_ms: T.nilable(Integer)).returns(Models::Shared::AttachmentRead) }
-    def upload_certificate(request:, timeout_ms: nil)
+    sig { params(request: Models::Ops::UploadExemptionCertRequest, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(Models::Shared::AttachmentRead) }
+    def upload_certificate(request:, timeout_ms: nil, http_headers: nil)
       # upload_certificate - Upload Exemption Certificate
       # The Upload Exemption Certificate API allows you
       #     to upload a file attachment (e.g., exemption certificate) for a specific exemption.
@@ -518,7 +529,7 @@ module KintsugiSDK
 
       timeout = (timeout_ms.to_f / 1000) unless timeout_ms.nil?
       timeout ||= @sdk_configuration.timeout
-      
+
 
       connection = @sdk_configuration.client
 
@@ -533,13 +544,16 @@ module KintsugiSDK
       error = T.let(nil, T.nilable(StandardError))
       http_response = T.let(nil, T.nilable(Faraday::Response))
       
-      
+
       begin
         http_response = T.must(connection).post(url) do |req|
           req.body = body
           req.headers.merge!(headers)
           req.options.timeout = timeout unless timeout.nil?
           Utils.configure_request_security(req, security)
+          http_headers&.each do |key, value|
+            req.headers[key.to_s] = value
+          end
 
           @sdk_configuration.hooks.before_request(
             hook_ctx: SDKHooks::BeforeRequestHookContext.new(
@@ -567,13 +581,13 @@ module KintsugiSDK
             response: http_response
           )
         end
-        
+
         if http_response.nil?
           raise error if !error.nil?
           raise 'no response'
         end
       end
-      
+
       content_type = http_response.headers.fetch('Content-Type', 'application/octet-stream')
       if Utils.match_status_code(http_response.status, ['200'])
         if Utils.match_content_type(content_type, 'application/json')
@@ -643,8 +657,8 @@ module KintsugiSDK
     end
 
 
-    sig { params(request: Models::Ops::GetExemptionAttachmentsRequest, timeout_ms: T.nilable(Integer)).returns(T::Array[Models::Shared::AttachmentRead]) }
-    def get_attachments(request:, timeout_ms: nil)
+    sig { params(request: Models::Ops::GetExemptionAttachmentsRequest, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(T::Array[Models::Shared::AttachmentRead]) }
+    def get_attachments(request:, timeout_ms: nil, http_headers: nil)
       # get_attachments - Get Attachments For Exemption
       # The Get Attachments for Exemption API retrieves all
       #     attachments associated with a specific exemption.
@@ -667,7 +681,7 @@ module KintsugiSDK
 
       timeout = (timeout_ms.to_f / 1000) unless timeout_ms.nil?
       timeout ||= @sdk_configuration.timeout
-      
+
 
       connection = @sdk_configuration.client
 
@@ -682,12 +696,15 @@ module KintsugiSDK
       error = T.let(nil, T.nilable(StandardError))
       http_response = T.let(nil, T.nilable(Faraday::Response))
       
-      
+
       begin
         http_response = T.must(connection).get(url) do |req|
           req.headers.merge!(headers)
           req.options.timeout = timeout unless timeout.nil?
           Utils.configure_request_security(req, security)
+          http_headers&.each do |key, value|
+            req.headers[key.to_s] = value
+          end
 
           @sdk_configuration.hooks.before_request(
             hook_ctx: SDKHooks::BeforeRequestHookContext.new(
@@ -715,13 +732,13 @@ module KintsugiSDK
             response: http_response
           )
         end
-        
+
         if http_response.nil?
           raise error if !error.nil?
           raise 'no response'
         end
       end
-      
+
       content_type = http_response.headers.fetch('Content-Type', 'application/octet-stream')
       if Utils.match_status_code(http_response.status, ['200'])
         if Utils.match_content_type(content_type, 'application/json')
@@ -775,5 +792,5 @@ module KintsugiSDK
 
       end
     end
-  end
+end
 end

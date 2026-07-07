@@ -1,5 +1,13 @@
 # NexusStateEnum
 
+## Example Usage
+
+```ruby
+require "kintsugi_sdk"
+
+value = NexusStateEnum::EXPOSED
+```
+
 
 ## Values
 

@@ -1,5 +1,13 @@
 # TaxItemTypeEnum
 
+## Example Usage
+
+```ruby
+require "kintsugi_sdk"
+
+value = TaxItemTypeEnum::IMPORTED_ORIGINAL
+```
+
 
 ## Values
 

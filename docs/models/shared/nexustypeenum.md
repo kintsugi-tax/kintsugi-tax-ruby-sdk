@@ -1,5 +1,13 @@
 # NexusTypeEnum
 
+## Example Usage
+
+```ruby
+require "kintsugi_sdk"
+
+value = NexusTypeEnum::CANADA_FEDERAL
+```
+
 
 ## Values
 

@@ -1,5 +1,13 @@
 # TransactionTypeEnum
 
+## Example Usage
+
+```ruby
+require "kintsugi_sdk"
+
+value = TransactionTypeEnum::SALE
+```
+
 
 ## Values
 

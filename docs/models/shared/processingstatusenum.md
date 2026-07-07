@@ -3,6 +3,14 @@
 Our transaction state, used to determine when/if a transaction needs additional
 processing.
 
+## Example Usage
+
+```ruby
+require "kintsugi_sdk"
+
+value = ProcessingStatusEnum::NEW
+```
+
 
 ## Values
 

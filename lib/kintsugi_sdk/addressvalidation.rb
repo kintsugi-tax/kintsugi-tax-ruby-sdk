@@ -39,8 +39,10 @@ module KintsugiSDK
     end
 
 
-    sig { params(security: Models::Ops::SearchV1AddressValidationSearchPostSecurity, request: Models::Shared::AddressBase, timeout_ms: T.nilable(Integer)).returns(T::Array[Models::Shared::AddressSearchResponse]) }
-    def search(security:, request:, timeout_ms: nil)
+
+
+    sig { params(security: Models::Ops::SearchV1AddressValidationSearchPostSecurity, request: Models::Shared::AddressBase, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(T::Array[Models::Shared::AddressSearchResponse]) }
+    def search(security:, request:, timeout_ms: nil, http_headers: nil)
       # search - Search
       # This API validates and enriches address information
       #     submitted by the user. It ensures that the address is standardized, accurate,
@@ -67,7 +69,7 @@ module KintsugiSDK
 
       timeout = (timeout_ms.to_f / 1000) unless timeout_ms.nil?
       timeout ||= @sdk_configuration.timeout
-      
+
 
       connection = @sdk_configuration.client
 
@@ -82,13 +84,16 @@ module KintsugiSDK
       error = T.let(nil, T.nilable(StandardError))
       http_response = T.let(nil, T.nilable(Faraday::Response))
       
-      
+
       begin
         http_response = T.must(connection).post(url) do |req|
           req.body = body
           req.headers.merge!(headers)
           req.options.timeout = timeout unless timeout.nil?
           Utils.configure_request_security(req, security)
+          http_headers&.each do |key, value|
+            req.headers[key.to_s] = value
+          end
 
           @sdk_configuration.hooks.before_request(
             hook_ctx: SDKHooks::BeforeRequestHookContext.new(
@@ -116,13 +121,13 @@ module KintsugiSDK
             response: http_response
           )
         end
-        
+
         if http_response.nil?
           raise error if !error.nil?
           raise 'no response'
         end
       end
-      
+
       content_type = http_response.headers.fetch('Content-Type', 'application/octet-stream')
       if Utils.match_status_code(http_response.status, ['200'])
         if Utils.match_content_type(content_type, 'application/json')
@@ -192,8 +197,8 @@ module KintsugiSDK
     end
 
 
-    sig { params(request: Models::Shared::ValidationAddress, timeout_ms: T.nilable(Integer)).returns(::Object) }
-    def suggestions(request:, timeout_ms: nil)
+    sig { params(request: Models::Shared::ValidationAddress, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(::Object) }
+    def suggestions(request:, timeout_ms: nil, http_headers: nil)
       # suggestions - Suggestions
       # This API endpoint provides address suggestions based on
       #     partial input data. It helps users auto-complete and validate addresses efficiently
@@ -223,7 +228,7 @@ module KintsugiSDK
 
       timeout = (timeout_ms.to_f / 1000) unless timeout_ms.nil?
       timeout ||= @sdk_configuration.timeout
-      
+
 
       connection = @sdk_configuration.client
 
@@ -238,13 +243,16 @@ module KintsugiSDK
       error = T.let(nil, T.nilable(StandardError))
       http_response = T.let(nil, T.nilable(Faraday::Response))
       
-      
+
       begin
         http_response = T.must(connection).post(url) do |req|
           req.body = body
           req.headers.merge!(headers)
           req.options.timeout = timeout unless timeout.nil?
           Utils.configure_request_security(req, security)
+          http_headers&.each do |key, value|
+            req.headers[key.to_s] = value
+          end
 
           @sdk_configuration.hooks.before_request(
             hook_ctx: SDKHooks::BeforeRequestHookContext.new(
@@ -272,13 +280,13 @@ module KintsugiSDK
             response: http_response
           )
         end
-        
+
         if http_response.nil?
           raise error if !error.nil?
           raise 'no response'
         end
       end
-      
+
       content_type = http_response.headers.fetch('Content-Type', 'application/octet-stream')
       if Utils.match_status_code(http_response.status, ['200'])
         if Utils.match_content_type(content_type, 'application/json')
@@ -346,5 +354,5 @@ module KintsugiSDK
 
       end
     end
-  end
+end
 end

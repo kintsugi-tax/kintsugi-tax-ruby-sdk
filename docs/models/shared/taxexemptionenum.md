@@ -2,6 +2,14 @@
 
 This enum is used to determine if a transaction is exempt from tax.
 
+## Example Usage
+
+```ruby
+require "kintsugi_sdk"
+
+value = TaxExemptionEnum::PRODUCT
+```
+
 
 ## Values
 

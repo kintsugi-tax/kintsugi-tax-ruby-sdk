@@ -1,5 +1,13 @@
 # CountryCodeEnum
 
+## Example Usage
+
+```ruby
+require "kintsugi_sdk"
+
+value = CountryCodeEnum::AF
+```
+
 
 ## Values
 
