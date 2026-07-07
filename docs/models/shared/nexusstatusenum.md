@@ -1,5 +1,13 @@
 # NexusStatusEnum
 
+## Example Usage
+
+```ruby
+require "kintsugi_sdk"
+
+value = NexusStatusEnum::NEEDS_RERUN
+```
+
 
 ## Values
 

@@ -1,5 +1,13 @@
 # ProductStatusEnum
 
+## Example Usage
+
+```ruby
+require "kintsugi_sdk"
+
+value = ProductStatusEnum::APPROVED
+```
+
 
 ## Values
 

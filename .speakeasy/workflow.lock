@@ -1,4 +1,4 @@
-speakeasyVersion: 1.737.0
+speakeasyVersion: 1.789.0
 sources:
     kintsugi-overlay:
         sourceNamespace: kintsugi-overlay
@@ -14,7 +14,7 @@ targets:
         sourceRevisionDigest: sha256:fd5d96046d74b2f4296d1fa5ab5be76c173cb3d61b27984bba375de9ef5ef233
         sourceBlobDigest: sha256:126749d28787973095659293084ff06affeb15e636c82ce92b15bcd7954f80e7
         codeSamplesNamespace: kintsugi-overlay-ruby-code-samples
-        codeSamplesRevisionDigest: sha256:23b9ac1e28437e0b0f29181a3316e9b09b4f9c9bba0b039b79c32558bd65bd29
+        codeSamplesRevisionDigest: sha256:e8d8f3accb8253fc12b838ac1e7e975aad71d91464d8bc6f9c3c77a1920bc627
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

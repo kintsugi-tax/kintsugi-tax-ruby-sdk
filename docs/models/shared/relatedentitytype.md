@@ -1,5 +1,13 @@
 # RelatedEntityType
 
+## Example Usage
+
+```ruby
+require "kintsugi_sdk"
+
+value = RelatedEntityType::EXEMPTION
+```
+
 
 ## Values
 

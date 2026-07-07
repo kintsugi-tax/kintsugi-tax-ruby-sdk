@@ -1,5 +1,13 @@
 # SourceEnum
 
+## Example Usage
+
+```ruby
+require "kintsugi_sdk"
+
+value = SourceEnum::BIGCOMMERCE
+```
+
 
 ## Values
 

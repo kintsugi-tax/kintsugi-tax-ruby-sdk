@@ -1,5 +1,13 @@
 # StatusEnum
 
+## Example Usage
+
+```ruby
+require "kintsugi_sdk"
+
+value = StatusEnum::ACTIVE
+```
+
 
 ## Values
 

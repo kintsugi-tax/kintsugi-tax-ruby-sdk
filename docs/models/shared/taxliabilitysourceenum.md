@@ -1,5 +1,13 @@
 # TaxLiabilitySourceEnum
 
+## Example Usage
+
+```ruby
+require "kintsugi_sdk"
+
+value = TaxLiabilitySourceEnum::CALCULATED
+```
+
 
 ## Values
 

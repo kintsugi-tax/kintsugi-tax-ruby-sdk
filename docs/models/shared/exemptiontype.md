@@ -1,5 +1,13 @@
 # ExemptionType
 
+## Example Usage
+
+```ruby
+require "kintsugi_sdk"
+
+value = ExemptionType::CUSTOMER
+```
+
 
 ## Values
 

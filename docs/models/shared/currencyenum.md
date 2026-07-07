@@ -1,5 +1,13 @@
 # CurrencyEnum
 
+## Example Usage
+
+```ruby
+require "kintsugi_sdk"
+
+value = CurrencyEnum::AED
+```
+
 
 ## Values
 

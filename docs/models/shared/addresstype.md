@@ -1,5 +1,13 @@
 # AddressType
 
+## Example Usage
+
+```ruby
+require "kintsugi_sdk"
+
+value = AddressType::BILL_TO
+```
+
 
 ## Values
 

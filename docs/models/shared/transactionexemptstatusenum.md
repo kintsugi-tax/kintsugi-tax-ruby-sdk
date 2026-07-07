@@ -6,6 +6,14 @@ PARTIALLY EXEMPT: At least some of the items are NOT EXEMPT
 FULLY_EXEMPT: All items sold in the transaction are EXEMPT
 ZERO_RATE_NOT_EXEMPT: All items sold in the transaction are zero-rated
 
+## Example Usage
+
+```ruby
+require "kintsugi_sdk"
+
+value = TransactionExemptStatusEnum::NOT_EXEMPT
+```
+
 
 ## Values
 

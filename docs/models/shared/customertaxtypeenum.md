@@ -2,6 +2,14 @@
 
 Enum for customer tax registration types.
 
+## Example Usage
+
+```ruby
+require "kintsugi_sdk"
+
+value = CustomerTaxTypeEnum::GST
+```
+
 
 ## Values
 

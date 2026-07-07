@@ -13,10 +13,9 @@ require_relative 'utils/retries'
 module KintsugiSDK
   extend T::Sig
 
-  SERVERS = [
+  SERVERS = T.let([
     'https://api.trykintsugi.com', # 1 - Production API server URL
-  ].freeze
-  SERVERS = T.let(SERVERS, T::Array[String])
+  ].freeze, T::Array[String])
   # Contains the list of servers available to the SDK
 
   class SDKConfiguration
@@ -89,9 +88,9 @@ module KintsugiSDK
       end
       @language = 'ruby'
       @openapi_doc_version = '1.0.0'
-      @sdk_version = '5.6.0'
-      @gen_version = '2.845.15'
-      @user_agent = 'speakeasy-sdk/ruby 5.6.0 2.845.15 1.0.0 kintsugi_sdk'
+      @sdk_version = '5.6.1'
+      @gen_version = '2.916.2'
+      @user_agent = 'speakeasy-sdk/ruby 5.6.1 2.916.2 1.0.0 kintsugi_sdk'
     end
 
     sig { returns([String, T::Hash[Symbol, String]]) }
