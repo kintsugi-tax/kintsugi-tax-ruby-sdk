@@ -1,0 +1,4 @@
+# TotalTaxAmountImported
+
+Imported tax amount.
+

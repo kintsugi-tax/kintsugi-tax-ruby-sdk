@@ -14,9 +14,11 @@ value = PeriodModelEnum::CURRENT_OR_PREVIOUS
 | Name                              | Value                             |
 | --------------------------------- | --------------------------------- |
 | `CURRENT_OR_PREVIOUS`             | CURRENT_OR_PREVIOUS               |
+| `CURRENT_OR_TWO_PREVIOUS`         | CURRENT_OR_TWO_PREVIOUS           |
 | `PRECEDING_YEAR_FROM_OCTOBER`     | PRECEDING_YEAR_FROM_OCTOBER       |
 | `CALENDAR_YEAR`                   | CALENDAR_YEAR                     |
 | `PREVIOUS_12_MONTHS`              | PREVIOUS_12_MONTHS                |
+| `CURRENT_OR_PREVIOUS_12_MONTHS`   | CURRENT_OR_PREVIOUS_12_MONTHS     |
 | `PREVIOUS_4_QUARTERS`             | PREVIOUS_4_QUARTERS               |
 | `PREVIOUS_4_QUARTERS_OFFSET`      | PREVIOUS_4_QUARTERS_OFFSET        |
 | `PRECEDING_YEAR`                  | PRECEDING_YEAR                    |
