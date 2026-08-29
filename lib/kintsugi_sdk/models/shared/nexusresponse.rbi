@@ -20,10 +20,6 @@ class KintsugiSDK::Models::Shared::NexusResponse
   def trigger=(str_); end
   def sales_or_transactions(); end
   def sales_or_transactions=(str_); end
-  def threshold_sales(); end
-  def threshold_sales=(str_); end
-  def threshold_transactions(); end
-  def threshold_transactions=(str_); end
   def start_date(); end
   def start_date=(str_); end
   def period_model(); end
@@ -32,10 +28,6 @@ class KintsugiSDK::Models::Shared::NexusResponse
   def period_start_date=(str_); end
   def period_end_date(); end
   def period_end_date=(str_); end
-  def previous_period_start_date(); end
-  def previous_period_start_date=(str_); end
-  def previous_period_end_date(); end
-  def previous_period_end_date=(str_); end
   def id(); end
   def id=(str_); end
   def created_at(); end
@@ -44,6 +36,8 @@ class KintsugiSDK::Models::Shared::NexusResponse
   def updated_at=(str_); end
   def organization_id(); end
   def organization_id=(str_); end
+  def threshold_sales(); end
+  def threshold_sales=(str_); end
   def is_vda_eligible(); end
   def is_vda_eligible=(str_); end
   def nexus_type(); end
@@ -56,48 +50,26 @@ class KintsugiSDK::Models::Shared::NexusResponse
   def total_transactions_exempted=(str_); end
   def total_transactions_marketplace(); end
   def total_transactions_marketplace=(str_); end
-  def marketplace_included(); end
-  def marketplace_included=(str_); end
   def processing_status(); end
   def processing_status=(str_); end
   def status(); end
   def status=(str_); end
-  def nexus_met_date(); end
-  def nexus_met_date=(str_); end
-  def economic_nexus_met_date(); end
-  def economic_nexus_met_date=(str_); end
-  def physical_nexus_met_date(); end
-  def physical_nexus_met_date=(str_); end
-  def collected_tax_nexus_met_date(); end
-  def collected_tax_nexus_met_date=(str_); end
-  def earliest_transaction_date(); end
-  def earliest_transaction_date=(str_); end
-  def most_recent_transaction_date(); end
-  def most_recent_transaction_date=(str_); end
-  def find_threshold_crossing_transaction_state(); end
-  def find_threshold_crossing_transaction_state=(str_); end
-  def predicted_month_from_today(); end
-  def predicted_month_from_today=(str_); end
-  def confidence_level(); end
-  def confidence_level=(str_); end
-  def last_processed_at(); end
-  def last_processed_at=(str_); end
-  def last_tax_liability_processed_at(); end
-  def last_tax_liability_processed_at=(str_); end
+  def threshold_transactions(); end
+  def threshold_transactions=(str_); end
+  def tax_type(); end
+  def tax_type=(str_); end
+  def previous_period_start_date(); end
+  def previous_period_start_date=(str_); end
+  def previous_period_end_date(); end
+  def previous_period_end_date=(str_); end
   def periods(); end
   def periods=(str_); end
-  def currency(); end
-  def currency=(str_); end
-  def registration(); end
-  def registration=(str_); end
-  def registration_regime(); end
-  def registration_regime=(str_); end
-  def disregarded_at(); end
-  def disregarded_at=(str_); end
-  def disregarded_by(); end
-  def disregarded_by=(str_); end
   def disregarded_nexus_types(); end
   def disregarded_nexus_types=(str_); end
+  def marketplace_included(); end
+  def marketplace_included=(str_); end
+  def threshold_sales_bigint(); end
+  def threshold_sales_bigint=(str_); end
   def transaction_count(); end
   def transaction_count=(str_); end
   def transactions_amount(); end
@@ -114,16 +86,56 @@ class KintsugiSDK::Models::Shared::NexusResponse
   def tax_liability=(str_); end
   def nexus_met(); end
   def nexus_met=(str_); end
+  def nexus_met_date(); end
+  def nexus_met_date=(str_); end
   def economic_nexus_met(); end
   def economic_nexus_met=(str_); end
+  def economic_nexus_met_date(); end
+  def economic_nexus_met_date=(str_); end
   def physical_nexus_met(); end
   def physical_nexus_met=(str_); end
+  def physical_nexus_met_date(); end
+  def physical_nexus_met_date=(str_); end
   def collected_tax_nexus_met(); end
   def collected_tax_nexus_met=(str_); end
+  def collected_tax_nexus_met_date(); end
+  def collected_tax_nexus_met_date=(str_); end
+  def earliest_transaction_date(); end
+  def earliest_transaction_date=(str_); end
+  def most_recent_transaction_date(); end
+  def most_recent_transaction_date=(str_); end
+  def find_threshold_crossing_transaction_state(); end
+  def find_threshold_crossing_transaction_state=(str_); end
   def earliest_collected_date(); end
   def earliest_collected_date=(str_); end
+  def predicted_month_from_today(); end
+  def predicted_month_from_today=(str_); end
   def vda_eligible(); end
   def vda_eligible=(str_); end
+  def confidence_level(); end
+  def confidence_level=(str_); end
+  def last_processed_at(); end
+  def last_processed_at=(str_); end
+  def last_tax_liability_processed_at(); end
+  def last_tax_liability_processed_at=(str_); end
+  def currency(); end
+  def currency=(str_); end
+  def registration(); end
+  def registration=(str_); end
+  def registration_regime(); end
+  def registration_regime=(str_); end
+  def disregarded_at(); end
+  def disregarded_at=(str_); end
+  def disregarded_by(); end
+  def disregarded_by=(str_); end
+  def disregarded_type(); end
+  def disregarded_type=(str_); end
   def is_currently_disregarded(); end
   def is_currently_disregarded=(str_); end
+  def ior_opt_out_eligible(); end
+  def ior_opt_out_eligible=(str_); end
+  def ior_eligible_at_registration(); end
+  def ior_eligible_at_registration=(str_); end
+  def requires_ior_number_to_register(); end
+  def requires_ior_number_to_register=(str_); end
 end
