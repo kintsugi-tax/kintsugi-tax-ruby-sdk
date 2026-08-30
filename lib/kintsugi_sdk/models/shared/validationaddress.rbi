@@ -18,14 +18,14 @@ class KintsugiSDK::Models::Shared::ValidationAddress
   def city=(str_); end
   def state(); end
   def state=(str_); end
+  def country(); end
+  def country=(str_); end
+  def postal_code(); end
+  def postal_code=(str_); end
   def id(); end
   def id=(str_); end
   def county(); end
   def county=(str_); end
   def full_address(); end
   def full_address=(str_); end
-  def country(); end
-  def country=(str_); end
-  def postal_code(); end
-  def postal_code=(str_); end
 end
