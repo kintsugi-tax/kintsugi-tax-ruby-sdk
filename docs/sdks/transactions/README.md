@@ -4,12 +4,12 @@
 
 ### Available Operations
 
-* [list](#list) - Get Transactions
-* [create](#create) - Create Transaction
-* [get_by_external_id](#get_by_external_id) - Get Transaction By External Id
-* [update](#update) - Update Transaction
-* [get_by_id](#get_by_id) - Get Transaction By Id
-* [get_by_filing_id](#get_by_filing_id) - Get Transactions By Filing Id
+* [list](#list) - Get transactions
+* [create](#create) - Create transaction
+* [get_by_external_id](#get_by_external_id) - Get transaction by external id
+* [get_by_filing_id](#get_by_filing_id) - Get transactions by filing id
+* [get_by_id](#get_by_id) - Get transaction by id
+* [update](#update) - Update transaction
 
 ## list
 
@@ -24,13 +24,15 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-  security: Models::Shared::Security.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-    custom_header: '<YOUR_API_KEY_HERE>'
-  )
+  api_key_header: '<YOUR_API_KEY_HERE>'
 )
 
-req = Models::Ops::GetTransactionsV1TransactionsGetRequest.new
+req = Models::Ops::GetTransactionsV1TransactionsGetRequest.new(
+  address_status_in: 'UNVERIFIED,INVALID,PARTIALLY_VERIFIED,VERIFIED,UNVERIFIABLE',
+  order_by: 'date,state,customer_name,status',
+  connection_id_in: 'conn_abc123,conn_def456',
+  x_organization_id: 'org_12345'
+)
 res = s.transactions.list(request: req)
 
 unless res.nil?
@@ -60,7 +62,7 @@ end
 
 ## create
 
-Create a transaction.
+Create a transaction. Set `marketplace: true` for reseller or marketplace orders where tax was remitted externally; gross sales still count toward nexus, but tax liability is excluded.
 
 ### Example Usage: connection_mismatch
 
@@ -70,22 +72,23 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-  security: Models::Shared::Security.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-    custom_header: '<YOUR_API_KEY_HERE>'
-  )
+  api_key_header: '<YOUR_API_KEY_HERE>'
 )
 
-req = Models::Shared::TransactionPublicRequest.new(
-  organization_id: '<id>',
-  external_id: '<id>',
-  date: DateTime.iso8601('2025-11-05T23:48:53.053Z'),
-  addresses: [],
-  transaction_items: [],
-  customer: Models::Shared::CustomerBaseBase.new(
-    organization_id: '<id>'
-  ),
-  type: Models::Shared::TransactionTypeEnum::TAX_REFUND
+req = Models::Ops::CreateTransactionV1TransactionsPostRequest.new(
+  x_organization_id: 'org_12345',
+  transaction_public_request: Models::Shared::TransactionPublicRequest.new(
+    organization_id: '<id>',
+    external_id: '<id>',
+    date: DateTime.iso8601('2025-11-05T23:48:53.053Z'),
+    addresses: [],
+    transaction_items: [],
+    customer: Models::Shared::CustomerBaseBase.new(
+      organization_id: '<id>',
+      is_test_data: false
+    ),
+    type: Models::Shared::TransactionTypeEnum::TAX_REFUND
+  )
 )
 res = s.transactions.create(request: req)
 
@@ -102,22 +105,23 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-  security: Models::Shared::Security.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-    custom_header: '<YOUR_API_KEY_HERE>'
-  )
+  api_key_header: '<YOUR_API_KEY_HERE>'
 )
 
-req = Models::Shared::TransactionPublicRequest.new(
-  organization_id: '<id>',
-  external_id: '<id>',
-  date: DateTime.iso8601('2025-11-05T23:48:53.053Z'),
-  addresses: [],
-  transaction_items: [],
-  customer: Models::Shared::CustomerBaseBase.new(
-    organization_id: '<id>'
-  ),
-  type: Models::Shared::TransactionTypeEnum::TAX_REFUND
+req = Models::Ops::CreateTransactionV1TransactionsPostRequest.new(
+  x_organization_id: 'org_12345',
+  transaction_public_request: Models::Shared::TransactionPublicRequest.new(
+    organization_id: '<id>',
+    external_id: '<id>',
+    date: DateTime.iso8601('2025-11-05T23:48:53.053Z'),
+    addresses: [],
+    transaction_items: [],
+    customer: Models::Shared::CustomerBaseBase.new(
+      organization_id: '<id>',
+      is_test_data: false
+    ),
+    type: Models::Shared::TransactionTypeEnum::TAX_REFUND
+  )
 )
 res = s.transactions.create(request: req)
 
@@ -134,22 +138,23 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-  security: Models::Shared::Security.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-    custom_header: '<YOUR_API_KEY_HERE>'
-  )
+  api_key_header: '<YOUR_API_KEY_HERE>'
 )
 
-req = Models::Shared::TransactionPublicRequest.new(
-  organization_id: '<id>',
-  external_id: '<id>',
-  date: DateTime.iso8601('2025-11-05T23:48:53.053Z'),
-  addresses: [],
-  transaction_items: [],
-  customer: Models::Shared::CustomerBaseBase.new(
-    organization_id: '<id>'
-  ),
-  type: Models::Shared::TransactionTypeEnum::TAX_REFUND
+req = Models::Ops::CreateTransactionV1TransactionsPostRequest.new(
+  x_organization_id: 'org_12345',
+  transaction_public_request: Models::Shared::TransactionPublicRequest.new(
+    organization_id: '<id>',
+    external_id: '<id>',
+    date: DateTime.iso8601('2025-11-05T23:48:53.053Z'),
+    addresses: [],
+    transaction_items: [],
+    customer: Models::Shared::CustomerBaseBase.new(
+      organization_id: '<id>',
+      is_test_data: false
+    ),
+    type: Models::Shared::TransactionTypeEnum::TAX_REFUND
+  )
 )
 res = s.transactions.create(request: req)
 
@@ -166,22 +171,23 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-  security: Models::Shared::Security.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-    custom_header: '<YOUR_API_KEY_HERE>'
-  )
+  api_key_header: '<YOUR_API_KEY_HERE>'
 )
 
-req = Models::Shared::TransactionPublicRequest.new(
-  organization_id: '<id>',
-  external_id: '<id>',
-  date: DateTime.iso8601('2025-11-05T23:48:53.053Z'),
-  addresses: [],
-  transaction_items: [],
-  customer: Models::Shared::CustomerBaseBase.new(
-    organization_id: '<id>'
-  ),
-  type: Models::Shared::TransactionTypeEnum::TAX_REFUND
+req = Models::Ops::CreateTransactionV1TransactionsPostRequest.new(
+  x_organization_id: 'org_12345',
+  transaction_public_request: Models::Shared::TransactionPublicRequest.new(
+    organization_id: '<id>',
+    external_id: '<id>',
+    date: DateTime.iso8601('2025-11-05T23:48:53.053Z'),
+    addresses: [],
+    transaction_items: [],
+    customer: Models::Shared::CustomerBaseBase.new(
+      organization_id: '<id>',
+      is_test_data: false
+    ),
+    type: Models::Shared::TransactionTypeEnum::TAX_REFUND
+  )
 )
 res = s.transactions.create(request: req)
 
@@ -198,22 +204,23 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-  security: Models::Shared::Security.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-    custom_header: '<YOUR_API_KEY_HERE>'
-  )
+  api_key_header: '<YOUR_API_KEY_HERE>'
 )
 
-req = Models::Shared::TransactionPublicRequest.new(
-  organization_id: '<id>',
-  external_id: '<id>',
-  date: DateTime.iso8601('2025-11-05T23:48:53.053Z'),
-  addresses: [],
-  transaction_items: [],
-  customer: Models::Shared::CustomerBaseBase.new(
-    organization_id: '<id>'
-  ),
-  type: Models::Shared::TransactionTypeEnum::TAX_REFUND
+req = Models::Ops::CreateTransactionV1TransactionsPostRequest.new(
+  x_organization_id: 'org_12345',
+  transaction_public_request: Models::Shared::TransactionPublicRequest.new(
+    organization_id: '<id>',
+    external_id: '<id>',
+    date: DateTime.iso8601('2025-11-05T23:48:53.053Z'),
+    addresses: [],
+    transaction_items: [],
+    customer: Models::Shared::CustomerBaseBase.new(
+      organization_id: '<id>',
+      is_test_data: false
+    ),
+    type: Models::Shared::TransactionTypeEnum::TAX_REFUND
+  )
 )
 res = s.transactions.create(request: req)
 
@@ -230,22 +237,23 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-  security: Models::Shared::Security.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-    custom_header: '<YOUR_API_KEY_HERE>'
-  )
+  api_key_header: '<YOUR_API_KEY_HERE>'
 )
 
-req = Models::Shared::TransactionPublicRequest.new(
-  organization_id: '<id>',
-  external_id: '<id>',
-  date: DateTime.iso8601('2025-11-05T23:48:53.053Z'),
-  addresses: [],
-  transaction_items: [],
-  customer: Models::Shared::CustomerBaseBase.new(
-    organization_id: '<id>'
-  ),
-  type: Models::Shared::TransactionTypeEnum::TAX_REFUND
+req = Models::Ops::CreateTransactionV1TransactionsPostRequest.new(
+  x_organization_id: 'org_12345',
+  transaction_public_request: Models::Shared::TransactionPublicRequest.new(
+    organization_id: '<id>',
+    external_id: '<id>',
+    date: DateTime.iso8601('2025-11-05T23:48:53.053Z'),
+    addresses: [],
+    transaction_items: [],
+    customer: Models::Shared::CustomerBaseBase.new(
+      organization_id: '<id>',
+      is_test_data: false
+    ),
+    type: Models::Shared::TransactionTypeEnum::TAX_REFUND
+  )
 )
 res = s.transactions.create(request: req)
 
@@ -262,22 +270,23 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-  security: Models::Shared::Security.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-    custom_header: '<YOUR_API_KEY_HERE>'
-  )
+  api_key_header: '<YOUR_API_KEY_HERE>'
 )
 
-req = Models::Shared::TransactionPublicRequest.new(
-  organization_id: '<id>',
-  external_id: '<id>',
-  date: DateTime.iso8601('2025-11-05T23:48:53.053Z'),
-  addresses: [],
-  transaction_items: [],
-  customer: Models::Shared::CustomerBaseBase.new(
-    organization_id: '<id>'
-  ),
-  type: Models::Shared::TransactionTypeEnum::TAX_REFUND
+req = Models::Ops::CreateTransactionV1TransactionsPostRequest.new(
+  x_organization_id: 'org_12345',
+  transaction_public_request: Models::Shared::TransactionPublicRequest.new(
+    organization_id: '<id>',
+    external_id: '<id>',
+    date: DateTime.iso8601('2025-11-05T23:48:53.053Z'),
+    addresses: [],
+    transaction_items: [],
+    customer: Models::Shared::CustomerBaseBase.new(
+      organization_id: '<id>',
+      is_test_data: false
+    ),
+    type: Models::Shared::TransactionTypeEnum::TAX_REFUND
+  )
 )
 res = s.transactions.create(request: req)
 
@@ -294,22 +303,23 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-  security: Models::Shared::Security.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-    custom_header: '<YOUR_API_KEY_HERE>'
-  )
+  api_key_header: '<YOUR_API_KEY_HERE>'
 )
 
-req = Models::Shared::TransactionPublicRequest.new(
-  organization_id: '<id>',
-  external_id: '<id>',
-  date: DateTime.iso8601('2025-11-05T23:48:53.053Z'),
-  addresses: [],
-  transaction_items: [],
-  customer: Models::Shared::CustomerBaseBase.new(
-    organization_id: '<id>'
-  ),
-  type: Models::Shared::TransactionTypeEnum::TAX_REFUND
+req = Models::Ops::CreateTransactionV1TransactionsPostRequest.new(
+  x_organization_id: 'org_12345',
+  transaction_public_request: Models::Shared::TransactionPublicRequest.new(
+    organization_id: '<id>',
+    external_id: '<id>',
+    date: DateTime.iso8601('2025-11-05T23:48:53.053Z'),
+    addresses: [],
+    transaction_items: [],
+    customer: Models::Shared::CustomerBaseBase.new(
+      organization_id: '<id>',
+      is_test_data: false
+    ),
+    type: Models::Shared::TransactionTypeEnum::TAX_REFUND
+  )
 )
 res = s.transactions.create(request: req)
 
@@ -321,9 +331,9 @@ end
 
 ### Parameters
 
-| Parameter                                                                                   | Type                                                                                        | Required                                                                                    | Description                                                                                 |
-| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `request`                                                                                   | [Models::Shared::TransactionPublicRequest](../../models/shared/transactionpublicrequest.md) | :heavy_check_mark:                                                                          | The request object to use for the request.                                                  |
+| Parameter                                                                                                                        | Type                                                                                                                             | Required                                                                                                                         | Description                                                                                                                      |
+| -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                                        | [Models::Ops::CreateTransactionV1TransactionsPostRequest](../../models/operations/createtransactionv1transactionspostrequest.md) | :heavy_check_mark:                                                                                                               | The request object to use for the request.                                                                                       |
 
 ### Response
 
@@ -351,14 +361,12 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-  security: Models::Shared::Security.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-    custom_header: '<YOUR_API_KEY_HERE>'
-  )
+  api_key_header: '<YOUR_API_KEY_HERE>'
 )
 
 req = Models::Ops::GetTransactionByExternalIdRequest.new(
-  external_id: '<id>'
+  external_id: '<id>',
+  x_organization_id: 'org_12345'
 )
 res = s.transactions.get_by_external_id(request: req)
 
@@ -387,6 +395,99 @@ end
 | Models::Errors::ErrorResponse                                          | 500                                                                    | application/json                                                       |
 | Errors::APIError                                                       | 4XX, 5XX                                                               | \*/\*                                                                  |
 
+## get_by_filing_id
+
+Retrieve transactions by filing ID.
+
+### Example Usage
+
+<!-- UsageSnippet language="ruby" operationID="getTransactionsByFiling" method="get" path="/v1/transactions/filings/{filing_id}" -->
+```ruby
+require 'kintsugi_sdk'
+
+Models = ::KintsugiSDK::Models
+s = ::KintsugiSDK::OpenApiSDK.new(
+  api_key_header: '<YOUR_API_KEY_HERE>'
+)
+
+req = Models::Ops::GetTransactionsByFilingRequest.new(
+  filing_id: '<id>',
+  x_organization_id: 'org_12345'
+)
+res = s.transactions.get_by_filing_id(request: req)
+
+unless res.nil?
+  # handle response
+end
+
+```
+
+### Parameters
+
+| Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                | [Models::Ops::GetTransactionsByFilingRequest](../../models/operations/gettransactionsbyfilingrequest.md) | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
+
+### Response
+
+**[T.nilable(T::Array[Models::Shared::TransactionRead])](../../models/operations/.md)**
+
+### Errors
+
+| Error Type                                                             | Status Code                                                            | Content Type                                                           |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Models::Errors::ErrorResponse                                          | 401                                                                    | application/json                                                       |
+| Models::Errors::BackendSrcTransactionsResponsesValidationErrorResponse | 422                                                                    | application/json                                                       |
+| Models::Errors::ErrorResponse                                          | 500                                                                    | application/json                                                       |
+| Errors::APIError                                                       | 4XX, 5XX                                                               | \*/\*                                                                  |
+
+## get_by_id
+
+The Get Transaction By Id API retrieves detailed information
+    about a specific transaction by providing its unique transaction ID.
+
+### Example Usage
+
+<!-- UsageSnippet language="ruby" operationID="get_transaction_by_id_v1_transactions__transaction_id__get" method="get" path="/v1/transactions/{transaction_id}" -->
+```ruby
+require 'kintsugi_sdk'
+
+Models = ::KintsugiSDK::Models
+s = ::KintsugiSDK::OpenApiSDK.new(
+  api_key_header: '<YOUR_API_KEY_HERE>'
+)
+
+req = Models::Ops::GetTransactionByIdV1TransactionsTransactionIdGetRequest.new(
+  transaction_id: '<id>',
+  x_organization_id: 'org_12345'
+)
+res = s.transactions.get_by_id(request: req)
+
+unless res.nil?
+  # handle response
+end
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                  | Type                                                                                                                                                       | Required                                                                                                                                                   | Description                                                                                                                                                |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                                                                  | [Models::Ops::GetTransactionByIdV1TransactionsTransactionIdGetRequest](../../models/operations/gettransactionbyidv1transactionstransactionidgetrequest.md) | :heavy_check_mark:                                                                                                                                         | The request object to use for the request.                                                                                                                 |
+
+### Response
+
+**[T.nilable(Models::Shared::TransactionRead)](../../models/operations/transactionread.md)**
+
+### Errors
+
+| Error Type                                                             | Status Code                                                            | Content Type                                                           |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Models::Errors::ErrorResponse                                          | 401, 404                                                               | application/json                                                       |
+| Models::Errors::BackendSrcTransactionsResponsesValidationErrorResponse | 422                                                                    | application/json                                                       |
+| Models::Errors::ErrorResponse                                          | 500                                                                    | application/json                                                       |
+| Errors::APIError                                                       | 4XX, 5XX                                                               | \*/\*                                                                  |
+
 ## update
 
 Update a specific transaction by its ID.
@@ -399,14 +500,12 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-  security: Models::Shared::Security.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-    custom_header: '<YOUR_API_KEY_HERE>'
-  )
+  api_key_header: '<YOUR_API_KEY_HERE>'
 )
 
 req = Models::Ops::UpdateTransactionV1TransactionsTransactionIdPutRequest.new(
   transaction_id: '<id>',
+  x_organization_id: 'org_12345',
   transaction_update: Models::Shared::TransactionUpdate.new(
     organization_id: 'orgn_argaLQwMy2fJc',
     external_id: 'EXT12345',
@@ -450,100 +549,3 @@ end
 | ----------------------------------- | ----------------------------------- | ----------------------------------- |
 | Models::Errors::HTTPValidationError | 422                                 | application/json                    |
 | Errors::APIError                    | 4XX, 5XX                            | \*/\*                               |
-
-## get_by_id
-
-The Get Transaction By Id API retrieves detailed information
-    about a specific transaction by providing its unique transaction ID.
-
-### Example Usage
-
-<!-- UsageSnippet language="ruby" operationID="get_transaction_by_id_v1_transactions__transaction_id__get" method="get" path="/v1/transactions/{transaction_id}" -->
-```ruby
-require 'kintsugi_sdk'
-
-Models = ::KintsugiSDK::Models
-s = ::KintsugiSDK::OpenApiSDK.new(
-  security: Models::Shared::Security.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-    custom_header: '<YOUR_API_KEY_HERE>'
-  )
-)
-
-req = Models::Ops::GetTransactionByIdV1TransactionsTransactionIdGetRequest.new(
-  transaction_id: '<id>'
-)
-res = s.transactions.get_by_id(request: req)
-
-unless res.nil?
-  # handle response
-end
-
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                  | Type                                                                                                                                                       | Required                                                                                                                                                   | Description                                                                                                                                                |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                                                                  | [Models::Ops::GetTransactionByIdV1TransactionsTransactionIdGetRequest](../../models/operations/gettransactionbyidv1transactionstransactionidgetrequest.md) | :heavy_check_mark:                                                                                                                                         | The request object to use for the request.                                                                                                                 |
-
-### Response
-
-**[T.nilable(Models::Shared::TransactionRead)](../../models/operations/transactionread.md)**
-
-### Errors
-
-| Error Type                                                             | Status Code                                                            | Content Type                                                           |
-| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| Models::Errors::ErrorResponse                                          | 401, 404                                                               | application/json                                                       |
-| Models::Errors::BackendSrcTransactionsResponsesValidationErrorResponse | 422                                                                    | application/json                                                       |
-| Models::Errors::ErrorResponse                                          | 500                                                                    | application/json                                                       |
-| Errors::APIError                                                       | 4XX, 5XX                                                               | \*/\*                                                                  |
-
-## get_by_filing_id
-
-Retrieve transactions by filing ID.
-
-### Example Usage
-
-<!-- UsageSnippet language="ruby" operationID="getTransactionsByFiling" method="get" path="/v1/transactions/filings/{filing_id}" -->
-```ruby
-require 'kintsugi_sdk'
-
-Models = ::KintsugiSDK::Models
-s = ::KintsugiSDK::OpenApiSDK.new(
-  security: Models::Shared::Security.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-    custom_header: '<YOUR_API_KEY_HERE>'
-  )
-)
-
-req = Models::Ops::GetTransactionsByFilingRequest.new(
-  filing_id: '<id>'
-)
-res = s.transactions.get_by_filing_id(request: req)
-
-unless res.nil?
-  # handle response
-end
-
-```
-
-### Parameters
-
-| Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
-| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                | [Models::Ops::GetTransactionsByFilingRequest](../../models/operations/gettransactionsbyfilingrequest.md) | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
-
-### Response
-
-**[T.nilable(T::Array[Models::Shared::TransactionRead])](../../models/operations/.md)**
-
-### Errors
-
-| Error Type                                                             | Status Code                                                            | Content Type                                                           |
-| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| Models::Errors::ErrorResponse                                          | 401                                                                    | application/json                                                       |
-| Models::Errors::BackendSrcTransactionsResponsesValidationErrorResponse | 422                                                                    | application/json                                                       |
-| Models::Errors::ErrorResponse                                          | 500                                                                    | application/json                                                       |
-| Errors::APIError                                                       | 4XX, 5XX                                                               | \*/\*                                                                  |

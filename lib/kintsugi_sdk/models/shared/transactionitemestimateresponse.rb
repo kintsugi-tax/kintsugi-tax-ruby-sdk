@@ -16,6 +16,8 @@ module KintsugiSDK
         field :date, ::DateTime, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('date'), required: true, 'decoder': ::KintsugiSDK::Utils.datetime_from_iso_format(false) } }
         # The total amount of the item.
         field :amount, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('amount'), required: true } }
+        # List of tax items applied to the transaction item.
+        field :tax_items, Crystalline::Nilable.new(Crystalline::Array.new(Models::Shared::TaxItemEstimate)), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('tax_items') } }
         # A unique identifier for the transaction item.
         field :external_id, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('external_id') } }
         # A description of the item.
@@ -35,25 +37,32 @@ module KintsugiSDK
         # Category of the product. Required if product_subcategory is used
         #         in place of external_product_id.
         field :product_category, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('product_category') } }
-        # This enum is used to determine if a transaction is exempt from tax.
-        field :exempt_reason, Crystalline::Nilable.new(Models::Shared::TaxExemptionEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('exempt_reason'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::TaxExemptionEnum, true) } }
-        # List of tax items applied to the transaction item.
-        field :tax_items, Crystalline::Nilable.new(Crystalline::Array.new(Models::Shared::TaxItemEstimate)), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('tax_items') } }
         # Defaults to 1.0. The quantity of the item.
         field :quantity, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('quantity') } }
         # Indicates whether the transaction item is exempt from tax.
         field :exempt, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('exempt') } }
+        # **Beta — not yet available in production.** When it is not enabled for your environment the field is accepted but ignored, and the response echoes `false`.
+        #
+        # Defaults to false. When true, `amount` is the gross (tax-included) price and the tax is backed out of it rather than added on top; for a taxable line, `taxable_amount` in the response is then the net base.
+        #
+        # When the line is not taxed - exempt, or no tax rule applies in the destination - `taxable_amount` is `0.00` rather than the net base, matching how exempt tax-exclusive lines already behave. Read the net amount as `taxable_amount` when `tax_amount` is non-zero, and as `amount` otherwise.
+        #
+        # This applies to the estimate in this request only. Transactions imported through a connection carry no such flag, so an order quoted here as gross is treated as net when it later syncs, and its recorded tax will be higher than this estimate. Send net amounts on the connection side, or reconcile the difference, until tax-inclusive import support ships.
+        field :is_tax_inclusive, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('is_tax_inclusive') } }
         # The total tax amount for the transaction item.
         field :tax_amount, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('tax_amount') } }
         # The taxable amount for the transaction item.
         field :taxable_amount, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('taxable_amount') } }
         # The tax rate applied to the transaction item.
         field :tax_rate, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('tax_rate') } }
+        # Reason for exemption, if applicable.
+        field :exempt_reason, Crystalline::Nilable.new(Models::Shared::TaxExemptionEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('exempt_reason'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::TaxExemptionEnum, true) } }
 
-        sig { params(date: ::DateTime, amount: ::String, external_id: T.nilable(::String), description: T.nilable(::String), external_product_id: T.nilable(::String), product_name: T.nilable(::String), product_description: T.nilable(::String), product_source: T.nilable(Models::Shared::SourceEnum), product_subcategory: T.nilable(::String), product_category: T.nilable(::String), exempt_reason: T.nilable(Models::Shared::TaxExemptionEnum), tax_items: T.nilable(T::Array[Models::Shared::TaxItemEstimate]), quantity: T.nilable(::String), exempt: T.nilable(T::Boolean), tax_amount: T.nilable(::String), taxable_amount: T.nilable(::String), tax_rate: T.nilable(::String)).void }
-        def initialize(date:, amount:, external_id: nil, description: nil, external_product_id: nil, product_name: nil, product_description: nil, product_source: nil, product_subcategory: nil, product_category: nil, exempt_reason: nil, tax_items: nil, quantity: '1.0', exempt: false, tax_amount: '0.00', taxable_amount: '0.00', tax_rate: '0.00')
+        sig { params(date: ::DateTime, amount: ::String, tax_items: T.nilable(T::Array[Models::Shared::TaxItemEstimate]), external_id: T.nilable(::String), description: T.nilable(::String), external_product_id: T.nilable(::String), product_name: T.nilable(::String), product_description: T.nilable(::String), product_source: T.nilable(Models::Shared::SourceEnum), product_subcategory: T.nilable(::String), product_category: T.nilable(::String), quantity: T.nilable(::String), exempt: T.nilable(T::Boolean), is_tax_inclusive: T.nilable(T::Boolean), tax_amount: T.nilable(::String), taxable_amount: T.nilable(::String), tax_rate: T.nilable(::String), exempt_reason: T.nilable(Models::Shared::TaxExemptionEnum)).void }
+        def initialize(date:, amount:, tax_items: nil, external_id: nil, description: nil, external_product_id: nil, product_name: nil, product_description: nil, product_source: nil, product_subcategory: nil, product_category: nil, quantity: '1.0', exempt: false, is_tax_inclusive: false, tax_amount: '0.00', taxable_amount: '0.00', tax_rate: '0.00', exempt_reason: nil)
           @date = date
           @amount = amount
+          @tax_items = tax_items
           @external_id = external_id
           @description = description
           @external_product_id = external_product_id
@@ -62,13 +71,13 @@ module KintsugiSDK
           @product_source = product_source
           @product_subcategory = product_subcategory
           @product_category = product_category
-          @exempt_reason = exempt_reason
-          @tax_items = tax_items
           @quantity = quantity
           @exempt = exempt
+          @is_tax_inclusive = is_tax_inclusive
           @tax_amount = tax_amount
           @taxable_amount = taxable_amount
           @tax_rate = tax_rate
+          @exempt_reason = exempt_reason
         end
 
         sig { params(other: T.untyped).returns(T::Boolean) }
@@ -76,6 +85,7 @@ module KintsugiSDK
           return false unless other.is_a? self.class
           return false unless @date == other.date
           return false unless @amount == other.amount
+          return false unless @tax_items == other.tax_items
           return false unless @external_id == other.external_id
           return false unless @description == other.description
           return false unless @external_product_id == other.external_product_id
@@ -84,13 +94,13 @@ module KintsugiSDK
           return false unless @product_source == other.product_source
           return false unless @product_subcategory == other.product_subcategory
           return false unless @product_category == other.product_category
-          return false unless @exempt_reason == other.exempt_reason
-          return false unless @tax_items == other.tax_items
           return false unless @quantity == other.quantity
           return false unless @exempt == other.exempt
+          return false unless @is_tax_inclusive == other.is_tax_inclusive
           return false unless @tax_amount == other.tax_amount
           return false unless @taxable_amount == other.taxable_amount
           return false unless @tax_rate == other.tax_rate
+          return false unless @exempt_reason == other.exempt_reason
           true
         end
       end
