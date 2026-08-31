@@ -10,8 +10,8 @@ end
 class KintsugiSDK::Models::Shared::DiscountBuilder
   def applied_to(); end
   def applied_to=(str_); end
-  def external_id(); end
-  def external_id=(str_); end
   def discount_amount(); end
   def discount_amount=(str_); end
+  def external_id(); end
+  def external_id=(str_); end
 end

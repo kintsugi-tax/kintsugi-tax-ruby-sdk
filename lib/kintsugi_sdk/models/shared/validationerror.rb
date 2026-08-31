@@ -13,17 +13,23 @@ module KintsugiSDK
         include Crystalline::MetadataFields
 
 
-        field :loc, Crystalline::Array.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('loc'), required: true } }
+        field :loc, Crystalline::Array.new(Crystalline::Union.new(::String, ::Integer)), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('loc'), required: true } }
 
         field :msg, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('msg'), required: true } }
 
         field :type, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('type'), required: true } }
 
-        sig { params(loc: T::Array[::String], msg: ::String, type: ::String).void }
-        def initialize(loc:, msg:, type:)
+        field :input, Crystalline::Nilable.new(::Object), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('input') } }
+
+        field :ctx, Crystalline::Nilable.new(Models::Shared::Context), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('ctx') } }
+
+        sig { params(loc: T::Array[T.any(::String, ::Integer)], msg: ::String, type: ::String, input: T.nilable(::Object), ctx: T.nilable(Models::Shared::Context)).void }
+        def initialize(loc:, msg:, type:, input: nil, ctx: nil)
           @loc = loc
           @msg = msg
           @type = type
+          @input = input
+          @ctx = ctx
         end
 
         sig { params(other: T.untyped).returns(T::Boolean) }
@@ -32,6 +38,8 @@ module KintsugiSDK
           return false unless @loc == other.loc
           return false unless @msg == other.msg
           return false unless @type == other.type
+          return false unless @input == other.input
+          return false unless @ctx == other.ctx
           true
         end
       end
