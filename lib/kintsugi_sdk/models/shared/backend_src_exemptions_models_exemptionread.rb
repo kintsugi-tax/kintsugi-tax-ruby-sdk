@@ -20,31 +20,32 @@ module KintsugiSDK
         field :id, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('id'), required: true } }
         # The jurisdiction identifier for the exemption
         field :jurisdiction, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('jurisdiction') } }
-
+        # Country code in ISO 3166-1 alpha-2 format (e.g., 'US')
         field :country_code, Crystalline::Nilable.new(Models::Shared::CountryCodeEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('country_code'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::CountryCodeEnum, true) } }
         # End date for the exemption validity period (YYYY-MM-DD format)
-        field :end_date, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('end_date') } }
+        field :end_date, Crystalline::Nilable.new(::Date), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('end_date'), 'decoder': ::KintsugiSDK::Utils.date_from_iso_format(true) } }
         # Unique identifier for the customer associated with the exemption
         field :customer_id, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('customer_id') } }
         # Unique identifier for the transaction
         #         associated with the exemption, if applicable.
         field :transaction_id, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('transaction_id') } }
+        # Indicates whether the exemption is for a reseller
+        field :reseller, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('reseller') } }
         # Federal Employer Identification Number
         #         associated with the exemption.
         field :fein, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('FEIN') } }
         # Sales tax ID for the exemption
         field :sales_tax_id, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('sales_tax_id') } }
-
+        # The status of the exemption.
+        #         Defaults to ACTIVE if not provided.
         field :status, Crystalline::Nilable.new(Models::Shared::ExemptionStatus), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('status'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::ExemptionStatus, true) } }
 
         field :customer_name, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('customer_name') } }
 
         field :attachment_id, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('attachment_id') } }
-        # Indicates whether the exemption is for a reseller
-        field :reseller, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('reseller') } }
 
-        sig { params(exemption_type: Models::Shared::ExemptionType, start_date: ::Date, id: ::String, jurisdiction: T.nilable(::String), country_code: T.nilable(Models::Shared::CountryCodeEnum), end_date: T.nilable(::String), customer_id: T.nilable(::String), transaction_id: T.nilable(::String), fein: T.nilable(::String), sales_tax_id: T.nilable(::String), status: T.nilable(Models::Shared::ExemptionStatus), customer_name: T.nilable(::String), attachment_id: T.nilable(::String), reseller: T.nilable(T::Boolean)).void }
-        def initialize(exemption_type:, start_date:, id:, jurisdiction: nil, country_code: nil, end_date: nil, customer_id: nil, transaction_id: nil, fein: nil, sales_tax_id: nil, status: nil, customer_name: nil, attachment_id: nil, reseller: false)
+        sig { params(exemption_type: Models::Shared::ExemptionType, start_date: ::Date, id: ::String, jurisdiction: T.nilable(::String), country_code: T.nilable(Models::Shared::CountryCodeEnum), end_date: T.nilable(::Date), customer_id: T.nilable(::String), transaction_id: T.nilable(::String), reseller: T.nilable(T::Boolean), fein: T.nilable(::String), sales_tax_id: T.nilable(::String), status: T.nilable(Models::Shared::ExemptionStatus), customer_name: T.nilable(::String), attachment_id: T.nilable(::String)).void }
+        def initialize(exemption_type:, start_date:, id:, jurisdiction: nil, country_code: nil, end_date: nil, customer_id: nil, transaction_id: nil, reseller: false, fein: nil, sales_tax_id: nil, status: nil, customer_name: nil, attachment_id: nil)
           @exemption_type = exemption_type
           @start_date = start_date
           @id = id
@@ -53,12 +54,12 @@ module KintsugiSDK
           @end_date = end_date
           @customer_id = customer_id
           @transaction_id = transaction_id
+          @reseller = reseller
           @fein = fein
           @sales_tax_id = sales_tax_id
           @status = status
           @customer_name = customer_name
           @attachment_id = attachment_id
-          @reseller = reseller
         end
 
         sig { params(other: T.untyped).returns(T::Boolean) }
@@ -72,12 +73,12 @@ module KintsugiSDK
           return false unless @end_date == other.end_date
           return false unless @customer_id == other.customer_id
           return false unless @transaction_id == other.transaction_id
+          return false unless @reseller == other.reseller
           return false unless @fein == other.fein
           return false unless @sales_tax_id == other.sales_tax_id
           return false unless @status == other.status
           return false unless @customer_name == other.customer_name
           return false unless @attachment_id == other.attachment_id
-          return false unless @reseller == other.reseller
           true
         end
       end

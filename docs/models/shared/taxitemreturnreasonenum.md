@@ -22,3 +22,4 @@ value = TaxItemReturnReasonEnum::NO_RULE_FOUND
 | `PRODUCT_EXEMPT`               | PRODUCT_EXEMPT                 |
 | `FROM_IMPORT`                  | FROM_IMPORT                    |
 | `RULE_EXCLUDED_IN_CALCULATION` | RULE_EXCLUDED_IN_CALCULATION   |
+| `REVERSE_CHARGE`               | REVERSE_CHARGE                 |

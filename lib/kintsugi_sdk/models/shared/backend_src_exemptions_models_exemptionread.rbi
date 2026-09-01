@@ -24,6 +24,8 @@ class KintsugiSDK::Models::Shared::BackendSrcExemptionsModelsExemptionRead
   def customer_id=(str_); end
   def transaction_id(); end
   def transaction_id=(str_); end
+  def reseller(); end
+  def reseller=(str_); end
   def fein(); end
   def fein=(str_); end
   def sales_tax_id(); end
@@ -34,6 +36,4 @@ class KintsugiSDK::Models::Shared::BackendSrcExemptionsModelsExemptionRead
   def customer_name=(str_); end
   def attachment_id(); end
   def attachment_id=(str_); end
-  def reseller(); end
-  def reseller=(str_); end
 end

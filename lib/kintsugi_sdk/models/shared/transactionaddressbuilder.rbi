@@ -10,6 +10,8 @@ end
 class KintsugiSDK::Models::Shared::TransactionAddressBuilder
   def type(); end
   def type=(str_); end
+  def status(); end
+  def status=(str_); end
   def phone(); end
   def phone=(str_); end
   def street_1(); end
@@ -30,8 +32,8 @@ class KintsugiSDK::Models::Shared::TransactionAddressBuilder
   def full_address=(str_); end
   def enriched_fields(); end
   def enriched_fields=(str_); end
-  def status(); end
-  def status=(str_); end
+  def is_unincorporated(); end
+  def is_unincorporated=(str_); end
   def organization_id(); end
   def organization_id=(str_); end
 end

@@ -4,13 +4,13 @@
 
 ### Available Operations
 
-* [list](#list) - Get Customers
-* [create](#create) - Create Customer
-* [get](#get) - Get Customer By Id
-* [update](#update) - Update Customer
-* [get_by_external_id](#get_by_external_id) - Get Customer By External Id
-* [get_transactions](#get_transactions) - Get Transactions By Customer Id
-* [create_transaction](#create_transaction) - Create Transaction By Customer Id
+* [list](#list) - Get customers
+* [create](#create) - Create customer
+* [get_by_external_id](#get_by_external_id) - Get customer by external id
+* [get](#get) - Get customer by id
+* [update](#update) - Update customer
+* [get_transactions](#get_transactions) - Get transactions by customer id
+* [create_transaction](#create_transaction) - Create transaction by customer id
 
 ## list
 
@@ -26,20 +26,20 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-  security: Models::Shared::Security.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-    custom_header: '<YOUR_API_KEY_HERE>'
-  )
+  api_key_header: '<YOUR_API_KEY_HERE>'
 )
 
 req = Models::Ops::GetCustomersV1Request.new(
   search_query: 'John',
   country: [
-
+    'U',
+    'S',
   ],
   state: 'CA',
   source_in: 'SHOPIFY,API',
-  order_by: 'created_at,street_1,street_2,city,state,postal_code,country,status'
+  connection_id_in: 'conn_abc123,conn_def456',
+  order_by: 'created_at,street_1,street_2,city,state,postal_code,country,status',
+  x_organization_id: 'org_12345'
 )
 res = s.customers.list(request: req)
 
@@ -81,27 +81,27 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-  security: Models::Shared::Security.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-    custom_header: '<YOUR_API_KEY_HERE>'
-  )
+  api_key_header: '<YOUR_API_KEY_HERE>'
 )
 
-req = Models::Shared::CustomerCreate.new(
-  phone: '987-654-3210',
-  street_1: '456 Elm St',
-  street_2: 'Suite 202',
-  city: 'Metropolis',
-  county: 'Wayne',
-  state: 'NY',
-  postal_code: '10001',
-  country: Models::Shared::CountryCodeEnum::US,
-  name: 'Jane Smith',
-  external_id: 'cust_002',
-  status: Models::Shared::StatusEnum::ARCHIVED,
-  email: 'jane.smith@example.com',
-  source: Models::Shared::SourceEnum::SHOPIFY,
-  address_status: Models::Shared::AddressStatus::PARTIALLY_VERIFIED
+req = Models::Ops::CreateCustomerV1CustomersPostRequest.new(
+  x_organization_id: 'org_12345',
+  customer_create: Models::Shared::CustomerCreate.new(
+    phone: '987-654-3210',
+    street_1: '456 Elm St',
+    street_2: 'Suite 202',
+    city: 'Metropolis',
+    county: 'Wayne',
+    state: 'NY',
+    postal_code: '10001',
+    country: Models::Shared::CountryCodeEnum::US,
+    name: 'Jane Smith',
+    external_id: 'cust_002',
+    status: Models::Shared::StatusEnum::ARCHIVED,
+    email: 'jane.smith@example.com',
+    source: Models::Shared::SourceEnum::SHOPIFY,
+    address_status: Models::Shared::AddressStatus::PARTIALLY_VERIFIED
+  )
 )
 res = s.customers.create(request: req)
 
@@ -113,9 +113,9 @@ end
 
 ### Parameters
 
-| Parameter                                                               | Type                                                                    | Required                                                                | Description                                                             |
-| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| `request`                                                               | [Models::Shared::CustomerCreate](../../models/shared/customercreate.md) | :heavy_check_mark:                                                      | The request object to use for the request.                              |
+| Parameter                                                                                                            | Type                                                                                                                 | Required                                                                                                             | Description                                                                                                          |
+| -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                            | [Models::Ops::CreateCustomerV1CustomersPostRequest](../../models/operations/createcustomerv1customerspostrequest.md) | :heavy_check_mark:                                                                                                   | The request object to use for the request.                                                                           |
 
 ### Response
 
@@ -129,6 +129,52 @@ end
 | Models::Errors::BackendSrcCustomersResponsesValidationErrorResponse | 422                                                                 | application/json                                                    |
 | Models::Errors::ErrorResponse                                       | 500                                                                 | application/json                                                    |
 | Errors::APIError                                                    | 4XX, 5XX                                                            | \*/\*                                                               |
+
+## get_by_external_id
+
+The Get Customer By External ID API retrieves the details of a single customer using
+their external identifier. This endpoint is useful for accessing customer data when only
+an external ID is available.
+
+### Example Usage
+
+<!-- UsageSnippet language="ruby" operationID="get_customer_by_external_id_v1_customers_external__external_id__get" method="get" path="/v1/customers/external/{external_id}" -->
+```ruby
+require 'kintsugi_sdk'
+
+Models = ::KintsugiSDK::Models
+s = ::KintsugiSDK::OpenApiSDK.new(
+  api_key_header: '<YOUR_API_KEY_HERE>'
+)
+
+req = Models::Ops::GetCustomerByExternalIdV1CustomersExternalExternalIdGetRequest.new(
+  external_id: 'external_12345',
+  x_organization_id: 'org_12345'
+)
+res = s.customers.get_by_external_id(request: req)
+
+unless res.nil?
+  # handle response
+end
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                | Type                                                                                                                                                                     | Required                                                                                                                                                                 | Description                                                                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                | [Models::Ops::GetCustomerByExternalIdV1CustomersExternalExternalIdGetRequest](../../models/operations/getcustomerbyexternalidv1customersexternalexternalidgetrequest.md) | :heavy_check_mark:                                                                                                                                                       | The request object to use for the request.                                                                                                                               |
+
+### Response
+
+**[T.nilable(Models::Shared::CustomerRead)](../../models/operations/customerread.md)**
+
+### Errors
+
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| Models::Errors::HTTPValidationError | 422                                 | application/json                    |
+| Errors::APIError                    | 4XX, 5XX                            | \*/\*                               |
 
 ## get
 
@@ -144,14 +190,12 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-  security: Models::Shared::Security.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-    custom_header: '<YOUR_API_KEY_HERE>'
-  )
+  api_key_header: '<YOUR_API_KEY_HERE>'
 )
 
 req = Models::Ops::GetCustomerByIdV1CustomersCustomerIdGetRequest.new(
-  customer_id: 'cust_abc123'
+  customer_id: 'cust_abc123',
+  x_organization_id: 'org_12345'
 )
 res = s.customers.get(request: req)
 
@@ -192,14 +236,12 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-  security: Models::Shared::Security.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-    custom_header: '<YOUR_API_KEY_HERE>'
-  )
+  api_key_header: '<YOUR_API_KEY_HERE>'
 )
 
 req = Models::Ops::UpdateCustomerV1CustomersCustomerIdPutRequest.new(
   customer_id: '<id>',
+  x_organization_id: 'org_12345',
   customer_update: Models::Shared::CustomerUpdate.new(
     phone: '987-654-3210',
     street_1: '456 Elm St',
@@ -245,57 +287,9 @@ end
 | Models::Errors::ErrorResponse                                       | 500                                                                 | application/json                                                    |
 | Errors::APIError                                                    | 4XX, 5XX                                                            | \*/\*                                                               |
 
-## get_by_external_id
-
-The Get Customer By External ID API retrieves the details of a single customer using
-their external identifier. This endpoint is useful for accessing customer data when only
-an external ID is available.
-
-### Example Usage
-
-<!-- UsageSnippet language="ruby" operationID="get_customer_by_external_id_v1_customers_external__external_id__get" method="get" path="/v1/customers/external/{external_id}" -->
-```ruby
-require 'kintsugi_sdk'
-
-Models = ::KintsugiSDK::Models
-s = ::KintsugiSDK::OpenApiSDK.new(
-  security: Models::Shared::Security.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-    custom_header: '<YOUR_API_KEY_HERE>'
-  )
-)
-
-req = Models::Ops::GetCustomerByExternalIdV1CustomersExternalExternalIdGetRequest.new(
-  external_id: 'external_12345'
-)
-res = s.customers.get_by_external_id(request: req)
-
-unless res.nil?
-  # handle response
-end
-
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                | Type                                                                                                                                                                     | Required                                                                                                                                                                 | Description                                                                                                                                                              |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                | [Models::Ops::GetCustomerByExternalIdV1CustomersExternalExternalIdGetRequest](../../models/operations/getcustomerbyexternalidv1customersexternalexternalidgetrequest.md) | :heavy_check_mark:                                                                                                                                                       | The request object to use for the request.                                                                                                                               |
-
-### Response
-
-**[T.nilable(Models::Shared::CustomerRead)](../../models/operations/customerread.md)**
-
-### Errors
-
-| Error Type                          | Status Code                         | Content Type                        |
-| ----------------------------------- | ----------------------------------- | ----------------------------------- |
-| Models::Errors::HTTPValidationError | 422                                 | application/json                    |
-| Errors::APIError                    | 4XX, 5XX                            | \*/\*                               |
-
 ## get_transactions
 
-Get a list of transactions for a customer by their unique ID.
+Get a list of transactions for a customer by their unique ID. When pagination params are provided, this endpoint returns a paginated response. When omitted, it returns the legacy list response format (deprecated).
 
 ### Example Usage
 
@@ -305,14 +299,12 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-  security: Models::Shared::Security.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-    custom_header: '<YOUR_API_KEY_HERE>'
-  )
+  api_key_header: '<YOUR_API_KEY_HERE>'
 )
 
 req = Models::Ops::GetTransactionsByCustomerRequest.new(
-  customer_id: '<id>'
+  customer_id: '<id>',
+  x_organization_id: 'org_12345'
 )
 res = s.customers.get_transactions(request: req)
 
@@ -330,7 +322,7 @@ end
 
 ### Response
 
-**[T.nilable(T::Array[Models::Shared::TransactionRead])](../../models/operations/.md)**
+**[T.nilable(T.any(T::Array[Models::Shared::TransactionRead], Models::Shared::PageTransactionRead))](../../models/operations/gettransactionsbycustomerresponsegettransactionsbycustomeridv1customerscu_5ea9d8.md)**
 
 ### Errors
 
@@ -351,14 +343,12 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-  security: Models::Shared::Security.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-    custom_header: '<YOUR_API_KEY_HERE>'
-  )
+  api_key_header: '<YOUR_API_KEY_HERE>'
 )
 
 req = Models::Ops::CreateTransactionByCustomerRequest.new(
   customer_id: '<id>',
+  x_organization_id: 'org_12345',
   transaction_create: Models::Shared::TransactionCreate.new(
     organization_id: '<id>',
     external_id: '<id>',
@@ -368,7 +358,14 @@ req = Models::Ops::CreateTransactionByCustomerRequest.new(
       Models::Shared::TransactionItemCreateUpdate.new(
         organization_id: '<id>',
         date: DateTime.iso8601('2023-12-30T23:49:45.106Z'),
-        external_product_id: '<id>'
+        external_product_id: '<id>',
+        quantity: 1.0,
+        amount: 0.0,
+        tax_amount_imported: 0.0,
+        tax_rate_imported: 0.0,
+        tax_amount_calculated: 0.0,
+        tax_rate_calculated: 0.0,
+        taxable_amount: 0.0
       ),
     ]
   )
