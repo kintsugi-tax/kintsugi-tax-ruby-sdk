@@ -19,6 +19,10 @@ module KintsugiSDK
         # Deprecated: use `jurisdiction_type` instead
         field :name, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('name'), required: true } }
 
+        field :type, Crystalline::Nilable.new(Models::Shared::TaxItemTypeEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('type'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::TaxItemTypeEnum, true) } }
+        # The rule ID of the tax item
+        field :rule_id, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('rule_id') } }
+
         field :converted_amount, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('converted_amount') } }
 
         field :currency, Crystalline::Nilable.new(Models::Shared::CurrencyEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('currency'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::CurrencyEnum, true) } }
@@ -27,27 +31,23 @@ module KintsugiSDK
 
         field :external_id, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('external_id') } }
 
-        field :type, Crystalline::Nilable.new(Models::Shared::TaxItemTypeEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('type'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::TaxItemTypeEnum, true) } }
-
         field :jurisdiction_type, Crystalline::Nilable.new(Models::Shared::JurisdictionType), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('jurisdiction_type'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::JurisdictionType, true) } }
 
         field :jurisdiction_name, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('jurisdiction_name') } }
-        # The rule ID of the tax item
-        field :rule_id, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('rule_id') } }
 
-        sig { params(rate: ::String, amount: ::String, name: ::String, converted_amount: T.nilable(::String), currency: T.nilable(Models::Shared::CurrencyEnum), destination_currency: T.nilable(Models::Shared::CurrencyEnum), external_id: T.nilable(::String), type: T.nilable(Models::Shared::TaxItemTypeEnum), jurisdiction_type: T.nilable(Models::Shared::JurisdictionType), jurisdiction_name: T.nilable(::String), rule_id: T.nilable(::String)).void }
-        def initialize(rate:, amount:, name:, converted_amount: nil, currency: nil, destination_currency: nil, external_id: nil, type: nil, jurisdiction_type: nil, jurisdiction_name: nil, rule_id: '0000')
+        sig { params(rate: ::String, amount: ::String, name: ::String, type: T.nilable(Models::Shared::TaxItemTypeEnum), rule_id: T.nilable(::String), converted_amount: T.nilable(::String), currency: T.nilable(Models::Shared::CurrencyEnum), destination_currency: T.nilable(Models::Shared::CurrencyEnum), external_id: T.nilable(::String), jurisdiction_type: T.nilable(Models::Shared::JurisdictionType), jurisdiction_name: T.nilable(::String)).void }
+        def initialize(rate:, amount:, name:, type: nil, rule_id: '0000', converted_amount: nil, currency: nil, destination_currency: nil, external_id: nil, jurisdiction_type: nil, jurisdiction_name: nil)
           @rate = rate
           @amount = amount
           @name = name
+          @type = type
+          @rule_id = rule_id
           @converted_amount = converted_amount
           @currency = currency
           @destination_currency = destination_currency
           @external_id = external_id
-          @type = type
           @jurisdiction_type = jurisdiction_type
           @jurisdiction_name = jurisdiction_name
-          @rule_id = rule_id
         end
 
         sig { params(other: T.untyped).returns(T::Boolean) }
@@ -56,14 +56,14 @@ module KintsugiSDK
           return false unless @rate == other.rate
           return false unless @amount == other.amount
           return false unless @name == other.name
+          return false unless @type == other.type
+          return false unless @rule_id == other.rule_id
           return false unless @converted_amount == other.converted_amount
           return false unless @currency == other.currency
           return false unless @destination_currency == other.destination_currency
           return false unless @external_id == other.external_id
-          return false unless @type == other.type
           return false unless @jurisdiction_type == other.jurisdiction_type
           return false unless @jurisdiction_name == other.jurisdiction_name
-          return false unless @rule_id == other.rule_id
           true
         end
       end

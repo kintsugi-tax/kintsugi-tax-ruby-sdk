@@ -12,6 +12,12 @@ class KintsugiSDK::Models::Shared::CustomerRead
   def id=(str_); end
   def organization_id(); end
   def organization_id=(str_); end
+  def status(); end
+  def status=(str_); end
+  def address_status(); end
+  def address_status=(str_); end
+  def customer_tax_registrations(); end
+  def customer_tax_registrations=(str_); end
   def phone(); end
   def phone=(str_); end
   def street_1(); end
@@ -34,20 +40,18 @@ class KintsugiSDK::Models::Shared::CustomerRead
   def name=(str_); end
   def external_id(); end
   def external_id=(str_); end
-  def status(); end
-  def status=(str_); end
   def email(); end
   def email=(str_); end
+  def company_name(); end
+  def company_name=(str_); end
   def source(); end
   def source=(str_); end
   def connection_id(); end
   def connection_id=(str_); end
-  def address_status(); end
-  def address_status=(str_); end
   def registration_number(); end
   def registration_number=(str_); end
   def external_friendly_id(); end
   def external_friendly_id=(str_); end
-  def customer_tax_registrations(); end
-  def customer_tax_registrations=(str_); end
+  def store_name(); end
+  def store_name=(str_); end
 end

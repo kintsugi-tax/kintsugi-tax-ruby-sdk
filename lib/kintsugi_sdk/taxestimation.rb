@@ -41,16 +41,16 @@ module KintsugiSDK
 
 
 
-    sig { params(request: Models::Ops::EstimateTaxV1TaxEstimatePostRequest, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(Models::Shared::PageTransactionEstimateResponse) }
+    sig { params(request: Models::Ops::EstimateTaxV1TaxEstimatePostRequest, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(Models::Shared::TransactionEstimateResponse) }
     def estimate_tax(request:, timeout_ms: nil, http_headers: nil)
-      # estimate_tax - Estimate Tax
+      # estimate_tax - Estimate tax
       # The Estimate Tax API calculates the estimated tax for a specific
       #     transaction based on the provided details, including organization nexus,
       #     transaction details, customer details, and addresses. Optionally simulates nexus being met for tax calculation purposes. The `simulate_nexus_met` parameter is deprecated and will be removed in future releases.
       url, params = @sdk_configuration.get_server_details
       base_url = Utils.template_url(url, params)
       url = "#{base_url}/v1/tax/estimate"
-      headers = {}
+      headers = Utils.get_headers(request)
       headers = T.cast(headers, T::Hash[String, String])
       req_content_type, data, form = Utils.serialize_request_body(request, false, false, :transaction_estimate_public_request, :json)
       headers['content-type'] = req_content_type
@@ -141,13 +141,13 @@ module KintsugiSDK
             response: http_response
           )
           response_data = http_response.env.response_body
-          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Shared::PageTransactionEstimateResponse)
+          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Shared::TransactionEstimateResponse)
 
           return obj
         else
           raise ::KintsugiSDK::Models::Errors::APIError.new(status_code: http_response.status, body: http_response.env.response_body, raw_response: http_response), 'Unknown content type received'
         end
-      elsif Utils.match_status_code(http_response.status, ['401'])
+      elsif Utils.match_status_code(http_response.status, ['400', '401'])
         if Utils.match_content_type(content_type, 'application/json')
           @sdk_configuration.hooks.after_success(
             hook_ctx: SDKHooks::AfterSuccessHookContext.new(
@@ -175,7 +175,7 @@ module KintsugiSDK
         else
           raise ::KintsugiSDK::Models::Errors::APIError.new(status_code: http_response.status, body: http_response.env.response_body, raw_response: http_response), 'Unknown content type received'
         end
-      elsif Utils.match_status_code(http_response.status, ['500'])
+      elsif Utils.match_status_code(http_response.status, ['500', '503'])
         if Utils.match_content_type(content_type, 'application/json')
           @sdk_configuration.hooks.after_success(
             hook_ctx: SDKHooks::AfterSuccessHookContext.new(

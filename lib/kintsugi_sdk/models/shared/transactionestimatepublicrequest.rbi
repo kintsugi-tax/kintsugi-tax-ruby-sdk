@@ -22,8 +22,8 @@ class KintsugiSDK::Models::Shared::TransactionEstimatePublicRequest
   def description=(str_); end
   def source(); end
   def source=(str_); end
-  def customer(); end
-  def customer=(str_); end
   def marketplace(); end
   def marketplace=(str_); end
+  def customer(); end
+  def customer=(str_); end
 end

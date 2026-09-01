@@ -12,22 +12,26 @@ module KintsugiSDK
         extend T::Sig
         include Crystalline::MetadataFields
 
+        # The unique identifier for the organization making the request
+        field :x_organization_id, Crystalline::Nilable.new(::String), { 'header': { 'field_name': 'x-organization-id', 'style': 'simple', 'explode': false } }
         # Search term to filter exemptions by exemption ID, customer name, or customer email
         field :search_query, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'search_query', 'style': 'form', 'explode': true } }
+        # Filter exemptions by their status
+        field :status_in, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'status__in', 'style': 'form', 'explode': true } }
         # Country code in ISO 3166-1 alpha-2 format
-        field :country_code, Crystalline::Nilable.new(Crystalline::Array.new(Models::Shared::CountryCodeEnum)), { 'query_param': { 'field_name': 'country_code', 'style': 'form', 'explode': true } }
+        field :country_code, Crystalline::Nilable.new(Crystalline::Array.new(Crystalline::Union.new(Models::Shared::CountryCodeEnum, ::String))), { 'query_param': { 'field_name': 'country_code', 'style': 'form', 'explode': true } }
         # Jurisdiction identifier
         field :jurisdiction, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'jurisdiction', 'style': 'form', 'explode': true } }
         # Start date for filtering exemptions
-        field :start_date, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'start_date', 'style': 'form', 'explode': true } }
+        field :start_date, Crystalline::Nilable.new(::Date), { 'query_param': { 'field_name': 'start_date', 'style': 'form', 'explode': true } }
         # End date for filtering exemptions
-        field :end_date, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'end_date', 'style': 'form', 'explode': true } }
+        field :end_date, Crystalline::Nilable.new(::Date), { 'query_param': { 'field_name': 'end_date', 'style': 'form', 'explode': true } }
         # Customer ID to filter exemptions
         field :customer_id, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'customer_id', 'style': 'form', 'explode': true } }
         # Transaction ID to filter exemptions
         field :transaction_id, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'transaction_id', 'style': 'form', 'explode': true } }
-        # Filter exemptions by their status
-        field :status_in, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'status__in', 'style': 'form', 'explode': true } }
+        # Filter exemptions by customer connection ID (comma-separated)
+        field :connection_id_in, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'connection_id__in', 'style': 'form', 'explode': true } }
         # Fields to sort by (comma-separated)
         field :order_by, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'order_by', 'style': 'form', 'explode': true } }
         # Page number
@@ -35,16 +39,18 @@ module KintsugiSDK
         # Page size
         field :size, Crystalline::Nilable.new(::Integer), { 'query_param': { 'field_name': 'size', 'style': 'form', 'explode': true } }
 
-        sig { params(search_query: T.nilable(::String), country_code: T.nilable(T::Array[Models::Shared::CountryCodeEnum]), jurisdiction: T.nilable(::String), start_date: T.nilable(::String), end_date: T.nilable(::String), customer_id: T.nilable(::String), transaction_id: T.nilable(::String), status_in: T.nilable(::String), order_by: T.nilable(::String), page: T.nilable(::Integer), size: T.nilable(::Integer)).void }
-        def initialize(search_query: nil, country_code: nil, jurisdiction: nil, start_date: nil, end_date: nil, customer_id: nil, transaction_id: nil, status_in: 'ACTIVE,INACTIVE,EXPIRED', order_by: 'end_date,FEIN,sales_tax_id,status', page: 1, size: 50)
+        sig { params(x_organization_id: T.nilable(::String), search_query: T.nilable(::String), status_in: T.nilable(::String), country_code: T.nilable(T::Array[T.any(Models::Shared::CountryCodeEnum, ::String)]), jurisdiction: T.nilable(::String), start_date: T.nilable(::Date), end_date: T.nilable(::Date), customer_id: T.nilable(::String), transaction_id: T.nilable(::String), connection_id_in: T.nilable(::String), order_by: T.nilable(::String), page: T.nilable(::Integer), size: T.nilable(::Integer)).void }
+        def initialize(x_organization_id: nil, search_query: nil, status_in: nil, country_code: nil, jurisdiction: nil, start_date: nil, end_date: nil, customer_id: nil, transaction_id: nil, connection_id_in: nil, order_by: nil, page: 1, size: 50)
+          @x_organization_id = x_organization_id
           @search_query = search_query
+          @status_in = status_in
           @country_code = country_code
           @jurisdiction = jurisdiction
           @start_date = start_date
           @end_date = end_date
           @customer_id = customer_id
           @transaction_id = transaction_id
-          @status_in = status_in
+          @connection_id_in = connection_id_in
           @order_by = order_by
           @page = page
           @size = size
@@ -53,14 +59,16 @@ module KintsugiSDK
         sig { params(other: T.untyped).returns(T::Boolean) }
         def ==(other)
           return false unless other.is_a? self.class
+          return false unless @x_organization_id == other.x_organization_id
           return false unless @search_query == other.search_query
+          return false unless @status_in == other.status_in
           return false unless @country_code == other.country_code
           return false unless @jurisdiction == other.jurisdiction
           return false unless @start_date == other.start_date
           return false unless @end_date == other.end_date
           return false unless @customer_id == other.customer_id
           return false unless @transaction_id == other.transaction_id
-          return false unless @status_in == other.status_in
+          return false unless @connection_id_in == other.connection_id_in
           return false unless @order_by == other.order_by
           return false unless @page == other.page
           return false unless @size == other.size
