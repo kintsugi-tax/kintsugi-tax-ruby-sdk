@@ -1,0 +1,4 @@
+# TaxRateCalculated
+
+Calculated tax rate.
+

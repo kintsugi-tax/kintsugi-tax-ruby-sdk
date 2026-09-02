@@ -16,6 +16,8 @@ class KintsugiSDK::Models::Shared::ProductUpdate
   def product_subcategory=(str_); end
   def tax_exempt(); end
   def tax_exempt=(str_); end
+  def status(); end
+  def status=(str_); end
   def id(); end
   def id=(str_); end
   def external_id(); end
@@ -24,8 +26,6 @@ class KintsugiSDK::Models::Shared::ProductUpdate
   def sku=(str_); end
   def description(); end
   def description=(str_); end
-  def status(); end
-  def status=(str_); end
   def classification_failed(); end
   def classification_failed=(str_); end
 end
