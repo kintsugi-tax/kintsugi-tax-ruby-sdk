@@ -22,12 +22,6 @@ module KintsugiSDK
         field :city, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('city') } }
         # State, province, or region of the address
         field :state, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('state') } }
-        # Unique identifier for the request, if applicable
-        field :id, Crystalline::Nilable.new(::Integer), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('id') } }
-        # County or district name for the address
-        field :county, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('county') } }
-        # A complete address string that can be used as an alternative to providing individual fields.
-        field :full_address, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('full_address') } }
         # Country code in ISO 3166-1 alpha-2 format (e.g., 'US' for the United States).
         #         Defaults to 'US'.
         #         should not be empty. Not validating here as the validation
@@ -36,19 +30,25 @@ module KintsugiSDK
         # ZIP or postal code for the address. Can be empty for some locales.
         #         Not validating here as the validation structure can be different for different providers
         field :postal_code, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('postalCode') } }
+        # Unique identifier for the request, if applicable
+        field :id, Crystalline::Nilable.new(::Integer), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('id') } }
+        # County or district name for the address
+        field :county, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('county') } }
+        # A complete address string that can be used as an alternative to providing individual fields.
+        field :full_address, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('fullAddress') } }
 
-        sig { params(line1: T.nilable(::String), line2: T.nilable(::String), line3: T.nilable(::String), city: T.nilable(::String), state: T.nilable(::String), id: T.nilable(::Integer), county: T.nilable(::String), full_address: T.nilable(::String), country: T.nilable(::String), postal_code: T.nilable(::String)).void }
-        def initialize(line1: nil, line2: nil, line3: nil, city: nil, state: nil, id: nil, county: nil, full_address: nil, country: 'US', postal_code: '')
+        sig { params(line1: T.nilable(::String), line2: T.nilable(::String), line3: T.nilable(::String), city: T.nilable(::String), state: T.nilable(::String), country: T.nilable(::String), postal_code: T.nilable(::String), id: T.nilable(::Integer), county: T.nilable(::String), full_address: T.nilable(::String)).void }
+        def initialize(line1: nil, line2: nil, line3: nil, city: nil, state: nil, country: nil, postal_code: nil, id: nil, county: nil, full_address: nil)
           @line1 = line1
           @line2 = line2
           @line3 = line3
           @city = city
           @state = state
+          @country = country
+          @postal_code = postal_code
           @id = id
           @county = county
           @full_address = full_address
-          @country = country
-          @postal_code = postal_code
         end
 
         sig { params(other: T.untyped).returns(T::Boolean) }
@@ -59,11 +59,11 @@ module KintsugiSDK
           return false unless @line3 == other.line3
           return false unless @city == other.city
           return false unless @state == other.state
+          return false unless @country == other.country
+          return false unless @postal_code == other.postal_code
           return false unless @id == other.id
           return false unless @county == other.county
           return false unless @full_address == other.full_address
-          return false unless @country == other.country
-          return false unless @postal_code == other.postal_code
           true
         end
       end

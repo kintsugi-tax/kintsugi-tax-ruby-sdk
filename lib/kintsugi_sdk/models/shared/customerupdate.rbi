@@ -8,6 +8,8 @@ end
 
 
 class KintsugiSDK::Models::Shared::CustomerUpdate
+  def address_status(); end
+  def address_status=(str_); end
   def phone(); end
   def phone=(str_); end
   def street_1(); end
@@ -32,10 +34,10 @@ class KintsugiSDK::Models::Shared::CustomerUpdate
   def status=(str_); end
   def email(); end
   def email=(str_); end
+  def company_name(); end
+  def company_name=(str_); end
   def source(); end
   def source=(str_); end
-  def address_status(); end
-  def address_status=(str_); end
   def external_id(); end
   def external_id=(str_); end
   def external_friendly_id(); end

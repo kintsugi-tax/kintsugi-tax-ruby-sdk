@@ -16,16 +16,20 @@ module KintsugiSDK
         #         whose transactions you wish to retrieve.
         #         
         field :filing_id, ::String, { 'path_param': { 'field_name': 'filing_id', 'style': 'simple', 'explode': false } }
+        # The unique identifier for the organization making the request
+        field :x_organization_id, Crystalline::Nilable.new(::String), { 'header': { 'field_name': 'x-organization-id', 'style': 'simple', 'explode': false } }
 
-        sig { params(filing_id: ::String).void }
-        def initialize(filing_id:)
+        sig { params(filing_id: ::String, x_organization_id: T.nilable(::String)).void }
+        def initialize(filing_id:, x_organization_id: nil)
           @filing_id = filing_id
+          @x_organization_id = x_organization_id
         end
 
         sig { params(other: T.untyped).returns(T::Boolean) }
         def ==(other)
           return false unless other.is_a? self.class
           return false unless @filing_id == other.filing_id
+          return false unless @x_organization_id == other.x_organization_id
           true
         end
       end
