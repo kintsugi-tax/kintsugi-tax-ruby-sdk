@@ -41,8 +41,8 @@ module KintsugiSDK
 
 
 
-    sig { params(security: Models::Ops::SearchV1AddressValidationSearchPostSecurity, request: Models::Shared::AddressBase, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(T::Array[Models::Shared::AddressSearchResponse]) }
-    def search(security:, request:, timeout_ms: nil, http_headers: nil)
+    sig { params(request: Models::Shared::AddressBase, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(T::Array[Models::Shared::AddressSearchResponse]) }
+    def search(request:, timeout_ms: nil, http_headers: nil)
       # search - Search
       # This API validates and enriches address information
       #     submitted by the user. It ensures that the address is standardized, accurate,
@@ -67,6 +67,8 @@ module KintsugiSDK
       headers['Accept'] = 'application/json'
       headers['user-agent'] = @sdk_configuration.user_agent
 
+      security = @sdk_configuration.security_source&.call
+
       timeout = (timeout_ms.to_f / 1000) unless timeout_ms.nil?
       timeout ||= @sdk_configuration.timeout
 
@@ -78,7 +80,7 @@ module KintsugiSDK
         base_url: base_url,
         oauth2_scopes: nil,
         operation_id: 'search_v1_address_validation_search_post',
-        security_source: -> { security }
+        security_source: @sdk_configuration.security_source
       )
 
       error = T.let(nil, T.nilable(StandardError))
@@ -197,7 +199,7 @@ module KintsugiSDK
     end
 
 
-    sig { params(request: Models::Shared::ValidationAddress, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(::Object) }
+    sig { params(request: Models::Ops::SuggestionsV1AddressValidationSuggestionsPostRequest, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(::Object) }
     def suggestions(request:, timeout_ms: nil, http_headers: nil)
       # suggestions - Suggestions
       # This API endpoint provides address suggestions based on
@@ -208,9 +210,9 @@ module KintsugiSDK
       url, params = @sdk_configuration.get_server_details
       base_url = Utils.template_url(url, params)
       url = "#{base_url}/v1/address_validation/suggestions"
-      headers = {}
+      headers = Utils.get_headers(request)
       headers = T.cast(headers, T::Hash[String, String])
-      req_content_type, data, form = Utils.serialize_request_body(request, false, false, :request, :json)
+      req_content_type, data, form = Utils.serialize_request_body(request, false, false, :validation_address, :json)
       headers['content-type'] = req_content_type
       raise StandardError, 'request body is required' if data.nil? && form.nil?
 

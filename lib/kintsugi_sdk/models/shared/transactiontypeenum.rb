@@ -14,6 +14,7 @@ module KintsugiSDK
           FULL_CREDIT_NOTE = new('FULL_CREDIT_NOTE')
           PARTIAL_CREDIT_NOTE = new('PARTIAL_CREDIT_NOTE')
           TAX_REFUND = new('TAX_REFUND')
+          TAX_COLLECTION = new('TAX_COLLECTION')
           ARCHIVE = new('ARCHIVE')
         end
       end

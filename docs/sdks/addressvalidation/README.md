@@ -21,7 +21,9 @@ This API validates and enriches address information
 require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
-s = ::KintsugiSDK::OpenApiSDK.new
+s = ::KintsugiSDK::OpenApiSDK.new(
+  api_key_header: '<YOUR_API_KEY_HERE>'
+)
 
 req = Models::Shared::AddressBase.new(
   phone: '555-123-4567',
@@ -34,9 +36,7 @@ req = Models::Shared::AddressBase.new(
   country: Models::Shared::CountryCodeEnum::US,
   full_address: '1600 Amphitheatre Parkway, Mountain View, CA 94043'
 )
-res = s.address_validation.search(request: req, security: Models::Ops::SearchV1AddressValidationSearchPostSecurity.new(
-  api_key_header: '<YOUR_API_KEY_HERE>'
-))
+res = s.address_validation.search(request: req)
 
 unless res.nil?
   # handle response
@@ -46,10 +46,9 @@ end
 
 ### Parameters
 
-| Parameter                                                                                                                   | Type                                                                                                                        | Required                                                                                                                    | Description                                                                                                                 |
-| --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                                   | [Models::Shared::AddressBase](../../models/shared/addressbase.md)                                                           | :heavy_check_mark:                                                                                                          | The request object to use for the request.                                                                                  |
-| `security`                                                                                                                  | [Models::Ops::SearchV1AddressValidationSearchPostSecurity](../../models/ops/searchv1addressvalidationsearchpostsecurity.md) | :heavy_check_mark:                                                                                                          | The security requirements to use for the request.                                                                           |
+| Parameter                                                         | Type                                                              | Required                                                          | Description                                                       |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `request`                                                         | [Models::Shared::AddressBase](../../models/shared/addressbase.md) | :heavy_check_mark:                                                | The request object to use for the request.                        |
 
 ### Response
 
@@ -80,22 +79,22 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-  security: Models::Shared::Security.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-    custom_header: '<YOUR_API_KEY_HERE>'
-  )
+  api_key_header: '<YOUR_API_KEY_HERE>'
 )
 
-req = Models::Shared::ValidationAddress.new(
-  line1: '1600 Amphitheatre Parkway',
-  line2: '',
-  line3: '',
-  city: 'Mountain View',
-  state: 'CA',
-  postal_code: '94043',
-  id: 215,
-  county: '',
-  full_address: '1600 Amphitheatre Parkway, Mountain View, CA 94043'
+req = Models::Ops::SuggestionsV1AddressValidationSuggestionsPostRequest.new(
+  x_organization_id: 'org_12345',
+  validation_address: Models::Shared::ValidationAddress.new(
+    line1: '1600 Amphitheatre Parkway',
+    line2: '',
+    line3: '',
+    city: 'Mountain View',
+    state: 'CA',
+    country: 'US',
+    postal_code: '94043',
+    id: 215,
+    county: ''
+  )
 )
 res = s.address_validation.suggestions(request: req)
 
@@ -107,9 +106,9 @@ end
 
 ### Parameters
 
-| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `request`                                                                     | [Models::Shared::ValidationAddress](../../models/shared/validationaddress.md) | :heavy_check_mark:                                                            | The request object to use for the request.                                    |
+| Parameter                                                                                                                                            | Type                                                                                                                                                 | Required                                                                                                                                             | Description                                                                                                                                          |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                                                            | [Models::Ops::SuggestionsV1AddressValidationSuggestionsPostRequest](../../models/operations/suggestionsv1addressvalidationsuggestionspostrequest.md) | :heavy_check_mark:                                                                                                                                   | The request object to use for the request.                                                                                                           |
 
 ### Response
 

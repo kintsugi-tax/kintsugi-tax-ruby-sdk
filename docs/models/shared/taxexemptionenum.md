@@ -18,6 +18,7 @@ value = TaxExemptionEnum::PRODUCT
 | `PRODUCT`                   | PRODUCT                     |
 | `TRANSACTION`               | TRANSACTION                 |
 | `CUSTOMER`                  | CUSTOMER                    |
+| `WHOLESALE`                 | WHOLESALE                   |
 | `REGION`                    | REGION                      |
 | `REVERSE_CHARGE`            | REVERSE_CHARGE              |
 | `ZERO_RATE_TAX`             | ZERO_RATE_TAX               |

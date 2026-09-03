@@ -18,11 +18,14 @@ module KintsugiSDK
         #
         # @deprecated true: This will be removed in a future release, please migrate away from it as soon as possible.
         field :simulate_nexus_met, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'query_param': { 'field_name': 'simulate_nexus_met', 'style': 'form', 'explode': true } }
+        # The unique identifier for the organization making the request
+        field :x_organization_id, Crystalline::Nilable.new(::String), { 'header': { 'field_name': 'x-organization-id', 'style': 'simple', 'explode': false } }
 
-        sig { params(transaction_estimate_public_request: Models::Shared::TransactionEstimatePublicRequest, simulate_nexus_met: T.nilable(T::Boolean)).void }
-        def initialize(transaction_estimate_public_request:, simulate_nexus_met: nil)
+        sig { params(transaction_estimate_public_request: Models::Shared::TransactionEstimatePublicRequest, simulate_nexus_met: T.nilable(T::Boolean), x_organization_id: T.nilable(::String)).void }
+        def initialize(transaction_estimate_public_request:, simulate_nexus_met: nil, x_organization_id: nil)
           @transaction_estimate_public_request = transaction_estimate_public_request
           @simulate_nexus_met = simulate_nexus_met
+          @x_organization_id = x_organization_id
         end
 
         sig { params(other: T.untyped).returns(T::Boolean) }
@@ -30,6 +33,7 @@ module KintsugiSDK
           return false unless other.is_a? self.class
           return false unless @transaction_estimate_public_request == other.transaction_estimate_public_request
           return false unless @simulate_nexus_met == other.simulate_nexus_met
+          return false unless @x_organization_id == other.x_organization_id
           true
         end
       end
