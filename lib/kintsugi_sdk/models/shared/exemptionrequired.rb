@@ -29,8 +29,18 @@ module KintsugiSDK
 
         field :customer_id, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('customer_id') } }
 
-        sig { params(organization_id: ::String, exemption_type: Models::Shared::ExemptionType, start_date: ::DateTime, status: Models::Shared::ExemptionStatus, reseller: T::Boolean, jurisdiction: T.nilable(::String), customer_id: T.nilable(::String)).void }
-        def initialize(organization_id:, exemption_type:, start_date:, status:, reseller:, jurisdiction: nil, customer_id: nil)
+        field :country_code, Crystalline::Nilable.new(Models::Shared::CountryCodeEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('country_code'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::CountryCodeEnum, true) } }
+
+        field :end_date, Crystalline::Nilable.new(::DateTime), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('end_date'), 'decoder': ::KintsugiSDK::Utils.datetime_from_iso_format(true) } }
+
+        field :fein, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('FEIN') } }
+
+        field :sales_tax_id, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('sales_tax_id') } }
+
+        field :source, Crystalline::Nilable.new(Models::Shared::ExemptionSourceEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('source'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::ExemptionSourceEnum, true) } }
+
+        sig { params(organization_id: ::String, exemption_type: Models::Shared::ExemptionType, start_date: ::DateTime, status: Models::Shared::ExemptionStatus, reseller: T::Boolean, jurisdiction: T.nilable(::String), customer_id: T.nilable(::String), country_code: T.nilable(Models::Shared::CountryCodeEnum), end_date: T.nilable(::DateTime), fein: T.nilable(::String), sales_tax_id: T.nilable(::String), source: T.nilable(Models::Shared::ExemptionSourceEnum)).void }
+        def initialize(organization_id:, exemption_type:, start_date:, status:, reseller:, jurisdiction: nil, customer_id: nil, country_code: nil, end_date: nil, fein: nil, sales_tax_id: nil, source: nil)
           @organization_id = organization_id
           @exemption_type = exemption_type
           @start_date = start_date
@@ -38,6 +48,11 @@ module KintsugiSDK
           @reseller = reseller
           @jurisdiction = jurisdiction
           @customer_id = customer_id
+          @country_code = country_code
+          @end_date = end_date
+          @fein = fein
+          @sales_tax_id = sales_tax_id
+          @source = source
         end
 
         sig { params(other: T.untyped).returns(T::Boolean) }
@@ -50,6 +65,11 @@ module KintsugiSDK
           return false unless @reseller == other.reseller
           return false unless @jurisdiction == other.jurisdiction
           return false unless @customer_id == other.customer_id
+          return false unless @country_code == other.country_code
+          return false unless @end_date == other.end_date
+          return false unless @fein == other.fein
+          return false unless @sales_tax_id == other.sales_tax_id
+          return false unless @source == other.source
           true
         end
       end

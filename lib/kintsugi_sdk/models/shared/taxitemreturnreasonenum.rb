@@ -17,6 +17,7 @@ module KintsugiSDK
           PRODUCT_EXEMPT = new('PRODUCT_EXEMPT')
           FROM_IMPORT = new('FROM_IMPORT')
           RULE_EXCLUDED_IN_CALCULATION = new('RULE_EXCLUDED_IN_CALCULATION')
+          REVERSE_CHARGE = new('REVERSE_CHARGE')
         end
       end
     end

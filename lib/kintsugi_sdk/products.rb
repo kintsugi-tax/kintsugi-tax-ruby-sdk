@@ -43,7 +43,7 @@ module KintsugiSDK
 
     sig { params(request: Models::Ops::GetProductByIdV1ProductsProductIdGetRequest, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(Models::Shared::ProductRead) }
     def get(request:, timeout_ms: nil, http_headers: nil)
-      # get - Get Product By Id
+      # get - Get product by id
       # The Get Product By ID API retrieves detailed information about
       #     a single product by its unique ID. This API helps in viewing the specific details
       #     of a product, including its attributes, status, and categorization.
@@ -55,7 +55,7 @@ module KintsugiSDK
         '/v1/products/{product_id}',
         request
       )
-      headers = {}
+      headers = Utils.get_headers(request)
       headers = T.cast(headers, T::Hash[String, String])
       headers['Accept'] = 'application/json'
       headers['user-agent'] = @sdk_configuration.user_agent
@@ -161,7 +161,7 @@ module KintsugiSDK
             response: http_response
           )
           response_data = http_response.env.response_body
-          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Errors::BackendSrcProductsResponsesValidationErrorResponse)
+          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Errors::BackendSrcProductsSchemasResponsesValidationErrorResponse)
           raise obj
         else
           raise ::KintsugiSDK::Models::Errors::APIError.new(status_code: http_response.status, body: http_response.env.response_body, raw_response: http_response), 'Unknown content type received'
@@ -193,11 +193,13 @@ module KintsugiSDK
 
     sig { params(request: Models::Ops::UpdateProductV1ProductsProductIdPutRequest, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(Models::Shared::ProductRead) }
     def update(request:, timeout_ms: nil, http_headers: nil)
-      # update - Update Product
+      # update - Update product
       # The Update Product API allows users to modify the details of
       #     an existing product identified by its unique product_id. You can
-      #     retrieve supported categories and subcategories from
-      #     [GET /products/categories endpoint](/reference/api/products/get-product-categories)
+      #     retrieve supported categories and subcategories from the
+      #     [GET /products/categories endpoint](/reference/api/products/get-product-categories),
+      #     or browse the full catalog with descriptions and examples in the
+      #     [Product Categories guide](/docs/guides/product-categories)
       url, params = @sdk_configuration.get_server_details
       base_url = Utils.template_url(url, params)
       url = Utils.generate_url(
@@ -206,9 +208,9 @@ module KintsugiSDK
         '/v1/products/{product_id}',
         request
       )
-      headers = {}
+      headers = Utils.get_headers(request)
       headers = T.cast(headers, T::Hash[String, String])
-      req_content_type, data, form = Utils.serialize_request_body(request, false, false, :product_update, :json)
+      req_content_type, data, form = Utils.serialize_request_body(request, false, false, :request_body, :json)
       headers['content-type'] = req_content_type
       raise StandardError, 'request body is required' if data.nil? && form.nil?
 
@@ -324,7 +326,7 @@ module KintsugiSDK
             response: http_response
           )
           response_data = http_response.env.response_body
-          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Errors::BackendSrcProductsResponsesValidationErrorResponse)
+          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Errors::BackendSrcProductsSchemasResponsesValidationErrorResponse)
           raise obj
         else
           raise ::KintsugiSDK::Models::Errors::APIError.new(status_code: http_response.status, body: http_response.env.response_body, raw_response: http_response), 'Unknown content type received'

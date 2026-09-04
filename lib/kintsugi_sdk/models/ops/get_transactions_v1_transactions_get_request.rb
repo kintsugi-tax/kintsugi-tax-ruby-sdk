@@ -12,6 +12,8 @@ module KintsugiSDK
         extend T::Sig
         include Crystalline::MetadataFields
 
+        # The unique identifier for the organization making the request
+        field :x_organization_id, Crystalline::Nilable.new(::String), { 'header': { 'field_name': 'x-organization-id', 'style': 'simple', 'explode': false } }
         # Filter transactions by state code.
         field :state_code, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'state_code', 'style': 'form', 'explode': true } }
         # Filter by transaction type (e.g., SALE, FULL_CREDIT_NOTE,
@@ -24,19 +26,29 @@ module KintsugiSDK
         field :search_query, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'search_query', 'style': 'form', 'explode': true } }
         # Filter transactions by country code
         #         (ISO 3166-1 alpha-2 format, e.g., US).
-        field :country, Crystalline::Nilable.new(Crystalline::Array.new(Models::Shared::CountryCodeEnum)), { 'query_param': { 'field_name': 'country', 'style': 'form', 'explode': true } }
+        field :country, Crystalline::Nilable.new(Crystalline::Array.new(Crystalline::Union.new(Models::Shared::CountryCodeEnum, ::String))), { 'query_param': { 'field_name': 'country', 'style': 'form', 'explode': true } }
         # Filter by full state name (e.g., California).
         field :state, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'state', 'style': 'form', 'explode': true } }
+        # Filter by address status (e.g., UNVERIFIED, INVALID,
+        #         PARTIALLY_VERIFIED, VERIFIED, UNVERIFIABLE).
+        field :address_status_in, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'address_status__in', 'style': 'form', 'explode': true } }
         # Filter by transaction status (e.g., PENDING, COMMITTED,
-        #         CANCELLED, FULLY_REFUNDED, PARTIALLY_REFUNDED, ARCHIVED).
+        #         CANCELLED, ARCHIVED). For refund filtering use the refund_status parameter.
         field :status, Crystalline::Nilable.new(Models::Shared::TransactionStatusEnum), { 'query_param': { 'field_name': 'status', 'style': 'form', 'explode': true } }
+        # Filter by refund status (e.g., FULLY_REFUNDED,
+        #         PARTIALLY_REFUNDED).
+        field :refund_status, Crystalline::Nilable.new(Models::Shared::TransactionRefundStatus), { 'query_param': { 'field_name': 'refund_status', 'style': 'form', 'explode': true } }
         # Retrieve transactions linked to a specific filing ID.
         field :filing_id, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'filing_id', 'style': 'form', 'explode': true } }
-        # Retrieve transactions with a date
-        #         greater than or equal to (YYYY-MM-DD).
+        # Sort results based on specified fields.
+        #         Prefix with - for descending order (e.g., -date for newest first).
+        field :order_by, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'order_by', 'style': 'form', 'explode': true } }
+        # Retrieve transactions with a date greater than or equal to the bound
+        #         (YYYY-MM-DD or ISO datetime in UTC).
+        #         Defaults to 12 months ago when neither date__gte nor date__lte is provided.
         field :date_gte, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'date__gte', 'style': 'form', 'explode': true } }
-        # Retrieve transactions with a date
-        #         less than or equal to (YYYY-MM-DD).
+        # Retrieve transactions with a date less than or equal to the bound
+        #         (YYYY-MM-DD or ISO datetime in UTC).
         field :date_lte, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'date__lte', 'style': 'form', 'explode': true } }
         # Filter transactions based on processing status.
         #         Multiple values can be passed as a comma-separated list.
@@ -46,34 +58,43 @@ module KintsugiSDK
         # Filter transactions by exemption status.
         #         Multiple values can be passed as a comma-separated list (e.g., EXEMPT,TAXABLE).
         field :exempt_in, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'exempt__in', 'style': 'form', 'explode': true } }
-        # Filter by address status (e.g., UNVERIFIED, INVALID,
-        #         PARTIALLY_VERIFIED, VERIFIED, UNVERIFIABLE).
-        field :address_status_in, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'address_status__in', 'style': 'form', 'explode': true } }
-        # Sort results based on specified fields.
-        #         Prefix with - for descending order (e.g., -date for newest first).
-        field :order_by, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'order_by', 'style': 'form', 'explode': true } }
+        # Filter transactions by connection ID (comma-separated)
+        field :connection_id_in, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'connection_id__in', 'style': 'form', 'explode': true } }
+        # Filter by transaction direction (SALE or PURCHASE). When unset, the list includes both directions.
+        field :direction, Crystalline::Nilable.new(Models::Shared::TransactionDirectionEnum), { 'query_param': { 'field_name': 'direction', 'style': 'form', 'explode': true } }
+        # Optional upper bound for the pagination COUNT query.
+        #         When set, the returned `total` is capped at this value and `pages`
+        #         is derived from the capped total, making large result sets faster
+        #         to paginate at the cost of approximate totals. When unset, `total`
+        #         and `pages` reflect the exact count (existing behavior).
+        field :count_limit, Crystalline::Nilable.new(::Integer), { 'query_param': { 'field_name': 'count_limit', 'style': 'form', 'explode': true } }
         # Page number
         field :page, Crystalline::Nilable.new(::Integer), { 'query_param': { 'field_name': 'page', 'style': 'form', 'explode': true } }
         # Page size
         field :size, Crystalline::Nilable.new(::Integer), { 'query_param': { 'field_name': 'size', 'style': 'form', 'explode': true } }
 
-        sig { params(state_code: T.nilable(::String), transaction_type: T.nilable(::String), transaction_source: T.nilable(::String), search_query: T.nilable(::String), country: T.nilable(T::Array[Models::Shared::CountryCodeEnum]), state: T.nilable(::String), status: T.nilable(Models::Shared::TransactionStatusEnum), filing_id: T.nilable(::String), date_gte: T.nilable(::String), date_lte: T.nilable(::String), processing_status_in: T.nilable(::String), marketplace: T.nilable(T::Boolean), exempt_in: T.nilable(::String), address_status_in: T.nilable(::String), order_by: T.nilable(::String), page: T.nilable(::Integer), size: T.nilable(::Integer)).void }
-        def initialize(state_code: nil, transaction_type: nil, transaction_source: nil, search_query: nil, country: nil, state: nil, status: nil, filing_id: nil, date_gte: nil, date_lte: nil, processing_status_in: nil, marketplace: nil, exempt_in: nil, address_status_in: 'UNVERIFIED,INVALID,PARTIALLY_VERIFIED,VERIFIED,UNVERIFIABLE', order_by: 'date,state,customer_name,status', page: 1, size: 50)
+        sig { params(x_organization_id: T.nilable(::String), state_code: T.nilable(::String), transaction_type: T.nilable(::String), transaction_source: T.nilable(::String), search_query: T.nilable(::String), country: T.nilable(T::Array[T.any(Models::Shared::CountryCodeEnum, ::String)]), state: T.nilable(::String), address_status_in: T.nilable(::String), status: T.nilable(Models::Shared::TransactionStatusEnum), refund_status: T.nilable(Models::Shared::TransactionRefundStatus), filing_id: T.nilable(::String), order_by: T.nilable(::String), date_gte: T.nilable(::String), date_lte: T.nilable(::String), processing_status_in: T.nilable(::String), marketplace: T.nilable(T::Boolean), exempt_in: T.nilable(::String), connection_id_in: T.nilable(::String), direction: T.nilable(Models::Shared::TransactionDirectionEnum), count_limit: T.nilable(::Integer), page: T.nilable(::Integer), size: T.nilable(::Integer)).void }
+        def initialize(x_organization_id: nil, state_code: nil, transaction_type: nil, transaction_source: nil, search_query: nil, country: nil, state: nil, address_status_in: nil, status: nil, refund_status: nil, filing_id: nil, order_by: nil, date_gte: nil, date_lte: nil, processing_status_in: nil, marketplace: nil, exempt_in: nil, connection_id_in: nil, direction: nil, count_limit: nil, page: 1, size: 50)
+          @x_organization_id = x_organization_id
           @state_code = state_code
           @transaction_type = transaction_type
           @transaction_source = transaction_source
           @search_query = search_query
           @country = country
           @state = state
+          @address_status_in = address_status_in
           @status = status
+          @refund_status = refund_status
           @filing_id = filing_id
+          @order_by = order_by
           @date_gte = date_gte
           @date_lte = date_lte
           @processing_status_in = processing_status_in
           @marketplace = marketplace
           @exempt_in = exempt_in
-          @address_status_in = address_status_in
-          @order_by = order_by
+          @connection_id_in = connection_id_in
+          @direction = direction
+          @count_limit = count_limit
           @page = page
           @size = size
         end
@@ -81,21 +102,26 @@ module KintsugiSDK
         sig { params(other: T.untyped).returns(T::Boolean) }
         def ==(other)
           return false unless other.is_a? self.class
+          return false unless @x_organization_id == other.x_organization_id
           return false unless @state_code == other.state_code
           return false unless @transaction_type == other.transaction_type
           return false unless @transaction_source == other.transaction_source
           return false unless @search_query == other.search_query
           return false unless @country == other.country
           return false unless @state == other.state
+          return false unless @address_status_in == other.address_status_in
           return false unless @status == other.status
+          return false unless @refund_status == other.refund_status
           return false unless @filing_id == other.filing_id
+          return false unless @order_by == other.order_by
           return false unless @date_gte == other.date_gte
           return false unless @date_lte == other.date_lte
           return false unless @processing_status_in == other.processing_status_in
           return false unless @marketplace == other.marketplace
           return false unless @exempt_in == other.exempt_in
-          return false unless @address_status_in == other.address_status_in
-          return false unless @order_by == other.order_by
+          return false unless @connection_id_in == other.connection_id_in
+          return false unless @direction == other.direction
+          return false unless @count_limit == other.count_limit
           return false unless @page == other.page
           return false unless @size == other.size
           true

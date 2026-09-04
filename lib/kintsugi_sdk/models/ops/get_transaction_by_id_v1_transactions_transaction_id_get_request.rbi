@@ -10,4 +10,6 @@ end
 class KintsugiSDK::Models::Ops::GetTransactionByIdV1TransactionsTransactionIdGetRequest
   def transaction_id(); end
   def transaction_id=(str_); end
+  def x_organization_id(); end
+  def x_organization_id=(str_); end
 end
