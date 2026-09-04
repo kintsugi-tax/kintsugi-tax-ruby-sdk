@@ -10,4 +10,6 @@ end
 class KintsugiSDK::Models::Ops::GetTransactionsByFilingRequest
   def filing_id(); end
   def filing_id=(str_); end
+  def x_organization_id(); end
+  def x_organization_id=(str_); end
 end
