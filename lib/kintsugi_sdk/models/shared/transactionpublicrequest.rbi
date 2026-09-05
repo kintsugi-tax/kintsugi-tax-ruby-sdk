@@ -22,6 +22,26 @@ class KintsugiSDK::Models::Shared::TransactionPublicRequest
   def customer=(str_); end
   def type(); end
   def type=(str_); end
+  def total_amount(); end
+  def total_amount=(str_); end
+  def total_tax_amount_imported(); end
+  def total_tax_amount_imported=(str_); end
+  def tax_rate_imported(); end
+  def tax_rate_imported=(str_); end
+  def total_tax_amount_calculated(); end
+  def total_tax_amount_calculated=(str_); end
+  def tax_rate_calculated(); end
+  def tax_rate_calculated=(str_); end
+  def total_tax_liability_amount(); end
+  def total_tax_liability_amount=(str_); end
+  def taxable_amount(); end
+  def taxable_amount=(str_); end
+  def currency(); end
+  def currency=(str_); end
+  def source(); end
+  def source=(str_); end
+  def status(); end
+  def status=(str_); end
   def requires_exemption(); end
   def requires_exemption=(str_); end
   def shop_date(); end
@@ -34,6 +54,8 @@ class KintsugiSDK::Models::Shared::TransactionPublicRequest
   def refund_status=(str_); end
   def customer_id(); end
   def customer_id=(str_); end
+  def marketplace(); end
+  def marketplace=(str_); end
   def exempt(); end
   def exempt=(str_); end
   def exemptions(); end
@@ -48,10 +70,8 @@ class KintsugiSDK::Models::Shared::TransactionPublicRequest
   def external_friendly_id=(str_); end
   def tax_liability_source(); end
   def tax_liability_source=(str_); end
-  def currency(); end
-  def currency=(str_); end
-  def source(); end
-  def source=(str_); end
+  def locked(); end
+  def locked=(str_); end
   def connection_id(); end
   def connection_id=(str_); end
   def filing_id(); end
@@ -68,24 +88,8 @@ class KintsugiSDK::Models::Shared::TransactionPublicRequest
   def postal_code=(str_); end
   def tax_id(); end
   def tax_id=(str_); end
-  def status(); end
-  def status=(str_); end
-  def total_amount(); end
-  def total_amount=(str_); end
-  def marketplace(); end
-  def marketplace=(str_); end
-  def total_tax_amount_imported(); end
-  def total_tax_amount_imported=(str_); end
-  def tax_rate_imported(); end
-  def tax_rate_imported=(str_); end
-  def total_tax_amount_calculated(); end
-  def total_tax_amount_calculated=(str_); end
-  def tax_rate_calculated(); end
-  def tax_rate_calculated=(str_); end
-  def total_tax_liability_amount(); end
-  def total_tax_liability_amount=(str_); end
-  def taxable_amount(); end
-  def taxable_amount=(str_); end
-  def locked(); end
-  def locked=(str_); end
+  def document_type(); end
+  def document_type=(str_); end
+  def created_from(); end
+  def created_from=(str_); end
 end

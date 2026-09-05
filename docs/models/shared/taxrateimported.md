@@ -1,0 +1,4 @@
+# TaxRateImported
+
+Imported tax rate.
+
