@@ -17,13 +17,9 @@ module KintsugiSDK
 
         field :external_id, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('external_id'), required: true } }
 
-        field :sku, Crystalline::Array.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('sku'), required: true } }
-
         field :code, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('code'), required: true } }
 
         field :name, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('name'), required: true } }
-
-        field :description, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('description'), required: true } }
 
         field :status, Models::Shared::ProductStatusEnum, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('status'), required: true, 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::ProductStatusEnum, false) } }
         # Main category of the product.
@@ -39,25 +35,50 @@ module KintsugiSDK
 
         field :source, Models::Shared::SourceEnum, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('source'), required: true, 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::SourceEnum, false) } }
 
-        field :connection_id, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('connection_id'), required: true } }
+        field :sku, Crystalline::Nilable.new(Crystalline::Array.new(::String)), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('sku'), required: true } }
 
-        field :classification_failed, Crystalline::Boolean.new, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('classification_failed'), required: true } }
+        field :description, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('description'), required: true } }
 
-        sig { params(id: ::String, external_id: ::String, sku: T::Array[::String], code: ::String, name: ::String, description: ::String, status: Models::Shared::ProductStatusEnum, product_category: ::String, product_subcategory: ::String, tax_exempt: T::Boolean, source: Models::Shared::SourceEnum, connection_id: ::String, classification_failed: T::Boolean).void }
-        def initialize(id:, external_id:, sku:, code:, name:, description:, status:, product_category:, product_subcategory:, tax_exempt:, source:, connection_id:, classification_failed:)
+        field :connection_id, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('connection_id'), required: true } }
+
+        field :classification_failed, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('classification_failed'), required: true } }
+
+        field :store_name, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('store_name') } }
+
+        field :source_taxonomy_type, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('source_taxonomy_type') } }
+
+        field :source_taxonomy_code, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('source_taxonomy_code') } }
+
+        field :source_taxonomy_id, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('source_taxonomy_id') } }
+
+        field :source_taxonomy_name, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('source_taxonomy_name') } }
+
+        field :source_taxonomy_categories, Crystalline::Nilable.new(Crystalline::Array.new(Crystalline::Hash.new(Symbol, ::Object))), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('source_taxonomy_categories') } }
+
+        field :source_taxonomy_metadata, Crystalline::Nilable.new(Crystalline::Hash.new(Symbol, ::Object)), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('source_taxonomy_metadata') } }
+
+        sig { params(id: ::String, external_id: ::String, code: ::String, name: ::String, status: Models::Shared::ProductStatusEnum, product_category: ::String, product_subcategory: ::String, tax_exempt: T::Boolean, source: Models::Shared::SourceEnum, sku: T.nilable(T::Array[::String]), description: T.nilable(::String), connection_id: T.nilable(::String), classification_failed: T.nilable(T::Boolean), store_name: T.nilable(::String), source_taxonomy_type: T.nilable(::String), source_taxonomy_code: T.nilable(::String), source_taxonomy_id: T.nilable(::String), source_taxonomy_name: T.nilable(::String), source_taxonomy_categories: T.nilable(T::Array[T::Hash[Symbol, ::Object]]), source_taxonomy_metadata: T.nilable(T::Hash[Symbol, ::Object])).void }
+        def initialize(id:, external_id:, code:, name:, status:, product_category:, product_subcategory:, tax_exempt:, source:, sku: nil, description: nil, connection_id: nil, classification_failed: nil, store_name: nil, source_taxonomy_type: nil, source_taxonomy_code: nil, source_taxonomy_id: nil, source_taxonomy_name: nil, source_taxonomy_categories: nil, source_taxonomy_metadata: nil)
           @id = id
           @external_id = external_id
-          @sku = sku
           @code = code
           @name = name
-          @description = description
           @status = status
           @product_category = product_category
           @product_subcategory = product_subcategory
           @tax_exempt = tax_exempt
           @source = source
+          @sku = sku
+          @description = description
           @connection_id = connection_id
           @classification_failed = classification_failed
+          @store_name = store_name
+          @source_taxonomy_type = source_taxonomy_type
+          @source_taxonomy_code = source_taxonomy_code
+          @source_taxonomy_id = source_taxonomy_id
+          @source_taxonomy_name = source_taxonomy_name
+          @source_taxonomy_categories = source_taxonomy_categories
+          @source_taxonomy_metadata = source_taxonomy_metadata
         end
 
         sig { params(other: T.untyped).returns(T::Boolean) }
@@ -65,17 +86,24 @@ module KintsugiSDK
           return false unless other.is_a? self.class
           return false unless @id == other.id
           return false unless @external_id == other.external_id
-          return false unless @sku == other.sku
           return false unless @code == other.code
           return false unless @name == other.name
-          return false unless @description == other.description
           return false unless @status == other.status
           return false unless @product_category == other.product_category
           return false unless @product_subcategory == other.product_subcategory
           return false unless @tax_exempt == other.tax_exempt
           return false unless @source == other.source
+          return false unless @sku == other.sku
+          return false unless @description == other.description
           return false unless @connection_id == other.connection_id
           return false unless @classification_failed == other.classification_failed
+          return false unless @store_name == other.store_name
+          return false unless @source_taxonomy_type == other.source_taxonomy_type
+          return false unless @source_taxonomy_code == other.source_taxonomy_code
+          return false unless @source_taxonomy_id == other.source_taxonomy_id
+          return false unless @source_taxonomy_name == other.source_taxonomy_name
+          return false unless @source_taxonomy_categories == other.source_taxonomy_categories
+          return false unless @source_taxonomy_metadata == other.source_taxonomy_metadata
           true
         end
       end

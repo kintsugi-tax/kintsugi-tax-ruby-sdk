@@ -43,13 +43,13 @@ module KintsugiSDK
 
     sig { params(request: Models::Ops::GetTransactionsV1TransactionsGetRequest, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(Models::Shared::PageTransactionRead) }
     def list(request:, timeout_ms: nil, http_headers: nil)
-      # list - Get Transactions
+      # list - Get transactions
       # The Get Transactions API retrieves a list of transactions with
       #     optional filtering, sorting, and pagination.
       url, params = @sdk_configuration.get_server_details
       base_url = Utils.template_url(url, params)
       url = "#{base_url}/v1/transactions"
-      headers = {}
+      headers = Utils.get_headers(request)
       headers = T.cast(headers, T::Hash[String, String])
       query_params = Utils.get_query_params(Models::Ops::GetTransactionsV1TransactionsGetRequest, request, nil)
       headers['Accept'] = 'application/json'
@@ -187,16 +187,16 @@ module KintsugiSDK
     end
 
 
-    sig { params(request: Models::Shared::TransactionPublicRequest, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(Models::Shared::TransactionRead) }
+    sig { params(request: Models::Ops::CreateTransactionV1TransactionsPostRequest, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(Models::Shared::TransactionRead) }
     def create(request:, timeout_ms: nil, http_headers: nil)
-      # create - Create Transaction
-      # Create a transaction.
+      # create - Create transaction
+      # Create a transaction. Set `marketplace: true` for reseller or marketplace orders where tax was remitted externally; gross sales still count toward nexus, but tax liability is excluded.
       url, params = @sdk_configuration.get_server_details
       base_url = Utils.template_url(url, params)
       url = "#{base_url}/v1/transactions"
-      headers = {}
+      headers = Utils.get_headers(request)
       headers = T.cast(headers, T::Hash[String, String])
-      req_content_type, data, form = Utils.serialize_request_body(request, false, false, :request, :json)
+      req_content_type, data, form = Utils.serialize_request_body(request, false, false, :transaction_public_request, :json)
       headers['content-type'] = req_content_type
       raise StandardError, 'request body is required' if data.nil? && form.nil?
 
@@ -344,7 +344,7 @@ module KintsugiSDK
 
     sig { params(request: Models::Ops::GetTransactionByExternalIdRequest, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(Models::Shared::TransactionRead) }
     def get_by_external_id(request:, timeout_ms: nil, http_headers: nil)
-      # get_by_external_id - Get Transaction By External Id
+      # get_by_external_id - Get transaction by external id
       # Retrieves a specific transaction based on its external ID.
       #     This allows users to fetch transaction details using an identifier from an external system.
       url, params = @sdk_configuration.get_server_details
@@ -355,7 +355,7 @@ module KintsugiSDK
         '/v1/transactions/external/{external_id}',
         request
       )
-      headers = {}
+      headers = Utils.get_headers(request)
       headers = T.cast(headers, T::Hash[String, String])
       headers['Accept'] = 'application/json'
       headers['user-agent'] = @sdk_configuration.user_agent
@@ -491,31 +491,20 @@ module KintsugiSDK
     end
 
 
-    sig { params(request: Models::Ops::UpdateTransactionV1TransactionsTransactionIdPutRequest, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(Models::Shared::TransactionRead) }
-    def update(request:, timeout_ms: nil, http_headers: nil)
-      # update - Update Transaction
-      # Update a specific transaction by its ID.
+    sig { params(request: Models::Ops::GetTransactionsByFilingRequest, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(T::Array[Models::Shared::TransactionRead]) }
+    def get_by_filing_id(request:, timeout_ms: nil, http_headers: nil)
+      # get_by_filing_id - Get transactions by filing id
+      # Retrieve transactions by filing ID.
       url, params = @sdk_configuration.get_server_details
       base_url = Utils.template_url(url, params)
       url = Utils.generate_url(
-        Models::Ops::UpdateTransactionV1TransactionsTransactionIdPutRequest,
+        Models::Ops::GetTransactionsByFilingRequest,
         base_url,
-        '/v1/transactions/{transaction_id}',
+        '/v1/transactions/filings/{filing_id}',
         request
       )
-      headers = {}
+      headers = Utils.get_headers(request)
       headers = T.cast(headers, T::Hash[String, String])
-      req_content_type, data, form = Utils.serialize_request_body(request, false, false, :transaction_update, :json)
-      headers['content-type'] = req_content_type
-      raise StandardError, 'request body is required' if data.nil? && form.nil?
-
-      if form && !form.empty?
-        body = Utils.encode_form(form)
-      elsif Utils.match_content_type(req_content_type, 'application/x-www-form-urlencoded')
-        body = URI.encode_www_form(T.cast(data, T::Hash[Symbol, Object]))
-      else
-        body = data
-      end
       headers['Accept'] = 'application/json'
       headers['user-agent'] = @sdk_configuration.user_agent
 
@@ -531,7 +520,7 @@ module KintsugiSDK
         config: @sdk_configuration,
         base_url: base_url,
         oauth2_scopes: nil,
-        operation_id: 'update_transaction_v1_transactions__transaction_id__put',
+        operation_id: 'getTransactionsByFiling',
         security_source: @sdk_configuration.security_source
       )
 
@@ -540,8 +529,7 @@ module KintsugiSDK
       
 
       begin
-        http_response = T.must(connection).put(url) do |req|
-          req.body = body
+        http_response = T.must(connection).get(url) do |req|
           req.headers.merge!(headers)
           req.options.timeout = timeout unless timeout.nil?
           Utils.configure_request_security(req, security)
@@ -592,9 +580,23 @@ module KintsugiSDK
             response: http_response
           )
           response_data = http_response.env.response_body
-          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Shared::TransactionRead)
+          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Crystalline::Array.new(Models::Shared::TransactionRead))
 
           return obj
+        else
+          raise ::KintsugiSDK::Models::Errors::APIError.new(status_code: http_response.status, body: http_response.env.response_body, raw_response: http_response), 'Unknown content type received'
+        end
+      elsif Utils.match_status_code(http_response.status, ['401'])
+        if Utils.match_content_type(content_type, 'application/json')
+          @sdk_configuration.hooks.after_success(
+            hook_ctx: SDKHooks::AfterSuccessHookContext.new(
+              hook_ctx: hook_ctx
+            ),
+            response: http_response
+          )
+          response_data = http_response.env.response_body
+          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Errors::ErrorResponse)
+          raise obj
         else
           raise ::KintsugiSDK::Models::Errors::APIError.new(status_code: http_response.status, body: http_response.env.response_body, raw_response: http_response), 'Unknown content type received'
         end
@@ -607,7 +609,21 @@ module KintsugiSDK
             response: http_response
           )
           response_data = http_response.env.response_body
-          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Errors::HTTPValidationError)
+          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Errors::BackendSrcTransactionsResponsesValidationErrorResponse)
+          raise obj
+        else
+          raise ::KintsugiSDK::Models::Errors::APIError.new(status_code: http_response.status, body: http_response.env.response_body, raw_response: http_response), 'Unknown content type received'
+        end
+      elsif Utils.match_status_code(http_response.status, ['500'])
+        if Utils.match_content_type(content_type, 'application/json')
+          @sdk_configuration.hooks.after_success(
+            hook_ctx: SDKHooks::AfterSuccessHookContext.new(
+              hook_ctx: hook_ctx
+            ),
+            response: http_response
+          )
+          response_data = http_response.env.response_body
+          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Errors::ErrorResponse)
           raise obj
         else
           raise ::KintsugiSDK::Models::Errors::APIError.new(status_code: http_response.status, body: http_response.env.response_body, raw_response: http_response), 'Unknown content type received'
@@ -625,7 +641,7 @@ module KintsugiSDK
 
     sig { params(request: Models::Ops::GetTransactionByIdV1TransactionsTransactionIdGetRequest, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(Models::Shared::TransactionRead) }
     def get_by_id(request:, timeout_ms: nil, http_headers: nil)
-      # get_by_id - Get Transaction By Id
+      # get_by_id - Get transaction by id
       # The Get Transaction By Id API retrieves detailed information
       #     about a specific transaction by providing its unique transaction ID.
       url, params = @sdk_configuration.get_server_details
@@ -636,7 +652,7 @@ module KintsugiSDK
         '/v1/transactions/{transaction_id}',
         request
       )
-      headers = {}
+      headers = Utils.get_headers(request)
       headers = T.cast(headers, T::Hash[String, String])
       headers['Accept'] = 'application/json'
       headers['user-agent'] = @sdk_configuration.user_agent
@@ -772,20 +788,31 @@ module KintsugiSDK
     end
 
 
-    sig { params(request: Models::Ops::GetTransactionsByFilingRequest, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(T::Array[Models::Shared::TransactionRead]) }
-    def get_by_filing_id(request:, timeout_ms: nil, http_headers: nil)
-      # get_by_filing_id - Get Transactions By Filing Id
-      # Retrieve transactions by filing ID.
+    sig { params(request: Models::Ops::UpdateTransactionV1TransactionsTransactionIdPutRequest, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(Models::Shared::TransactionRead) }
+    def update(request:, timeout_ms: nil, http_headers: nil)
+      # update - Update transaction
+      # Update a specific transaction by its ID.
       url, params = @sdk_configuration.get_server_details
       base_url = Utils.template_url(url, params)
       url = Utils.generate_url(
-        Models::Ops::GetTransactionsByFilingRequest,
+        Models::Ops::UpdateTransactionV1TransactionsTransactionIdPutRequest,
         base_url,
-        '/v1/transactions/filings/{filing_id}',
+        '/v1/transactions/{transaction_id}',
         request
       )
-      headers = {}
+      headers = Utils.get_headers(request)
       headers = T.cast(headers, T::Hash[String, String])
+      req_content_type, data, form = Utils.serialize_request_body(request, false, false, :transaction_update, :json)
+      headers['content-type'] = req_content_type
+      raise StandardError, 'request body is required' if data.nil? && form.nil?
+
+      if form && !form.empty?
+        body = Utils.encode_form(form)
+      elsif Utils.match_content_type(req_content_type, 'application/x-www-form-urlencoded')
+        body = URI.encode_www_form(T.cast(data, T::Hash[Symbol, Object]))
+      else
+        body = data
+      end
       headers['Accept'] = 'application/json'
       headers['user-agent'] = @sdk_configuration.user_agent
 
@@ -801,7 +828,7 @@ module KintsugiSDK
         config: @sdk_configuration,
         base_url: base_url,
         oauth2_scopes: nil,
-        operation_id: 'getTransactionsByFiling',
+        operation_id: 'update_transaction_v1_transactions__transaction_id__put',
         security_source: @sdk_configuration.security_source
       )
 
@@ -810,7 +837,8 @@ module KintsugiSDK
       
 
       begin
-        http_response = T.must(connection).get(url) do |req|
+        http_response = T.must(connection).put(url) do |req|
+          req.body = body
           req.headers.merge!(headers)
           req.options.timeout = timeout unless timeout.nil?
           Utils.configure_request_security(req, security)
@@ -861,23 +889,9 @@ module KintsugiSDK
             response: http_response
           )
           response_data = http_response.env.response_body
-          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Crystalline::Array.new(Models::Shared::TransactionRead))
+          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Shared::TransactionRead)
 
           return obj
-        else
-          raise ::KintsugiSDK::Models::Errors::APIError.new(status_code: http_response.status, body: http_response.env.response_body, raw_response: http_response), 'Unknown content type received'
-        end
-      elsif Utils.match_status_code(http_response.status, ['401'])
-        if Utils.match_content_type(content_type, 'application/json')
-          @sdk_configuration.hooks.after_success(
-            hook_ctx: SDKHooks::AfterSuccessHookContext.new(
-              hook_ctx: hook_ctx
-            ),
-            response: http_response
-          )
-          response_data = http_response.env.response_body
-          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Errors::ErrorResponse)
-          raise obj
         else
           raise ::KintsugiSDK::Models::Errors::APIError.new(status_code: http_response.status, body: http_response.env.response_body, raw_response: http_response), 'Unknown content type received'
         end
@@ -890,21 +904,7 @@ module KintsugiSDK
             response: http_response
           )
           response_data = http_response.env.response_body
-          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Errors::BackendSrcTransactionsResponsesValidationErrorResponse)
-          raise obj
-        else
-          raise ::KintsugiSDK::Models::Errors::APIError.new(status_code: http_response.status, body: http_response.env.response_body, raw_response: http_response), 'Unknown content type received'
-        end
-      elsif Utils.match_status_code(http_response.status, ['500'])
-        if Utils.match_content_type(content_type, 'application/json')
-          @sdk_configuration.hooks.after_success(
-            hook_ctx: SDKHooks::AfterSuccessHookContext.new(
-              hook_ctx: hook_ctx
-            ),
-            response: http_response
-          )
-          response_data = http_response.env.response_body
-          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Errors::ErrorResponse)
+          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Errors::HTTPValidationError)
           raise obj
         else
           raise ::KintsugiSDK::Models::Errors::APIError.new(status_code: http_response.status, body: http_response.env.response_body, raw_response: http_response), 'Unknown content type received'

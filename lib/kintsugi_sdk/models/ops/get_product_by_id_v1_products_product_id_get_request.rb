@@ -14,16 +14,20 @@ module KintsugiSDK
 
         # The unique identifier for the product you want to retrieve.
         field :product_id, ::String, { 'path_param': { 'field_name': 'product_id', 'style': 'simple', 'explode': false } }
+        # The unique identifier for the organization making the request
+        field :x_organization_id, Crystalline::Nilable.new(::String), { 'header': { 'field_name': 'x-organization-id', 'style': 'simple', 'explode': false } }
 
-        sig { params(product_id: ::String).void }
-        def initialize(product_id:)
+        sig { params(product_id: ::String, x_organization_id: T.nilable(::String)).void }
+        def initialize(product_id:, x_organization_id: nil)
           @product_id = product_id
+          @x_organization_id = x_organization_id
         end
 
         sig { params(other: T.untyped).returns(T::Boolean) }
         def ==(other)
           return false unless other.is_a? self.class
           return false unless @product_id == other.product_id
+          return false unless @x_organization_id == other.x_organization_id
           true
         end
       end
