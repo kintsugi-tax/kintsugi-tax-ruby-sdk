@@ -14,16 +14,20 @@ module KintsugiSDK
 
         # The unique external identifier of the transaction.
         field :external_id, ::String, { 'path_param': { 'field_name': 'external_id', 'style': 'simple', 'explode': false } }
+        # The unique identifier for the organization making the request
+        field :x_organization_id, Crystalline::Nilable.new(::String), { 'header': { 'field_name': 'x-organization-id', 'style': 'simple', 'explode': false } }
 
-        sig { params(external_id: ::String).void }
-        def initialize(external_id:)
+        sig { params(external_id: ::String, x_organization_id: T.nilable(::String)).void }
+        def initialize(external_id:, x_organization_id: nil)
           @external_id = external_id
+          @x_organization_id = x_organization_id
         end
 
         sig { params(other: T.untyped).returns(T::Boolean) }
         def ==(other)
           return false unless other.is_a? self.class
           return false unless @external_id == other.external_id
+          return false unless @x_organization_id == other.x_organization_id
           true
         end
       end

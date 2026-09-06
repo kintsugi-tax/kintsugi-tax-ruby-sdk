@@ -32,4 +32,6 @@ class KintsugiSDK::Models::Shared::TransactionEstimateResponseAddresses
   def status=(str_); end
   def enriched_fields(); end
   def enriched_fields=(str_); end
+  def is_unincorporated(); end
+  def is_unincorporated=(str_); end
 end

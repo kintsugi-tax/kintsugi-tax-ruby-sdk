@@ -41,14 +41,14 @@ module KintsugiSDK
 
 
 
-    sig { params(request: Models::Ops::GetNexusForOrgV1NexusGetRequest, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(Models::Shared::PageNexusResponse) }
+    sig { params(request: Models::Ops::GetNexusForOrgV1NexusGetRequest, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(T.any(Models::Shared::PageNexusResponse, T::Array[Models::Shared::NexusResponse])) }
     def list(request:, timeout_ms: nil, http_headers: nil)
-      # list - Get Nexus For Org
+      # list - Get nexus for org
       # Get a list of all nexuses for the organization.
       url, params = @sdk_configuration.get_server_details
       base_url = Utils.template_url(url, params)
       url = "#{base_url}/v1/nexus"
-      headers = {}
+      headers = Utils.get_headers(request)
       headers = T.cast(headers, T::Hash[String, String])
       query_params = Utils.get_query_params(Models::Ops::GetNexusForOrgV1NexusGetRequest, request, nil)
       headers['Accept'] = 'application/json'
@@ -127,7 +127,7 @@ module KintsugiSDK
             response: http_response
           )
           response_data = http_response.env.response_body
-          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Shared::PageNexusResponse)
+          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Crystalline::Union.new(Models::Shared::PageNexusResponse, Crystalline::Array.new(Models::Shared::NexusResponse)))
 
           return obj
         else

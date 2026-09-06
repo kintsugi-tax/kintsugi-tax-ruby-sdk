@@ -13,9 +13,9 @@ module KintsugiSDK
         include Crystalline::MetadataFields
 
         # The file to be uploaded. Supported format: PDF. Max size: 10 MB.
-        field :file, Models::Shared::File, { 'multipart_form': { 'file': true, 'field_name': 'file' } }
+        field :file, ::String, { 'multipart_form': { 'field_name': 'file' } }
 
-        sig { params(file: Models::Shared::File).void }
+        sig { params(file: ::String).void }
         def initialize(file:)
           @file = file
         end

@@ -13,6 +13,7 @@ module KintsugiSDK
           APPROVED = new('APPROVED')
           PARTIALLY_APPROVED = new('PARTIALLY_APPROVED')
           PENDING = new('PENDING')
+          ARCHIVED = new('ARCHIVED')
         end
       end
     end
