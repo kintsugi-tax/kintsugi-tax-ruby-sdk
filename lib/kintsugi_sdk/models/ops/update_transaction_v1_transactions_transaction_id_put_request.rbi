@@ -12,4 +12,6 @@ class KintsugiSDK::Models::Ops::UpdateTransactionV1TransactionsTransactionIdPutR
   def transaction_id=(str_); end
   def transaction_update(); end
   def transaction_update=(str_); end
+  def x_organization_id(); end
+  def x_organization_id=(str_); end
 end

@@ -15,19 +15,23 @@ module KintsugiSDK
         # Unique identifier of the product to be updated.
         field :product_id, ::String, { 'path_param': { 'field_name': 'product_id', 'style': 'simple', 'explode': false } }
 
-        field :product_update, Models::Shared::ProductUpdate, { 'request': { 'media_type': 'application/json' } }
+        field :request_body, Crystalline::Union.new(Models::Shared::ProductUpdate, Models::Shared::ProductUpdateV2), { 'request': { 'media_type': 'application/json' } }
+        # The unique identifier for the organization making the request
+        field :x_organization_id, Crystalline::Nilable.new(::String), { 'header': { 'field_name': 'x-organization-id', 'style': 'simple', 'explode': false } }
 
-        sig { params(product_id: ::String, product_update: Models::Shared::ProductUpdate).void }
-        def initialize(product_id:, product_update:)
+        sig { params(product_id: ::String, request_body: T.any(Models::Shared::ProductUpdate, Models::Shared::ProductUpdateV2), x_organization_id: T.nilable(::String)).void }
+        def initialize(product_id:, request_body:, x_organization_id: nil)
           @product_id = product_id
-          @product_update = product_update
+          @request_body = request_body
+          @x_organization_id = x_organization_id
         end
 
         sig { params(other: T.untyped).returns(T::Boolean) }
         def ==(other)
           return false unless other.is_a? self.class
           return false unless @product_id == other.product_id
-          return false unless @product_update == other.product_update
+          return false unless @request_body == other.request_body
+          return false unless @x_organization_id == other.x_organization_id
           true
         end
       end

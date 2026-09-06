@@ -10,4 +10,6 @@ end
 class KintsugiSDK::Models::Ops::GetCustomerByExternalIdV1CustomersExternalExternalIdGetRequest
   def external_id(); end
   def external_id=(str_); end
+  def x_organization_id(); end
+  def x_organization_id=(str_); end
 end
