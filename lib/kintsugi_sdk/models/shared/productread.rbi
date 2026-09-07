@@ -12,14 +12,10 @@ class KintsugiSDK::Models::Shared::ProductRead
   def id=(str_); end
   def external_id(); end
   def external_id=(str_); end
-  def sku(); end
-  def sku=(str_); end
   def code(); end
   def code=(str_); end
   def name(); end
   def name=(str_); end
-  def description(); end
-  def description=(str_); end
   def status(); end
   def status=(str_); end
   def product_category(); end
@@ -30,8 +26,26 @@ class KintsugiSDK::Models::Shared::ProductRead
   def tax_exempt=(str_); end
   def source(); end
   def source=(str_); end
+  def sku(); end
+  def sku=(str_); end
+  def description(); end
+  def description=(str_); end
   def connection_id(); end
   def connection_id=(str_); end
   def classification_failed(); end
   def classification_failed=(str_); end
+  def store_name(); end
+  def store_name=(str_); end
+  def source_taxonomy_type(); end
+  def source_taxonomy_type=(str_); end
+  def source_taxonomy_code(); end
+  def source_taxonomy_code=(str_); end
+  def source_taxonomy_id(); end
+  def source_taxonomy_id=(str_); end
+  def source_taxonomy_name(); end
+  def source_taxonomy_name=(str_); end
+  def source_taxonomy_categories(); end
+  def source_taxonomy_categories=(str_); end
+  def source_taxonomy_metadata(); end
+  def source_taxonomy_metadata=(str_); end
 end
