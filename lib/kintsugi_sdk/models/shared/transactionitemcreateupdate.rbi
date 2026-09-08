@@ -8,12 +8,28 @@ end
 
 
 class KintsugiSDK::Models::Shared::TransactionItemCreateUpdate
-  def organization_id(); end
-  def organization_id=(str_); end
   def date(); end
   def date=(str_); end
   def external_product_id(); end
   def external_product_id=(str_); end
+  def organization_id(); end
+  def organization_id=(str_); end
+  def quantity(); end
+  def quantity=(str_); end
+  def amount(); end
+  def amount=(str_); end
+  def tax_amount_imported(); end
+  def tax_amount_imported=(str_); end
+  def tax_rate_imported(); end
+  def tax_rate_imported=(str_); end
+  def tax_amount_calculated(); end
+  def tax_amount_calculated=(str_); end
+  def tax_rate_calculated(); end
+  def tax_rate_calculated=(str_); end
+  def taxable_amount(); end
+  def taxable_amount=(str_); end
+  def tax_items(); end
+  def tax_items=(str_); end
   def external_id(); end
   def external_id=(str_); end
   def description(); end
@@ -44,24 +60,8 @@ class KintsugiSDK::Models::Shared::TransactionItemCreateUpdate
   def converted_subtotal=(str_); end
   def tax_exemption(); end
   def tax_exemption=(str_); end
-  def tax_items(); end
-  def tax_items=(str_); end
-  def discount_builder(); end
-  def discount_builder=(str_); end
-  def quantity(); end
-  def quantity=(str_); end
-  def amount(); end
-  def amount=(str_); end
-  def tax_amount_imported(); end
-  def tax_amount_imported=(str_); end
-  def tax_rate_imported(); end
-  def tax_rate_imported=(str_); end
-  def tax_amount_calculated(); end
-  def tax_amount_calculated=(str_); end
-  def tax_rate_calculated(); end
-  def tax_rate_calculated=(str_); end
-  def taxable_amount(); end
-  def taxable_amount=(str_); end
   def exempt(); end
   def exempt=(str_); end
+  def discount_builder(); end
+  def discount_builder=(str_); end
 end

@@ -13,21 +13,17 @@ module KintsugiSDK
         include Crystalline::MetadataFields
 
 
-        field :api_key_header, ::String, { 'security': { 'scheme': true, 'type': 'apiKey', 'sub_type': 'header', 'composite': true, 'field_name': 'X-API-KEY' } }
+        field :api_key_header, ::String, { 'security': { 'scheme': true, 'type': 'apiKey', 'sub_type': 'header', 'field_name': 'X-API-KEY' } }
 
-        field :custom_header, ::String, { 'security': { 'scheme': true, 'type': 'apiKey', 'sub_type': 'header', 'composite': true, 'field_name': 'x-organization-id' } }
-
-        sig { params(api_key_header: ::String, custom_header: ::String).void }
-        def initialize(api_key_header:, custom_header:)
+        sig { params(api_key_header: ::String).void }
+        def initialize(api_key_header:)
           @api_key_header = api_key_header
-          @custom_header = custom_header
         end
 
         sig { params(other: T.untyped).returns(T::Boolean) }
         def ==(other)
           return false unless other.is_a? self.class
           return false unless @api_key_header == other.api_key_header
-          return false unless @custom_header == other.custom_header
           true
         end
       end

@@ -25,6 +25,7 @@ module KintsugiSDK
           ARCHIVED = new('ARCHIVED')
           NEEDS_REFETCH = new('NEEDS_REFETCH')
           EXCLUDED_IN_CALCULATION = new('EXCLUDED_IN_CALCULATION')
+          DEFERRED_FROM_FILING = new('DEFERRED_FROM_FILING')
         end
       end
     end

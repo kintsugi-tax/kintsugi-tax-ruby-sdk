@@ -1,0 +1,4 @@
+# TotalTaxAmountCalculated
+
+Calculated tax amount.
+
