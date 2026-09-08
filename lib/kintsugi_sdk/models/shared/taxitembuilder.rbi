@@ -14,8 +14,12 @@ class KintsugiSDK::Models::Shared::TaxItemBuilder
   def amount=(str_); end
   def name(); end
   def name=(str_); end
+  def type(); end
+  def type=(str_); end
   def organization_id(); end
   def organization_id=(str_); end
+  def rule_id(); end
+  def rule_id=(str_); end
   def converted_amount(); end
   def converted_amount=(str_); end
   def currency(); end
@@ -24,12 +28,8 @@ class KintsugiSDK::Models::Shared::TaxItemBuilder
   def destination_currency=(str_); end
   def external_id(); end
   def external_id=(str_); end
-  def type(); end
-  def type=(str_); end
   def jurisdiction_type(); end
   def jurisdiction_type=(str_); end
   def jurisdiction_name(); end
   def jurisdiction_name=(str_); end
-  def rule_id(); end
-  def rule_id=(str_); end
 end

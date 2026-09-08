@@ -4,8 +4,8 @@
 
 ### Available Operations
 
-* [get](#get) - Get Product By Id
-* [update](#update) - Update Product
+* [get](#get) - Get product by id
+* [update](#update) - Update product
 
 ## get
 
@@ -21,14 +21,12 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-  security: Models::Shared::Security.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-    custom_header: '<YOUR_API_KEY_HERE>'
-  )
+  api_key_header: '<YOUR_API_KEY_HERE>'
 )
 
 req = Models::Ops::GetProductByIdV1ProductsProductIdGetRequest.new(
-  product_id: '<id>'
+  product_id: '<id>',
+  x_organization_id: 'org_12345'
 )
 res = s.products.get(request: req)
 
@@ -50,19 +48,21 @@ end
 
 ### Errors
 
-| Error Type                                                         | Status Code                                                        | Content Type                                                       |
-| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
-| Models::Errors::ErrorResponse                                      | 401                                                                | application/json                                                   |
-| Models::Errors::BackendSrcProductsResponsesValidationErrorResponse | 422                                                                | application/json                                                   |
-| Models::Errors::ErrorResponse                                      | 500                                                                | application/json                                                   |
-| Errors::APIError                                                   | 4XX, 5XX                                                           | \*/\*                                                              |
+| Error Type                                                                | Status Code                                                               | Content Type                                                              |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| Models::Errors::ErrorResponse                                             | 401                                                                       | application/json                                                          |
+| Models::Errors::BackendSrcProductsSchemasResponsesValidationErrorResponse | 422                                                                       | application/json                                                          |
+| Models::Errors::ErrorResponse                                             | 500                                                                       | application/json                                                          |
+| Errors::APIError                                                          | 4XX, 5XX                                                                  | \*/\*                                                                     |
 
 ## update
 
 The Update Product API allows users to modify the details of
     an existing product identified by its unique product_id. You can
-    retrieve supported categories and subcategories from
-    [GET /products/categories endpoint](/reference/api/products/get-product-categories)
+    retrieve supported categories and subcategories from the
+    [GET /products/categories endpoint](/reference/api/products/get-product-categories),
+    or browse the full catalog with descriptions and examples in the
+    [Product Categories guide](/docs/guides/product-categories)
 
 ### Example Usage
 
@@ -72,22 +72,21 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-  security: Models::Shared::Security.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-    custom_header: '<YOUR_API_KEY_HERE>'
-  )
+  api_key_header: '<YOUR_API_KEY_HERE>'
 )
 
 req = Models::Ops::UpdateProductV1ProductsProductIdPutRequest.new(
   product_id: '<id>',
-  product_update: Models::Shared::ProductUpdate.new(
-    external_id: 'prod_001',
+  x_organization_id: 'org_12345',
+  request_body: Models::Shared::ProductUpdateV2.new(
     name: 'Updated T-Shirt',
-    description: 'An updated description for the product',
     status: Models::Shared::ProductStatusEnum::APPROVED,
     product_category: 'Physical',
     product_subcategory: 'General Clothing',
-    tax_exempt: false
+    tax_exempt: false,
+    external_id: 'prod_001',
+    description: 'An updated description for the product',
+    classification_failed: false
   )
 )
 res = s.products.update(request: req)
@@ -110,9 +109,9 @@ end
 
 ### Errors
 
-| Error Type                                                         | Status Code                                                        | Content Type                                                       |
-| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
-| Models::Errors::ErrorResponse                                      | 401                                                                | application/json                                                   |
-| Models::Errors::BackendSrcProductsResponsesValidationErrorResponse | 422                                                                | application/json                                                   |
-| Models::Errors::ErrorResponse                                      | 500                                                                | application/json                                                   |
-| Errors::APIError                                                   | 4XX, 5XX                                                           | \*/\*                                                              |
+| Error Type                                                                | Status Code                                                               | Content Type                                                              |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| Models::Errors::ErrorResponse                                             | 401                                                                       | application/json                                                          |
+| Models::Errors::BackendSrcProductsSchemasResponsesValidationErrorResponse | 422                                                                       | application/json                                                          |
+| Models::Errors::ErrorResponse                                             | 500                                                                       | application/json                                                          |
+| Errors::APIError                                                          | 4XX, 5XX                                                                  | \*/\*                                                                     |

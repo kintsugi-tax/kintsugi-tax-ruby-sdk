@@ -4,7 +4,7 @@
 
 ### Available Operations
 
-* [list](#list) - Get Nexus For Org
+* [list](#list) - Get nexus for org
 
 ## list
 
@@ -18,13 +18,14 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-  security: Models::Shared::Security.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-    custom_header: '<YOUR_API_KEY_HERE>'
-  )
+  api_key_header: '<YOUR_API_KEY_HERE>'
 )
 
-req = Models::Ops::GetNexusForOrgV1NexusGetRequest.new
+req = Models::Ops::GetNexusForOrgV1NexusGetRequest.new(
+  status_in: 'APPROACHING,NOT_EXPOSED,PENDING_REGISTRATION,EXPOSED,APPROACHING,REGISTERED',
+  order_by: 'state_code,country_code',
+  x_organization_id: 'org_12345'
+)
 res = s.nexus.list(request: req)
 
 unless res.nil?
@@ -41,7 +42,7 @@ end
 
 ### Response
 
-**[T.nilable(Models::Shared::PageNexusResponse)](../../models/operations/pagenexusresponse.md)**
+**[T.nilable(T.any(Models::Shared::PageNexusResponse, T::Array[Models::Shared::NexusResponse]))](../../models/operations/getnexusfororgv1nexusgetresponsegetnexusfororgv1nexusget.md)**
 
 ### Errors
 

@@ -30,4 +30,6 @@ class KintsugiSDK::Models::Shared::Addresses
   def full_address=(str_); end
   def status(); end
   def status=(str_); end
+  def is_unincorporated(); end
+  def is_unincorporated=(str_); end
 end

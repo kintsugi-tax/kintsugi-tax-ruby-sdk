@@ -14,7 +14,7 @@ module KintsugiSDK
   extend T::Sig
 
   SERVERS = T.let([
-    'https://api.trykintsugi.com', # 1 - Production API server URL
+    'https://api.trykintsugi.com', # 1 - Production
   ].freeze, T::Array[String])
   # Contains the list of servers available to the SDK
 
@@ -67,13 +67,13 @@ module KintsugiSDK
         hooks: ::KintsugiSDK::SDKHooks::Hooks,
         retry_config: T.nilable(::KintsugiSDK::Utils::RetryConfig),
         timeout_ms: T.nilable(Integer),
-        security: T.nilable(Models::Shared::Security),
+        api_key_header: T.nilable(::String),
         security_source: T.nilable(T.proc.returns(Models::Shared::Security)),
         server_url: T.nilable(String),
         server_idx: T.nilable(Integer)
       ).void
     end
-    def initialize(client, hooks, retry_config, timeout_ms, security, security_source, server_url, server_idx)
+    def initialize(client, hooks, retry_config, timeout_ms, api_key_header, security_source, server_url, server_idx)
       @client = client
       @hooks = hooks
       @retry_config = retry_config
@@ -83,14 +83,14 @@ module KintsugiSDK
       raise StandardError, "Invalid server index #{server_idx}" if @server_idx.negative? || @server_idx >= SERVERS.length
       if !security_source.nil?
         @security_source = security_source
-      elsif !security.nil?
-        @security_source = -> { security }
+      elsif !api_key_header.nil?
+        @security_source = -> { Models::Shared::Security.new(api_key_header: api_key_header) }
       end
       @language = 'ruby'
       @openapi_doc_version = '1.0.0'
-      @sdk_version = '5.6.1'
-      @gen_version = '2.916.2'
-      @user_agent = 'speakeasy-sdk/ruby 5.6.1 2.916.2 1.0.0 kintsugi_sdk'
+      @sdk_version = '5.7.0'
+      @gen_version = '2.935.1'
+      @user_agent = 'speakeasy-sdk/ruby 5.7.0 2.935.1 1.0.0 kintsugi_sdk'
     end
 
     sig { returns([String, T::Hash[Symbol, String]]) }

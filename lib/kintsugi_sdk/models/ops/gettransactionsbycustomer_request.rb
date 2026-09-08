@@ -14,16 +14,28 @@ module KintsugiSDK
 
 
         field :customer_id, ::String, { 'path_param': { 'field_name': 'customer_id', 'style': 'simple', 'explode': false } }
+        # The unique identifier for the organization making the request
+        field :x_organization_id, Crystalline::Nilable.new(::String), { 'header': { 'field_name': 'x-organization-id', 'style': 'simple', 'explode': false } }
 
-        sig { params(customer_id: ::String).void }
-        def initialize(customer_id:)
+        field :page, Crystalline::Nilable.new(::Integer), { 'query_param': { 'field_name': 'page', 'style': 'form', 'explode': true } }
+
+        field :size, Crystalline::Nilable.new(::Integer), { 'query_param': { 'field_name': 'size', 'style': 'form', 'explode': true } }
+
+        sig { params(customer_id: ::String, x_organization_id: T.nilable(::String), page: T.nilable(::Integer), size: T.nilable(::Integer)).void }
+        def initialize(customer_id:, x_organization_id: nil, page: nil, size: nil)
           @customer_id = customer_id
+          @x_organization_id = x_organization_id
+          @page = page
+          @size = size
         end
 
         sig { params(other: T.untyped).returns(T::Boolean) }
         def ==(other)
           return false unless other.is_a? self.class
           return false unless @customer_id == other.customer_id
+          return false unless @x_organization_id == other.x_organization_id
+          return false unless @page == other.page
+          return false unless @size == other.size
           true
         end
       end

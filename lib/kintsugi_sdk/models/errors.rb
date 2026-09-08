@@ -12,7 +12,7 @@ module KintsugiSDK
       autoload :BackendSrcAddressValidationResponsesValidationErrorResponse, 'kintsugi_sdk/models/errors/backend_src_address_validation_responses_validationerrorresponse.rb'
       autoload :BackendSrcCustomersResponsesValidationErrorResponse, 'kintsugi_sdk/models/errors/backend_src_customers_responses_validationerrorresponse.rb'
       autoload :BackendSrcExemptionsResponsesValidationErrorResponse, 'kintsugi_sdk/models/errors/backend_src_exemptions_responses_validationerrorresponse.rb'
-      autoload :BackendSrcProductsResponsesValidationErrorResponse, 'kintsugi_sdk/models/errors/backend_src_products_responses_validationerrorresponse.rb'
+      autoload :BackendSrcProductsSchemasResponsesValidationErrorResponse, 'kintsugi_sdk/models/errors/backend_src_products_schemas_responses_validationerrorresponse.rb'
       autoload :BackendSrcTaxEstimationResponsesValidationErrorResponse, 'kintsugi_sdk/models/errors/backend_src_tax_estimation_responses_validationerrorresponse.rb'
       autoload :BackendSrcTransactionsResponsesValidationErrorResponse, 'kintsugi_sdk/models/errors/backend_src_transactions_responses_validationerrorresponse.rb'
     end

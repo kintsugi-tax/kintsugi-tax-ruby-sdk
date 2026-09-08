@@ -16,11 +16,14 @@ module KintsugiSDK
         field :exemption_id, ::String, { 'path_param': { 'field_name': 'exemption_id', 'style': 'simple', 'explode': false } }
 
         field :body_upload_exemption_certificate_v1_exemptions_exemption_id_attachments_post, Models::Shared::BodyUploadExemptionCertificateV1ExemptionsExemptionIdAttachmentsPost, { 'request': { 'media_type': 'multipart/form-data' } }
+        # The unique identifier for the organization making the request
+        field :x_organization_id, Crystalline::Nilable.new(::String), { 'header': { 'field_name': 'x-organization-id', 'style': 'simple', 'explode': false } }
 
-        sig { params(exemption_id: ::String, body_upload_exemption_certificate_v1_exemptions_exemption_id_attachments_post: Models::Shared::BodyUploadExemptionCertificateV1ExemptionsExemptionIdAttachmentsPost).void }
-        def initialize(exemption_id:, body_upload_exemption_certificate_v1_exemptions_exemption_id_attachments_post:)
+        sig { params(exemption_id: ::String, body_upload_exemption_certificate_v1_exemptions_exemption_id_attachments_post: Models::Shared::BodyUploadExemptionCertificateV1ExemptionsExemptionIdAttachmentsPost, x_organization_id: T.nilable(::String)).void }
+        def initialize(exemption_id:, body_upload_exemption_certificate_v1_exemptions_exemption_id_attachments_post:, x_organization_id: nil)
           @exemption_id = exemption_id
           @body_upload_exemption_certificate_v1_exemptions_exemption_id_attachments_post = body_upload_exemption_certificate_v1_exemptions_exemption_id_attachments_post
+          @x_organization_id = x_organization_id
         end
 
         sig { params(other: T.untyped).returns(T::Boolean) }
@@ -28,6 +31,7 @@ module KintsugiSDK
           return false unless other.is_a? self.class
           return false unless @exemption_id == other.exemption_id
           return false unless @body_upload_exemption_certificate_v1_exemptions_exemption_id_attachments_post == other.body_upload_exemption_certificate_v1_exemptions_exemption_id_attachments_post
+          return false unless @x_organization_id == other.x_organization_id
           true
         end
       end
