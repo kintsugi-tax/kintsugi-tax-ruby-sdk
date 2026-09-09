@@ -16,7 +16,7 @@ module KintsugiSDK
   class OpenApiSDK
     extend T::Sig
 
-    attr_accessor :address_validation, :customers, :exemptions, :nexus, :products, :transactions, :tax_estimation
+    attr_accessor :address_validation, :customers, :exemptions, :nexus, :products, :tax_estimation, :transactions
 
     # Instantiates the SDK, configuring it with the provided parameters.
     #
@@ -33,14 +33,14 @@ module KintsugiSDK
         client: T.nilable(Faraday::Connection),
         retry_config: T.nilable(::KintsugiSDK::Utils::RetryConfig),
         timeout_ms: T.nilable(Integer),
-        security: T.nilable(Models::Shared::Security),
+        api_key_header: T.nilable(::String),
         security_source: T.nilable(T.proc.returns(Models::Shared::Security)),
         server_idx: T.nilable(Integer),
         server_url: T.nilable(String),
         url_params: T.nilable(T::Hash[Symbol, String])
       ).void
     end
-    def initialize(client: nil, retry_config: nil, timeout_ms: nil, security: nil, security_source: nil, server_idx: nil, server_url: nil, url_params: nil)
+    def initialize(client: nil, retry_config: nil, timeout_ms: nil, api_key_header: nil, security_source: nil, server_idx: nil, server_url: nil, url_params: nil)
 
       connection_options = {
         request: {
@@ -67,7 +67,7 @@ module KintsugiSDK
         hooks,
         retry_config,
         timeout_ms,
-        security,
+        api_key_header,
         security_source,
         server_url,
         server_idx
@@ -83,8 +83,8 @@ module KintsugiSDK
       @exemptions = Exemptions.new(@sdk_configuration)
       @nexus = Nexus.new(@sdk_configuration)
       @products = Products.new(@sdk_configuration)
-      @transactions = Transactions.new(@sdk_configuration)
       @tax_estimation = TaxEstimation.new(@sdk_configuration)
+      @transactions = Transactions.new(@sdk_configuration)
     end
 
     sig { params(base_url: String, url_variables: T.nilable(T::Hash[Symbol, T.any(String, T::Enum)])).returns(String) }

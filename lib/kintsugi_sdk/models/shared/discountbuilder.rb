@@ -14,24 +14,24 @@ module KintsugiSDK
 
 
         field :applied_to, Models::Shared::AppliedTo, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('applied_to'), required: true, 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::AppliedTo, false) } }
+        # Absolute discount amount for the line or transaction. Send a positive value for sales; credit notes may use a negative value so subtotal = amount + total_discount stays coherent.
+        field :discount_amount, Crystalline::Nilable.new(Crystalline::Union.new(::Float, ::String)), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('discount_amount') } }
 
         field :external_id, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('external_id') } }
 
-        field :discount_amount, Crystalline::Nilable.new(::Float), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('discount_amount') } }
-
-        sig { params(applied_to: Models::Shared::AppliedTo, external_id: T.nilable(::String), discount_amount: T.nilable(::Float)).void }
-        def initialize(applied_to:, external_id: nil, discount_amount: 0.0)
+        sig { params(applied_to: Models::Shared::AppliedTo, discount_amount: T.nilable(T.any(::Float, ::String)), external_id: T.nilable(::String)).void }
+        def initialize(applied_to:, discount_amount: nil, external_id: nil)
           @applied_to = applied_to
-          @external_id = external_id
           @discount_amount = discount_amount
+          @external_id = external_id
         end
 
         sig { params(other: T.untyped).returns(T::Boolean) }
         def ==(other)
           return false unless other.is_a? self.class
           return false unless @applied_to == other.applied_to
-          return false unless @external_id == other.external_id
           return false unless @discount_amount == other.discount_amount
+          return false unless @external_id == other.external_id
           true
         end
       end

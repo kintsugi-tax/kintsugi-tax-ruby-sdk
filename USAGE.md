@@ -3,7 +3,9 @@
 require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
-s = ::KintsugiSDK::OpenApiSDK.new
+s = ::KintsugiSDK::OpenApiSDK.new(
+  api_key_header: '<YOUR_API_KEY_HERE>'
+)
 
 req = Models::Shared::AddressBase.new(
   phone: '555-123-4567',
@@ -16,9 +18,7 @@ req = Models::Shared::AddressBase.new(
   country: Models::Shared::CountryCodeEnum::US,
   full_address: '1600 Amphitheatre Parkway, Mountain View, CA 94043'
 )
-res = s.address_validation.search(request: req, security: Models::Ops::SearchV1AddressValidationSearchPostSecurity.new(
-  api_key_header: '<YOUR_API_KEY_HERE>'
-))
+res = s.address_validation.search(request: req)
 
 unless res.nil?
   # handle response

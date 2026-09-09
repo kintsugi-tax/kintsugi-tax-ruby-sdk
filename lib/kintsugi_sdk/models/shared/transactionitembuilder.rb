@@ -12,14 +12,30 @@ module KintsugiSDK
         extend T::Sig
         include Crystalline::MetadataFields
 
-        # Unique identifier of the organization. This field is deprecated, and should no longer be used. The value is populated through the 'x-organization-id' header.
-        #
-        # @deprecated true: This will be removed in a future release, please migrate away from it as soon as possible.
-        field :organization_id, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('organization_id'), required: true } }
         # Date/time of item.
         field :date, ::DateTime, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('date'), required: true, 'decoder': ::KintsugiSDK::Utils.datetime_from_iso_format(false) } }
         # External product identifier.
         field :external_product_id, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('external_product_id'), required: true } }
+        # Unique identifier of the organization. This field is deprecated, and should no longer be used. The value is populated through the 'x-organization-id' header.
+        #
+        # @deprecated true: This will be removed in a future release, please migrate away from it as soon as possible.
+        field :organization_id, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('organization_id'), required: true } }
+        # Quantity of item.
+        field :quantity, Crystalline::Nilable.new(Crystalline::Union.new(::Float, ::String)), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('quantity') } }
+        # Item amount.
+        field :amount, Crystalline::Nilable.new(Crystalline::Union.new(::Float, ::String)), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('amount') } }
+        # Imported tax amount for the item.
+        field :tax_amount_imported, Crystalline::Nilable.new(Crystalline::Union.new(::Float, ::String)), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('tax_amount_imported') } }
+        # Imported tax rate.
+        field :tax_rate_imported, Crystalline::Nilable.new(Crystalline::Union.new(::Float, ::String)), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('tax_rate_imported') } }
+        # Calculated tax amount for the item.
+        field :tax_amount_calculated, Crystalline::Nilable.new(Crystalline::Union.new(::Float, ::String)), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('tax_amount_calculated') } }
+        # Calculated tax rate.
+        field :tax_rate_calculated, Crystalline::Nilable.new(Crystalline::Union.new(::Float, ::String)), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('tax_rate_calculated') } }
+        # Taxable amount for the item.
+        field :taxable_amount, Crystalline::Nilable.new(Crystalline::Union.new(::Float, ::String)), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('taxable_amount') } }
+
+        field :tax_items, Crystalline::Nilable.new(Crystalline::Array.new(Models::Shared::TaxItemBuilder)), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('tax_items') } }
         # External item identifier.
         field :external_id, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('external_id') } }
         # Item description
@@ -32,50 +48,42 @@ module KintsugiSDK
         field :product_name, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('product_name') } }
         # Product description
         field :product_description, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('product_description') } }
-
+        # Original currency code.
         field :original_currency, Crystalline::Nilable.new(Models::Shared::CurrencyEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('original_currency'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::CurrencyEnum, true) } }
-
+        # Destination currency code.
         field :destination_currency, Crystalline::Nilable.new(Models::Shared::CurrencyEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('destination_currency'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::CurrencyEnum, true) } }
         # Converted item amount.
-        field :converted_amount, Crystalline::Nilable.new(::Float), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('converted_amount') } }
+        field :converted_amount, Crystalline::Nilable.new(Crystalline::Union.new(::Float, ::String)), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('converted_amount') } }
         # Converted taxable amount.
-        field :converted_taxable_amount, Crystalline::Nilable.new(::Float), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('converted_taxable_amount') } }
+        field :converted_taxable_amount, Crystalline::Nilable.new(Crystalline::Union.new(::Float, ::String)), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('converted_taxable_amount') } }
         # Converted imported tax amount.
-        field :converted_tax_amount_imported, Crystalline::Nilable.new(::Float), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('converted_tax_amount_imported') } }
+        field :converted_tax_amount_imported, Crystalline::Nilable.new(Crystalline::Union.new(::Float, ::String)), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('converted_tax_amount_imported') } }
         # Converted calculated tax amount
-        field :converted_tax_amount_calculated, Crystalline::Nilable.new(::Float), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('converted_tax_amount_calculated') } }
+        field :converted_tax_amount_calculated, Crystalline::Nilable.new(Crystalline::Union.new(::Float, ::String)), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('converted_tax_amount_calculated') } }
         # Converted total discount amount.
-        field :converted_total_discount, Crystalline::Nilable.new(::Float), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('converted_total_discount') } }
+        field :converted_total_discount, Crystalline::Nilable.new(Crystalline::Union.new(::Float, ::String)), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('converted_total_discount') } }
         # Converted subtotal amount.
-        field :converted_subtotal, Crystalline::Nilable.new(::Float), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('converted_subtotal') } }
-        # This enum is used to determine if a transaction is exempt from tax.
+        field :converted_subtotal, Crystalline::Nilable.new(Crystalline::Union.new(::Float, ::String)), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('converted_subtotal') } }
+        # Tax exemption status.
         field :tax_exemption, Crystalline::Nilable.new(Models::Shared::TaxExemptionEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('tax_exemption'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::TaxExemptionEnum, true) } }
-
-        field :tax_items, Crystalline::Nilable.new(Crystalline::Array.new(Models::Shared::TaxItemBuilder)), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('tax_items') } }
-
-        field :discount_builder, Crystalline::Nilable.new(Models::Shared::DiscountBuilder), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('discount_builder') } }
-        # Quantity of item.
-        field :quantity, Crystalline::Nilable.new(::Float), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('quantity') } }
-        # Item amount.
-        field :amount, Crystalline::Nilable.new(::Float), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('amount') } }
-        # Imported tax amount for the item.
-        field :tax_amount_imported, Crystalline::Nilable.new(::Float), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('tax_amount_imported') } }
-        # Imported tax rate.
-        field :tax_rate_imported, Crystalline::Nilable.new(::Float), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('tax_rate_imported') } }
-        # Calculated tax amount for the item.
-        field :tax_amount_calculated, Crystalline::Nilable.new(::Float), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('tax_amount_calculated') } }
-        # Calculated tax rate.
-        field :tax_rate_calculated, Crystalline::Nilable.new(::Float), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('tax_rate_calculated') } }
-        # Taxable amount for the item.
-        field :taxable_amount, Crystalline::Nilable.new(::Float), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('taxable_amount') } }
         # Indicates if the item is exempt.
         field :exempt, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('exempt') } }
 
-        sig { params(organization_id: ::String, date: ::DateTime, external_product_id: ::String, external_id: T.nilable(::String), description: T.nilable(::String), product: T.nilable(::String), product_id: T.nilable(::String), product_name: T.nilable(::String), product_description: T.nilable(::String), original_currency: T.nilable(Models::Shared::CurrencyEnum), destination_currency: T.nilable(Models::Shared::CurrencyEnum), converted_amount: T.nilable(::Float), converted_taxable_amount: T.nilable(::Float), converted_tax_amount_imported: T.nilable(::Float), converted_tax_amount_calculated: T.nilable(::Float), converted_total_discount: T.nilable(::Float), converted_subtotal: T.nilable(::Float), tax_exemption: T.nilable(Models::Shared::TaxExemptionEnum), tax_items: T.nilable(T::Array[Models::Shared::TaxItemBuilder]), discount_builder: T.nilable(Models::Shared::DiscountBuilder), quantity: T.nilable(::Float), amount: T.nilable(::Float), tax_amount_imported: T.nilable(::Float), tax_rate_imported: T.nilable(::Float), tax_amount_calculated: T.nilable(::Float), tax_rate_calculated: T.nilable(::Float), taxable_amount: T.nilable(::Float), exempt: T.nilable(T::Boolean)).void }
-        def initialize(organization_id:, date:, external_product_id:, external_id: nil, description: nil, product: nil, product_id: nil, product_name: nil, product_description: nil, original_currency: nil, destination_currency: nil, converted_amount: nil, converted_taxable_amount: nil, converted_tax_amount_imported: nil, converted_tax_amount_calculated: nil, converted_total_discount: nil, converted_subtotal: nil, tax_exemption: nil, tax_items: nil, discount_builder: nil, quantity: 1.0, amount: 0.0, tax_amount_imported: 0.0, tax_rate_imported: 0.0, tax_amount_calculated: 0.0, tax_rate_calculated: 0.0, taxable_amount: 0.0, exempt: false)
-          @organization_id = organization_id
+        field :discount_builder, Crystalline::Nilable.new(Models::Shared::DiscountBuilder), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('discount_builder') } }
+
+        sig { params(date: ::DateTime, external_product_id: ::String, organization_id: T.nilable(::String), quantity: T.nilable(T.any(::Float, ::String)), amount: T.nilable(T.any(::Float, ::String)), tax_amount_imported: T.nilable(T.any(::Float, ::String)), tax_rate_imported: T.nilable(T.any(::Float, ::String)), tax_amount_calculated: T.nilable(T.any(::Float, ::String)), tax_rate_calculated: T.nilable(T.any(::Float, ::String)), taxable_amount: T.nilable(T.any(::Float, ::String)), tax_items: T.nilable(T::Array[Models::Shared::TaxItemBuilder]), external_id: T.nilable(::String), description: T.nilable(::String), product: T.nilable(::String), product_id: T.nilable(::String), product_name: T.nilable(::String), product_description: T.nilable(::String), original_currency: T.nilable(Models::Shared::CurrencyEnum), destination_currency: T.nilable(Models::Shared::CurrencyEnum), converted_amount: T.nilable(T.any(::Float, ::String)), converted_taxable_amount: T.nilable(T.any(::Float, ::String)), converted_tax_amount_imported: T.nilable(T.any(::Float, ::String)), converted_tax_amount_calculated: T.nilable(T.any(::Float, ::String)), converted_total_discount: T.nilable(T.any(::Float, ::String)), converted_subtotal: T.nilable(T.any(::Float, ::String)), tax_exemption: T.nilable(Models::Shared::TaxExemptionEnum), exempt: T.nilable(T::Boolean), discount_builder: T.nilable(Models::Shared::DiscountBuilder)).void }
+        def initialize(date:, external_product_id:, organization_id: nil, quantity: nil, amount: nil, tax_amount_imported: nil, tax_rate_imported: nil, tax_amount_calculated: nil, tax_rate_calculated: nil, taxable_amount: nil, tax_items: nil, external_id: nil, description: nil, product: nil, product_id: nil, product_name: nil, product_description: nil, original_currency: nil, destination_currency: nil, converted_amount: nil, converted_taxable_amount: nil, converted_tax_amount_imported: nil, converted_tax_amount_calculated: nil, converted_total_discount: nil, converted_subtotal: nil, tax_exemption: nil, exempt: false, discount_builder: nil)
           @date = date
           @external_product_id = external_product_id
+          @organization_id = organization_id
+          @quantity = quantity
+          @amount = amount
+          @tax_amount_imported = tax_amount_imported
+          @tax_rate_imported = tax_rate_imported
+          @tax_amount_calculated = tax_amount_calculated
+          @tax_rate_calculated = tax_rate_calculated
+          @taxable_amount = taxable_amount
+          @tax_items = tax_items
           @external_id = external_id
           @description = description
           @product = product
@@ -91,24 +99,24 @@ module KintsugiSDK
           @converted_total_discount = converted_total_discount
           @converted_subtotal = converted_subtotal
           @tax_exemption = tax_exemption
-          @tax_items = tax_items
-          @discount_builder = discount_builder
-          @quantity = quantity
-          @amount = amount
-          @tax_amount_imported = tax_amount_imported
-          @tax_rate_imported = tax_rate_imported
-          @tax_amount_calculated = tax_amount_calculated
-          @tax_rate_calculated = tax_rate_calculated
-          @taxable_amount = taxable_amount
           @exempt = exempt
+          @discount_builder = discount_builder
         end
 
         sig { params(other: T.untyped).returns(T::Boolean) }
         def ==(other)
           return false unless other.is_a? self.class
-          return false unless @organization_id == other.organization_id
           return false unless @date == other.date
           return false unless @external_product_id == other.external_product_id
+          return false unless @organization_id == other.organization_id
+          return false unless @quantity == other.quantity
+          return false unless @amount == other.amount
+          return false unless @tax_amount_imported == other.tax_amount_imported
+          return false unless @tax_rate_imported == other.tax_rate_imported
+          return false unless @tax_amount_calculated == other.tax_amount_calculated
+          return false unless @tax_rate_calculated == other.tax_rate_calculated
+          return false unless @taxable_amount == other.taxable_amount
+          return false unless @tax_items == other.tax_items
           return false unless @external_id == other.external_id
           return false unless @description == other.description
           return false unless @product == other.product
@@ -124,16 +132,8 @@ module KintsugiSDK
           return false unless @converted_total_discount == other.converted_total_discount
           return false unless @converted_subtotal == other.converted_subtotal
           return false unless @tax_exemption == other.tax_exemption
-          return false unless @tax_items == other.tax_items
-          return false unless @discount_builder == other.discount_builder
-          return false unless @quantity == other.quantity
-          return false unless @amount == other.amount
-          return false unless @tax_amount_imported == other.tax_amount_imported
-          return false unless @tax_rate_imported == other.tax_rate_imported
-          return false unless @tax_amount_calculated == other.tax_amount_calculated
-          return false unless @tax_rate_calculated == other.tax_rate_calculated
-          return false unless @taxable_amount == other.taxable_amount
           return false unless @exempt == other.exempt
+          return false unless @discount_builder == other.discount_builder
           true
         end
       end
