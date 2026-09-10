@@ -28,4 +28,6 @@ class KintsugiSDK::Models::Shared::TransactionAddressPublic
   def country=(str_); end
   def full_address(); end
   def full_address=(str_); end
+  def is_unincorporated(); end
+  def is_unincorporated=(str_); end
 end

@@ -16,6 +16,8 @@ class KintsugiSDK::Models::Shared::Exemption
   def id=(str_); end
   def created_at(); end
   def created_at=(str_); end
+  def organization_id(); end
+  def organization_id=(str_); end
   def updated_at(); end
   def updated_at=(str_); end
   def jurisdiction(); end
@@ -28,14 +30,16 @@ class KintsugiSDK::Models::Shared::Exemption
   def customer_id=(str_); end
   def transaction_id(); end
   def transaction_id=(str_); end
+  def reseller(); end
+  def reseller=(str_); end
   def fein(); end
   def fein=(str_); end
   def sales_tax_id(); end
   def sales_tax_id=(str_); end
   def status(); end
   def status=(str_); end
-  def organization_id(); end
-  def organization_id=(str_); end
-  def reseller(); end
-  def reseller=(str_); end
+  def certificate_import_id(); end
+  def certificate_import_id=(str_); end
+  def source(); end
+  def source=(str_); end
 end
