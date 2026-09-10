@@ -13,6 +13,7 @@ module KintsugiSDK
           CUSTOMER = new('customer')
           WHOLESALE = new('wholesale')
           TRANSACTION = new('transaction')
+          REVERSE_CHARGE = new('reverse_charge')
         end
       end
     end
