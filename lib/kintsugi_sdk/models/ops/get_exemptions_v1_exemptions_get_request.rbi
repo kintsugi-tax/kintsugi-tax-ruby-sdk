@@ -8,8 +8,12 @@ end
 
 
 class KintsugiSDK::Models::Ops::GetExemptionsV1ExemptionsGetRequest
+  def x_organization_id(); end
+  def x_organization_id=(str_); end
   def search_query(); end
   def search_query=(str_); end
+  def status_in(); end
+  def status_in=(str_); end
   def country_code(); end
   def country_code=(str_); end
   def jurisdiction(); end
@@ -22,8 +26,8 @@ class KintsugiSDK::Models::Ops::GetExemptionsV1ExemptionsGetRequest
   def customer_id=(str_); end
   def transaction_id(); end
   def transaction_id=(str_); end
-  def status_in(); end
-  def status_in=(str_); end
+  def connection_id_in(); end
+  def connection_id_in=(str_); end
   def order_by(); end
   def order_by=(str_); end
   def page(); end

@@ -8,6 +8,8 @@ end
 
 
 class KintsugiSDK::Models::Ops::GetTransactionsV1TransactionsGetRequest
+  def x_organization_id(); end
+  def x_organization_id=(str_); end
   def state_code(); end
   def state_code=(str_); end
   def transaction_type(); end
@@ -20,10 +22,16 @@ class KintsugiSDK::Models::Ops::GetTransactionsV1TransactionsGetRequest
   def country=(str_); end
   def state(); end
   def state=(str_); end
+  def address_status_in(); end
+  def address_status_in=(str_); end
   def status(); end
   def status=(str_); end
+  def refund_status(); end
+  def refund_status=(str_); end
   def filing_id(); end
   def filing_id=(str_); end
+  def order_by(); end
+  def order_by=(str_); end
   def date_gte(); end
   def date_gte=(str_); end
   def date_lte(); end
@@ -34,10 +42,12 @@ class KintsugiSDK::Models::Ops::GetTransactionsV1TransactionsGetRequest
   def marketplace=(str_); end
   def exempt_in(); end
   def exempt_in=(str_); end
-  def address_status_in(); end
-  def address_status_in=(str_); end
-  def order_by(); end
-  def order_by=(str_); end
+  def connection_id_in(); end
+  def connection_id_in=(str_); end
+  def direction(); end
+  def direction=(str_); end
+  def count_limit(); end
+  def count_limit=(str_); end
   def page(); end
   def page=(str_); end
   def size(); end
