@@ -25,15 +25,17 @@ module KintsugiSDK
         field :addresses, Crystalline::Array.new(Models::Shared::Addresses), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('addresses'), required: true } }
         # An optional description of the transaction.
         field :description, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('description') } }
-
+        # While currently not used, it may be used in the future to determine taxability. The source of the transaction (e.g., OTHER).
+        #
+        # @deprecated true: This will be removed in a future release, please migrate away from it as soon as possible.
         field :source, Crystalline::Nilable.new(Models::Shared::SourceEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('source'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::SourceEnum, true) } }
-
-        field :customer, Crystalline::Nilable.new(Models::Shared::CustomerBasePublic), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('customer') } }
         # Indicates if the transaction involves a marketplace.
         field :marketplace, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('marketplace') } }
+        # Details about the customer. If the customer is not found, it will be ignored.
+        field :customer, Crystalline::Nilable.new(Models::Shared::CustomerBasePublic), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('customer') } }
 
-        sig { params(date: ::DateTime, external_id: ::String, currency: Models::Shared::CurrencyEnum, transaction_items: T::Array[Models::Shared::TransactionItemEstimateBase], addresses: T::Array[Models::Shared::Addresses], description: T.nilable(::String), source: T.nilable(Models::Shared::SourceEnum), customer: T.nilable(Models::Shared::CustomerBasePublic), marketplace: T.nilable(T::Boolean)).void }
-        def initialize(date:, external_id:, currency:, transaction_items:, addresses:, description: nil, source: nil, customer: nil, marketplace: false)
+        sig { params(date: ::DateTime, external_id: ::String, currency: Models::Shared::CurrencyEnum, transaction_items: T::Array[Models::Shared::TransactionItemEstimateBase], addresses: T::Array[Models::Shared::Addresses], description: T.nilable(::String), source: T.nilable(Models::Shared::SourceEnum), marketplace: T.nilable(T::Boolean), customer: T.nilable(Models::Shared::CustomerBasePublic)).void }
+        def initialize(date:, external_id:, currency:, transaction_items:, addresses:, description: nil, source: nil, marketplace: nil, customer: nil)
           @date = date
           @external_id = external_id
           @currency = currency
@@ -41,8 +43,8 @@ module KintsugiSDK
           @addresses = addresses
           @description = description
           @source = source
-          @customer = customer
           @marketplace = marketplace
+          @customer = customer
         end
 
         sig { params(other: T.untyped).returns(T::Boolean) }
@@ -55,8 +57,8 @@ module KintsugiSDK
           return false unless @addresses == other.addresses
           return false unless @description == other.description
           return false unless @source == other.source
-          return false unless @customer == other.customer
           return false unless @marketplace == other.marketplace
+          return false unless @customer == other.customer
           true
         end
       end

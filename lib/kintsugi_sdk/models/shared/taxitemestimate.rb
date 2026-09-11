@@ -14,10 +14,6 @@ module KintsugiSDK
 
 
         field :name, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('name'), required: true } }
-        # We use this to understand the response from get_tax_items
-        field :exempt_reason, Crystalline::Nilable.new(Models::Shared::TaxItemReturnReasonEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('exempt_reason'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::TaxItemReturnReasonEnum, true) } }
-
-        field :rule, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('rule') } }
 
         field :rate, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('rate') } }
 
@@ -25,25 +21,29 @@ module KintsugiSDK
 
         field :exempt, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('exempt') } }
 
-        sig { params(name: ::String, exempt_reason: T.nilable(Models::Shared::TaxItemReturnReasonEnum), rule: T.nilable(::String), rate: T.nilable(::String), amount: T.nilable(::String), exempt: T.nilable(T::Boolean)).void }
-        def initialize(name:, exempt_reason: nil, rule: nil, rate: '0.0', amount: '0.0', exempt: false)
+        field :exempt_reason, Crystalline::Nilable.new(Models::Shared::TaxItemReturnReasonEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('exempt_reason'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::TaxItemReturnReasonEnum, true) } }
+
+        field :rule, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('rule') } }
+
+        sig { params(name: ::String, rate: T.nilable(::String), amount: T.nilable(::String), exempt: T.nilable(T::Boolean), exempt_reason: T.nilable(Models::Shared::TaxItemReturnReasonEnum), rule: T.nilable(::String)).void }
+        def initialize(name:, rate: '0.0', amount: '0.0', exempt: false, exempt_reason: nil, rule: nil)
           @name = name
-          @exempt_reason = exempt_reason
-          @rule = rule
           @rate = rate
           @amount = amount
           @exempt = exempt
+          @exempt_reason = exempt_reason
+          @rule = rule
         end
 
         sig { params(other: T.untyped).returns(T::Boolean) }
         def ==(other)
           return false unless other.is_a? self.class
           return false unless @name == other.name
-          return false unless @exempt_reason == other.exempt_reason
-          return false unless @rule == other.rule
           return false unless @rate == other.rate
           return false unless @amount == other.amount
           return false unless @exempt == other.exempt
+          return false unless @exempt_reason == other.exempt_reason
+          return false unless @rule == other.rule
           true
         end
       end
