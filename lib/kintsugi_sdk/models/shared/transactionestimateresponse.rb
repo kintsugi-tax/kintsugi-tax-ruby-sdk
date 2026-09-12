@@ -20,16 +20,18 @@ module KintsugiSDK
         field :currency, Models::Shared::CurrencyEnum, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('currency'), required: true, 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::CurrencyEnum, false) } }
 
         field :transaction_items, Crystalline::Array.new(Models::Shared::TransactionItemEstimateResponse), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('transaction_items'), required: true } }
-        # List of addresses related to the transaction. At least one BILL_TO or SHIP_TO address must be provided. The address will be validated during estimation, and the transaction may be rejected if the address does not pass validation. The SHIP_TO will be preferred to use for determining tax liability. **Deprecated:** Use of `address.status` in estimate api is ignored and will be removed in the future status will be considered UNVERIFIED by default and always validated
+        # List of addresses related to the transaction. At least one BILL_TO or SHIP_TO address must be provided. The address will be validated during estimation, and the transaction may be rejected if the address does not pass validation. The SHIP_TO will be preferred to use for determining tax liability. Optional per-address `status` is deprecated, accepted for backward compatibility, and ignored; estimation always validates from structured address fields.
         field :addresses, Crystalline::Array.new(Models::Shared::TransactionEstimateResponseAddresses), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('addresses'), required: true } }
         # An optional description of the transaction.
         field :description, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('description') } }
-
+        # While currently not used, it may be used in the future to determine taxability. The source of the transaction (e.g., OTHER).
+        #
+        # @deprecated true: This will be removed in a future release, please migrate away from it as soon as possible.
         field :source, Crystalline::Nilable.new(Models::Shared::SourceEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('source'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::SourceEnum, true) } }
-
-        field :customer, Crystalline::Nilable.new(Models::Shared::CustomerBase), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('customer') } }
         # Indicates if the transaction involves a marketplace.
         field :marketplace, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('marketplace') } }
+        # Details about the customer. If the customer is not found, it will be ignored.
+        field :customer, Crystalline::Nilable.new(Models::Shared::CustomerBase), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('customer') } }
         # The total amount of tax determined for the transaction.
         field :total_tax_amount_calculated, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('total_tax_amount_calculated') } }
         # The taxable amount for the transaction.
@@ -43,8 +45,8 @@ module KintsugiSDK
         # Indicates if there is an active registration for the transaction.
         field :has_active_registration, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('has_active_registration') } }
 
-        sig { params(date: ::DateTime, external_id: ::String, currency: Models::Shared::CurrencyEnum, transaction_items: T::Array[Models::Shared::TransactionItemEstimateResponse], addresses: T::Array[Models::Shared::TransactionEstimateResponseAddresses], description: T.nilable(::String), source: T.nilable(Models::Shared::SourceEnum), customer: T.nilable(Models::Shared::CustomerBase), marketplace: T.nilable(T::Boolean), total_tax_amount_calculated: T.nilable(::String), taxable_amount: T.nilable(::String), tax_rate_calculated: T.nilable(::String), nexus_met: T.nilable(T::Boolean), has_active_registration: T.nilable(T::Boolean)).void }
-        def initialize(date:, external_id:, currency:, transaction_items:, addresses:, description: nil, source: nil, customer: nil, marketplace: false, total_tax_amount_calculated: '0.00', taxable_amount: '0.00', tax_rate_calculated: '0.00', nexus_met: false, has_active_registration: false)
+        sig { params(date: ::DateTime, external_id: ::String, currency: Models::Shared::CurrencyEnum, transaction_items: T::Array[Models::Shared::TransactionItemEstimateResponse], addresses: T::Array[Models::Shared::TransactionEstimateResponseAddresses], description: T.nilable(::String), source: T.nilable(Models::Shared::SourceEnum), marketplace: T.nilable(T::Boolean), customer: T.nilable(Models::Shared::CustomerBase), total_tax_amount_calculated: T.nilable(::String), taxable_amount: T.nilable(::String), tax_rate_calculated: T.nilable(::String), nexus_met: T.nilable(T::Boolean), has_active_registration: T.nilable(T::Boolean)).void }
+        def initialize(date:, external_id:, currency:, transaction_items:, addresses:, description: nil, source: nil, marketplace: nil, customer: nil, total_tax_amount_calculated: '0.00', taxable_amount: '0.00', tax_rate_calculated: '0.00', nexus_met: false, has_active_registration: false)
           @date = date
           @external_id = external_id
           @currency = currency
@@ -52,8 +54,8 @@ module KintsugiSDK
           @addresses = addresses
           @description = description
           @source = source
-          @customer = customer
           @marketplace = marketplace
+          @customer = customer
           @total_tax_amount_calculated = total_tax_amount_calculated
           @taxable_amount = taxable_amount
           @tax_rate_calculated = tax_rate_calculated
@@ -71,8 +73,8 @@ module KintsugiSDK
           return false unless @addresses == other.addresses
           return false unless @description == other.description
           return false unless @source == other.source
-          return false unless @customer == other.customer
           return false unless @marketplace == other.marketplace
+          return false unless @customer == other.customer
           return false unless @total_tax_amount_calculated == other.total_tax_amount_calculated
           return false unless @taxable_amount == other.taxable_amount
           return false unless @tax_rate_calculated == other.tax_rate_calculated

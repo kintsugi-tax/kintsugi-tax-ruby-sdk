@@ -8,20 +8,28 @@ end
 
 
 class KintsugiSDK::Models::Ops::GetNexusForOrgV1NexusGetRequest
-  def disregard_view(); end
-  def disregard_view=(str_); end
-  def state_code(); end
-  def state_code=(str_); end
-  def country_code_in(); end
-  def country_code_in=(str_); end
-  def collected_tax_nexus_met(); end
-  def collected_tax_nexus_met=(str_); end
+  def x_organization_id(); end
+  def x_organization_id=(str_); end
   def without_pagination(); end
   def without_pagination=(str_); end
+  def disregard_view(); end
+  def disregard_view=(str_); end
+  def search_query(); end
+  def search_query=(str_); end
   def status_in(); end
   def status_in=(str_); end
+  def state_code(); end
+  def state_code=(str_); end
+  def state_code_in(); end
+  def state_code_in=(str_); end
+  def country_code_in(); end
+  def country_code_in=(str_); end
+  def tax_type_in(); end
+  def tax_type_in=(str_); end
   def order_by(); end
   def order_by=(str_); end
+  def collected_tax_nexus_met(); end
+  def collected_tax_nexus_met=(str_); end
   def page(); end
   def page=(str_); end
   def size(); end

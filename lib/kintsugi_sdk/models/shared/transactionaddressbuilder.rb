@@ -14,6 +14,8 @@ module KintsugiSDK
 
 
         field :type, Models::Shared::AddressType, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('type'), required: true, 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::AddressType, false) } }
+
+        field :status, Crystalline::Nilable.new(Models::Shared::AddressStatus), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('status'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::AddressStatus, true) } }
         # Phone number associated with the address.
         field :phone, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('phone') } }
         # Primary street address.
@@ -28,20 +30,21 @@ module KintsugiSDK
         field :state, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('state') } }
         # ZIP or Postal code of the customer.
         field :postal_code, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('postal_code') } }
-
+        # Country code in ISO 3166-1 alpha-2 format
         field :country, Crystalline::Nilable.new(Models::Shared::CountryCodeEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('country'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::CountryCodeEnum, true) } }
         # Complete address string of the customer, which can be used as an alternative to individual fields.
         field :full_address, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('full_address') } }
         # Optional additional enriched data for the address.
         field :enriched_fields, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('enriched_fields') } }
-
-        field :status, Crystalline::Nilable.new(Models::Shared::AddressStatus), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('status'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::AddressStatus, true) } }
+        # If true, city-level tax rates are not applied for this address.
+        field :is_unincorporated, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('is_unincorporated') } }
 
         field :organization_id, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('organization_id') } }
 
-        sig { params(type: Models::Shared::AddressType, phone: T.nilable(::String), street_1: T.nilable(::String), street_2: T.nilable(::String), city: T.nilable(::String), county: T.nilable(::String), state: T.nilable(::String), postal_code: T.nilable(::String), country: T.nilable(Models::Shared::CountryCodeEnum), full_address: T.nilable(::String), enriched_fields: T.nilable(::String), status: T.nilable(Models::Shared::AddressStatus), organization_id: T.nilable(::String)).void }
-        def initialize(type:, phone: nil, street_1: nil, street_2: nil, city: nil, county: nil, state: nil, postal_code: nil, country: nil, full_address: nil, enriched_fields: nil, status: nil, organization_id: nil)
+        sig { params(type: Models::Shared::AddressType, status: T.nilable(Models::Shared::AddressStatus), phone: T.nilable(::String), street_1: T.nilable(::String), street_2: T.nilable(::String), city: T.nilable(::String), county: T.nilable(::String), state: T.nilable(::String), postal_code: T.nilable(::String), country: T.nilable(Models::Shared::CountryCodeEnum), full_address: T.nilable(::String), enriched_fields: T.nilable(::String), is_unincorporated: T.nilable(T::Boolean), organization_id: T.nilable(::String)).void }
+        def initialize(type:, status: nil, phone: nil, street_1: nil, street_2: nil, city: nil, county: nil, state: nil, postal_code: nil, country: nil, full_address: nil, enriched_fields: nil, is_unincorporated: false, organization_id: nil)
           @type = type
+          @status = status
           @phone = phone
           @street_1 = street_1
           @street_2 = street_2
@@ -52,7 +55,7 @@ module KintsugiSDK
           @country = country
           @full_address = full_address
           @enriched_fields = enriched_fields
-          @status = status
+          @is_unincorporated = is_unincorporated
           @organization_id = organization_id
         end
 
@@ -60,6 +63,7 @@ module KintsugiSDK
         def ==(other)
           return false unless other.is_a? self.class
           return false unless @type == other.type
+          return false unless @status == other.status
           return false unless @phone == other.phone
           return false unless @street_1 == other.street_1
           return false unless @street_2 == other.street_2
@@ -70,7 +74,7 @@ module KintsugiSDK
           return false unless @country == other.country
           return false unless @full_address == other.full_address
           return false unless @enriched_fields == other.enriched_fields
-          return false unless @status == other.status
+          return false unless @is_unincorporated == other.is_unincorporated
           return false unless @organization_id == other.organization_id
           true
         end

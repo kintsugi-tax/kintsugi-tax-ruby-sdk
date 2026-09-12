@@ -7,7 +7,7 @@
 module KintsugiSDK
   module Models
     module Shared
-      # Public address class for transaction addresses
+      # API-facing transaction address without internal enrichment fields.
       class TransactionAddressPublic
         extend T::Sig
         include Crystalline::MetadataFields
@@ -28,13 +28,15 @@ module KintsugiSDK
         field :state, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('state') } }
         # ZIP or Postal code of the customer.
         field :postal_code, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('postal_code') } }
-
+        # Country code in ISO 3166-1 alpha-2 format
         field :country, Crystalline::Nilable.new(Models::Shared::CountryCodeEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('country'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::CountryCodeEnum, true) } }
         # Complete address string of the customer, which can be used as an alternative to individual fields.
         field :full_address, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('full_address') } }
+        # If true, city-level tax rates are not applied for this address.
+        field :is_unincorporated, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('is_unincorporated') } }
 
-        sig { params(type: Models::Shared::AddressType, phone: T.nilable(::String), street_1: T.nilable(::String), street_2: T.nilable(::String), city: T.nilable(::String), county: T.nilable(::String), state: T.nilable(::String), postal_code: T.nilable(::String), country: T.nilable(Models::Shared::CountryCodeEnum), full_address: T.nilable(::String)).void }
-        def initialize(type:, phone: nil, street_1: nil, street_2: nil, city: nil, county: nil, state: nil, postal_code: nil, country: nil, full_address: nil)
+        sig { params(type: Models::Shared::AddressType, phone: T.nilable(::String), street_1: T.nilable(::String), street_2: T.nilable(::String), city: T.nilable(::String), county: T.nilable(::String), state: T.nilable(::String), postal_code: T.nilable(::String), country: T.nilable(Models::Shared::CountryCodeEnum), full_address: T.nilable(::String), is_unincorporated: T.nilable(T::Boolean)).void }
+        def initialize(type:, phone: nil, street_1: nil, street_2: nil, city: nil, county: nil, state: nil, postal_code: nil, country: nil, full_address: nil, is_unincorporated: false)
           @type = type
           @phone = phone
           @street_1 = street_1
@@ -45,6 +47,7 @@ module KintsugiSDK
           @postal_code = postal_code
           @country = country
           @full_address = full_address
+          @is_unincorporated = is_unincorporated
         end
 
         sig { params(other: T.untyped).returns(T::Boolean) }
@@ -60,6 +63,7 @@ module KintsugiSDK
           return false unless @postal_code == other.postal_code
           return false unless @country == other.country
           return false unless @full_address == other.full_address
+          return false unless @is_unincorporated == other.is_unincorporated
           true
         end
       end

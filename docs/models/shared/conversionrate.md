@@ -1,0 +1,4 @@
+# ConversionRate
+
+Currency conversion rate.
+
