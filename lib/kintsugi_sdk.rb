@@ -10,8 +10,8 @@ module KintsugiSDK
   autoload :Exemptions, 'kintsugi_sdk/exemptions'
   autoload :Nexus, 'kintsugi_sdk/nexus'
   autoload :Products, 'kintsugi_sdk/products'
-  autoload :Transactions, 'kintsugi_sdk/transactions'
   autoload :TaxEstimation, 'kintsugi_sdk/taxestimation'
+  autoload :Transactions, 'kintsugi_sdk/transactions'
   module Models
     autoload :Shared, 'kintsugi_sdk/models/shared'
     autoload :Ops, 'kintsugi_sdk/models/ops'

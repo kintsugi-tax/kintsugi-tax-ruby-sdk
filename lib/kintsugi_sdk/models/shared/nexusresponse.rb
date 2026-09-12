@@ -25,10 +25,6 @@ module KintsugiSDK
 
         field :sales_or_transactions, Models::Shared::SalesOrTransactionsEnum, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('sales_or_transactions'), required: true, 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::SalesOrTransactionsEnum, false) } }
 
-        field :threshold_sales, ::Integer, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('threshold_sales'), required: true } }
-
-        field :threshold_transactions, ::Integer, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('threshold_transactions'), required: true } }
-
         field :start_date, ::Date, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('start_date'), required: true, 'decoder': ::KintsugiSDK::Utils.date_from_iso_format(false) } }
 
         field :period_model, Models::Shared::PeriodModelEnum, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('period_model'), required: true, 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::PeriodModelEnum, false) } }
@@ -37,10 +33,6 @@ module KintsugiSDK
 
         field :period_end_date, ::Date, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('period_end_date'), required: true, 'decoder': ::KintsugiSDK::Utils.date_from_iso_format(false) } }
 
-        field :previous_period_start_date, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('previous_period_start_date'), required: true } }
-
-        field :previous_period_end_date, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('previous_period_end_date'), required: true } }
-
         field :id, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('id'), required: true } }
 
         field :created_at, ::DateTime, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('created_at'), required: true, 'decoder': ::KintsugiSDK::Utils.datetime_from_iso_format(false) } }
@@ -48,6 +40,8 @@ module KintsugiSDK
         field :updated_at, ::DateTime, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('updated_at'), required: true, 'decoder': ::KintsugiSDK::Utils.datetime_from_iso_format(false) } }
 
         field :organization_id, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('organization_id'), required: true } }
+
+        field :threshold_sales, ::Integer, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('threshold_sales'), required: true } }
 
         field :is_vda_eligible, Crystalline::Boolean.new, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('is_vda_eligible'), required: true } }
 
@@ -61,56 +55,40 @@ module KintsugiSDK
 
         field :total_transactions_marketplace, ::Integer, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('total_transactions_marketplace'), required: true } }
 
-        field :marketplace_included, Crystalline::Boolean.new, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('marketplace_included'), required: true } }
-
         field :processing_status, Crystalline::Nilable.new(Models::Shared::NexusStatusEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('processing_status'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::NexusStatusEnum, true) } }
 
         field :status, Crystalline::Nilable.new(Models::Shared::NexusStateEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('status'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::NexusStateEnum, true) } }
 
-        field :nexus_met_date, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('nexus_met_date') } }
+        field :threshold_transactions, Crystalline::Nilable.new(::Integer), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('threshold_transactions'), required: true } }
+        # Tax obligation on a nexus, registration, or filing row.
+        #
+        # Registrations and filings may be SALES_AND_USE_TAX: one state account and
+        # one return can cover both taxes, and each is stored as a single row.
+        # Nexus rows are only SALES_TAX or USE_TAX. Sales and use tax exposure are
+        # separate obligations with their own met dates, period models, and liability
+        # accrual.
+        field :tax_type, Crystalline::Nilable.new(Models::Shared::TaxTypeEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('tax_type'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::TaxTypeEnum, true) } }
 
-        field :economic_nexus_met_date, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('economic_nexus_met_date') } }
+        field :previous_period_start_date, Crystalline::Nilable.new(::Date), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('previous_period_start_date'), required: true, 'decoder': ::KintsugiSDK::Utils.date_from_iso_format(false) } }
 
-        field :physical_nexus_met_date, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('physical_nexus_met_date') } }
-
-        field :collected_tax_nexus_met_date, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('collected_tax_nexus_met_date') } }
-
-        field :earliest_transaction_date, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('earliest_transaction_date') } }
-
-        field :most_recent_transaction_date, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('most_recent_transaction_date') } }
-
-        field :find_threshold_crossing_transaction_state, Crystalline::Nilable.new(Models::Shared::FindThresholdCrossingTransactionState), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('find_threshold_crossing_transaction_state') } }
-
-        field :predicted_month_from_today, Crystalline::Nilable.new(::Integer), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('predicted_month_from_today') } }
-
-        field :confidence_level, Crystalline::Nilable.new(::Float), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('confidence_level') } }
-
-        field :last_processed_at, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('last_processed_at') } }
-
-        field :last_tax_liability_processed_at, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('last_tax_liability_processed_at') } }
+        field :previous_period_end_date, Crystalline::Nilable.new(::Date), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('previous_period_end_date'), required: true, 'decoder': ::KintsugiSDK::Utils.date_from_iso_format(false) } }
 
         field :periods, Crystalline::Nilable.new(Crystalline::Array.new(Crystalline::Hash.new(Symbol, ::Object))), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('periods') } }
 
-        field :currency, Crystalline::Nilable.new(Models::Shared::CurrencyEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('currency'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::CurrencyEnum, true) } }
-
-        field :registration, Crystalline::Nilable.new(Models::Shared::Registration), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('registration') } }
-
-        field :registration_regime, Crystalline::Nilable.new(Models::Shared::RegistrationsRegimeEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('registration_regime'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::RegistrationsRegimeEnum, true) } }
-
-        field :disregarded_at, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('disregarded_at') } }
-
-        field :disregarded_by, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('disregarded_by') } }
-
         field :disregarded_nexus_types, Crystalline::Nilable.new(Crystalline::Array.new(::String)), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('disregarded_nexus_types') } }
+
+        field :marketplace_included, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('marketplace_included'), required: true } }
+
+        field :threshold_sales_bigint, Crystalline::Nilable.new(::Integer), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('threshold_sales_bigint') } }
 
         field :transaction_count, Crystalline::Nilable.new(::Integer), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('transaction_count') } }
 
         field :transactions_amount, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('transactions_amount') } }
-        # Deprecated: transaction_count now includes both current and previous period values when period_model is CURRENT_OR_PREVIOUS
+        # Deprecated: transaction_count now includes both current and previous period values when period_model is CURRENT_OR_PREVIOUS, CURRENT_OR_TWO_PREVIOUS, or CURRENT_OR_PREVIOUS_12_MONTHS
         #
         # @deprecated true: This will be removed in a future release, please migrate away from it as soon as possible.
         field :previous_transaction_count, Crystalline::Nilable.new(::Integer), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('previous_transaction_count') } }
-        # Deprecated: transactions_amount now includes both current and previous period values when period_model is CURRENT_OR_PREVIOUS
+        # Deprecated: transactions_amount now includes both current and previous period values when period_model is CURRENT_OR_PREVIOUS, CURRENT_OR_TWO_PREVIOUS, or CURRENT_OR_PREVIOUS_12_MONTHS
         #
         # @deprecated true: This will be removed in a future release, please migrate away from it as soon as possible.
         field :previous_transactions_amount, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('previous_transactions_amount') } }
@@ -123,65 +101,91 @@ module KintsugiSDK
 
         field :nexus_met, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('nexus_met') } }
 
+        field :nexus_met_date, Crystalline::Nilable.new(::Date), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('nexus_met_date'), 'decoder': ::KintsugiSDK::Utils.date_from_iso_format(true) } }
+
         field :economic_nexus_met, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('economic_nexus_met') } }
+
+        field :economic_nexus_met_date, Crystalline::Nilable.new(::Date), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('economic_nexus_met_date'), 'decoder': ::KintsugiSDK::Utils.date_from_iso_format(true) } }
 
         field :physical_nexus_met, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('physical_nexus_met') } }
 
+        field :physical_nexus_met_date, Crystalline::Nilable.new(::Date), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('physical_nexus_met_date'), 'decoder': ::KintsugiSDK::Utils.date_from_iso_format(true) } }
+
         field :collected_tax_nexus_met, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('collected_tax_nexus_met') } }
+
+        field :collected_tax_nexus_met_date, Crystalline::Nilable.new(::Date), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('collected_tax_nexus_met_date'), 'decoder': ::KintsugiSDK::Utils.date_from_iso_format(true) } }
+
+        field :earliest_transaction_date, Crystalline::Nilable.new(::DateTime), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('earliest_transaction_date'), 'decoder': ::KintsugiSDK::Utils.datetime_from_iso_format(true) } }
+
+        field :most_recent_transaction_date, Crystalline::Nilable.new(::DateTime), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('most_recent_transaction_date'), 'decoder': ::KintsugiSDK::Utils.datetime_from_iso_format(true) } }
+
+        field :find_threshold_crossing_transaction_state, Crystalline::Nilable.new(Models::Shared::FindThresholdCrossingTransactionState), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('find_threshold_crossing_transaction_state') } }
 
         field :earliest_collected_date, Crystalline::Nilable.new(::DateTime), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('earliest_collected_date'), 'decoder': ::KintsugiSDK::Utils.datetime_from_iso_format(true) } }
 
+        field :predicted_month_from_today, Crystalline::Nilable.new(::Integer), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('predicted_month_from_today') } }
+
         field :vda_eligible, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('vda_eligible') } }
+
+        field :confidence_level, Crystalline::Nilable.new(::Float), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('confidence_level') } }
+
+        field :last_processed_at, Crystalline::Nilable.new(::DateTime), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('last_processed_at'), 'decoder': ::KintsugiSDK::Utils.datetime_from_iso_format(true) } }
+
+        field :last_tax_liability_processed_at, Crystalline::Nilable.new(::DateTime), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('last_tax_liability_processed_at'), 'decoder': ::KintsugiSDK::Utils.datetime_from_iso_format(true) } }
+        # Currency code for the nexus (e.g., USD, CAD).
+        field :currency, Crystalline::Nilable.new(Models::Shared::CurrencyEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('currency'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::CurrencyEnum, true) } }
+
+        field :registration, Crystalline::Nilable.new(Crystalline::Hash.new(Symbol, ::Object)), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('registration') } }
+
+        field :registration_regime, Crystalline::Nilable.new(Models::Shared::RegistrationsRegimeEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('registration_regime'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::RegistrationsRegimeEnum, true) } }
+
+        field :disregarded_at, Crystalline::Nilable.new(::DateTime), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('disregarded_at'), 'decoder': ::KintsugiSDK::Utils.datetime_from_iso_format(true) } }
+
+        field :disregarded_by, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('disregarded_by') } }
+
+        field :disregarded_type, Crystalline::Nilable.new(Models::Shared::DisregardedTypeEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('disregarded_type'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::DisregardedTypeEnum, true) } }
 
         field :is_currently_disregarded, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('is_currently_disregarded') } }
 
-        sig { params(country_code: Models::Shared::CountryCodeEnum, state_code: ::String, state_name: ::String, treatment_of_exempt_transactions: Models::Shared::TreatmentEnum, trigger: ::String, sales_or_transactions: Models::Shared::SalesOrTransactionsEnum, threshold_sales: ::Integer, threshold_transactions: ::Integer, start_date: ::Date, period_model: Models::Shared::PeriodModelEnum, period_start_date: ::Date, period_end_date: ::Date, previous_period_start_date: ::String, previous_period_end_date: ::String, id: ::String, created_at: ::DateTime, updated_at: ::DateTime, organization_id: ::String, is_vda_eligible: T::Boolean, nexus_type: Models::Shared::NexusTypeEnum, total_transactions: ::Integer, total_transactions_included: ::Integer, total_transactions_exempted: ::Integer, total_transactions_marketplace: ::Integer, marketplace_included: T::Boolean, processing_status: T.nilable(Models::Shared::NexusStatusEnum), status: T.nilable(Models::Shared::NexusStateEnum), nexus_met_date: T.nilable(::String), economic_nexus_met_date: T.nilable(::String), physical_nexus_met_date: T.nilable(::String), collected_tax_nexus_met_date: T.nilable(::String), earliest_transaction_date: T.nilable(::String), most_recent_transaction_date: T.nilable(::String), find_threshold_crossing_transaction_state: T.nilable(Models::Shared::FindThresholdCrossingTransactionState), predicted_month_from_today: T.nilable(::Integer), confidence_level: T.nilable(::Float), last_processed_at: T.nilable(::String), last_tax_liability_processed_at: T.nilable(::String), periods: T.nilable(T::Array[T::Hash[Symbol, ::Object]]), currency: T.nilable(Models::Shared::CurrencyEnum), registration: T.nilable(Models::Shared::Registration), registration_regime: T.nilable(Models::Shared::RegistrationsRegimeEnum), disregarded_at: T.nilable(::String), disregarded_by: T.nilable(::String), disregarded_nexus_types: T.nilable(T::Array[::String]), transaction_count: T.nilable(::Integer), transactions_amount: T.nilable(::String), previous_transaction_count: T.nilable(::Integer), previous_transactions_amount: T.nilable(::String), calculated_tax_liability: T.nilable(::String), imported_tax_liability: T.nilable(::String), tax_liability: T.nilable(::String), nexus_met: T.nilable(T::Boolean), economic_nexus_met: T.nilable(T::Boolean), physical_nexus_met: T.nilable(T::Boolean), collected_tax_nexus_met: T.nilable(T::Boolean), earliest_collected_date: T.nilable(::DateTime), vda_eligible: T.nilable(T::Boolean), is_currently_disregarded: T.nilable(T::Boolean)).void }
-        def initialize(country_code:, state_code:, state_name:, treatment_of_exempt_transactions:, trigger:, sales_or_transactions:, threshold_sales:, threshold_transactions:, start_date:, period_model:, period_start_date:, period_end_date:, previous_period_start_date:, previous_period_end_date:, id:, created_at:, updated_at:, organization_id:, is_vda_eligible:, nexus_type:, total_transactions:, total_transactions_included:, total_transactions_exempted:, total_transactions_marketplace:, marketplace_included:, processing_status: nil, status: nil, nexus_met_date: nil, economic_nexus_met_date: nil, physical_nexus_met_date: nil, collected_tax_nexus_met_date: nil, earliest_transaction_date: nil, most_recent_transaction_date: nil, find_threshold_crossing_transaction_state: nil, predicted_month_from_today: nil, confidence_level: nil, last_processed_at: nil, last_tax_liability_processed_at: nil, periods: nil, currency: nil, registration: nil, registration_regime: nil, disregarded_at: nil, disregarded_by: nil, disregarded_nexus_types: nil, transaction_count: 0, transactions_amount: '0.00', previous_transaction_count: 0, previous_transactions_amount: '0.00', calculated_tax_liability: '0.00', imported_tax_liability: '0.00', tax_liability: '0.00', nexus_met: false, economic_nexus_met: false, physical_nexus_met: false, collected_tax_nexus_met: false, earliest_collected_date: DateTime.iso8601('2018-01-01T00:00:00'), vda_eligible: false, is_currently_disregarded: false)
+        field :ior_opt_out_eligible, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('ior_opt_out_eligible') } }
+
+        field :ior_eligible_at_registration, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('ior_eligible_at_registration') } }
+
+        field :requires_ior_number_to_register, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('requires_ior_number_to_register') } }
+
+        sig { params(country_code: Models::Shared::CountryCodeEnum, state_code: ::String, state_name: ::String, treatment_of_exempt_transactions: Models::Shared::TreatmentEnum, trigger: ::String, sales_or_transactions: Models::Shared::SalesOrTransactionsEnum, start_date: ::Date, period_model: Models::Shared::PeriodModelEnum, period_start_date: ::Date, period_end_date: ::Date, id: ::String, created_at: ::DateTime, updated_at: ::DateTime, organization_id: ::String, threshold_sales: ::Integer, is_vda_eligible: T::Boolean, nexus_type: Models::Shared::NexusTypeEnum, total_transactions: ::Integer, total_transactions_included: ::Integer, total_transactions_exempted: ::Integer, total_transactions_marketplace: ::Integer, processing_status: T.nilable(Models::Shared::NexusStatusEnum), status: T.nilable(Models::Shared::NexusStateEnum), threshold_transactions: T.nilable(::Integer), tax_type: T.nilable(Models::Shared::TaxTypeEnum), previous_period_start_date: T.nilable(::Date), previous_period_end_date: T.nilable(::Date), periods: T.nilable(T::Array[T::Hash[Symbol, ::Object]]), disregarded_nexus_types: T.nilable(T::Array[::String]), marketplace_included: T.nilable(T::Boolean), threshold_sales_bigint: T.nilable(::Integer), transaction_count: T.nilable(::Integer), transactions_amount: T.nilable(::String), previous_transaction_count: T.nilable(::Integer), previous_transactions_amount: T.nilable(::String), calculated_tax_liability: T.nilable(::String), imported_tax_liability: T.nilable(::String), tax_liability: T.nilable(::String), nexus_met: T.nilable(T::Boolean), nexus_met_date: T.nilable(::Date), economic_nexus_met: T.nilable(T::Boolean), economic_nexus_met_date: T.nilable(::Date), physical_nexus_met: T.nilable(T::Boolean), physical_nexus_met_date: T.nilable(::Date), collected_tax_nexus_met: T.nilable(T::Boolean), collected_tax_nexus_met_date: T.nilable(::Date), earliest_transaction_date: T.nilable(::DateTime), most_recent_transaction_date: T.nilable(::DateTime), find_threshold_crossing_transaction_state: T.nilable(Models::Shared::FindThresholdCrossingTransactionState), earliest_collected_date: T.nilable(::DateTime), predicted_month_from_today: T.nilable(::Integer), vda_eligible: T.nilable(T::Boolean), confidence_level: T.nilable(::Float), last_processed_at: T.nilable(::DateTime), last_tax_liability_processed_at: T.nilable(::DateTime), currency: T.nilable(Models::Shared::CurrencyEnum), registration: T.nilable(T::Hash[Symbol, ::Object]), registration_regime: T.nilable(Models::Shared::RegistrationsRegimeEnum), disregarded_at: T.nilable(::DateTime), disregarded_by: T.nilable(::String), disregarded_type: T.nilable(Models::Shared::DisregardedTypeEnum), is_currently_disregarded: T.nilable(T::Boolean), ior_opt_out_eligible: T.nilable(T::Boolean), ior_eligible_at_registration: T.nilable(T::Boolean), requires_ior_number_to_register: T.nilable(T::Boolean)).void }
+        def initialize(country_code:, state_code:, state_name:, treatment_of_exempt_transactions:, trigger:, sales_or_transactions:, start_date:, period_model:, period_start_date:, period_end_date:, id:, created_at:, updated_at:, organization_id:, threshold_sales:, is_vda_eligible:, nexus_type:, total_transactions:, total_transactions_included:, total_transactions_exempted:, total_transactions_marketplace:, processing_status: nil, status: nil, threshold_transactions: nil, tax_type: nil, previous_period_start_date: nil, previous_period_end_date: nil, periods: nil, disregarded_nexus_types: nil, marketplace_included: nil, threshold_sales_bigint: 0, transaction_count: 0, transactions_amount: '0.00', previous_transaction_count: 0, previous_transactions_amount: '0.00', calculated_tax_liability: nil, imported_tax_liability: nil, tax_liability: '0.00', nexus_met: false, nexus_met_date: nil, economic_nexus_met: false, economic_nexus_met_date: nil, physical_nexus_met: false, physical_nexus_met_date: nil, collected_tax_nexus_met: nil, collected_tax_nexus_met_date: nil, earliest_transaction_date: nil, most_recent_transaction_date: nil, find_threshold_crossing_transaction_state: nil, earliest_collected_date: DateTime.iso8601('2018-01-01T00:00:00'), predicted_month_from_today: nil, vda_eligible: nil, confidence_level: nil, last_processed_at: nil, last_tax_liability_processed_at: nil, currency: nil, registration: nil, registration_regime: nil, disregarded_at: nil, disregarded_by: nil, disregarded_type: nil, is_currently_disregarded: false, ior_opt_out_eligible: false, ior_eligible_at_registration: false, requires_ior_number_to_register: false)
           @country_code = country_code
           @state_code = state_code
           @state_name = state_name
           @treatment_of_exempt_transactions = treatment_of_exempt_transactions
           @trigger = trigger
           @sales_or_transactions = sales_or_transactions
-          @threshold_sales = threshold_sales
-          @threshold_transactions = threshold_transactions
           @start_date = start_date
           @period_model = period_model
           @period_start_date = period_start_date
           @period_end_date = period_end_date
-          @previous_period_start_date = previous_period_start_date
-          @previous_period_end_date = previous_period_end_date
           @id = id
           @created_at = created_at
           @updated_at = updated_at
           @organization_id = organization_id
+          @threshold_sales = threshold_sales
           @is_vda_eligible = is_vda_eligible
           @nexus_type = nexus_type
           @total_transactions = total_transactions
           @total_transactions_included = total_transactions_included
           @total_transactions_exempted = total_transactions_exempted
           @total_transactions_marketplace = total_transactions_marketplace
-          @marketplace_included = marketplace_included
           @processing_status = processing_status
           @status = status
-          @nexus_met_date = nexus_met_date
-          @economic_nexus_met_date = economic_nexus_met_date
-          @physical_nexus_met_date = physical_nexus_met_date
-          @collected_tax_nexus_met_date = collected_tax_nexus_met_date
-          @earliest_transaction_date = earliest_transaction_date
-          @most_recent_transaction_date = most_recent_transaction_date
-          @find_threshold_crossing_transaction_state = find_threshold_crossing_transaction_state
-          @predicted_month_from_today = predicted_month_from_today
-          @confidence_level = confidence_level
-          @last_processed_at = last_processed_at
-          @last_tax_liability_processed_at = last_tax_liability_processed_at
+          @threshold_transactions = threshold_transactions
+          @tax_type = tax_type
+          @previous_period_start_date = previous_period_start_date
+          @previous_period_end_date = previous_period_end_date
           @periods = periods
-          @currency = currency
-          @registration = registration
-          @registration_regime = registration_regime
-          @disregarded_at = disregarded_at
-          @disregarded_by = disregarded_by
           @disregarded_nexus_types = disregarded_nexus_types
+          @marketplace_included = marketplace_included
+          @threshold_sales_bigint = threshold_sales_bigint
           @transaction_count = transaction_count
           @transactions_amount = transactions_amount
           @previous_transaction_count = previous_transaction_count
@@ -190,12 +194,32 @@ module KintsugiSDK
           @imported_tax_liability = imported_tax_liability
           @tax_liability = tax_liability
           @nexus_met = nexus_met
+          @nexus_met_date = nexus_met_date
           @economic_nexus_met = economic_nexus_met
+          @economic_nexus_met_date = economic_nexus_met_date
           @physical_nexus_met = physical_nexus_met
+          @physical_nexus_met_date = physical_nexus_met_date
           @collected_tax_nexus_met = collected_tax_nexus_met
+          @collected_tax_nexus_met_date = collected_tax_nexus_met_date
+          @earliest_transaction_date = earliest_transaction_date
+          @most_recent_transaction_date = most_recent_transaction_date
+          @find_threshold_crossing_transaction_state = find_threshold_crossing_transaction_state
           @earliest_collected_date = earliest_collected_date
+          @predicted_month_from_today = predicted_month_from_today
           @vda_eligible = vda_eligible
+          @confidence_level = confidence_level
+          @last_processed_at = last_processed_at
+          @last_tax_liability_processed_at = last_tax_liability_processed_at
+          @currency = currency
+          @registration = registration
+          @registration_regime = registration_regime
+          @disregarded_at = disregarded_at
+          @disregarded_by = disregarded_by
+          @disregarded_type = disregarded_type
           @is_currently_disregarded = is_currently_disregarded
+          @ior_opt_out_eligible = ior_opt_out_eligible
+          @ior_eligible_at_registration = ior_eligible_at_registration
+          @requires_ior_number_to_register = requires_ior_number_to_register
         end
 
         sig { params(other: T.untyped).returns(T::Boolean) }
@@ -207,45 +231,31 @@ module KintsugiSDK
           return false unless @treatment_of_exempt_transactions == other.treatment_of_exempt_transactions
           return false unless @trigger == other.trigger
           return false unless @sales_or_transactions == other.sales_or_transactions
-          return false unless @threshold_sales == other.threshold_sales
-          return false unless @threshold_transactions == other.threshold_transactions
           return false unless @start_date == other.start_date
           return false unless @period_model == other.period_model
           return false unless @period_start_date == other.period_start_date
           return false unless @period_end_date == other.period_end_date
-          return false unless @previous_period_start_date == other.previous_period_start_date
-          return false unless @previous_period_end_date == other.previous_period_end_date
           return false unless @id == other.id
           return false unless @created_at == other.created_at
           return false unless @updated_at == other.updated_at
           return false unless @organization_id == other.organization_id
+          return false unless @threshold_sales == other.threshold_sales
           return false unless @is_vda_eligible == other.is_vda_eligible
           return false unless @nexus_type == other.nexus_type
           return false unless @total_transactions == other.total_transactions
           return false unless @total_transactions_included == other.total_transactions_included
           return false unless @total_transactions_exempted == other.total_transactions_exempted
           return false unless @total_transactions_marketplace == other.total_transactions_marketplace
-          return false unless @marketplace_included == other.marketplace_included
           return false unless @processing_status == other.processing_status
           return false unless @status == other.status
-          return false unless @nexus_met_date == other.nexus_met_date
-          return false unless @economic_nexus_met_date == other.economic_nexus_met_date
-          return false unless @physical_nexus_met_date == other.physical_nexus_met_date
-          return false unless @collected_tax_nexus_met_date == other.collected_tax_nexus_met_date
-          return false unless @earliest_transaction_date == other.earliest_transaction_date
-          return false unless @most_recent_transaction_date == other.most_recent_transaction_date
-          return false unless @find_threshold_crossing_transaction_state == other.find_threshold_crossing_transaction_state
-          return false unless @predicted_month_from_today == other.predicted_month_from_today
-          return false unless @confidence_level == other.confidence_level
-          return false unless @last_processed_at == other.last_processed_at
-          return false unless @last_tax_liability_processed_at == other.last_tax_liability_processed_at
+          return false unless @threshold_transactions == other.threshold_transactions
+          return false unless @tax_type == other.tax_type
+          return false unless @previous_period_start_date == other.previous_period_start_date
+          return false unless @previous_period_end_date == other.previous_period_end_date
           return false unless @periods == other.periods
-          return false unless @currency == other.currency
-          return false unless @registration == other.registration
-          return false unless @registration_regime == other.registration_regime
-          return false unless @disregarded_at == other.disregarded_at
-          return false unless @disregarded_by == other.disregarded_by
           return false unless @disregarded_nexus_types == other.disregarded_nexus_types
+          return false unless @marketplace_included == other.marketplace_included
+          return false unless @threshold_sales_bigint == other.threshold_sales_bigint
           return false unless @transaction_count == other.transaction_count
           return false unless @transactions_amount == other.transactions_amount
           return false unless @previous_transaction_count == other.previous_transaction_count
@@ -254,12 +264,32 @@ module KintsugiSDK
           return false unless @imported_tax_liability == other.imported_tax_liability
           return false unless @tax_liability == other.tax_liability
           return false unless @nexus_met == other.nexus_met
+          return false unless @nexus_met_date == other.nexus_met_date
           return false unless @economic_nexus_met == other.economic_nexus_met
+          return false unless @economic_nexus_met_date == other.economic_nexus_met_date
           return false unless @physical_nexus_met == other.physical_nexus_met
+          return false unless @physical_nexus_met_date == other.physical_nexus_met_date
           return false unless @collected_tax_nexus_met == other.collected_tax_nexus_met
+          return false unless @collected_tax_nexus_met_date == other.collected_tax_nexus_met_date
+          return false unless @earliest_transaction_date == other.earliest_transaction_date
+          return false unless @most_recent_transaction_date == other.most_recent_transaction_date
+          return false unless @find_threshold_crossing_transaction_state == other.find_threshold_crossing_transaction_state
           return false unless @earliest_collected_date == other.earliest_collected_date
+          return false unless @predicted_month_from_today == other.predicted_month_from_today
           return false unless @vda_eligible == other.vda_eligible
+          return false unless @confidence_level == other.confidence_level
+          return false unless @last_processed_at == other.last_processed_at
+          return false unless @last_tax_liability_processed_at == other.last_tax_liability_processed_at
+          return false unless @currency == other.currency
+          return false unless @registration == other.registration
+          return false unless @registration_regime == other.registration_regime
+          return false unless @disregarded_at == other.disregarded_at
+          return false unless @disregarded_by == other.disregarded_by
+          return false unless @disregarded_type == other.disregarded_type
           return false unless @is_currently_disregarded == other.is_currently_disregarded
+          return false unless @ior_opt_out_eligible == other.ior_opt_out_eligible
+          return false unless @ior_eligible_at_registration == other.ior_eligible_at_registration
+          return false unless @requires_ior_number_to_register == other.requires_ior_number_to_register
           true
         end
       end

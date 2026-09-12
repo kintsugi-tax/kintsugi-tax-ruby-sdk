@@ -30,3 +30,4 @@ value = ProcessingStatusEnum::NEW
 | `ARCHIVED`                | ARCHIVED                  |
 | `NEEDS_REFETCH`           | NEEDS_REFETCH             |
 | `EXCLUDED_IN_CALCULATION` | EXCLUDED_IN_CALCULATION   |
+| `DEFERRED_FROM_FILING`    | DEFERRED_FROM_FILING      |
