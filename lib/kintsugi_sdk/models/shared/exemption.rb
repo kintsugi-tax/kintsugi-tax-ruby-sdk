@@ -20,48 +20,55 @@ module KintsugiSDK
         field :id, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('id') } }
         # Timestamp when transaction was created in Kintsugi.
         field :created_at, Crystalline::Nilable.new(::DateTime), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('created_at'), 'decoder': ::KintsugiSDK::Utils.datetime_from_iso_format(true) } }
+
+        field :organization_id, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('organization_id') } }
         # Timestamp when transaction was last updated.
-        field :updated_at, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('updated_at') } }
+        field :updated_at, Crystalline::Nilable.new(::DateTime), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('updated_at'), 'decoder': ::KintsugiSDK::Utils.datetime_from_iso_format(true) } }
         # The jurisdiction identifier for the exemption
         field :jurisdiction, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('jurisdiction') } }
-
+        # Country code in ISO 3166-1 alpha-2 format (e.g., 'US')
         field :country_code, Crystalline::Nilable.new(Models::Shared::CountryCodeEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('country_code'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::CountryCodeEnum, true) } }
         # End date for the exemption validity period (YYYY-MM-DD format)
-        field :end_date, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('end_date') } }
+        field :end_date, Crystalline::Nilable.new(::Date), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('end_date'), 'decoder': ::KintsugiSDK::Utils.date_from_iso_format(true) } }
         # Unique identifier for the customer associated with the exemption
         field :customer_id, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('customer_id') } }
         # Unique identifier for the transaction
         #         associated with the exemption, if applicable.
         field :transaction_id, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('transaction_id') } }
+        # Indicates whether the exemption is for a reseller
+        field :reseller, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('reseller') } }
         # Federal Employer Identification Number
         #         associated with the exemption.
         field :fein, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('FEIN') } }
         # Sales tax ID for the exemption
         field :sales_tax_id, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('sales_tax_id') } }
-
+        # The status of the exemption.
+        #         Defaults to ACTIVE if not provided.
         field :status, Crystalline::Nilable.new(Models::Shared::ExemptionStatus), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('status'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::ExemptionStatus, true) } }
+        # FK to bulk-imported certificate; NULL for manually-created exemptions
+        field :certificate_import_id, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('certificate_import_id') } }
+        # Source of exemption.
+        field :source, Crystalline::Nilable.new(Models::Shared::ExemptionSourceEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('source'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::ExemptionSourceEnum, true) } }
 
-        field :organization_id, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('organization_id') } }
-        # Indicates whether the exemption is for a reseller
-        field :reseller, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('reseller') } }
-
-        sig { params(exemption_type: Models::Shared::ExemptionType, start_date: ::Date, id: T.nilable(::String), created_at: T.nilable(::DateTime), updated_at: T.nilable(::String), jurisdiction: T.nilable(::String), country_code: T.nilable(Models::Shared::CountryCodeEnum), end_date: T.nilable(::String), customer_id: T.nilable(::String), transaction_id: T.nilable(::String), fein: T.nilable(::String), sales_tax_id: T.nilable(::String), status: T.nilable(Models::Shared::ExemptionStatus), organization_id: T.nilable(::String), reseller: T.nilable(T::Boolean)).void }
-        def initialize(exemption_type:, start_date:, id: nil, created_at: nil, updated_at: nil, jurisdiction: nil, country_code: nil, end_date: nil, customer_id: nil, transaction_id: nil, fein: nil, sales_tax_id: nil, status: nil, organization_id: nil, reseller: false)
+        sig { params(exemption_type: Models::Shared::ExemptionType, start_date: ::Date, id: T.nilable(::String), created_at: T.nilable(::DateTime), organization_id: T.nilable(::String), updated_at: T.nilable(::DateTime), jurisdiction: T.nilable(::String), country_code: T.nilable(Models::Shared::CountryCodeEnum), end_date: T.nilable(::Date), customer_id: T.nilable(::String), transaction_id: T.nilable(::String), reseller: T.nilable(T::Boolean), fein: T.nilable(::String), sales_tax_id: T.nilable(::String), status: T.nilable(Models::Shared::ExemptionStatus), certificate_import_id: T.nilable(::String), source: T.nilable(Models::Shared::ExemptionSourceEnum)).void }
+        def initialize(exemption_type:, start_date:, id: nil, created_at: nil, organization_id: nil, updated_at: nil, jurisdiction: nil, country_code: nil, end_date: nil, customer_id: nil, transaction_id: nil, reseller: false, fein: nil, sales_tax_id: nil, status: nil, certificate_import_id: nil, source: nil)
           @exemption_type = exemption_type
           @start_date = start_date
           @id = id
           @created_at = created_at
+          @organization_id = organization_id
           @updated_at = updated_at
           @jurisdiction = jurisdiction
           @country_code = country_code
           @end_date = end_date
           @customer_id = customer_id
           @transaction_id = transaction_id
+          @reseller = reseller
           @fein = fein
           @sales_tax_id = sales_tax_id
           @status = status
-          @organization_id = organization_id
-          @reseller = reseller
+          @certificate_import_id = certificate_import_id
+          @source = source
         end
 
         sig { params(other: T.untyped).returns(T::Boolean) }
@@ -71,17 +78,19 @@ module KintsugiSDK
           return false unless @start_date == other.start_date
           return false unless @id == other.id
           return false unless @created_at == other.created_at
+          return false unless @organization_id == other.organization_id
           return false unless @updated_at == other.updated_at
           return false unless @jurisdiction == other.jurisdiction
           return false unless @country_code == other.country_code
           return false unless @end_date == other.end_date
           return false unless @customer_id == other.customer_id
           return false unless @transaction_id == other.transaction_id
+          return false unless @reseller == other.reseller
           return false unless @fein == other.fein
           return false unless @sales_tax_id == other.sales_tax_id
           return false unless @status == other.status
-          return false unless @organization_id == other.organization_id
-          return false unless @reseller == other.reseller
+          return false unless @certificate_import_id == other.certificate_import_id
+          return false unless @source == other.source
           true
         end
       end

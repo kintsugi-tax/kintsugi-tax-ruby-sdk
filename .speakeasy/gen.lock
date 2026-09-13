@@ -1,30 +1,32 @@
 lockVersion: 2.0.0
 id: 42356d7a-ce0a-4cdf-bb17-e774a6ae7cfc
 management:
-  docChecksum: 2c7e8255e589056c6c88c50453372dd1
+  docChecksum: f182b9d1e97465563a23abaf19fd06d4
   docVersion: 1.0.0
-  speakeasyVersion: 1.789.0
-  generationVersion: 2.916.2
-  releaseVersion: 5.6.1
-  configChecksum: 67c19c5f13f89111270423c69656bbaf
+  speakeasyVersion: 1.796.4
+  generationVersion: 2.935.1
+  releaseVersion: 5.7.0
+  configChecksum: fe264206e4539d30ef1c6fbeee3b73b2
   repoURL: https://github.com/kintsugi-tax/kintsugi-tax-ruby-sdk.git
   installationURL: https://github.com/kintsugi-tax/kintsugi-tax-ruby-sdk
   published: true
 persistentEdits:
-  generation_id: abf7b9ba-ce62-45d1-bf9d-b1bed660d320
-  pristine_commit_hash: 07c5fe5f0f5bc797cf0ac58aa2f213d9db36a232
-  pristine_tree_hash: c14b20cab2441903dd064c55c9bcab091575095c
+  generation_id: 7e17e6b4-7b92-4086-b41b-625bcef2ed61
+  pristine_commit_hash: 1023600419d028033889a52c78f062a24106795d
+  pristine_tree_hash: 8fd30217c01b01028f3f2f4ab9b5d68b0249787d
 features:
   ruby:
     constsAndDefaults: 0.1.4
-    core: 3.11.33
+    core: 3.11.35
     deprecations: 2.81.2
     globalSecurity: 2.81.11
+    globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.83.1
     groups: 2.81.3
-    methodSecurity: 2.82.4
     nameOverrides: 2.81.4
+    nullables: 0.1.0
     responseFormat: 0.1.0
+    unions: 0.1.5
 trackedFiles:
   .gitattributes:
     id: 24139dae6567
@@ -44,16 +46,16 @@ trackedFiles:
     pristine_git_object: b0ea40558f3ca80dcf7d30b159d34a1e5ab33440
   Gemfile.lock:
     id: 21fb5836b499
-    last_write_checksum: sha1:f1ceab21ca420cb66c26ad60756610b8c5ba5704
-    pristine_git_object: 5235e046efea34365715759c6d6eb2180f110c7e
+    last_write_checksum: sha1:bb6b403dab0b8a919713b7878ab28835addcba4a
+    pristine_git_object: 829e7304ab037a1b5e5964576285ad905ea47a71
   Rakefile:
     id: 44b7fa1ba503
     last_write_checksum: sha1:c572639efdae8c7b24141ee5c02d8f009e101ed8
     pristine_git_object: 5feb18be8b2748edf6dcf7b3ab8b90a0068f4e44
   USAGE.md:
     id: 3aed33ce6e6f
-    last_write_checksum: sha1:6e79ec6926ecd5c7e1dfc7b256835bd6e8b60ee7
-    pristine_git_object: d9e2efb0524105ae6b719e9c99d0cfdf735b2934
+    last_write_checksum: sha1:ab39f9287799a4d2788b2722df3df65e6faa8d26
+    pristine_git_object: faa8c540f8f2b2b306fa180c364b1581cd8889ad
   docs/models/errors/backendsrcaddressvalidationresponsesvalidationerrorresponse.md:
     id: 14563c73ce78
     last_write_checksum: sha1:8ef5800c24fc50a71b421bcb8a5b26d46396b802
@@ -66,10 +68,10 @@ trackedFiles:
     id: 36cbf2497ab3
     last_write_checksum: sha1:4925b279e7185eecc50686ded755cf65d8d8c104
     pristine_git_object: 69952ab01ba8dabd2f0373ebf9fedcb5de230afc
-  docs/models/errors/backendsrcproductsresponsesvalidationerrorresponse.md:
-    id: c8a82f61198f
-    last_write_checksum: sha1:2572ca6718ad2ae9ba2df2466d22f2a7cd01db7d
-    pristine_git_object: 11b6a2f2b2ee8707aed89dbeba106e8887f46613
+  docs/models/errors/backendsrcproductsschemasresponsesvalidationerrorresponse.md:
+    id: 079b77e5681c
+    last_write_checksum: sha1:f3f8f84337dc449a0c9f7df9851d4a38c3ae2068
+    pristine_git_object: d098b579702193553b60a0735c8fc450450b3b3e
   docs/models/errors/backendsrctaxestimationresponsesvalidationerrorresponse.md:
     id: a00a1e44af40
     last_write_checksum: sha1:f16a3abc2c8563dd1b443aa838aff3ff931f952d
@@ -86,94 +88,130 @@ trackedFiles:
     id: 9365601abbd7
     last_write_checksum: sha1:197dc1f48557d419405ff04dfd74986e3814becd
     pristine_git_object: a23c5885c0e89477aab4569c745a8a8113ba526a
+  docs/models/ops/country.md:
+    id: 1814278a630f
+    last_write_checksum: sha1:75d2f244d6c221275d647c56213a23e4fb8fe9c4
+    pristine_git_object: 911d783d590903768a67a8d004c2310ebb590974
+  docs/models/ops/countrycode.md:
+    id: 4f151101acbd
+    last_write_checksum: sha1:8553d99875b820581a803a1ffe0d75cb8641c79b
+    pristine_git_object: b966f5e98f16df0ed95dcc8f2df1290287765590
+  docs/models/ops/createcustomerv1customerspostrequest.md:
+    id: cceedd3060f4
+    last_write_checksum: sha1:797bffaf20aa60c4f1c9ac6b73f139db54814ab1
+    pristine_git_object: 0af8e8142128f9249a1a70a4b2a1b48526d23752
+  docs/models/ops/createexemptionv1exemptionspostrequest.md:
+    id: ef00fa038504
+    last_write_checksum: sha1:086b76ac160ccedecd17d7047ed39fe74f992460
+    pristine_git_object: 5e5b393698c650faeb3e6a8d4c6bc84b40d35647
   docs/models/ops/createtransactionbycustomerrequest.md:
     id: 5c660f0d6288
-    last_write_checksum: sha1:df86760208f1274c2a7379ef80413949519748f5
-    pristine_git_object: fe7c363446e3a427ca9a6d573fa8b0b8a38b07d4
+    last_write_checksum: sha1:20e1a68769f0f025d8d1b70eadd0f883265bc8ed
+    pristine_git_object: 9efa6beec63c08ed57348d2e61227049fc3b6575
+  docs/models/ops/createtransactionv1transactionspostrequest.md:
+    id: 49dd04a321e2
+    last_write_checksum: sha1:1b687f1648b1a94a2bdf087e6214a92704cb181c
+    pristine_git_object: aaeaff388bd887a29575a1e38b013979013673df
   docs/models/ops/estimatetaxv1taxestimatepostrequest.md:
     id: 99c0a5f4950f
-    last_write_checksum: sha1:1814f37607fea5c1d72ba20ab1b3e4722c150729
-    pristine_git_object: cb9f4c952bf1df816efd2e8e4c71d66900428907
+    last_write_checksum: sha1:0df48e224b3d96fe1512ccb8a97e7d071ff0687c
+    pristine_git_object: 1b34a07d663a5c1c594a42cc14bc4fee7d628c5f
   docs/models/ops/getcustomerbyexternalidv1customersexternalexternalidgetrequest.md:
     id: db139f18d017
-    last_write_checksum: sha1:81331fa73c61323365da6965ae352f652b43fb87
-    pristine_git_object: 4defb695df1d6710dbfb660ccf47c72f25976d62
+    last_write_checksum: sha1:7cc54a60ee2a5cd7a55579ee4589e65f3978f8cb
+    pristine_git_object: 8421bcfc8451e35331855a919c1d60ff2d6ea6e7
   docs/models/ops/getcustomerbyidv1customerscustomeridgetrequest.md:
     id: 34f85676d87f
-    last_write_checksum: sha1:99705c043c9df47ab3a51d9970a46136d80b2711
-    pristine_git_object: 6b471f0cd4e1887a24d2148c7281bc796f9dea23
+    last_write_checksum: sha1:b4ad13d968a3590b9d4bb96594b8fe296f3020ba
+    pristine_git_object: 044b197e0933916f1fa284e32db3acf84495f5d6
   docs/models/ops/getcustomersv1request.md:
     id: 85fecefd6167
-    last_write_checksum: sha1:442e5537887ea10faeca3923721036a31d9b410b
-    pristine_git_object: 27dbbddb850faeb636660ce3e63106bb51c5be70
+    last_write_checksum: sha1:81c6419b616056d83141d195d3ff5b0bc6e24a78
+    pristine_git_object: 838003410e44691ee029fe3a98330cf5b29cf825
   docs/models/ops/getexemptionattachmentsrequest.md:
     id: 24e9a2217df0
-    last_write_checksum: sha1:9b3f2ab0e6d122fc2ec491bc723e042a6cc9979d
-    pristine_git_object: 67b29460cc9772b63cc16589d3c853a485fdbe7b
+    last_write_checksum: sha1:daecdec55c2814a60f6419c43e1d9b22b0fd1f8b
+    pristine_git_object: c966f338524b037baffbf699163318f8297feb43
   docs/models/ops/getexemptionbyidv1exemptionsexemptionidgetrequest.md:
     id: 63b96adb3c2d
-    last_write_checksum: sha1:7123643c93b7952440022f556344aa2187ef5eda
-    pristine_git_object: 4a9945353e7df0dd07a9c3204412ed71f9fbc6cf
+    last_write_checksum: sha1:f01e761136de347343c3801245b5f57a19f75b3a
+    pristine_git_object: 07434fd717ecb9e365001a04fe3ba8c1b4258e42
   docs/models/ops/getexemptionsv1exemptionsgetrequest.md:
     id: 968153da70e1
-    last_write_checksum: sha1:37c44b7cd360f92276ff708192b74a477f35ff68
-    pristine_git_object: ebc73db5f66af965641eca46e2934b4790d6c7a8
+    last_write_checksum: sha1:8cfec9a101176efa87fb47f13bc27d79854346cc
+    pristine_git_object: 8db93886b05e049b065472ae1baecfe5b30f9899
   docs/models/ops/getnexusfororgv1nexusgetrequest.md:
     id: aa21e9788379
-    last_write_checksum: sha1:ad0509793b0b7113f003ee965c0a90a6913f2a02
-    pristine_git_object: 60f47d8306de04b79f53ae69f16f42c93246aaa6
+    last_write_checksum: sha1:a602b908cde92acde61a66997ba58421ea601afe
+    pristine_git_object: 5f70a2d29f84041204892ff3eb3697f5d06cd96e
+  docs/models/ops/getnexusfororgv1nexusgetresponsegetnexusfororgv1nexusget.md:
+    id: 7acd003561b1
+    last_write_checksum: sha1:6424ce607474be44625deddf8d1e05a7261013a8
+    pristine_git_object: 34b397bf33c66c3c56c7b14227690ac88f3e30bf
   docs/models/ops/getproductbyidv1productsproductidgetrequest.md:
     id: 778a61b2a229
-    last_write_checksum: sha1:ad8e0422add84160dc16b31ea1b3d33bc4e26443
-    pristine_git_object: 29a0e75e6edb0e4c1b27d2c8deab3d1d56e5033f
+    last_write_checksum: sha1:8e80e00cda0aeee28d7a2d1c1ef05059eb5a6f2b
+    pristine_git_object: fd1b7ac043c7da5aa572b3d62b5ddf6a085335f8
   docs/models/ops/gettransactionbyexternalidrequest.md:
     id: 23490c7504a1
-    last_write_checksum: sha1:1ea4bb1e86582b647437533926a99467eb24a718
-    pristine_git_object: 04de46ea7b756f44cb13bd3ff92586207527d9b8
+    last_write_checksum: sha1:73aad775fe964d9790606c95230bed4f9853d72a
+    pristine_git_object: cecf91966fe1de5b7d1afa1c44745f91e72d5bb2
   docs/models/ops/gettransactionbyidv1transactionstransactionidgetrequest.md:
     id: a62722bb38fb
-    last_write_checksum: sha1:f54050d570b08f463b8961b8faf677d99219d037
-    pristine_git_object: 76dc12428b2c04f2584efd062a8bd2a2f18dce90
+    last_write_checksum: sha1:eae63da57737f3049d638b2a85b5bdbe20674b5d
+    pristine_git_object: 0a48667b3574262941ad3a4e20efb717f65eb70a
   docs/models/ops/gettransactionsbycustomerrequest.md:
     id: 652d1a47beab
-    last_write_checksum: sha1:387c6c4422916ac9e950d9630d3c33de80068b89
-    pristine_git_object: d0723c103fb51504064c249d9f9e15a1a4be462e
+    last_write_checksum: sha1:5a22ba68624d0e09aaeda35fef2f7a6dfd42b3c9
+    pristine_git_object: fc2409bceccc0ed7390ad8a11050c59e3333833f
+  docs/models/ops/gettransactionsbycustomerresponsegettransactionsbycustomeridv1customerscu_5ea9d8.md:
+    id: 856445f1d5b7
+    last_write_checksum: sha1:3dacd76f41995f6b922f18236368e82ae223967e
+    pristine_git_object: 4814f15cb199e0bac4754e1e61a601c8922513c3
   docs/models/ops/gettransactionsbyfilingrequest.md:
     id: b354624b3c05
-    last_write_checksum: sha1:95f275e2815238f11834e0d3b09731894af53d1f
-    pristine_git_object: 794a873c8bdd651f19c5c139f2e81ca5d07a2a03
+    last_write_checksum: sha1:15ecb9452f08c3512c1451034b59a6b48be7e058
+    pristine_git_object: bf30bfb0aee89ee42778f0230d72243d26307050
   docs/models/ops/gettransactionsv1transactionsgetrequest.md:
     id: ea9251c01030
-    last_write_checksum: sha1:27afab192415ecd801ecd8fe9faabaab050b3fd9
-    pristine_git_object: 7c173aba7eb85d48b573311f0a0e97615db09ae1
-  docs/models/ops/searchv1addressvalidationsearchpostsecurity.md:
-    id: 461fc337a283
-    last_write_checksum: sha1:5fdd03fde84632c93627a7b7b2182c6c25a2fa58
-    pristine_git_object: e1932ffc7e885ec6b2e778e376b30611ba6ad006
+    last_write_checksum: sha1:603b4f0e749c4a5b9b9af033b53a241eefb9c522
+    pristine_git_object: a79a66ff0dcf948ac481651e1575633ca1031892
+  docs/models/ops/queryparamcountry.md:
+    id: 6398ba248afb
+    last_write_checksum: sha1:965d8aaeae2f56dcb6da87f2290ccdb643f13496
+    pristine_git_object: 0e519e8d40765df0fc8971f98d44b1742bff56e2
+  docs/models/ops/suggestionsv1addressvalidationsuggestionspostrequest.md:
+    id: b28bbb552d20
+    last_write_checksum: sha1:85e1f205fd2b50064f545fd374fe2b49a69e2310
+    pristine_git_object: bcc00420ed23b0ef214f410702d9b7cea93eb6f3
   docs/models/ops/updatecustomerv1customerscustomeridputrequest.md:
     id: f89703e5c554
-    last_write_checksum: sha1:3dc11317ae6854b9380c0248710426671a9f9118
-    pristine_git_object: 1463a982d3e5f99ed0c6fb9e8239e56fdf4c2b18
+    last_write_checksum: sha1:13584d8a2f516b16a9ee12020d4d6dffeeda50a5
+    pristine_git_object: 4320dfe3338495674bf7234962dc865008709c23
+  docs/models/ops/updateproductv1productsproductidputproduct.md:
+    id: b271f0ee06ad
+    last_write_checksum: sha1:5a2f5fa472bea0be32ae179d4b1a320622e0ba19
+    pristine_git_object: b87f706cc13af19b00b834c29a90bbffea5b14db
   docs/models/ops/updateproductv1productsproductidputrequest.md:
     id: 209723dca9b4
-    last_write_checksum: sha1:2d946cddc05d5eaba49dd253e68e858072791ac5
-    pristine_git_object: 91e7213a7fb9698d6337fdd6fbd828a855b59363
+    last_write_checksum: sha1:be5e43ce6936e5ec2d4fecdb182489972c5a07c7
+    pristine_git_object: 8642015284c15a9a77021ddb8b617a14e95aca0f
   docs/models/ops/updatetransactionv1transactionstransactionidputrequest.md:
     id: 4a14034cd6b1
-    last_write_checksum: sha1:de67c47b3c181db93cca6e9655c8061e96e52e91
-    pristine_git_object: 7db9baa2295e304309390beda4cb3347702c9ef8
+    last_write_checksum: sha1:e2941dc87e7a66cbe0ac8b67d4cb5cc8dd1d649b
+    pristine_git_object: 0aaa4f10087fd5359c840a2d7ef6d09bcd2eac06
   docs/models/ops/uploadexemptioncertrequest.md:
     id: f5c770030f6a
-    last_write_checksum: sha1:b6474cff7e463888adcdae07894031aa2ef75050
-    pristine_git_object: d644140f296e820d0d0378e52c5ca2d6c3a0da87
+    last_write_checksum: sha1:ec32b0f4c6d6cc83f9cf953cc8c66a7cb94ad008
+    pristine_git_object: 7fcf85a5659c2b44fdf47d7848c28ec96d48d889
   docs/models/shared/addressbase.md:
     id: ae3dc5d1a05c
-    last_write_checksum: sha1:ef10f58c4b22f13cd705980178eee112a2fa69b0
-    pristine_git_object: 8dd7a6a4c3216663bb366272a692493f14cd11db
+    last_write_checksum: sha1:88cae216a526ad0072439876780a9b5a50e94592
+    pristine_git_object: 1dcd539156457b02f6905dd66d9ae3c5dbc91dfb
   docs/models/shared/addresses.md:
     id: f1074c1594b8
-    last_write_checksum: sha1:420b6758faa183677f0d539b7f228cdf9d985e2f
-    pristine_git_object: 9e88a5a6b04b7b2bd445fd585f99752227b8eef0
+    last_write_checksum: sha1:cfdf0d861940dd6163d72bd8c7ea143c8332e14b
+    pristine_git_object: 08a58cd1ae691d1e1797323d3035827377780ee6
   docs/models/shared/addressresponsedata.md:
     id: 7c642e785ac1
     last_write_checksum: sha1:7244fd8f377d92f14355722c62949e490ebf3d0b
@@ -194,6 +232,10 @@ trackedFiles:
     id: 03af29105952
     last_write_checksum: sha1:893604372ba597905e73c8cc070a8584c1c17132
     pristine_git_object: 553f9a905581069d4a7365004258e25091277107
+  docs/models/shared/amount.md:
+    id: b1e28b6da121
+    last_write_checksum: sha1:8c9e6fabeb66d711b8aafac3c7ab4841c6f36726
+    pristine_git_object: 10d44c8521c44a06bc018dc7c37b688f028992d3
   docs/models/shared/appliedto.md:
     id: d9746a99ce25
     last_write_checksum: sha1:cbdd42c788baa8e0e167d0b1458936d470e7ba0c
@@ -212,20 +254,20 @@ trackedFiles:
     pristine_git_object: feb8da65c0f8e269eaedafc264b85c6dc21f4bcc
   docs/models/shared/backendsrcexemptionsmodelsexemptionread.md:
     id: da30ccac956d
-    last_write_checksum: sha1:b779bc67160fd6d61d0cbe95557ca464a50b249c
-    pristine_git_object: 1a38f8e76f7f02bc19afbba1916938ce10cd8715
+    last_write_checksum: sha1:a517e66b9b3f21548407597ecc3e9e0665b1524c
+    pristine_git_object: 3eefce6f34f07ded39957c40dc8533e42c7377c0
   docs/models/shared/backendsrcexemptionsresponsesvalidationerroritem.md:
     id: 0a48aba86602
     last_write_checksum: sha1:84582eedfc7d98ad50b8a22d66904225df069ba3
     pristine_git_object: b7e073f671e29079d298f5d54ee94f34c762c1ba
   docs/models/shared/backendsrcexemptionsserializersexemptionread.md:
     id: 93862265b31d
-    last_write_checksum: sha1:e1dd01f77452b2fe6a658cb8960094cc6e901338
-    pristine_git_object: 90876f49721ad90ec0d315c703af875e7fae6fad
-  docs/models/shared/backendsrcproductsresponsesvalidationerroritem.md:
-    id: 8f7310b52e70
-    last_write_checksum: sha1:cdd574de925658a75e7f1279872ec4b8df795e8d
-    pristine_git_object: c66c29b136ef6304d762424bc048e48d037f0b77
+    last_write_checksum: sha1:00e5564bfca7f084501a6b32a53c7d65df70c584
+    pristine_git_object: 56660884fe00197cd145d48e7bdf13cf0ae72694
+  docs/models/shared/backendsrcproductsschemasresponsesvalidationerroritem.md:
+    id: a365fee76d9b
+    last_write_checksum: sha1:7bb890ac355a15e79ed70a288694cd470aa8d1cd
+    pristine_git_object: 14c4f44cfe50354e5ad1ddea0850863a8feb860b
   docs/models/shared/backendsrctaxestimationresponsesvalidationerroritem.md:
     id: 928f17458112
     last_write_checksum: sha1:e2c8890de49752c08673fa2072139a13f41fd31d
@@ -236,8 +278,56 @@ trackedFiles:
     pristine_git_object: 4140132ad258441b7e6fe3a59bb746893d86f9c0
   docs/models/shared/bodyuploadexemptioncertificatev1exemptionsexemptionidattachmentspost.md:
     id: c57b70b0d560
-    last_write_checksum: sha1:84468f38904aa889fb608a4b5dacdeea6cc6ef9b
-    pristine_git_object: ff9b59b688f48b35fb7205f5732f5bdddeeaa183
+    last_write_checksum: sha1:347eb21719f40d8079ddb3db24c29687798b1020
+    pristine_git_object: 8037454050006c05d9fc57988f05db6711527ba4
+  docs/models/shared/context.md:
+    id: ccdfa26d6fff
+    last_write_checksum: sha1:4c14b386f9f89d98f4dd9487ab030f10478c0e63
+    pristine_git_object: 107f1bd428b1f39b36f75e5a10532bc462967ce5
+  docs/models/shared/conversionrate.md:
+    id: 607ac8de4f95
+    last_write_checksum: sha1:8f9b8a04a1d685500630897040f3159d7dc0dbad
+    pristine_git_object: 7a0bfcee0b0077b4cd5d1341b7a08d12bb443089
+  docs/models/shared/convertedamount.md:
+    id: 814e9b0b6231
+    last_write_checksum: sha1:0437684ab6398ccdc06ad6ab717aef263d03e389
+    pristine_git_object: ac87306cd89d83d6ada7670d648cedaa638e79d5
+  docs/models/shared/convertedsubtotal.md:
+    id: e0f48defccbc
+    last_write_checksum: sha1:b61700b67e1fa9e7a8c02538991ab1b328eabb92
+    pristine_git_object: 6f2c0c3eb4a75b20e808bab734a362390c4e66db
+  docs/models/shared/convertedtaxableamount.md:
+    id: 6c91700d8965
+    last_write_checksum: sha1:f80c6d527156f8d44b1704e3af3cec45fe555866
+    pristine_git_object: 3b3c2e1616f4a33b19412cd633c90e4337870ea2
+  docs/models/shared/convertedtaxamountcalculated.md:
+    id: d49856dd4387
+    last_write_checksum: sha1:47367bf7ac14b04d9737cd1252d22ee26454678a
+    pristine_git_object: 0429ad69a5dd6bd5c81884f23ee592ffed632900
+  docs/models/shared/convertedtaxamountimported.md:
+    id: 42c23abbfbde
+    last_write_checksum: sha1:e25a103bbcc4c082832e356c61bee29f19c41dff
+    pristine_git_object: c7c4c1dc2fab0f9ceb42626fb6b64b0c103c307c
+  docs/models/shared/convertedtotalamount.md:
+    id: 6f7fc9f9cd3a
+    last_write_checksum: sha1:5118134d3b698841de2336bb86fa7476168a40c5
+    pristine_git_object: b58742bdae9a7f2a50cd9e1730174bafc552cb90
+  docs/models/shared/convertedtotaldiscount.md:
+    id: 3b48bca5fa03
+    last_write_checksum: sha1:6928a6c96e6e176be46a44ffa9d99da44cb72231
+    pristine_git_object: 3762e56fe84073b30f8326e70a1d0844616e8197
+  docs/models/shared/convertedtotaltaxamountcalculated.md:
+    id: e44ab6635d6d
+    last_write_checksum: sha1:accda215a54eef7849bfd6f87d69d8ce228bf90b
+    pristine_git_object: 83c2c081cf64a1342a70ab023ec08e51bac1bd0e
+  docs/models/shared/convertedtotaltaxamountimported.md:
+    id: ac185dfd613a
+    last_write_checksum: sha1:580fd3efb6fee5e1423c11aa2bf9de5c1b844925
+    pristine_git_object: 95442c4fe68d0f35281c4d66113f287da011eea6
+  docs/models/shared/convertedtotaltaxliabilityamount.md:
+    id: e026b27d6e1b
+    last_write_checksum: sha1:193ca4c9f4228ab4c3088fd2956086c2d47e4d92
+    pristine_git_object: f02cdfe14a6c52a19c88a3cffea12fcb1bc65d1a
   docs/models/shared/countrycodeenum.md:
     id: 9c7d7d1c2844
     last_write_checksum: sha1:279b86fa96f795547ee737fc91dcb8eacfe8250f
@@ -246,26 +336,30 @@ trackedFiles:
     id: 80084433b69e
     last_write_checksum: sha1:4347f12074c8dc723b449c7e590e94b7eb61cf6f
     pristine_git_object: b5c933d0add74f969e57192d27659f3e242b704e
+  docs/models/shared/customer.md:
+    id: 7800920b0562
+    last_write_checksum: sha1:0f8cf89656bcce98c8b79dcc4005758cc0ce1d9a
+    pristine_git_object: ebe7bbd530802fb75ecc491aad751fd4f3464024
   docs/models/shared/customerbase.md:
     id: 71a2e4025316
-    last_write_checksum: sha1:e4f14cbdc49c753d8643c9eb0761b634042104bd
-    pristine_git_object: 40f119e2a073e2da889f5c7a1c9938f761dbb945
+    last_write_checksum: sha1:c62d5bf42bdaa8d9720a0f29d7955744be1e6a99
+    pristine_git_object: 510037637143a4cc95b3a8b00868d136b5861cba
   docs/models/shared/customerbasebase.md:
     id: 991b5d43155f
-    last_write_checksum: sha1:85ae1c0931446c39c3d8ad20e28bbab830e35b01
-    pristine_git_object: 0d912630ecfa1203d45246fb676e5f135af22b8b
+    last_write_checksum: sha1:2d8f0c5f4cf9d12dee4757bc10f46368e32d73d6
+    pristine_git_object: d5d0200bb2432b04ffbab1967a42e4967bd0c34a
   docs/models/shared/customerbasepublic.md:
     id: 35eaed48777a
-    last_write_checksum: sha1:222eeac0fbc2cbea4643794483953742ca48d5e5
-    pristine_git_object: b2eb5fe33111a00e5ef68012ce9aeb4aa41e27ca
+    last_write_checksum: sha1:1945a30d34909602b564805eefc12bab4e1ac814
+    pristine_git_object: c89bb66cb5fd8cd7599c6e1622a1144b0c9deb52
   docs/models/shared/customercreate.md:
     id: 6f880907c7c7
-    last_write_checksum: sha1:130a90ec4735566a0479dd67418c7628411454f4
-    pristine_git_object: 3decd0d029eb780ce7b980d3085bbc2f6710b16e
+    last_write_checksum: sha1:09e9b9472290ee15c3458dcf80f98a002c891f55
+    pristine_git_object: fa9224558c5cfe8a991878baaf874b6b224afaac
   docs/models/shared/customerread.md:
     id: 6a68362a67e4
-    last_write_checksum: sha1:ca670d36fb7e6495032731dcc6d0f004d9b9d2ac
-    pristine_git_object: 9a869bbd379d76fcc19512db6f99f40e92d1bd36
+    last_write_checksum: sha1:e82aad3b7acfbe876b052e67e4b52ca69bd519fb
+    pristine_git_object: 785861d1d97bb9d77b932382583a9b7978f6b800
   docs/models/shared/customertaxregistrationread.md:
     id: 391f98ce542f
     last_write_checksum: sha1:87b6b081437a6bbdf24cec569cdc71b11c44791a
@@ -276,40 +370,52 @@ trackedFiles:
     pristine_git_object: edf4c4765e701ef1dc312e41a1b7a193651e6048
   docs/models/shared/customerupdate.md:
     id: 9b55f758e932
-    last_write_checksum: sha1:e9a6cc69f30a6e216a8930a4e7fe3a792a275901
-    pristine_git_object: d05a3a07ad3a2e634f1154ef1592d9496d9d8c83
+    last_write_checksum: sha1:f1b51dad0b218c0d0f1012cb074e4bccce4043d9
+    pristine_git_object: 706c6d15628025478fbe9328468d195ec9e6a22d
+  docs/models/shared/discountamount.md:
+    id: b72a1d3f3ced
+    last_write_checksum: sha1:235e84257484386de6873f0b776b327eb5945cd4
+    pristine_git_object: 3c14c5e7d97eeba17fd884fc5ee3af40f599b45a
   docs/models/shared/discountbuilder.md:
     id: a22903cc12cd
-    last_write_checksum: sha1:1fbbe82f4080f6bf6227b93ee72117a60c5e7726
-    pristine_git_object: ac63aeb7b10718e5503e69f4b9d6eb1a200af1d4
+    last_write_checksum: sha1:b2369e595c5c729ef248202c1fc105b70ca9e9e2
+    pristine_git_object: c0025c32e524e9394eef52120f6b84b173f85264
+  docs/models/shared/disregardedtypeenum.md:
+    id: 5d1b0499ca6b
+    last_write_checksum: sha1:94a6202600a48222c1d635d82ef5fb8eb30b7754
+    pristine_git_object: ac93a5d29e3b9f9e754e8ed484573aa41ec7f79d
+  docs/models/shared/documenttypeenum.md:
+    id: 7f77e5ef669f
+    last_write_checksum: sha1:f4e68fe836ed6ba378fbe974b140fa79f84632d5
+    pristine_git_object: e658e6138365c9638d1e846bc29ebf7e4b64deb6
   docs/models/shared/exemption.md:
     id: 6e3c4ea8a5da
-    last_write_checksum: sha1:55f535ea8881b5a09c5e182a7206db48330bc1ce
-    pristine_git_object: 31b600a31ccc9153185de5a6b40c0bf4e7ee8892
+    last_write_checksum: sha1:c5dc1543ecc8dacd543dc64d2c4ae00ef85b3b48
+    pristine_git_object: ff7dfa8170b663825db35354a63b2aa7c3c13171
   docs/models/shared/exemptioncreate.md:
     id: b487d00b5669
-    last_write_checksum: sha1:16f291abf7536117199b2c4f293e9409caab4bcc
-    pristine_git_object: 3552276e92ee2f63df48988ce6c27d0819b7567c
+    last_write_checksum: sha1:16dfc3e42e20ea8a098f61b477e39d5bf4159b80
+    pristine_git_object: 4c0132a702b501ddfca66f8f224a3ba98b2f1760
   docs/models/shared/exemptionrequired.md:
     id: 2776b3495276
-    last_write_checksum: sha1:5ccb87c27835dbcf2b67fcc0800b4039d9234361
-    pristine_git_object: 1ee6a6f2518dbfb4c2a5925f5a31830de2a9e0b9
+    last_write_checksum: sha1:8ca34b83d351e84736f54f5acb2d08fe75c624c8
+    pristine_git_object: b4fc7474872d741ac780c0876d929d303405cefc
+  docs/models/shared/exemptionsourceenum.md:
+    id: 6567c6544c02
+    last_write_checksum: sha1:7a5415e6e42c9684fbe11809e1cfea7926a6fe15
+    pristine_git_object: 976e400648370159731dae91f7185e7d36f83b82
   docs/models/shared/exemptionstatus.md:
     id: c712efa3cc5a
     last_write_checksum: sha1:6b4e825cc5c55283919b75f260df6012a819c0c4
     pristine_git_object: 16ff3489a0a552db050e9fd83fe7ae00ce830d2c
   docs/models/shared/exemptiontype.md:
     id: 0f447e6b58f3
-    last_write_checksum: sha1:3f8215ef52e17706642716bdca1418f16395c1d3
-    pristine_git_object: c6b4104604dfb20cec36269f8cf61874aebc460d
+    last_write_checksum: sha1:7e651967aeda0700bb7166076907bd6db17b6dbd
+    pristine_git_object: 6d68d725194746529446f532e8b90c8d6f57f38f
   docs/models/shared/fastapipaginationdefaultpageexemptionread2.md:
     id: 299419bcc0f0
     last_write_checksum: sha1:ed674b94d8634d82d50e9ab5d8a50e9e340fac75
     pristine_git_object: 66f7803631c63e6bbd95721ab623b36e9e09db06
-  docs/models/shared/file.md:
-    id: 63855dedfb72
-    last_write_checksum: sha1:d882a49e870fe743aa9299639329c512d49e2f71
-    pristine_git_object: 24f9d5b45caf79340b23da1117f5e65a0a9fa750
   docs/models/shared/findthresholdcrossingtransactionstate.md:
     id: e8b00f5e3429
     last_write_checksum: sha1:c869892313b45d254bd92728c3d2c6e4586f077e
@@ -318,10 +424,14 @@ trackedFiles:
     id: 86b3ccefb5a0
     last_write_checksum: sha1:16eb58a19fe6231decd739e6d7ce6d24e6ddc45d
     pristine_git_object: 6b1f3a86970b2f2021583dc5fea59c44d2b3b446
+  docs/models/shared/loc.md:
+    id: b58542854bb3
+    last_write_checksum: sha1:553c4b930472acfb12ffdf4b350c8566f05582cd
+    pristine_git_object: 7ceac31de24e80c12a613d25da6ad5947b260630
   docs/models/shared/nexusresponse.md:
     id: a9d4c4f2310f
-    last_write_checksum: sha1:f65199aa08f0060083c9376997d30868fbc077b0
-    pristine_git_object: ec54d0753ff0f8d76b82b770e8d62ba085063c40
+    last_write_checksum: sha1:0b0b9c0a657f9a62236544f8309ae3b62aa20da6
+    pristine_git_object: bb9960f581ba4e58caf3dea118fffc817d4c7f04
   docs/models/shared/nexusstateenum.md:
     id: 18d6fc90f31a
     last_write_checksum: sha1:8bc0ec507510fefb982260ab0cb16c815b7ac51b
@@ -332,8 +442,8 @@ trackedFiles:
     pristine_git_object: 719cc748c67436f8fbbef9d3ef4033db8eac71d1
   docs/models/shared/nexustypeenum.md:
     id: dd25a7b4ef32
-    last_write_checksum: sha1:e162163a79af08a3dd8f6d4f437c69f4fc5744f1
-    pristine_git_object: 7b4ac84cbd9745911b36d7ee69eca1acf6942c70
+    last_write_checksum: sha1:6be8d58647976f60d2c8ae34a28f15f30577ce28
+    pristine_git_object: 4373775a67164ce408a1788073ba77ba68340e2d
   docs/models/shared/pagecustomerread.md:
     id: 7d1eb1d3b085
     last_write_checksum: sha1:ccd3e3b931c4dfe6b0b92fae01b1ae63b7a748bf
@@ -342,38 +452,46 @@ trackedFiles:
     id: f31b09fb1839
     last_write_checksum: sha1:d00ff7667b6cd0d1562807e19549e63b328bf7ef
     pristine_git_object: 7ad43517bbb9bc38f4cbc8dc1726216b9e580798
-  docs/models/shared/pagetransactionestimateresponse.md:
-    id: 35ae13ca26d0
-    last_write_checksum: sha1:c570edd09896dd5b7c6443c7da4b45c5ea6efde7
-    pristine_git_object: 84e73bf65fce034a077c02cbc8f2be013c33828b
   docs/models/shared/pagetransactionread.md:
     id: 9c8a96b2d50f
     last_write_checksum: sha1:2aee61e389d41c15c643b5dc22d444fae722a3fb
     pristine_git_object: 4d2930c48fa408c81362d3f0d1af127441980c5b
   docs/models/shared/periodmodelenum.md:
     id: 7a2909a1c5ad
-    last_write_checksum: sha1:52878e3e5ff812ba8e0d82635d72771370f2996d
-    pristine_git_object: d6062efb99e51bda73ac7f876f95034a26a40f67
+    last_write_checksum: sha1:f5e38f8d7a912a01c80533d1a9e2948b74f0ab1a
+    pristine_git_object: 035287e7cc341b1e8026d1a8949f54d34aa1b061
   docs/models/shared/processingstatusenum.md:
     id: fed8624a432d
-    last_write_checksum: sha1:70a892dd66eb3145e9bca29814fdc81444b20d15
-    pristine_git_object: 144145a7e02ae1036cf1f50e7bbd62827af10dfc
+    last_write_checksum: sha1:54dd4a54fe1c624202cfd34109751baed625e0ec
+    pristine_git_object: 07c64fb168334c02325ab2f7eb6f46d003cd9b71
   docs/models/shared/productread.md:
     id: 2e97b946496a
-    last_write_checksum: sha1:2f66ff8ff899a2d7dc1e20be2fe7042975d0538f
-    pristine_git_object: a209f13cb63be1ffe408afda56eca8e3369a0645
+    last_write_checksum: sha1:04d6feb080ce7a62189594ebd453002e03aa6f7a
+    pristine_git_object: 1a5ca27f46523565ac89eb86a688ad2398c46ed9
   docs/models/shared/productstatusenum.md:
     id: 8f4f80139113
-    last_write_checksum: sha1:91af522d64b592a0be5cc0c8389af517aca8ac4d
-    pristine_git_object: 8c09cae67bc0eb31c1b63b7bc704c0762c4326db
+    last_write_checksum: sha1:59adef905ffd67767c4daffe579e584c33b2baf0
+    pristine_git_object: 424a98bff16dd3ed3ab516216b7b3c255ec4b62a
   docs/models/shared/productupdate.md:
     id: e34f5665ea54
     last_write_checksum: sha1:1aae4c61ccd787ae54cdb233f4ab3a4864c3ad6b
     pristine_git_object: 16babaec99b067c104946fbeaf53a5c29e9b58c3
-  docs/models/shared/registration.md:
-    id: bfbfea5af604
-    last_write_checksum: sha1:5dc310f2a8bdba20aad0003062ad9aea81a1c727
-    pristine_git_object: f4f9866bc6100ddd337ab374bc5113461c6eca1b
+  docs/models/shared/productupdatev2.md:
+    id: 591d0d279a16
+    last_write_checksum: sha1:9ad64af9dbf05354e8cd00da3c2b09759d19d04a
+    pristine_git_object: a7cfd0a173ab30d4818039fbf1339c1b16b43c38
+  docs/models/shared/quantity.md:
+    id: 4cb5faf80ac4
+    last_write_checksum: sha1:92dbca6d5562765907135bf54c28a67f150a7e5a
+    pristine_git_object: 5e840fd341e4cb7acc1cd3320af8b282f02c93ff
+  docs/models/shared/quantityoftheproduct.md:
+    id: ec82fc24ea0e
+    last_write_checksum: sha1:b31638014510c668fafb529823f9fdb63f25ccd5
+    pristine_git_object: 4a812e31b1406a570dfaaac2d2c2b68fc09fee95
+  docs/models/shared/rate.md:
+    id: ff1712979d2f
+    last_write_checksum: sha1:9abb0195a534928c2fb2da58d54f7a40e74858b9
+    pristine_git_object: 11dc7261ff31d48fc55681a9b0263159e0b1e63b
   docs/models/shared/registrationsregimeenum.md:
     id: 7c9dd117dc37
     last_write_checksum: sha1:b612f159775886d21311d4980395f1399f8d7704
@@ -388,36 +506,56 @@ trackedFiles:
     pristine_git_object: 44e11c82cac520f41925df88bf72689e1ed7a101
   docs/models/shared/security.md:
     id: 3035c5c37727
-    last_write_checksum: sha1:43e444df29388a35688d16ca327c242065441989
-    pristine_git_object: 5c251b4a3fa5ac2785621584b5f47df42a4e274c
+    last_write_checksum: sha1:de4a2093058f51ed4daa81f8222133cab06a30c1
+    pristine_git_object: 1081a7f4abf4b0ddcb23adec7de7c6710aebc60c
   docs/models/shared/sourceenum.md:
     id: a22e781931aa
-    last_write_checksum: sha1:629ffff22a067272d43541a427c759382ea591b4
-    pristine_git_object: 05e496698e18ee78a0bb1b228e6f60bf651b1cd1
+    last_write_checksum: sha1:bfeb2977741bc2f79837189012d9841782c2cbce
+    pristine_git_object: 34402c719997c5af1f9e919f94ae9c02d1e2deda
   docs/models/shared/statusenum.md:
     id: 90ecfc97f42b
     last_write_checksum: sha1:bee529282f2bfe3c0b1c1c6873d6c322dd45a42e
     pristine_git_object: 0c48c75a568fe5d372d81899a19664870d666513
+  docs/models/shared/taxableamount.md:
+    id: 7318d4297a3e
+    last_write_checksum: sha1:be485e10cea8f25c9f8e489177394de3937c2612
+    pristine_git_object: 105335310071ecfee520e7b223f1bbab60309ec6
+  docs/models/shared/taxamountcalculated.md:
+    id: 7d3fc3b728a5
+    last_write_checksum: sha1:74b809633621bc722e69c67d240edfc7fc695e6c
+    pristine_git_object: adc1a39e20a362cde28bd002434d58fe036e0bc6
+  docs/models/shared/taxamountimported.md:
+    id: df03bd385d42
+    last_write_checksum: sha1:9af7d2aaf285f479b431b7de6334144e0a2b03ed
+    pristine_git_object: b1b05b856b2b58df9e94bda1e1dc085fdffd171c
   docs/models/shared/taxexemptionenum.md:
     id: b2150a0b3cbd
-    last_write_checksum: sha1:eaa0d69ca823ad8c65bc289b0b292a8b9cd2e32d
-    pristine_git_object: 2226ed2313bace51dfdd819a070f247820b30616
+    last_write_checksum: sha1:19478c86069af5cc8e03b05e1e85278a5b072980
+    pristine_git_object: 7d3c8f4faf95134730fdcd5cdb2db287814aae17
   docs/models/shared/taxitembuilder.md:
     id: a107dfdb86e2
-    last_write_checksum: sha1:0258885c02562b9d6b79674dab30cb7e2cdff4af
-    pristine_git_object: a5594268b3240e0dd2e87b319371b362e71e8760
+    last_write_checksum: sha1:0a945f23d9ab91b3aac336f808871d9b904066c3
+    pristine_git_object: 50dcc037badfa77f2afbb1fba230c87a8e749a11
+  docs/models/shared/taxitembuilderamount.md:
+    id: 2b833c9813a0
+    last_write_checksum: sha1:d5bed85a1809e21b2c05de6bca7cfb19286d876a
+    pristine_git_object: d8cd0ddfada1dbc190f2cc0d1e44f163c900f6dc
+  docs/models/shared/taxitembuilderconvertedamount.md:
+    id: 896c29b3113d
+    last_write_checksum: sha1:b4beb522e920dcacf3cacf665a6a55b7694d10e7
+    pristine_git_object: 8571cc20fe53f341a7f372e385f9ee8e06099eb4
   docs/models/shared/taxitemestimate.md:
     id: dba61a65c869
-    last_write_checksum: sha1:26de6a6767a8c9763df9b6223c9a0ab38bba78eb
-    pristine_git_object: dec40def821db566bbee844c9755e3a9ed337d8a
+    last_write_checksum: sha1:c3559ea6d6153822b94f1debae24e28e8a91cf5b
+    pristine_git_object: 2819c0e4828f1c421073d401cb21bdc08d84a6b6
   docs/models/shared/taxitemread.md:
     id: fc08b31ade85
     last_write_checksum: sha1:e8cc36f265797116b9177590fad2f437524b3dcf
     pristine_git_object: 154d61cca897c25b27ab1d14f8b74a9aea8ec724
   docs/models/shared/taxitemreturnreasonenum.md:
     id: c6516c0ed3e0
-    last_write_checksum: sha1:2eba7a93d2f17556600c1b2ef2f4c84030ec077f
-    pristine_git_object: bbb2bc0f06856efbf12dff264c16e64620aa7c5f
+    last_write_checksum: sha1:802d8b82d06b1c611086079c777a894ce211f494
+    pristine_git_object: 94d3ba3f7bbebfffba27cfdcabda1f933b932ff1
   docs/models/shared/taxitemtypeenum.md:
     id: 4be208f8ed07
     last_write_checksum: sha1:81942d6363c84e2b27a6d43c30947cf80d954147
@@ -426,34 +564,70 @@ trackedFiles:
     id: 99fedba26580
     last_write_checksum: sha1:551c3aa390b160827ae6a092bb258c7d3eda6bb1
     pristine_git_object: 746f22437757b58f2a9529e0db433ae399cbf922
+  docs/models/shared/taxratecalculated.md:
+    id: 77531eb08ee2
+    last_write_checksum: sha1:6fc27482fb325e33ae67d02102466472cc9525c2
+    pristine_git_object: f3990fd7669f07acd78c31132943fe7ede2efc5a
+  docs/models/shared/taxrateimported.md:
+    id: 5f77cbad95d1
+    last_write_checksum: sha1:ff9c842ec407cb099004a8f1645430c6c5b840f7
+    pristine_git_object: 6df744cb329b725191c33d24af5d26ec37351f5f
+  docs/models/shared/taxtypeenum.md:
+    id: c01b4f2245aa
+    last_write_checksum: sha1:70c6098e4e4e64c6e7d923a62a0de7719ae14217
+    pristine_git_object: 6ab42dd98108ec41d5caebb670fcbb45d0b59b75
+  docs/models/shared/totalamount.md:
+    id: ab2c6dd3702b
+    last_write_checksum: sha1:7e363b1eb8e03d62102f3d43055104898dae0367
+    pristine_git_object: 56c1aafd4bdf16332dce57f846844b8900c5871e
+  docs/models/shared/totalamountofthistransactionitemafterdiscounts.md:
+    id: 4ced82b86335
+    last_write_checksum: sha1:f13dbaf1e1b98dd010a6e81eb601fff0ca4d7e0a
+    pristine_git_object: 1ca543d975f6250e14166e1f3fa0d4e162aef75d
+  docs/models/shared/totaltaxamountcalculated.md:
+    id: 85d4f0850d04
+    last_write_checksum: sha1:8e60b027a742d240fab85a3f9c81db5b5d427eae
+    pristine_git_object: 81717bdb6b856b02c7340e9fc1998486f6d4a2eb
+  docs/models/shared/totaltaxamountimported.md:
+    id: c1ea3b9501c2
+    last_write_checksum: sha1:25f291988b512fd447c69da794e7527345ce9af9
+    pristine_git_object: f43a65094781cae767e731e594756da12e149660
+  docs/models/shared/totaltaxliabilityamount.md:
+    id: 12256fc6bed8
+    last_write_checksum: sha1:38b777cf9e07ee17ca5f840828b4b23be7d2a8fe
+    pristine_git_object: 7146cdc515a2a5989b1b0a218f5ca6806166d983
   docs/models/shared/transactionaddressbuilder.md:
     id: cabc0a0b1340
-    last_write_checksum: sha1:de3bdadbfbe3641067ab885f6689ef55f4f93ae3
-    pristine_git_object: fa3828f997c0583f1edac37377e4f7da3669135e
+    last_write_checksum: sha1:d2b7bbf20f8a20d17f8d1f68bca9820e1833cf52
+    pristine_git_object: 197e73ae8e42e75fc725cba0f1d2256a45bba097
   docs/models/shared/transactionaddresspublic.md:
     id: 3f7ad3f8f5a9
-    last_write_checksum: sha1:b231967126094970e5d0811bfa2c7c4e9c96a8f6
-    pristine_git_object: 40b5b0c0585abc1433af52553fab99b17442e7e1
+    last_write_checksum: sha1:3177b831830794dcc0009a99e1c7bf4e25151e32
+    pristine_git_object: 21987648151e16de67324091eb5c56e5258974ce
   docs/models/shared/transactionaddressreadoutput.md:
     id: b9c1742ec3e4
-    last_write_checksum: sha1:b15b15721b8a7ab5a75fa439c9b28bbd1b3b3f0b
-    pristine_git_object: 9db6d2c8dab40a225b4a0eaba52a1ec5fa9482a6
+    last_write_checksum: sha1:9ae5514a85a8b02e0870a4e5fa998ab702e86ffe
+    pristine_git_object: 176348e962c11b8a054ef01f9bd1a0e502982c0d
   docs/models/shared/transactioncreate.md:
     id: 1a7c0c98032a
-    last_write_checksum: sha1:55b49679711198c14b7e1095031af1a76f031f4f
-    pristine_git_object: cd10df8c71f24120cf4e9a84a5e569f3c0b2dd4a
+    last_write_checksum: sha1:172ef6b0df9571ca5ca08a2c10bff26508e8eea0
+    pristine_git_object: ddcab388403489865e45cc226f2f6c9a3b70dfe3
+  docs/models/shared/transactiondirectionenum.md:
+    id: 537f3d9132ea
+    last_write_checksum: sha1:597beec250a31555860bd6c433352d9389380a37
+    pristine_git_object: 9c1b7d2f4dea7675722f94576a8f0035ce9ab39a
   docs/models/shared/transactionestimatepublicrequest.md:
     id: b79d5c47000a
-    last_write_checksum: sha1:e121057d9732c7a0e537a5ee22e23ca51c1f3b2c
-    pristine_git_object: c9b74debc41098ab8e1a319a4d096ad4826fbde5
+    last_write_checksum: sha1:218a66137a44453698adf7318537ea5d6e9d45ac
+    pristine_git_object: caf63013f4da4fab4a84e4ca79591405f7267010
   docs/models/shared/transactionestimateresponse.md:
     id: 34c85ff249eb
-    last_write_checksum: sha1:d7c72761aca4dba5c125065204a668102445c366
-    pristine_git_object: 07a0db38a78ca4b731a1bd769f3b57b792e0027e
+    last_write_checksum: sha1:4636045ec0872c7313c3775717570b0d7cf884ea
+    pristine_git_object: 4311285e0747e63d1a85a02e598d32d49cdbc1d6
   docs/models/shared/transactionestimateresponseaddresses.md:
     id: f40bc43b6363
-    last_write_checksum: sha1:f7d3fd05560d57eea3c37a47b36da57447eb9712
-    pristine_git_object: 430393e9bdccea482256ebc0a5ef24b8ed31de14
+    last_write_checksum: sha1:941782ecf1a33ee97a1f21cb40eeb7473a1da452
+    pristine_git_object: a7a80d1840c1760f8d0d0b01ddcdcefad453fe10
   docs/models/shared/transactionestimateresponsetype.md:
     id: 052482e91076
     last_write_checksum: sha1:a39316d486818e254a5913d441fdcf73b1b4dad9
@@ -462,34 +636,142 @@ trackedFiles:
     id: 17090fc18e1d
     last_write_checksum: sha1:490dce0dfd4b4185d80adace292ecffd4138f4a6
     pristine_git_object: 1877e0f9cd89a8e1dd9cf73f7296b332e7979318
+  docs/models/shared/transactionimportcustomer.md:
+    id: 992855ba2a5f
+    last_write_checksum: sha1:d1c8c71e887d412a917986ce32ca9fa2d81bbf3f
+    pristine_git_object: 47e218d2150a96a26ca209890fe09a716c6a6fcc
   docs/models/shared/transactionitembuilder.md:
     id: b6b131006430
-    last_write_checksum: sha1:a3098225614ddc4ba58186edbef947c51be68747
-    pristine_git_object: c1aec70a70fdcb2036cf21417efbfd3a799bde01
+    last_write_checksum: sha1:d8b816cfdbddf9e76d250fb137ca4dcbec0790b8
+    pristine_git_object: ebab50c0c389f776f67dcd1ffda1fc57db29b5b2
+  docs/models/shared/transactionitembuilderamount.md:
+    id: beb0c99d768d
+    last_write_checksum: sha1:6ac79e6718919aef38bc536422baa40d071038db
+    pristine_git_object: eef031d53364c9295f1739904237a4bd786590a7
+  docs/models/shared/transactionitembuilderconvertedamount.md:
+    id: 9a2e2a56b577
+    last_write_checksum: sha1:b73c7c66cadc537968838014f903c6b2d0d1f65a
+    pristine_git_object: 32feb00169ac326b8f14710d3377796ee11891ca
+  docs/models/shared/transactionitembuilderconvertedsubtotal.md:
+    id: db2be3885de6
+    last_write_checksum: sha1:788b9439224e150a1937a4064bc5dc0da6072edf
+    pristine_git_object: 17ab5d71836f5cd040dd8859c683e5dcdd3ce1e8
+  docs/models/shared/transactionitembuilderconvertedtaxableamount.md:
+    id: f53d7049336f
+    last_write_checksum: sha1:7464ebfb40fe2253b32b1d5cf8dd4360c5952fba
+    pristine_git_object: c9dfdee53cdbaf376fefb68d960d5719ff320b7b
+  docs/models/shared/transactionitembuilderconvertedtaxamountcalculated.md:
+    id: 3c38f867600b
+    last_write_checksum: sha1:26ed419ab37c6241480cbfb359d4c72101a75643
+    pristine_git_object: 01c5fe461f6e3e19c2965edf3141c496fe00789a
+  docs/models/shared/transactionitembuilderconvertedtaxamountimported.md:
+    id: 102a90af69c9
+    last_write_checksum: sha1:b14012451d5508f61c59216fcd665461717b8e3e
+    pristine_git_object: ef50b9365ac036c9c20d05c2941b8c5d56cc65a3
+  docs/models/shared/transactionitembuilderconvertedtotaldiscount.md:
+    id: 05707b0be412
+    last_write_checksum: sha1:bd6bdebe1995187caec6d4581b29d7d52ff09c9b
+    pristine_git_object: b1ba18e2d9433b870084de3b0673640bf3b584bf
+  docs/models/shared/transactionitembuilderquantity.md:
+    id: 4d7005444c26
+    last_write_checksum: sha1:c1f8c86b071d01e04c91aa2e444288e01c1eb33f
+    pristine_git_object: a85875769e1d17c844b396c1a24602b6b1197078
+  docs/models/shared/transactionitembuildertaxableamount.md:
+    id: 45dd1d955483
+    last_write_checksum: sha1:17dc7d51360f04966f0627d1905764d16a0f6115
+    pristine_git_object: 2be8129e344e31b934a95d41af0e11cb08138ade
+  docs/models/shared/transactionitembuildertaxamountcalculated.md:
+    id: a80b2ebd9c85
+    last_write_checksum: sha1:409ffedb10c12f571c08e36bcbf246458c105c4c
+    pristine_git_object: 53764063e4db262fe1bcc2ad7e292472e12cec99
+  docs/models/shared/transactionitembuildertaxamountimported.md:
+    id: 7f913f0abba0
+    last_write_checksum: sha1:84d32ff521bf372cf6087fd9d26644830aa310b2
+    pristine_git_object: 0811d794b3fa5494e98f5fc1ac38c90fe36a3826
+  docs/models/shared/transactionitembuildertaxratecalculated.md:
+    id: 88f6b73c2893
+    last_write_checksum: sha1:5c48cd0a597a33a5c2f34acfc55a8bc2db7e20e1
+    pristine_git_object: 0ebc8097dcbe60cdb30f8c12b1d43f3abcb9dae2
+  docs/models/shared/transactionitembuildertaxrateimported.md:
+    id: 1eb17f7c47bc
+    last_write_checksum: sha1:320679a729fcb56b150d831a2b39e84984dbb35d
+    pristine_git_object: adeac0e606097fd390b53f7499610cf7f3ac30bb
   docs/models/shared/transactionitemcreateupdate.md:
     id: bbb402674a30
-    last_write_checksum: sha1:e37ed191f140dc3033a4a7a0cc7f3487f2a3b441
-    pristine_git_object: ff038e1f4b44d34ced4b32cb96153f5584d4bc34
+    last_write_checksum: sha1:11d11230ea3f8489ed63a33179c1e9c870d66f1b
+    pristine_git_object: aeeb7568614f315a574619eb2f846b902b7a997f
+  docs/models/shared/transactionitemcreateupdateconvertedsubtotal.md:
+    id: 7e1e61e53c63
+    last_write_checksum: sha1:a70642fb8b536214c1839e8941aed268457c2539
+    pristine_git_object: 59a7efe98d818c9587ee01716ef0cc94e211d232
+  docs/models/shared/transactionitemcreateupdateconvertedtaxableamount.md:
+    id: 27164f1f3377
+    last_write_checksum: sha1:79caa4a8f65747dc14e03e483f9bddb417ee0355
+    pristine_git_object: 5dd469cb4c307edc667d207f862d788a0f8f42b9
+  docs/models/shared/transactionitemcreateupdateconvertedtotaldiscount.md:
+    id: 85ffa85ba069
+    last_write_checksum: sha1:444b8475040935ea8b095f34af1032f81a3afcf1
+    pristine_git_object: a7febc8662c7bc947f063dee9df71392ff7f3414
+  docs/models/shared/transactionitemcreateupdatetaxableamount.md:
+    id: 4e80205ae2cc
+    last_write_checksum: sha1:1a73c40338c02f1a25c82d97190c5966cc89b070
+    pristine_git_object: 93f80975b8ee85beca1dd6d86ebe87d56dfd0f78
+  docs/models/shared/transactionitemcreateupdatetaxratecalculated.md:
+    id: d21209e210eb
+    last_write_checksum: sha1:c9ecb65a1b74e4787edc0c5b1f78e07a05052acc
+    pristine_git_object: aa7f54b9346cd7ce453f139dfcc281d2b14979f4
+  docs/models/shared/transactionitemcreateupdatetaxrateimported.md:
+    id: 9beb92bbc06f
+    last_write_checksum: sha1:528f645cc0a0cc3649468132850bf78d274b693e
+    pristine_git_object: 0e8125cc65543a981f08b38db11e863ca26d6c41
   docs/models/shared/transactionitemestimatebase.md:
     id: 736522e54dc2
-    last_write_checksum: sha1:55ccfc20dd91867dbe016d2a7895ffd852302da5
-    pristine_git_object: ebc299c0fd39291f22eb2d302f541e9503983afe
+    last_write_checksum: sha1:e6450a8d74b3c7b00b1ccba5192ab539ce83aae6
+    pristine_git_object: 0fa304a85baad8555b80216e80846641a4c26cd7
   docs/models/shared/transactionitemestimateresponse.md:
     id: cb7fb210ab34
-    last_write_checksum: sha1:df0742928a30eae6966b147b4b38e83b6a2ca0d9
-    pristine_git_object: 3a5f4fe5b234bf18f7bb7ebedc9e849d710d5382
+    last_write_checksum: sha1:fa84eeef5c3078410f44b67f32227c2a4114ee0d
+    pristine_git_object: 1729cfd4eea066dc784977b04a3bc3ac815f748a
   docs/models/shared/transactionitemread.md:
     id: e5883635c19b
-    last_write_checksum: sha1:e546771212b4a845e6f119664e0dccd8b3438eaf
-    pristine_git_object: 8ef5dad2edf40416ab74225a8b513a15ff88b740
+    last_write_checksum: sha1:2095aadc96d7c5f4180ef2d3b69e77f63c6bb8fe
+    pristine_git_object: 551bf36a7c7f756bf7f5854ace07467bcd7c41f9
   docs/models/shared/transactionpublicrequest.md:
     id: 60bd03c17b64
-    last_write_checksum: sha1:c6986fdab915e616463cf7f811df5e79d8746058
-    pristine_git_object: 25c38a00b6b5496b8768a8d831602e3608b2dce5
+    last_write_checksum: sha1:d9f2b8abf0e08ba840582a3cdc39e07aabe9b74c
+    pristine_git_object: 8fe0d6ce998f9e35a0ba338a760cf349ba08254d
+  docs/models/shared/transactionpublicrequesttaxableamount.md:
+    id: a29581dd88c9
+    last_write_checksum: sha1:e9b9a1a8173cee20fe49cea9bb939e950dbd9cf3
+    pristine_git_object: 3975d4fce5adef23215ef8934bdd77f2f915d2d6
+  docs/models/shared/transactionpublicrequesttaxratecalculated.md:
+    id: b2f2a7736ddc
+    last_write_checksum: sha1:ebf53b1559e008b97ee2ccfa6e12ce77a0ee0418
+    pristine_git_object: 32046294fd18f516e00d025d0f7bde2452d44cf9
+  docs/models/shared/transactionpublicrequesttaxrateimported.md:
+    id: c5208da7018d
+    last_write_checksum: sha1:4e477baa7b57523891155755a12da8b32bf59cf1
+    pristine_git_object: c15a7ccb8d60890c3b51de02e32e04dfb9de8c3f
+  docs/models/shared/transactionpublicrequesttotalamount.md:
+    id: 9bdb6633669d
+    last_write_checksum: sha1:ffa1ca0276eb44dc898afa5cf040afae9e0d2099
+    pristine_git_object: 2e9fab8ff69f4dc9253df081bacecac77b4e9734
+  docs/models/shared/transactionpublicrequesttotaltaxamountcalculated.md:
+    id: 48c41e979678
+    last_write_checksum: sha1:349979c1c42419bda37743f1e52dfc805cb2b737
+    pristine_git_object: c72dc4a90616e8aa9092f7559dd243624dbc631a
+  docs/models/shared/transactionpublicrequesttotaltaxamountimported.md:
+    id: 230bb4c2f1c0
+    last_write_checksum: sha1:272f89fcf5da5cdf62a2ac8b33a0d7b3f238f8cb
+    pristine_git_object: 3f87c5d164ebb4afe8ac71421b198df93712df53
+  docs/models/shared/transactionpublicrequesttotaltaxliabilityamount.md:
+    id: 25315b5fb724
+    last_write_checksum: sha1:c654434b045b1f928bd355c95f2d48b26035bd79
+    pristine_git_object: 91102724a50b65eb86bf8eda5c0408b463d81f5c
   docs/models/shared/transactionread.md:
     id: 3a72336fc3be
-    last_write_checksum: sha1:0c41318dbd4c54db2920c9eb8699686926ae753f
-    pristine_git_object: d8e5bd644684a4f0e8e30782906e399091a8752d
+    last_write_checksum: sha1:7406937a38eb71fff42c0984e526894c22e9a286
+    pristine_git_object: 6ff711a7ff2f980fdd733ef1d3a78f6c5b3922a4
   docs/models/shared/transactionrefundstatus.md:
     id: 7793cc975958
     last_write_checksum: sha1:6f5cdf5c1833f792986e6a046ae61c32fa15811d
@@ -500,12 +782,40 @@ trackedFiles:
     pristine_git_object: 54750b059d8b396ead424023220366ace41a5e80
   docs/models/shared/transactiontypeenum.md:
     id: fbfa1f0dc0de
-    last_write_checksum: sha1:ab91588ecb723d53bbbc7b36a5fe965d5b8a590a
-    pristine_git_object: ce8e8f963b49e842cb092c92ee94bf47ad14675a
+    last_write_checksum: sha1:724e85fa116c4715ebebcbca9583f0c0f34f9664
+    pristine_git_object: bbff963b31377504eb42d8e15cf9db691c151cba
   docs/models/shared/transactionupdate.md:
     id: 5a6f6603a86a
-    last_write_checksum: sha1:3a68d934622450b8965d57dd6c1ba323c0e61745
-    pristine_git_object: e403e491b462c2fab7afa13c67007898d73543df
+    last_write_checksum: sha1:6778d3d01f91dcc9fa7b39f90dad532faa2bf497
+    pristine_git_object: 8c3294a15e9310efb1b206ec1c0ba18b1245004a
+  docs/models/shared/transactionupdatetaxableamount.md:
+    id: 8d8bd616b9e8
+    last_write_checksum: sha1:68a5d3b5a33a83bc010b63df484f99804974582b
+    pristine_git_object: 2f98e1cd6841b2e3aef44793e1edc06da02a0f4b
+  docs/models/shared/transactionupdatetaxratecalculated.md:
+    id: bb0605ab3323
+    last_write_checksum: sha1:df47cb772f16c3f2ffa80c6534ba43f8f92016ee
+    pristine_git_object: bd856eaaae3e3f5cfef12e2482bc0dc70cd260d1
+  docs/models/shared/transactionupdatetaxrateimported.md:
+    id: adf6e4f5d75e
+    last_write_checksum: sha1:cd77a2367a00b2ef16b82bba9b93f8ef4e26b061
+    pristine_git_object: 8b27264afb4cd99bbe2a96232197de1f9669542e
+  docs/models/shared/transactionupdatetotalamount.md:
+    id: 738f667d6858
+    last_write_checksum: sha1:6533c158180485ef0e14f045271fe1aed983b5fb
+    pristine_git_object: 95594adf3bf703c216f038d13fa198182fd050ca
+  docs/models/shared/transactionupdatetotaltaxamountcalculated.md:
+    id: 98994fadd53c
+    last_write_checksum: sha1:e86e5e4dc130a1e01d47c25095ecbc4e4c8105cb
+    pristine_git_object: 512147d2b4a93af055a0cc0ce1e39e10aa9be167
+  docs/models/shared/transactionupdatetotaltaxamountimported.md:
+    id: f4358e9da9e5
+    last_write_checksum: sha1:09bd0bb4da7389e8e662a32cbadf48531c5097e6
+    pristine_git_object: 8ff4d39e73481e2dc6a9cf616eae1c453905961a
+  docs/models/shared/transactionupdatetotaltaxliabilityamount.md:
+    id: 36d7272730bb
+    last_write_checksum: sha1:5b73078fb3a214f06a382d90d45de96bb6be7f04
+    pristine_git_object: 7bee8940d1dee0ac37b1f6ab31093dea02dbf280
   docs/models/shared/treatmentenum.md:
     id: 71d314c9b574
     last_write_checksum: sha1:14014c35997b4ce9e914b7043c8fe3445272b488
@@ -520,40 +830,40 @@ trackedFiles:
     pristine_git_object: b4a6d9b0e55a538f0124a2fd8a0c2f19f47e3b66
   docs/models/shared/validationerror.md:
     id: 9f0f6b463985
-    last_write_checksum: sha1:9db669fbeca226b5516c9adb54757287494e8f40
-    pristine_git_object: c3e9f700fde327ae1f6a955c9282d303317565bf
+    last_write_checksum: sha1:d964045fd403bc202d290e00cd6edc76ad98034d
+    pristine_git_object: ae8f81c6ac50e15be3a108e14f89668fbbee032e
   docs/sdks/addressvalidation/README.md:
     id: a167b487f13b
-    last_write_checksum: sha1:c959f9dd1ad5b85306e32c1e3292421fcaf630ab
-    pristine_git_object: 5956c83d8d4f406d9e44b03a0f4edbf0dbb8c126
+    last_write_checksum: sha1:f5a11c55850d20ef3fd5166d83a53bf17de5850a
+    pristine_git_object: 9671144ff91b44ffbff65d324690c8dd3ee6dc8c
   docs/sdks/customers/README.md:
     id: 9332759cffc2
-    last_write_checksum: sha1:bb4d6d12b1a9080a1d97d7c8ee4906136eae74c6
-    pristine_git_object: a3108c86fccea265b9a4999ae6447156f4eb408b
+    last_write_checksum: sha1:1b0758a9e8558efce050a0a948cd63cfda22ff7a
+    pristine_git_object: a35bae80fa32ac326f904f681101521d5c18d6c1
   docs/sdks/exemptions/README.md:
     id: e3bfb9ba8fc5
-    last_write_checksum: sha1:b29d9945151f329dd0d01c1726cafc7b3be4c0cf
-    pristine_git_object: b8b3be3b570b1f0bba5d5d807187d90fb29818ac
+    last_write_checksum: sha1:00cc199c7fdf3a8ed898212c9c2bedd0a15b17c5
+    pristine_git_object: 7c2f539fe1e1e313157a486a53523139dd99d95a
   docs/sdks/nexus/README.md:
     id: 5d33642e4c8a
-    last_write_checksum: sha1:87be18d78ecdbb338fe6a129f553a009d8a59bf7
-    pristine_git_object: fdf767f4744f442b82bfd23059a16916f29e9300
+    last_write_checksum: sha1:935d34d9f4e756f48a165007b3afe76bf00fbdd8
+    pristine_git_object: 9de4fa905e0de6192ea8a6c559854f6aae40bd69
   docs/sdks/products/README.md:
     id: af06255e12ab
-    last_write_checksum: sha1:576e307815430d32c2a833454e5d28cf2a4572e1
-    pristine_git_object: f8eb9573237003194ba958dc455318a146e80ca4
+    last_write_checksum: sha1:b611e436f27199919084163d4f0caba67b700c8a
+    pristine_git_object: 8ec7c2a4b246289098561d9bca042eb7188729d3
   docs/sdks/taxestimation/README.md:
     id: e87c7b0ae06e
-    last_write_checksum: sha1:f15c97913e6ec12065043c7c2f6e66974dd3652f
-    pristine_git_object: d4a79d9e5abff520593419187b742eff18662342
+    last_write_checksum: sha1:8bdd56449a61eee96f6b698df26b6bf78174497e
+    pristine_git_object: cd4ac0ef9a75c6f496b6785b9bcbbe2cf8b69dfa
   docs/sdks/transactions/README.md:
     id: 85592abe3c6b
-    last_write_checksum: sha1:88b17432b4fb98c3257dce7975c09893cf4c5e7a
-    pristine_git_object: 3289b7b7ef8072370c040816d97dcf8b9572fdbc
+    last_write_checksum: sha1:8ac65a872291f41e45a5d983c036137b13365c82
+    pristine_git_object: 798e454e38a807dd9d641438c79199c1d3c55edd
   kintsugi_sdk.gemspec:
     id: 23c95d65a79e
-    last_write_checksum: sha1:be98d85971e0da1ee42f2933e7641bd19608c1e5
-    pristine_git_object: a767ac48dfdd28b21a6683f0d37ea6dde6379639
+    last_write_checksum: sha1:31fc59d194ac25ccbf1af8cbb3f3057ca2971f27
+    pristine_git_object: d74a11785da91632a1533b8d89cfb37acd256560
   lib/crystalline.rb:
     id: eca767cf937a
     last_write_checksum: sha1:b6ec0a2833f58ba9a6f07c9637fdca05e59006d3
@@ -580,28 +890,28 @@ trackedFiles:
     pristine_git_object: 2ed83f4352774e4d02e73402216b71cde5f86639
   lib/kintsugi_sdk.rb:
     id: 20cf69ab4538
-    last_write_checksum: sha1:615d14ed5ebd5b946ce601fe191c61cef0fea28b
-    pristine_git_object: d4f477722e0e507820b228b204267a3380abfff7
+    last_write_checksum: sha1:8b2eb2b61a2f57cb42844b3dc3a5d8f2e037d5fe
+    pristine_git_object: f99699c6d8bb2d7fcd82c86dc870892b36ba8580
   lib/kintsugi_sdk/addressvalidation.rb:
     id: 61cf05d19e61
-    last_write_checksum: sha1:e72bebe1cb7f2b208d95b1fb3c4c4788ad10ced9
-    pristine_git_object: 0408aa156fe714e8c0a51091c990300389cbb6cc
+    last_write_checksum: sha1:8f5d8a1f1716271b9c93842195e27fbee8f50377
+    pristine_git_object: 08c019f4b6c68e4a1aac23f4d3ead63b69e5b0c4
   lib/kintsugi_sdk/customers.rb:
     id: 1a8d1fadf344
-    last_write_checksum: sha1:f1fdd9206d05d8b072c014ccd82352fb3661694e
-    pristine_git_object: cfa6008414af7b081a4bff31f3351aed3072d0fb
+    last_write_checksum: sha1:2f90fcd3517d40a907ad036f6e2dde70f3e2aa85
+    pristine_git_object: 924cfc5d6198637f8804033b34dc6d3057c68838
   lib/kintsugi_sdk/exemptions.rb:
     id: a2e115a4a946
-    last_write_checksum: sha1:911a3fb0a4f0ddcfe6820d3ce5c4cc46a9ad048b
-    pristine_git_object: bfa02fee110f54b0f7ce3e5c9f9f7ed500fd10d3
+    last_write_checksum: sha1:d1b9afe7eb741f022c2b7d8d1e456f835f463c5e
+    pristine_git_object: 70030fb2f8ffa0c7621e0570f8c8c4972138b096
   lib/kintsugi_sdk/models/callbacks.rb:
     id: 07606ed5ce21
     last_write_checksum: sha1:8bc55d25b47c1af6033e785888b226e5f7c23245
     pristine_git_object: 99d70fc9329f608cb00e18b1df9582bd2e3f55c9
   lib/kintsugi_sdk/models/errors.rb:
     id: 4530aaf5ae37
-    last_write_checksum: sha1:8d9d738d3b7769215d5d1ffac8019d85c0bc3f45
-    pristine_git_object: 4e31fc0b0e8886a45a547561c46d4c22bcb542bf
+    last_write_checksum: sha1:457a7e8569041219903eddc8c3edf75546402b9c
+    pristine_git_object: b3035616a745268ec55603f08747c256db3ac3e7
   lib/kintsugi_sdk/models/errors/apierror.rb:
     id: e5caafe0910e
     last_write_checksum: sha1:8d1b8c7a0eb1320b8e12ab0680831799483be742
@@ -634,14 +944,14 @@ trackedFiles:
     id: 1ace0ea2ff42
     last_write_checksum: sha1:0ecf105f7cea3decb965e3965bf9a97a989f53bc
     pristine_git_object: dc2a41ddc25fd0f13ebf78f4556e393799d0b8eb
-  lib/kintsugi_sdk/models/errors/backend_src_products_responses_validationerrorresponse.rb:
-    id: b2d534965d8a
-    last_write_checksum: sha1:4cddee4ada49a2afd7fdab34a8a9fdcebfac589a
-    pristine_git_object: b69a1dc7ad50a76703c31c7d2af8f9783d960976
-  lib/kintsugi_sdk/models/errors/backend_src_products_responses_validationerrorresponse.rbi:
-    id: 121f85111365
-    last_write_checksum: sha1:f1d7896f595b83d22e3d87e078464400d84fc112
-    pristine_git_object: 58437271b1617781d81f1d62b02d78039db0f954
+  lib/kintsugi_sdk/models/errors/backend_src_products_schemas_responses_validationerrorresponse.rb:
+    id: bde4ee2140f8
+    last_write_checksum: sha1:4d246e06b236919fee28d2a3bb8dfdd06d8499dc
+    pristine_git_object: 2c0faa6d08b1e495aa43cade338f9b4855f016c4
+  lib/kintsugi_sdk/models/errors/backend_src_products_schemas_responses_validationerrorresponse.rbi:
+    id: 8d555ea95655
+    last_write_checksum: sha1:2c1ad0a6a6e822922e4040daf866a282cb329b3d
+    pristine_git_object: aa96194518363020169c0a118d98585f42e99747
   lib/kintsugi_sdk/models/errors/backend_src_tax_estimation_responses_validationerrorresponse.rb:
     id: 7120795de4c7
     last_write_checksum: sha1:fb569881b8c2212f36cc3bf9fd730b5728a26edf
@@ -676,188 +986,260 @@ trackedFiles:
     pristine_git_object: c7d0ac377e8273ca906a6abef8c3af6e60d30c22
   lib/kintsugi_sdk/models/ops.rb:
     id: b3018e53243c
-    last_write_checksum: sha1:0a65adadb0badb8643bf98324bb5d9af70bc2aaa
-    pristine_git_object: 80506fce1c46aba4ca0d832e749c027a06144740
+    last_write_checksum: sha1:7eea5bc8d233542fde4dd0c98b413af3e010fa07
+    pristine_git_object: 0a0081dc668eea088330413138d7ab76e3420029
+  lib/kintsugi_sdk/models/ops/country.rb:
+    id: 4b954ea8746d
+    last_write_checksum: sha1:91f6cd57c76ef64d6a50f0a215152fea9e7fb463
+    pristine_git_object: 86c4a46c6d5700b2f651bc3f32e23b8370663c95
+  lib/kintsugi_sdk/models/ops/country.rbi:
+    id: f803e1e1a06b
+    last_write_checksum: sha1:a6790f29602af15a4806bf884fa54b7c645ec4e4
+    pristine_git_object: 55a498a9530891f298c2a591def311525cbb4b36
+  lib/kintsugi_sdk/models/ops/country_code.rb:
+    id: f08a5c957038
+    last_write_checksum: sha1:cd12a62a37fdeeccc8b06ccbb02532c019847adf
+    pristine_git_object: 862e5f394c80fde8183843798246f7e0fed1bf81
+  lib/kintsugi_sdk/models/ops/country_code.rbi:
+    id: 960072b447f1
+    last_write_checksum: sha1:a7441b8418638bd7630811d147295bbeec5d59ac
+    pristine_git_object: 905c64a3381f8dd12fe52727f8a407230db97ca9
+  lib/kintsugi_sdk/models/ops/create_customer_v1_customers_post_request.rb:
+    id: bdc32e9b0983
+    last_write_checksum: sha1:fb82ad6cc02e03c8a00394436bda60d87800275d
+    pristine_git_object: 5062bb79c8752b18be7d3c97c1189e4a0298287d
+  lib/kintsugi_sdk/models/ops/create_customer_v1_customers_post_request.rbi:
+    id: b370e7457cec
+    last_write_checksum: sha1:f357fb100e3ed3bada7f84c31e4f6e4ee325ebcd
+    pristine_git_object: 396fe6f3d1526560eef22c6112c55829e2213e98
+  lib/kintsugi_sdk/models/ops/create_exemption_v1_exemptions_post_request.rb:
+    id: a4b214d69941
+    last_write_checksum: sha1:5a536301c12e0b741146ff80e45cf69bbd5e8aeb
+    pristine_git_object: 6f5cdd18fb13799dbba3f3c44846fca97d1d5c1e
+  lib/kintsugi_sdk/models/ops/create_exemption_v1_exemptions_post_request.rbi:
+    id: 4ef784b48379
+    last_write_checksum: sha1:d5a310cef3330bf9da094532ec85e2b02ef7be08
+    pristine_git_object: 110204299c326ac89c5f2c187640870a6b89d88d
+  lib/kintsugi_sdk/models/ops/create_transaction_v1_transactions_post_request.rb:
+    id: 1591716e0b53
+    last_write_checksum: sha1:d6a68a5daf374597aabe05c5fe91b116341a2ae9
+    pristine_git_object: 5bc81501d818bc705151b4c91f0d3264ef5a55c5
+  lib/kintsugi_sdk/models/ops/create_transaction_v1_transactions_post_request.rbi:
+    id: 4dc3cbf96371
+    last_write_checksum: sha1:bb7f908a973939490d9b2cad16e9de7eac9d75f7
+    pristine_git_object: ed0d58123713033ec7eae3ac2df98ab8608fb003
   lib/kintsugi_sdk/models/ops/createtransactionbycustomer_request.rb:
     id: 8659621a6827
-    last_write_checksum: sha1:2ca0d687840507dd71924a7f6300a6484fe7c004
-    pristine_git_object: 4d95042d82c075aa574b9627c5b3dbc01fc1b216
+    last_write_checksum: sha1:b930fcfce39627c49ce5270ca69b874d39e47ffc
+    pristine_git_object: 73fec1bcc7da6766f165ace72396be7d9f41a3cf
   lib/kintsugi_sdk/models/ops/createtransactionbycustomer_request.rbi:
     id: f3f4a655b573
-    last_write_checksum: sha1:dc916ac5e5936916e0b146ae357606719d4d1246
-    pristine_git_object: 95218073641a466eccb86614126aace74fe1effd
+    last_write_checksum: sha1:185cccf19c7c9513a8ac547abbd8d30b4f0a3658
+    pristine_git_object: b70a40009f637cc3be1c53f915061ea1f6dea238
   lib/kintsugi_sdk/models/ops/estimate_tax_v1_tax_estimate_post_request.rb:
     id: f7714cc138d7
-    last_write_checksum: sha1:351b52029b8aa8704365c66f1cd890952abbc629
-    pristine_git_object: 0d4d61460c39faaea0b14de2a586e7a8b5acfbf9
+    last_write_checksum: sha1:092976bca3f28c22c54d6830e44953fb601755d2
+    pristine_git_object: 7ce7b87efb17b757101c6f9fc9ed59587b29b0b3
   lib/kintsugi_sdk/models/ops/estimate_tax_v1_tax_estimate_post_request.rbi:
     id: 018f13f57d1e
-    last_write_checksum: sha1:0537daf8d4f53b8ed16075884dc9d4f8035e940f
-    pristine_git_object: 46f82a352240c488e1e5efac92771f602efa71ef
+    last_write_checksum: sha1:ed0509ee0039bb0780e885bb0483d658b18ce642
+    pristine_git_object: 5913c95d653f5975df257fb44deefe32e568e256
   lib/kintsugi_sdk/models/ops/get_customer_by_external_id_v1_customers_external_external_id_get_request.rb:
     id: 8f42ad6d4147
-    last_write_checksum: sha1:10076ec2804c27508cd946d83f01a4f21e84b72f
-    pristine_git_object: 10d21bf14699361e3570bf602b94abbb3531eebc
+    last_write_checksum: sha1:246216485dcc38b1d8714842b3b3b1435cef87d6
+    pristine_git_object: 26909d77c442f2e998ca3e70adcd5e85a1334833
   lib/kintsugi_sdk/models/ops/get_customer_by_external_id_v1_customers_external_external_id_get_request.rbi:
     id: 6107857bc79f
-    last_write_checksum: sha1:7df1fac0c805ab9498e5f7b959a3cc050a3222d1
-    pristine_git_object: a90840284e255a304f59bf0e239408bdaef6e72b
+    last_write_checksum: sha1:1af960b9a253bb97fdef0a6e4ecf669788746036
+    pristine_git_object: 82301789d18ac1902de1756364e68fcfeed4d87f
   lib/kintsugi_sdk/models/ops/get_customer_by_id_v1_customers_customer_id_get_request.rb:
     id: 0bb2650cd4ca
-    last_write_checksum: sha1:5cda378625f5ac424e15d1be6dba1b2fce5c1f13
-    pristine_git_object: 6b0a2203bd28f57c73d3417abb72f8420f199dac
+    last_write_checksum: sha1:d3c46672c1f5f539fe4aacdf901b63fbc057020e
+    pristine_git_object: c757e6ab8bff24a28002cf879ad1b5d134aba969
   lib/kintsugi_sdk/models/ops/get_customer_by_id_v1_customers_customer_id_get_request.rbi:
     id: f235a3693d96
-    last_write_checksum: sha1:11210ebc55b12269a1bac850d2eaa08c98d58818
-    pristine_git_object: 2e3aef619e1e686451d755fabe5c37167230fa0e
+    last_write_checksum: sha1:9a151bde785dd274370312280978af941acefe3c
+    pristine_git_object: 4a0d3ce4d33e42263f5c8d213924cdf4927df3b2
   lib/kintsugi_sdk/models/ops/get_customers_v1_request.rb:
     id: 322dd298f5ca
-    last_write_checksum: sha1:2f5cb858c05ac930b5c069b7f09a6c0fbda4d7af
-    pristine_git_object: 9cdf5b15300e5541865b67e7464d8894b36bc0ab
+    last_write_checksum: sha1:6ff7861976f217957ec4b74527fcd0e301d71bef
+    pristine_git_object: 54953b7386c740f0dea3f5c6e83f6134177b5cc1
   lib/kintsugi_sdk/models/ops/get_customers_v1_request.rbi:
     id: 09663d0b7288
-    last_write_checksum: sha1:cfe4fab7c2eea8a99483f367e7b5fee511256bde
-    pristine_git_object: 89d1d47a2dcfec1999d772590d4849719601063b
+    last_write_checksum: sha1:0b394303da6e52c9bbd2f1991b6918f32c8cf69b
+    pristine_git_object: 96eee812d3b091eb08c9a5fca38fdc5985354b4b
   lib/kintsugi_sdk/models/ops/get_exemption_by_id_v1_exemptions_exemption_id_get_request.rb:
     id: 360191dbfafe
-    last_write_checksum: sha1:5b7364f95eb87a6560dacd877272b9ce93d2f949
-    pristine_git_object: 9a9f7d832240f9de6c22d72928fbee549cbbedf6
+    last_write_checksum: sha1:21fa7bd6f090b04cca3de23b95d78d50dcc5a918
+    pristine_git_object: 6627406af9abb8ba3b19ea8d066d311e24357b1f
   lib/kintsugi_sdk/models/ops/get_exemption_by_id_v1_exemptions_exemption_id_get_request.rbi:
     id: 62c5d3e2ed87
-    last_write_checksum: sha1:8f53e9c8d40c0d6c9ce10db093a2b37551f31f07
-    pristine_git_object: 4a80af521065f1157764f8caf5f7779ee4cd6bbd
+    last_write_checksum: sha1:f16934b7e52f6ae6a44eda3c7b95199ba3f19773
+    pristine_git_object: 1a7b02f150aba4625ea960c3c421800546e1cc75
   lib/kintsugi_sdk/models/ops/get_exemptions_v1_exemptions_get_request.rb:
     id: 1433026dfd48
-    last_write_checksum: sha1:67e5ada394ab01289d1cea384bcaf2e62ec4d722
-    pristine_git_object: c652a9b80664de5c556c8d56920ac0239544a0c3
+    last_write_checksum: sha1:a3579b3f70a0c1b153eba75764409da99765ea62
+    pristine_git_object: a8d4e1e1c6c4b32481cecf45de954f00eb4b3b40
   lib/kintsugi_sdk/models/ops/get_exemptions_v1_exemptions_get_request.rbi:
     id: a59b02756f70
-    last_write_checksum: sha1:d133090b5f79ebd51697ce3977abe97a4489daee
-    pristine_git_object: 5435a8aee0cd98f0a9a5c1901bafab57f83b3009
+    last_write_checksum: sha1:197ccbbf50bb0dd8a1b8824cde830c76d0fe4cb0
+    pristine_git_object: 9b8a94a7956a2f5080bea760a677c6badf153463
   lib/kintsugi_sdk/models/ops/get_nexus_for_org_v1_nexus_get_request.rb:
     id: 8e45c5f57353
-    last_write_checksum: sha1:a66ab0deb4c4a0c6eee1f37d2863996ffc83a190
-    pristine_git_object: 2b665605e4310dcba9387a344822aa0e26a39d43
+    last_write_checksum: sha1:d3d121e2997ad99bc06f6a111fe956ca1afedc7f
+    pristine_git_object: f6f9996ba73a4a66b77ba874e521b8323f46d8ff
   lib/kintsugi_sdk/models/ops/get_nexus_for_org_v1_nexus_get_request.rbi:
     id: e7be902877df
-    last_write_checksum: sha1:13ff92ffed40d1bfc8515e62ad3b79365acde8e8
-    pristine_git_object: 34a0912b487bb4e5a816aa996d9f82e9dc19c845
+    last_write_checksum: sha1:f4b6fdcde54a5e1f92a2d60fd2ae94a3c1a56d8e
+    pristine_git_object: c905ffd42e0a8059b0caa83ca7d14f6678af82eb
+  lib/kintsugi_sdk/models/ops/get_nexus_for_org_v1_nexus_get_response_get_nexus_for_org_v1_nexus_get.rb:
+    id: 346aba27d97e
+    last_write_checksum: sha1:4bae952ff02a578772b4d7f5109707c996ef2f02
+    pristine_git_object: d000dacf7e37c439a942d71ea6cb22461af635ac
+  lib/kintsugi_sdk/models/ops/get_nexus_for_org_v1_nexus_get_response_get_nexus_for_org_v1_nexus_get.rbi:
+    id: 05b05881df61
+    last_write_checksum: sha1:b00f55d6b2995122d53d18d4ee1b535843c8f659
+    pristine_git_object: fc5627b84f8209e12980086df07780b032f987c5
   lib/kintsugi_sdk/models/ops/get_product_by_id_v1_products_product_id_get_request.rb:
     id: 852e9e276b34
-    last_write_checksum: sha1:f55c5c7afb4923b11e0d7e2dc53b165116c2f2fa
-    pristine_git_object: b5cad9625b28403b82c2c6e62e047b8928a0515b
+    last_write_checksum: sha1:3da31eb41230c5d8d2ec52c05339beadaea50a58
+    pristine_git_object: b4d0b8f38630b4804a059083e1d34144813788fa
   lib/kintsugi_sdk/models/ops/get_product_by_id_v1_products_product_id_get_request.rbi:
     id: a335a679ebf4
-    last_write_checksum: sha1:1f34469a1656450ea9713692087707a2a8a177c7
-    pristine_git_object: 59d977823c248c70920b9fa28bf3f94a9fa07197
+    last_write_checksum: sha1:ff47b6b4b44601aa8dcf3fa0da35113a55ab062b
+    pristine_git_object: 696cc63b48fbbba021954e4a1cc6cfc7a47434b7
   lib/kintsugi_sdk/models/ops/get_transaction_by_id_v1_transactions_transaction_id_get_request.rb:
     id: 2845d2f3f4b3
-    last_write_checksum: sha1:df23476cb47b5b00683dcc45fffd127680e4e766
-    pristine_git_object: 1a24d8eee9ba0476c2d48da9e9329ad944418357
+    last_write_checksum: sha1:6e6669e09ebe5a9825d0ad820325c2f9abd26a91
+    pristine_git_object: c0b7068e915d036bdbe2b0750238a3bf89323b0c
   lib/kintsugi_sdk/models/ops/get_transaction_by_id_v1_transactions_transaction_id_get_request.rbi:
     id: 8a533a9ba1ef
-    last_write_checksum: sha1:cc126dc032e5a158ed87195c9cf123578691dc7a
-    pristine_git_object: 71223409538ee02e16031a1093eeaecf9131139b
+    last_write_checksum: sha1:f4e2fd67f422c6e27ba92608ef492bc92854f722
+    pristine_git_object: dfc3f4d0409b0d1a676c5a6ffd75410302590a81
   lib/kintsugi_sdk/models/ops/get_transactions_v1_transactions_get_request.rb:
     id: a9ecba1d00af
-    last_write_checksum: sha1:4c7d085d2696d6c2e5d183317c82badbf31ad338
-    pristine_git_object: 741c599268336ffb120d88ac68007c78abe8816d
+    last_write_checksum: sha1:d1d5bf5dc49c2122aabf34f45bd798c87eb66175
+    pristine_git_object: 2b929651cc39d285f58326364789546a105bbeee
   lib/kintsugi_sdk/models/ops/get_transactions_v1_transactions_get_request.rbi:
     id: 33220422c9d0
-    last_write_checksum: sha1:6afd37004db4ea908fc3e753e56c4417e96964e8
-    pristine_git_object: 54aeec4a4e9607905ddf3cfb314c7e8f1e12b9cb
+    last_write_checksum: sha1:5d2ce47a987f13c6835512c36a009af7468f9651
+    pristine_git_object: f73603cbc496b89d5084a5c227b120edd7409c4f
   lib/kintsugi_sdk/models/ops/getexemptionattachments_request.rb:
     id: 748f11b71c8c
-    last_write_checksum: sha1:29ec544b0f9deb9dabfb097b3e0163650a7787a0
-    pristine_git_object: 58f2fb1bbe8aab317ff40e40da0ca622c91087bd
+    last_write_checksum: sha1:5c6920f8c36d0ba1395691ca4c6ccdc0c4521dbc
+    pristine_git_object: 736b23589118345e4f3005588b67c777017d6b57
   lib/kintsugi_sdk/models/ops/getexemptionattachments_request.rbi:
     id: 50828192d7a1
-    last_write_checksum: sha1:764645a39e74063d5eaf853cea2aca87cdfcbc5e
-    pristine_git_object: 96c776a138f9d5371495ba929cc0c6e04f1efc2e
+    last_write_checksum: sha1:a8a6298ac4b5db9535329d18f1703012673d0990
+    pristine_git_object: af59041434edcd05c8268e463e526a01305af58c
   lib/kintsugi_sdk/models/ops/gettransactionbyexternalid_request.rb:
     id: 4e538325d075
-    last_write_checksum: sha1:3d56bd330c0a56c2a7fc8b6ab8973598f06b2e3e
-    pristine_git_object: 330bb84c429a5f56fec28dc7cbf0d64a66c20ed4
+    last_write_checksum: sha1:8d7ec4fa9341c38b72f481ee3188394688512b2b
+    pristine_git_object: 0e922531aa5df2454c5a30509fe5a777c36b896b
   lib/kintsugi_sdk/models/ops/gettransactionbyexternalid_request.rbi:
     id: b2813de60579
-    last_write_checksum: sha1:9d78592c4dac18c549d075a51f129e422ae3b85d
-    pristine_git_object: e9b520606e360332a1e89ca583d8d55ab89c539d
+    last_write_checksum: sha1:e14165d1b226a574eec258491d42093e8a9ebd05
+    pristine_git_object: 4cf67b67a6d16dcc47a2250e019efd606f38c91a
   lib/kintsugi_sdk/models/ops/gettransactionsbycustomer_request.rb:
     id: 5419aa1b2b5a
-    last_write_checksum: sha1:729561c4fd87543269598589654354be17b6a929
-    pristine_git_object: b326db486a365e329b17d7488fc207e3963eebaf
+    last_write_checksum: sha1:001489fe2949b0729af27f52e382c2ea08c0c485
+    pristine_git_object: e9d8626cb05e99b1f24ed4c9bcba9e9f5456daab
   lib/kintsugi_sdk/models/ops/gettransactionsbycustomer_request.rbi:
     id: a1120dbe8567
-    last_write_checksum: sha1:53efd4bf439fff9c5697004e5bb9c18117d0e942
-    pristine_git_object: 866e76591e85beb3b88c02d243353225b371b10c
+    last_write_checksum: sha1:4160a4eb1369d3527575a8d8530c89f0f53d9a6a
+    pristine_git_object: c9152bd37ccf6f57b19e72e73b2aef759509c422
+  lib/kintsugi_sdk/models/ops/gettransactionsbycustomer_response_get_transactions_by_customer_id_v1_cus_6a2c85.rb:
+    id: 8c4f7dd5d998
+    last_write_checksum: sha1:ec6f2bde89b32b3ca89a58ff596837cfd6498b43
+    pristine_git_object: a8d510226dfa665cc0bb7dc1654d683e43e725bd
+  lib/kintsugi_sdk/models/ops/gettransactionsbycustomer_response_get_transactions_by_customer_id_v1_cus_6a2c85.rbi:
+    id: 928c08ba6af6
+    last_write_checksum: sha1:61f195f59167549594ee638e6d2a1c955f4dc318
+    pristine_git_object: 153a1b8d940727703bf1267fce596528da6c3763
   lib/kintsugi_sdk/models/ops/gettransactionsbyfiling_request.rb:
     id: 68fbbc8097e0
-    last_write_checksum: sha1:dadb53c9008f3c19c864e0c50a03fba58099d7c3
-    pristine_git_object: 5ee91caf5239dcdd4bcab595ce16922cc32c3b44
+    last_write_checksum: sha1:54037ebf3e24a06e9d1d4c42306fd6903340db48
+    pristine_git_object: c435ee1c81b265bb6abd5e95e48f93387f7f6857
   lib/kintsugi_sdk/models/ops/gettransactionsbyfiling_request.rbi:
     id: c16ba9102db6
-    last_write_checksum: sha1:4a906d0536ba30d4150cd7c92890f9ab806ed27c
-    pristine_git_object: f254fbcb7f90abb7caf0a55789dcc52b8659cbe5
-  lib/kintsugi_sdk/models/ops/search_v1_address_validation_search_post_security.rb:
-    id: ceb920b886da
-    last_write_checksum: sha1:eeb2ceeb6652cc82c4e5be3080f8c6e383af7c5a
-    pristine_git_object: 0e16e8adf2110535db5d9d98cac88f5563b15e3c
-  lib/kintsugi_sdk/models/ops/search_v1_address_validation_search_post_security.rbi:
-    id: e609e4a1c70d
-    last_write_checksum: sha1:e4301a3cfdd729ef8a59b31749660d0f3fe33ebb
-    pristine_git_object: 4bc40ffe032d83468ad9b25fdf8d4d4048ec3b9b
+    last_write_checksum: sha1:76261b678dc8cfe81e16973144e0cba34c839185
+    pristine_git_object: 77760a422d4e92d55d9b0b997a4fac714319bdc9
+  lib/kintsugi_sdk/models/ops/queryparam_country.rb:
+    id: d5ed5cb3276b
+    last_write_checksum: sha1:3f7a96ffed6d22c9910bde5ab3b53718d9984759
+    pristine_git_object: 67f832f88d28a9f048f70e10a3b20fbac5d61750
+  lib/kintsugi_sdk/models/ops/queryparam_country.rbi:
+    id: 832bc500d358
+    last_write_checksum: sha1:5486e458a60c67a377d6997b06321ae2345bed47
+    pristine_git_object: 953c6e98a3ece48ab6438d93e5eb4c737802eb05
+  lib/kintsugi_sdk/models/ops/suggestions_v1_address_validation_suggestions_post_request.rb:
+    id: fdafd8570dea
+    last_write_checksum: sha1:fbe1fda809a92b98cfb64ae0d02b77141b46f2d7
+    pristine_git_object: 9f9deb81df4653bf3eee6a7cabed9dc928bee68e
+  lib/kintsugi_sdk/models/ops/suggestions_v1_address_validation_suggestions_post_request.rbi:
+    id: 361cce6d5808
+    last_write_checksum: sha1:58f791b50b893c2839ffe1a5325db1f14befcd43
+    pristine_git_object: 984956a0ee0925fb922fd90aaba41e1e5d48dde1
   lib/kintsugi_sdk/models/ops/update_customer_v1_customers_customer_id_put_request.rb:
     id: b4fbb27babb6
-    last_write_checksum: sha1:4b9ded5b0993d5871cb2e3ebe3724beca53c8170
-    pristine_git_object: a75a392837fa6b0db729930da6f1723d19769d15
+    last_write_checksum: sha1:2bc7a360effbb449a9a7b69ffe2bbb4e54f4db13
+    pristine_git_object: ede9760158bee73509f319b0bcc16b109c0db24f
   lib/kintsugi_sdk/models/ops/update_customer_v1_customers_customer_id_put_request.rbi:
     id: a01d73507ad1
-    last_write_checksum: sha1:fa24e4be48158eda1ca6a0771aca870c55755c05
-    pristine_git_object: 73b6daf8c040ca336d36c19a09f0dc501e7461b2
+    last_write_checksum: sha1:56b3e22dfcad2bb6d984adc5e11b62eb92e2e77d
+    pristine_git_object: ce91e94fc35f7116c7f48c7213e04b2879c91f8c
+  lib/kintsugi_sdk/models/ops/update_product_v1_products_product_id_put_product.rb:
+    id: a0b7be05b468
+    last_write_checksum: sha1:a2197ef43e82ebba5073c6a2f27f23b334ef76d0
+    pristine_git_object: 0e25380631cb439dbf8313455c7670d7454f513d
+  lib/kintsugi_sdk/models/ops/update_product_v1_products_product_id_put_product.rbi:
+    id: da6e77484d7d
+    last_write_checksum: sha1:f52afa96c879ff856c83519de4eaa15f99ecac92
+    pristine_git_object: ec7ac97a83ed22060ffd987b1466cd8d5f67e072
   lib/kintsugi_sdk/models/ops/update_product_v1_products_product_id_put_request.rb:
     id: 67221f955c05
-    last_write_checksum: sha1:0f06062c85148ab9ef333a6af80fca1eafe0516e
-    pristine_git_object: 1f91f470b62b9d56f3a29b605207f2e606c00fe5
+    last_write_checksum: sha1:829af4bb5f63154553cfecc0f73bea643558cf80
+    pristine_git_object: 36213d9d6a61f0444044b682ac73236aed6654d5
   lib/kintsugi_sdk/models/ops/update_product_v1_products_product_id_put_request.rbi:
     id: 1c2167f58236
-    last_write_checksum: sha1:85a8aef07bc50953afed526c1222c9885438289f
-    pristine_git_object: 0a4aa6d35262d584f45e323d25cde9ff89f0788f
+    last_write_checksum: sha1:22f821552173a70967513bbcee71bd9c88e4a979
+    pristine_git_object: 86f36d02e7f8c5d16d6aaa260eecf8b4e96ab1a9
   lib/kintsugi_sdk/models/ops/update_transaction_v1_transactions_transaction_id_put_request.rb:
     id: 0469c485fc3f
-    last_write_checksum: sha1:812826d64678a5d9458565e9f8cff11eedfbbc98
-    pristine_git_object: 60f938563d09d965ad9df1d896514e036389351f
+    last_write_checksum: sha1:af5cb0c4cf3b64dfc9d09ec60cb149bb6cea0e72
+    pristine_git_object: 44ac87460026ff902879b408b11c6a3512d576f5
   lib/kintsugi_sdk/models/ops/update_transaction_v1_transactions_transaction_id_put_request.rbi:
     id: 1e20fb448b8b
-    last_write_checksum: sha1:934fca95746786c855a89dc9857e45e4e97072ff
-    pristine_git_object: ec5346abfe1b0cd1f2978c606192fed1f4974159
+    last_write_checksum: sha1:ece7202d54c50d956fe138a586c8887b004fab7d
+    pristine_git_object: 74a2f833a9d907643e30d03738ece80def5520dd
   lib/kintsugi_sdk/models/ops/uploadexemptioncert_request.rb:
     id: f82ad8e9ab42
-    last_write_checksum: sha1:2ccb15ac83dfe329243a348ca54f977b73362fd0
-    pristine_git_object: 078a793164ba10b08fbdde913a7bff00ac947e2a
+    last_write_checksum: sha1:55b4d1be1357924794c7c174804511060c0af9cb
+    pristine_git_object: d1ae4b543d5236ccf9471019da32e92ba8ba4cbd
   lib/kintsugi_sdk/models/ops/uploadexemptioncert_request.rbi:
     id: a195fb07f272
-    last_write_checksum: sha1:928083032a4507510d7a51b453b23bd377dd7012
-    pristine_git_object: 355bd89c1ec1ae8d670e885a36a3da9f8542fc1f
+    last_write_checksum: sha1:68fc1a9619b1350fe04dc53a0429b2369b6d5c0b
+    pristine_git_object: 357d3327e4252e283077e9abcb796d3d916aa83c
   lib/kintsugi_sdk/models/shared.rb:
     id: e588065b6e0f
-    last_write_checksum: sha1:02f59aa04d7c4af35b59f27f642f8339db2c110d
-    pristine_git_object: 8931e9fe157309b9d9f56842107aceb39f75cc60
+    last_write_checksum: sha1:5213e37cc913d6c4235433aa7c083a3f54deea0b
+    pristine_git_object: 7366d54b7ee7a64093a12eff241e86d7ae6956a8
   lib/kintsugi_sdk/models/shared/addressbase.rb:
     id: 77ea1766c61f
-    last_write_checksum: sha1:785feb15400032ea828630ccf52db9a54e232a0b
-    pristine_git_object: 7a30b16e7276fabb044fa5161436b36523e06a4f
+    last_write_checksum: sha1:9c3b894d8e4a8e8ab6e901e4f6af6fae5a89ec14
+    pristine_git_object: 81e80f72173bc259cf142ab8e34bda5ab9643aac
   lib/kintsugi_sdk/models/shared/addressbase.rbi:
     id: 4d1a1a062938
     last_write_checksum: sha1:3c1988f7d21518f2a3b31c9d059eea45d33d98dc
     pristine_git_object: 5f7bc50133518fa3cddf31ecfb2346fcf91e910a
   lib/kintsugi_sdk/models/shared/addresses.rb:
     id: ba6922c50c83
-    last_write_checksum: sha1:69fa1211da99c202f0800fe39a62d9f11847e462
-    pristine_git_object: 7d916dc103d974286415058fecea57a73ed6fdc1
+    last_write_checksum: sha1:322a83e3b6b47fec3024bc9bb6a648dcb52a5436
+    pristine_git_object: 2a96f7cb3962465c6722c46065d7875bd0a0bddd
   lib/kintsugi_sdk/models/shared/addresses.rbi:
     id: d9f0720e29af
-    last_write_checksum: sha1:7a4c494b152e496730befc0932d8bd54475cea51
-    pristine_git_object: 107d6c878719bbc149124cbe85cd53510d616b14
+    last_write_checksum: sha1:7584b8b22675b81b213c50b076b9e4d1f020bb71
+    pristine_git_object: e01aa672780fac3b3c914fdd8f7e1712b41c7692
   lib/kintsugi_sdk/models/shared/addressresponsedata.rb:
     id: 1ac91d514d7c
     last_write_checksum: sha1:b047077f80f411d9da411fe47458e13481633ff0
@@ -898,6 +1280,14 @@ trackedFiles:
     id: 51bd8dcde529
     last_write_checksum: sha1:5d827dbaf6481e379ad4399e7471e200cfd55a54
     pristine_git_object: ba69f3201c856f5f435d376aa14f1d6105c11611
+  lib/kintsugi_sdk/models/shared/amount.rb:
+    id: dd87775b868d
+    last_write_checksum: sha1:aa09f0abe0cccf245a5a422638b3966d304e4bbb
+    pristine_git_object: 968fc4c9f9a7c102d814f9b87b08afe84473d97d
+  lib/kintsugi_sdk/models/shared/amount.rbi:
+    id: b580df07d522
+    last_write_checksum: sha1:f7dd2a9e2d57f0b1e3efe683dd92af4ee838577e
+    pristine_git_object: 8fc594cef54509c5b06dcfc8f79bc1ce52f6b81f
   lib/kintsugi_sdk/models/shared/appliedto.rb:
     id: e4a72b2256a7
     last_write_checksum: sha1:d2faa3efaf9168b099498175928bacddabab128b
@@ -932,12 +1322,12 @@ trackedFiles:
     pristine_git_object: c68ad0b0394d9ebbf3847d26d40476fda80c9208
   lib/kintsugi_sdk/models/shared/backend_src_exemptions_models_exemptionread.rb:
     id: 124d5c675da2
-    last_write_checksum: sha1:f18b1aad02f194d5c590c9ec2ea546d4391f4dac
-    pristine_git_object: 46dc8c929bceecf876d025e18d6e12bb61de7774
+    last_write_checksum: sha1:fcb038afeadd16b536b9a97e50b0e6a6db611c3b
+    pristine_git_object: d409cc1b5ef69900e7f10e6455d801ad284d8d93
   lib/kintsugi_sdk/models/shared/backend_src_exemptions_models_exemptionread.rbi:
     id: befde5e62cdf
-    last_write_checksum: sha1:5f40e7338a894743eb022b1152634f8a8b889237
-    pristine_git_object: 2b45f5603ff825654c7f9f57930fd0ab0ee4aea1
+    last_write_checksum: sha1:fb13a745244d1c39f9bdb50b8ef701652d9e90b6
+    pristine_git_object: a938bcc0e354d07fe13d4d7a717a08230bcbb324
   lib/kintsugi_sdk/models/shared/backend_src_exemptions_responses_validationerroritem.rb:
     id: cecb7e297bd5
     last_write_checksum: sha1:83840dc06147c38602b47264b7a4099f0b3d192e
@@ -948,20 +1338,20 @@ trackedFiles:
     pristine_git_object: 59429fb91b2c813911b6a1ee6a661a059fd97329
   lib/kintsugi_sdk/models/shared/backend_src_exemptions_serializers_exemptionread.rb:
     id: b8c54504867c
-    last_write_checksum: sha1:a110d85b041b4b2bd501915da9ea5ada027ca527
-    pristine_git_object: 3891d64a1134411d97fde7739ddea1dbfc83a49f
+    last_write_checksum: sha1:2b96b5367fd8c947895cca7b232dd96ee6202ee8
+    pristine_git_object: cb3662525987690e1485eb5b3da123cc4733b4a0
   lib/kintsugi_sdk/models/shared/backend_src_exemptions_serializers_exemptionread.rbi:
     id: ba0880331a2e
-    last_write_checksum: sha1:4d6d6bf658ccf4904bae51c7f1c1dc1478312c6f
-    pristine_git_object: 2cb3e91453f890a673f09aedaa03ef615c2d01ea
-  lib/kintsugi_sdk/models/shared/backend_src_products_responses_validationerroritem.rb:
-    id: 52c1c0e2043d
-    last_write_checksum: sha1:550ecaa93171ab6ec3953845550f920d2b531ad0
-    pristine_git_object: 654f36053d0ed5cff2db6d2d0a1273338d70c937
-  lib/kintsugi_sdk/models/shared/backend_src_products_responses_validationerroritem.rbi:
-    id: c17c7440b07b
-    last_write_checksum: sha1:c634f933ce0d15b0b3e8989e29e7261e1a681d2b
-    pristine_git_object: 002a435d252f9daa3c5e7979eeff3494770702ae
+    last_write_checksum: sha1:a73db86d84047d1e5717398d53e6744cb4c0e165
+    pristine_git_object: a7eeca99a361445b58552f56f57c45f1641a2a5d
+  lib/kintsugi_sdk/models/shared/backend_src_products_schemas_responses_validationerroritem.rb:
+    id: fd3f4cf63bfc
+    last_write_checksum: sha1:9f571836ae49e4934be0ae39973a2b29022604be
+    pristine_git_object: d2adee70bd9478e4d5c7e01df9af28bdea1d9896
+  lib/kintsugi_sdk/models/shared/backend_src_products_schemas_responses_validationerroritem.rbi:
+    id: ca79641f3e24
+    last_write_checksum: sha1:2e7d10d60f1a2c2c57f2b50ad62d6f92e7de9fa7
+    pristine_git_object: f57365469e2fde6ac7a4203b68a41ed23b5b89d9
   lib/kintsugi_sdk/models/shared/backend_src_tax_estimation_responses_validationerroritem.rb:
     id: 471816ad4e7d
     last_write_checksum: sha1:043c778c687bcaa3b9d6ec98103fade66c189a90
@@ -980,12 +1370,108 @@ trackedFiles:
     pristine_git_object: 35dcee49ae443cd87293443adfd1726719900b89
   lib/kintsugi_sdk/models/shared/body_upload_exemption_certificate_v1_exemptions_exemption_id_attachments_post.rb:
     id: 1e1e672a7342
-    last_write_checksum: sha1:f0bbcd7f2254b6094aa2d6c5b8cdb66d91b80b40
-    pristine_git_object: 7cfe1b1994b25cd9f4e4071c37e4c781dbc25066
+    last_write_checksum: sha1:71fb1b1a32944ed4ac424376d560947149d8b06e
+    pristine_git_object: 63bab7faaf05dd88050633e653e3ad76d44ee905
   lib/kintsugi_sdk/models/shared/body_upload_exemption_certificate_v1_exemptions_exemption_id_attachments_post.rbi:
     id: 5a300df4a960
     last_write_checksum: sha1:ce2da9602c8741a8cae984805e68e80dd9dab390
     pristine_git_object: fc85af5c94c0f3a63aa59cb47f9facb935216738
+  lib/kintsugi_sdk/models/shared/context.rb:
+    id: a9437bf7228b
+    last_write_checksum: sha1:9a4ff210a6fc6f998ae7dde4480110780c4189dd
+    pristine_git_object: fdf6c9c1aa1722f664a273d0db2a79cdcdb20fec
+  lib/kintsugi_sdk/models/shared/context.rbi:
+    id: 070e0d63a91b
+    last_write_checksum: sha1:81318fd471802da5068711c236b01ca6a3cd18ff
+    pristine_git_object: b4d1df6dbf3fcd91d2d82d19cf93390e4679c720
+  lib/kintsugi_sdk/models/shared/conversion_rate.rb:
+    id: f6165c887b28
+    last_write_checksum: sha1:bd9ee20a8bc3f1b8c1ad4379d2300dc186e0873b
+    pristine_git_object: 448ab51703792d8e378fec290a6efa0361b606fc
+  lib/kintsugi_sdk/models/shared/conversion_rate.rbi:
+    id: 2c17d79387be
+    last_write_checksum: sha1:319d8821686c4ff8f29a7c57b1fd63b4f2985964
+    pristine_git_object: 62184b97525b9846b13413c48c4cd8be5bdc7961
+  lib/kintsugi_sdk/models/shared/converted_amount.rb:
+    id: 3e7615e1397d
+    last_write_checksum: sha1:6df7754de269e7034d4172bddf5cd89884545712
+    pristine_git_object: 0cfb9a24db864771e53de7d02b461a801cbe02b7
+  lib/kintsugi_sdk/models/shared/converted_amount.rbi:
+    id: b775e995e5e6
+    last_write_checksum: sha1:ac48007d32b4e6d0959877e48cf28a4acf39f38c
+    pristine_git_object: debe2d193acfa3d7152c9d5a326ea23438377ca7
+  lib/kintsugi_sdk/models/shared/converted_subtotal.rb:
+    id: cf1eba17600b
+    last_write_checksum: sha1:eb915bc6bf4a3d22c7c02495568b7c3fb2f2948c
+    pristine_git_object: 3e59178be10ccc24075de33eeb02c4d41913f139
+  lib/kintsugi_sdk/models/shared/converted_subtotal.rbi:
+    id: d357b0f81e88
+    last_write_checksum: sha1:d55c46bf47a5bbc7b0ce0d296ff1e5db2581f965
+    pristine_git_object: aa96a8777c6ba977aec42e9857bfb80e112a30fe
+  lib/kintsugi_sdk/models/shared/converted_tax_amount_calculated.rb:
+    id: dcea4658339a
+    last_write_checksum: sha1:4fbed6caa81bbea46b51a6756684fd53a5e3ff90
+    pristine_git_object: 0ce3e3efdd48cead691a9de708973cf3ec2a7637
+  lib/kintsugi_sdk/models/shared/converted_tax_amount_calculated.rbi:
+    id: 2372eee8815f
+    last_write_checksum: sha1:21dc331dd06b004f7d94261524d1744414708fbb
+    pristine_git_object: eb4cc5914420d5d3ae6b09c2a4f63abdfe74fdbe
+  lib/kintsugi_sdk/models/shared/converted_tax_amount_imported.rb:
+    id: 69bc994eda5f
+    last_write_checksum: sha1:31317eb986bd6e6729dfd1ab3a619e653ef60564
+    pristine_git_object: 420516efc7795e2435a5b4f2425be6580c33a729
+  lib/kintsugi_sdk/models/shared/converted_tax_amount_imported.rbi:
+    id: 12d93c0811d6
+    last_write_checksum: sha1:b054177bd9d8cf5e66d7ca20c106ae587eeb69a8
+    pristine_git_object: 438d869e96b91a7105ee037bc6fcc62c83060c16
+  lib/kintsugi_sdk/models/shared/converted_taxable_amount.rb:
+    id: "672691900639"
+    last_write_checksum: sha1:c63e188fc3c6d7f2e47c9ee1e68c09371eb63dbc
+    pristine_git_object: ea4381518352478a2bb9c5be41b21ce12d06a44c
+  lib/kintsugi_sdk/models/shared/converted_taxable_amount.rbi:
+    id: 8b3fe7f694b7
+    last_write_checksum: sha1:66e7b5714604da24d0f845998c732b41d09574b8
+    pristine_git_object: 61d1b5d93159da6d348a708a8872b8f912da89d9
+  lib/kintsugi_sdk/models/shared/converted_total_amount.rb:
+    id: 4a5394f28abb
+    last_write_checksum: sha1:7e077d4c22011da2b52b3af17a80f5af68258df9
+    pristine_git_object: b48541138c99ed78b4c9cd80c30ac71c7a8fe776
+  lib/kintsugi_sdk/models/shared/converted_total_amount.rbi:
+    id: cd80b638bc8b
+    last_write_checksum: sha1:db8d54dd09b8ccfb90d659df10fa92523f807747
+    pristine_git_object: eca9888b65579afaf84940d4931bfb72cdae10ae
+  lib/kintsugi_sdk/models/shared/converted_total_discount.rb:
+    id: a58d26ef09fd
+    last_write_checksum: sha1:b9c9bcaa093155a419f4189786cb62acec4b43c5
+    pristine_git_object: 1c356f5c578d080ff808efbee9108577503e14fc
+  lib/kintsugi_sdk/models/shared/converted_total_discount.rbi:
+    id: fda8b2b6a4ef
+    last_write_checksum: sha1:64b96173a2132b347329d0f5650f5da26c170a4b
+    pristine_git_object: bf73356c0f5d86ed89b77be82eb3fb1bb6abbbcc
+  lib/kintsugi_sdk/models/shared/converted_total_tax_amount_calculated.rb:
+    id: d23a167af7a1
+    last_write_checksum: sha1:8dfee1aac9ae692cff4341b4ae1a31ad3f810daa
+    pristine_git_object: aad793fdac427d5aa78cddb4c93102946c88f0c8
+  lib/kintsugi_sdk/models/shared/converted_total_tax_amount_calculated.rbi:
+    id: 11fa3d1a163b
+    last_write_checksum: sha1:5ad549143267614c1c1e361080c6b205f5a27c56
+    pristine_git_object: 47d954fa5ed74c43ae579f8de4f062d8f6ff4a14
+  lib/kintsugi_sdk/models/shared/converted_total_tax_amount_imported.rb:
+    id: db8f10aeb3b3
+    last_write_checksum: sha1:60aa3d0b02df42aa82de4157978c9fd8ed5e77c9
+    pristine_git_object: dbe07c21e3a36dba53b36c104edbc8e3ff364678
+  lib/kintsugi_sdk/models/shared/converted_total_tax_amount_imported.rbi:
+    id: 90574b01bcd3
+    last_write_checksum: sha1:7eae1a281e9b5b77869f0041a2d3feeaeaac9ef3
+    pristine_git_object: 2c492aa48313901503dd9596d4f893c4ccf19b34
+  lib/kintsugi_sdk/models/shared/converted_total_tax_liability_amount.rb:
+    id: aa2ab6c97b6d
+    last_write_checksum: sha1:bcbf7c855f93251f69a97268452d2f1b31d87845
+    pristine_git_object: a909231603612795f432776a773b3d705d3497d0
+  lib/kintsugi_sdk/models/shared/converted_total_tax_liability_amount.rbi:
+    id: 3db14ad72514
+    last_write_checksum: sha1:6298f57ec2813a34c5ba690781741ef9691f736f
+    pristine_git_object: 4581910a9a7a3c28f71bf23faf3ce33f2c584913
   lib/kintsugi_sdk/models/shared/countrycodeenum.rb:
     id: a83a8bc47f17
     last_write_checksum: sha1:0cf9b6fab95725a11f85d62fc2c13b443b4d41cf
@@ -1002,46 +1488,54 @@ trackedFiles:
     id: 2e0067ed30d7
     last_write_checksum: sha1:e821854c953c1fac0f7e50609919047370a5d346
     pristine_git_object: f124d654c294dad5acf88f43bf60a413d7c34307
+  lib/kintsugi_sdk/models/shared/customer.rb:
+    id: 97d136d97677
+    last_write_checksum: sha1:7c757a60025149817f6b9730f0c30c9ec3e634ad
+    pristine_git_object: 7905cf0c1008729b25f7fbaeeb7c991f25e6e1b6
+  lib/kintsugi_sdk/models/shared/customer.rbi:
+    id: 8468a7a63505
+    last_write_checksum: sha1:6c9b6c9dc27e486c2595b77bc06a008353d51ab6
+    pristine_git_object: b824465a2cf2a6e567b0f5835d91862bfd64daf3
   lib/kintsugi_sdk/models/shared/customerbase.rb:
     id: a47854bb4fd9
-    last_write_checksum: sha1:a05732bcbce597b46af20525032959b20503bbb3
-    pristine_git_object: 09211818ac62d9c4373821f06a89afa0bee4d882
+    last_write_checksum: sha1:a80315442d5d617cc2f4f23dbd0cfec22579e334
+    pristine_git_object: e88927ba832fb094571369926a557c49a22d77d8
   lib/kintsugi_sdk/models/shared/customerbase.rbi:
     id: 26c28e2e3df2
-    last_write_checksum: sha1:87f064333182f425d63cde616033b851865e6741
-    pristine_git_object: 91277c68e858fb59eadc0df5d8e77c5f13cc1e03
+    last_write_checksum: sha1:7ced93750cd06b5e0e4a9e86cd7eb2b30edcf3a6
+    pristine_git_object: d1dc5ea7bf79054fc87f70804865484aa30d67f0
   lib/kintsugi_sdk/models/shared/customerbasebase.rb:
     id: 3cdd99531e19
-    last_write_checksum: sha1:3daeb153fc7cb2e7977c2431f5466eef718a4be7
-    pristine_git_object: 42162cba021279ccdcad8d5af1bc89874ac2ab8e
+    last_write_checksum: sha1:7f9df0ad867a01aa234f76b5cb58bcceae8e895e
+    pristine_git_object: 470e167c6a7246cb25599d97420e119778923575
   lib/kintsugi_sdk/models/shared/customerbasebase.rbi:
     id: 96fd972849ee
-    last_write_checksum: sha1:b9a112ed0f4cb2fcf9fe97a9c06e61bc6d23f8a1
-    pristine_git_object: 490f8f8cefd498d876a1ff86f8f264c5930dd5ce
+    last_write_checksum: sha1:ad6fa3572db6e26cc5aadc56051f116031618a97
+    pristine_git_object: 0f6fdbcc638b735e79efd1a936e4fc1be44bc026
   lib/kintsugi_sdk/models/shared/customerbasepublic.rb:
     id: 10db9955a942
-    last_write_checksum: sha1:090f2407a07dd7e6268862ce287e09a299eb236f
-    pristine_git_object: e6a74927f3a662a59bf70b4c771a59f418effd7a
+    last_write_checksum: sha1:b360c24f6ab6770624aa451bbcb9c96fcea3c5a4
+    pristine_git_object: 4c020820324c397fed2f1dfcb3f896f7fde43efc
   lib/kintsugi_sdk/models/shared/customerbasepublic.rbi:
     id: 0fb80c8b7636
-    last_write_checksum: sha1:aae7e7ebab62a3eb4f4b7ae04a302e2ad0b14d8c
-    pristine_git_object: 9f653113341e471f9bc46b2738e5ee00b7769c30
+    last_write_checksum: sha1:59245720a178f1dc491612610e2c396e0920961c
+    pristine_git_object: ad478c021e3a84692a129fcb7ba8e35d4e9ccd39
   lib/kintsugi_sdk/models/shared/customercreate.rb:
     id: e89211c3d803
-    last_write_checksum: sha1:752378f8bee0506ba3c0938377ab6caa30d9fdd9
-    pristine_git_object: f8721be977b6e2868c453e99dbb511f9755aee1e
+    last_write_checksum: sha1:c2eb543902d50279a6dac4ec043b779669466227
+    pristine_git_object: 71899396b744375e0d7b91b761edcb65ebded29c
   lib/kintsugi_sdk/models/shared/customercreate.rbi:
     id: ab8fc57e58e8
-    last_write_checksum: sha1:0ada7f5c4fdf56e8a04975dbeeb6cc48b6fcfefa
-    pristine_git_object: bf58381f2769387210fd6bb3608adad3277b1f35
+    last_write_checksum: sha1:9c47c28cf94c34ee344b4b6ea0c146c805baf60f
+    pristine_git_object: ee19134cd35b281ee97a1bf5be5c50ebc2e65bf8
   lib/kintsugi_sdk/models/shared/customerread.rb:
     id: 02698329c042
-    last_write_checksum: sha1:ca098eb4c70e32dc605e93e3d482174fdfbd4308
-    pristine_git_object: a7864259e184e620ff122771f3cb1f495d2413f6
+    last_write_checksum: sha1:1d4b9034442dfd6049b761e90af5ee3dc6eb9d78
+    pristine_git_object: 8ee14000c828319a85c3cc67fe14b8db97b0896a
   lib/kintsugi_sdk/models/shared/customerread.rbi:
     id: 210a1df534b7
-    last_write_checksum: sha1:099d879b29cd25eb2ce755994e3a9f3fecb4c318
-    pristine_git_object: d903a3f05783c9f30950d67a2d0326c5c364fc2c
+    last_write_checksum: sha1:d9ff6894fe17bc42f44023add2a3d904f66fb5e9
+    pristine_git_object: e8b6f59fcae7c86072aadcee2f095b79e697e20e
   lib/kintsugi_sdk/models/shared/customertaxregistrationread.rb:
     id: ca3f4da4e4f9
     last_write_checksum: sha1:21572ff97a923c93fad9243c022f1f4549713a07
@@ -1060,44 +1554,76 @@ trackedFiles:
     pristine_git_object: 4c9f65fd5ffb69cd3b9ff042393b082bc0d7a7de
   lib/kintsugi_sdk/models/shared/customerupdate.rb:
     id: ae0b4f0f8840
-    last_write_checksum: sha1:8aef36053fece42dc73f7937194ebbb9bc16062a
-    pristine_git_object: d40153d055764ac4fecf95f1844335fa366cdfe1
+    last_write_checksum: sha1:9b2f548b015342fa92d44ea28484a95aaad9ae5f
+    pristine_git_object: 472541c75b1987d40ddd0a2b7ed258ad1c357c58
   lib/kintsugi_sdk/models/shared/customerupdate.rbi:
     id: df6210128025
-    last_write_checksum: sha1:6aece0e4cfe3aff96237ffdd72a61b676b4909c7
-    pristine_git_object: 8fe67b54e10b0c7f5bc283f9bf1f6bacf68e432f
+    last_write_checksum: sha1:cf3cc61ac098c20d9a9bff6b03cf4416fba068cb
+    pristine_git_object: 4623da0983a4e18db207090b74e74cf3a4c26bbf
+  lib/kintsugi_sdk/models/shared/discount_amount.rb:
+    id: e4117aaf54d3
+    last_write_checksum: sha1:0fd4df1722d62c40691df18c1792e696a16e9f61
+    pristine_git_object: c4a6de4e4967726cd7bc71057a150dd68ad57a19
+  lib/kintsugi_sdk/models/shared/discount_amount.rbi:
+    id: 0e8f7499dd94
+    last_write_checksum: sha1:9cba7833e8c28a8e91ee386d9a649fca65d942c1
+    pristine_git_object: 3733074d23dc8c9e7bbb0d491d2a6e2f3a4c4dcc
   lib/kintsugi_sdk/models/shared/discountbuilder.rb:
     id: 2cfedc80c9a7
-    last_write_checksum: sha1:cdeb67d0118fa935a888381bff6715ada96654f7
-    pristine_git_object: 78b70f5e884d42111544b7ccd6562599ea336112
+    last_write_checksum: sha1:7545edd603a6f8034d7dda59b9ee4b439748b425
+    pristine_git_object: 879cd3911d4dd0f58bf7585568b0056791b25e44
   lib/kintsugi_sdk/models/shared/discountbuilder.rbi:
     id: bcbf0c0936b6
-    last_write_checksum: sha1:7bfbd7cad2a7edd8a36d21ad5cdd16e6ea0060c3
-    pristine_git_object: 5299fc661599b39af109b9bf2ac14cb2fc099074
+    last_write_checksum: sha1:ccb02b037126c62d46b0a1eb0230f11bda315ae4
+    pristine_git_object: 57349938a9e378da3efdfcb8690081c47153570d
+  lib/kintsugi_sdk/models/shared/disregardedtypeenum.rb:
+    id: a1e4da2d3b86
+    last_write_checksum: sha1:e748be3bbb7f7d037662b9ead7a36eabf2cd533d
+    pristine_git_object: b02d572d054dac5b970c57fbe6e2d8bb00ed7fe3
+  lib/kintsugi_sdk/models/shared/disregardedtypeenum.rbi:
+    id: "529362036577"
+    last_write_checksum: sha1:5d4b14b95380765a82143af4e4c83eeef0a50f04
+    pristine_git_object: 6b8b05a91dc2b36e04487f773339eca822a488d8
+  lib/kintsugi_sdk/models/shared/documenttypeenum.rb:
+    id: 5c76ce414e18
+    last_write_checksum: sha1:6a02fb73696e7536749c1ae999d6701e7eca4b9f
+    pristine_git_object: 8e22009747901673da9f33f346281bb058ec3344
+  lib/kintsugi_sdk/models/shared/documenttypeenum.rbi:
+    id: 40225ffbdfba
+    last_write_checksum: sha1:299ef9d1de902dd85b074ced84e82c7200730e26
+    pristine_git_object: 2f60e17c29cfe4d6b8cc964caf1ef280d6858fb4
   lib/kintsugi_sdk/models/shared/exemption.rb:
     id: 6a406296368e
-    last_write_checksum: sha1:aecba3fb9174ce4f15fbb43aea828dc5083b982b
-    pristine_git_object: 23cc3ff03e62b4294e37f25492664c7b6d05eae3
+    last_write_checksum: sha1:a063741c0efbb5cd10cbc1a8ec0aa0a332a64a32
+    pristine_git_object: 59461720425f9b51746de90a81e36121a269195e
   lib/kintsugi_sdk/models/shared/exemption.rbi:
     id: 5ac16646b936
-    last_write_checksum: sha1:2444a2c9fdd5e7060e1c4dc1dbda6a5ee859983d
-    pristine_git_object: 0f660786473149c6568a787e7f632cdcbe7e958f
+    last_write_checksum: sha1:bcf4e0f82641e2cb8779087b7efbcdee7e6de9aa
+    pristine_git_object: 2b19c51031e34aa3ce879bd314e7509da3346f95
   lib/kintsugi_sdk/models/shared/exemptioncreate.rb:
     id: a6d5cd5377f2
-    last_write_checksum: sha1:fbfdbf792819ecef5b4b979c7d289fdc25c02dc3
-    pristine_git_object: 5bf1f3cac07f161b69d8afe734e9e43dd9770116
+    last_write_checksum: sha1:1481f22259910c4e0a4345ea9fd06a8818e4592a
+    pristine_git_object: cc09e187a2aee7a8750d2be5839b1688e82f3c40
   lib/kintsugi_sdk/models/shared/exemptioncreate.rbi:
     id: e8aedbe70955
     last_write_checksum: sha1:7456fecb6676f1ec8532eeabde1ff4583729d9d9
     pristine_git_object: c64498bff2bb3f03b5f5e1483b8ea201b7b80856
   lib/kintsugi_sdk/models/shared/exemptionrequired.rb:
     id: b8d684813548
-    last_write_checksum: sha1:49725f7e584a6e6569a5bb83b4d27f9f848a02dd
-    pristine_git_object: ee6cedc2feed37cd14852c6373f073716db24cec
+    last_write_checksum: sha1:7badff64799acf45ddb64ed0ea3b333028e61518
+    pristine_git_object: 91919f86af733f79fa6a45871f05fef6b54b8f8d
   lib/kintsugi_sdk/models/shared/exemptionrequired.rbi:
     id: f5fe95c6ef8d
-    last_write_checksum: sha1:fbec3bba65b20939dbb59a11fa26f0501370a7d9
-    pristine_git_object: f0dbcc36ecdedcdca0b1ac3392ca77f9101f95f2
+    last_write_checksum: sha1:9ff59abc6f3f5e3b73888bb0a2119d93a6c59051
+    pristine_git_object: ad074bd21140f035b6abd19bde83634a858a3773
+  lib/kintsugi_sdk/models/shared/exemptionsourceenum.rb:
+    id: 26f159f10d94
+    last_write_checksum: sha1:9980a6e0e37e2cc4cf662bc7c8f2b9e23e99170c
+    pristine_git_object: 7a535f73cbc2b190eaf517cd4b37d35bdfc85e28
+  lib/kintsugi_sdk/models/shared/exemptionsourceenum.rbi:
+    id: 1df1ee37e3d9
+    last_write_checksum: sha1:7f9229ffacbe2a9d5a9a7511288965d4250b8339
+    pristine_git_object: e6434e8b9ac67b6b2885e8222230a46dee01a5bd
   lib/kintsugi_sdk/models/shared/exemptionstatus.rb:
     id: 97f2b4d7c458
     last_write_checksum: sha1:354a37b0e8c6ac1a243253a81685b84aa223d351
@@ -1108,8 +1634,8 @@ trackedFiles:
     pristine_git_object: 254ab6417c3fd509242661ff5656bfbb7769631a
   lib/kintsugi_sdk/models/shared/exemptiontype.rb:
     id: 1660138d2e7c
-    last_write_checksum: sha1:055912917c868a414ef7375d9c917ba3ab3512f7
-    pristine_git_object: 9c2bdc342033c8d465fbc90cf7c287b9cdc77c6f
+    last_write_checksum: sha1:b1aa3b367db75ecb704a2f89da0974209a01c37f
+    pristine_git_object: 233147f6c73c0a525e2e59b7bb8b76e5b600685a
   lib/kintsugi_sdk/models/shared/exemptiontype.rbi:
     id: 375feb22b457
     last_write_checksum: sha1:1fa2f42a0b9844801a3fdd1b44c31a2273db8a45
@@ -1122,14 +1648,6 @@ trackedFiles:
     id: dbab8c707e47
     last_write_checksum: sha1:25607994357514f9b01e78d49a1e31be7bafee69
     pristine_git_object: 1d817284602a01dced4bed0efe337fe59a952429
-  lib/kintsugi_sdk/models/shared/file.rb:
-    id: 87d517549a11
-    last_write_checksum: sha1:2b05ed18f2862f327d25e516977dd9934016f0b8
-    pristine_git_object: 142d7bcc5d83c87f8e5c669d7ba14759725e8b38
-  lib/kintsugi_sdk/models/shared/file.rbi:
-    id: c378e2d85288
-    last_write_checksum: sha1:65b596d4e8bc43604c56f6b1e44a195002bc4864
-    pristine_git_object: 2a8d0ff2b065e21cc34acbd6b5aeade429c6b146
   lib/kintsugi_sdk/models/shared/findthresholdcrossingtransactionstate.rb:
     id: 55d9beb0f841
     last_write_checksum: sha1:57eaebfaa84e5e7d08ac34a887b2e0e7826da62e
@@ -1146,14 +1664,22 @@ trackedFiles:
     id: 5ed9c8a9e804
     last_write_checksum: sha1:1ab1f778e56d4f53a7c2dec3f9b174304cde91fa
     pristine_git_object: 6578e9d51d4c56707a1e26500ed7dfc05196aadf
+  lib/kintsugi_sdk/models/shared/loc.rb:
+    id: d8e2907ef802
+    last_write_checksum: sha1:0b097461621072edd7fe5303522263f33c96e6cb
+    pristine_git_object: e7ecd4e59004d32d7074090e8c5903e02c3bb76c
+  lib/kintsugi_sdk/models/shared/loc.rbi:
+    id: 55e495ecabce
+    last_write_checksum: sha1:f1bb98ebffd1b0f65bad500a2673bd8d8871f20e
+    pristine_git_object: e6f9572261315bbb8c1196d9bbc2f8adf1c00321
   lib/kintsugi_sdk/models/shared/nexusresponse.rb:
     id: 13435de075c9
-    last_write_checksum: sha1:afcf1b69ab2a6b6843c9bd11a0bad7a9ac1b65da
-    pristine_git_object: 901982c1aec7201c18f71365dd33e316bb1ca523
+    last_write_checksum: sha1:6a16953a0dbe0ea12eddbe218f9d96654b152486
+    pristine_git_object: 1e540fd1501378c123ddbdc71f3cbb9faa59abaa
   lib/kintsugi_sdk/models/shared/nexusresponse.rbi:
     id: 13d34f65abe7
-    last_write_checksum: sha1:438a2179f544293900684ede25ded38bfd84750a
-    pristine_git_object: 11d2112a8f54670a7e369f8ff454462e693864a2
+    last_write_checksum: sha1:dd59aa0d2d03db713b8c0892b6eaffab315a943d
+    pristine_git_object: eda1c60e37dabcf1603785a1f2f92da01c808901
   lib/kintsugi_sdk/models/shared/nexusstateenum.rb:
     id: 7b61828600c1
     last_write_checksum: sha1:c8746be50785b1f3e745da80e5af7ac2b202c2af
@@ -1172,8 +1698,8 @@ trackedFiles:
     pristine_git_object: 39536598bd74ee8f35ff64d30e2348aa02ee36b2
   lib/kintsugi_sdk/models/shared/nexustypeenum.rb:
     id: cfbd8c6b73ba
-    last_write_checksum: sha1:ae15f6db8f5f94899b4dac4c13097fd3e42bfc8e
-    pristine_git_object: 9c8bd6800c80e342229c260e3991958ef85679e3
+    last_write_checksum: sha1:dd4ba58083954efa681348d665cc3af65c6fe671
+    pristine_git_object: aa24df768a6658a2dae0d7b40c0503d1c868f048
   lib/kintsugi_sdk/models/shared/nexustypeenum.rbi:
     id: a7679fab813c
     last_write_checksum: sha1:e2ccb07ab26419b9ae9d0b1c0bf0c5ebf1036ab5
@@ -1194,14 +1720,6 @@ trackedFiles:
     id: 71c83b772087
     last_write_checksum: sha1:986482ddf04546ce349db9e7348e062cff7e9d7d
     pristine_git_object: 3338c93e287713012a9c6c0c14d2acb07a04dddb
-  lib/kintsugi_sdk/models/shared/page_transactionestimateresponse_.rb:
-    id: ab87488a4212
-    last_write_checksum: sha1:91a5a7ae30c85055443d964a1625cecb217245ed
-    pristine_git_object: 13917739071b4b355ed475e634f8c9480190caa4
-  lib/kintsugi_sdk/models/shared/page_transactionestimateresponse_.rbi:
-    id: c5391981cd43
-    last_write_checksum: sha1:4550ceed336dbe84f46913aac046ef9d41755dfa
-    pristine_git_object: 77add249102fde8ea6d5a3478d5e5fee124db6f6
   lib/kintsugi_sdk/models/shared/page_transactionread_.rb:
     id: 8ee038a83eb6
     last_write_checksum: sha1:6ff11415a63423d2b7d92f1f2cc904eb1e60a566
@@ -1212,52 +1730,76 @@ trackedFiles:
     pristine_git_object: 8d27ffc2b9c0bf81393eee759b24cf604baa9240
   lib/kintsugi_sdk/models/shared/periodmodelenum.rb:
     id: c36eded0b61f
-    last_write_checksum: sha1:7958bbc7ab4f942eb32d09a846e6251a90246039
-    pristine_git_object: f5150b78e21189e98b9e826aebe1662a9992d606
+    last_write_checksum: sha1:727255ef28ec323d90776d37ec41c0cc866b5d7b
+    pristine_git_object: c41af92a440a56db94d973f3aff497c65cb5da52
   lib/kintsugi_sdk/models/shared/periodmodelenum.rbi:
     id: 4288f731a583
     last_write_checksum: sha1:fffcbf71c112a3994e127a59cd564ffc59e2bb2e
     pristine_git_object: d6c01ee40d132a3d53d94fe6b397a8004b69476e
   lib/kintsugi_sdk/models/shared/processingstatusenum.rb:
     id: 13494d9a472a
-    last_write_checksum: sha1:bad16be17bee35df9f8bf8709979f8b7ef076f2a
-    pristine_git_object: 30f49c0cf8669384e410b7ceeffbf8d6b5a9f3bf
+    last_write_checksum: sha1:4055e4d2f1ec9d591030064456821ec99635a5e4
+    pristine_git_object: d11d2bacb0156cfaff4d8a22781a65523f3d6173
   lib/kintsugi_sdk/models/shared/processingstatusenum.rbi:
     id: a43cf4c5b236
     last_write_checksum: sha1:c46911417b433ecc58d1dc3f9805decfbe47c77b
     pristine_git_object: d869fd7eec0826302d0250120ad0133b284df469
   lib/kintsugi_sdk/models/shared/productread.rb:
     id: 885c2487037e
-    last_write_checksum: sha1:4c8c492e5a31b34c1df36d44e975ee35801db3d5
-    pristine_git_object: 0d927915ea82f50d71ba7f67a48e8bd1bfeff712
+    last_write_checksum: sha1:c2d51cac08f905201262eaf7448c04c28321a9e3
+    pristine_git_object: 7ea88d2675de3258a4892b6e75ad7e297419fe3b
   lib/kintsugi_sdk/models/shared/productread.rbi:
     id: acb23a99e1c8
-    last_write_checksum: sha1:adaf615fcbdf1fe7413294ef09c4fbc5588faffb
-    pristine_git_object: 8a45bd96ba8a4193153e484a9abf3e3c219375e1
+    last_write_checksum: sha1:2958b8e1d7b9930a5d81bca35dd439a6b4c281dc
+    pristine_git_object: 4034c6d4e0e7b70140792273969f1b04b4983106
   lib/kintsugi_sdk/models/shared/productstatusenum.rb:
     id: d402ad1e97bf
-    last_write_checksum: sha1:f7804103753a735dd0de71a15fd4345fb34ca663
-    pristine_git_object: 3dd39f00bf8529783324cdcc8f106a0600ceb673
+    last_write_checksum: sha1:62c2701e840b0b8ab2dc1b248208d36da96c4adc
+    pristine_git_object: b7815ffc63d7b3a4393e9bf1896d740e2d1a466e
   lib/kintsugi_sdk/models/shared/productstatusenum.rbi:
     id: 04f5cbf9cf35
     last_write_checksum: sha1:c21590cf43835f3da3fafe43cda079dec483bd48
     pristine_git_object: a21c008f122e82137530a3d45aa018f2eb089d7b
   lib/kintsugi_sdk/models/shared/productupdate.rb:
     id: 60b5b3502d62
-    last_write_checksum: sha1:3a8c392e1e56ebb78c08bda77a99a8e6c328578b
-    pristine_git_object: c29eea1288ad45e68d96ff600085692c0c789327
+    last_write_checksum: sha1:85effdf4c6db4e5cc23121790b6420e406a13c64
+    pristine_git_object: fa7c2a2dbaf2d28119dde655141c38fff5747f1f
   lib/kintsugi_sdk/models/shared/productupdate.rbi:
     id: c5fcc24b70e0
-    last_write_checksum: sha1:9ca45eab8ae964c3deddd5225db73b6da1654a55
-    pristine_git_object: ad073ddb1a93f7910c100f5e3b52c0778c25c53f
-  lib/kintsugi_sdk/models/shared/registration.rb:
-    id: 4930177029fd
-    last_write_checksum: sha1:190869bdc59c529c9f87f0b505f5ce2c61a3208b
-    pristine_git_object: 670241dc7471b4f56be8a41be800d2d946664b47
-  lib/kintsugi_sdk/models/shared/registration.rbi:
-    id: cab3fddcd8b1
-    last_write_checksum: sha1:a1b98da9262d82ff0319f14acf3af88c3a234c97
-    pristine_git_object: 1d9fa2eadff9a8f96a7a3eba1efc40ec90d926fb
+    last_write_checksum: sha1:daf8acf5743f02065daccf21df5a2668ba0442e8
+    pristine_git_object: 1052c274062a4841dc74f44d12befc7a400d6d90
+  lib/kintsugi_sdk/models/shared/productupdatev2.rb:
+    id: 35e019cf4f08
+    last_write_checksum: sha1:f1f516d13d533bf67f863e5a46fbf69b35fb4f1e
+    pristine_git_object: 68f3392f59d44e0b2f200cc6b40969811de4562e
+  lib/kintsugi_sdk/models/shared/productupdatev2.rbi:
+    id: 20976bfd0823
+    last_write_checksum: sha1:69a7c621db2878f388f681110fc9d1229af53ecf
+    pristine_git_object: b7a0dfd50798959cad51c1c2c094fd244de29eb4
+  lib/kintsugi_sdk/models/shared/quantity.rb:
+    id: c5453def638e
+    last_write_checksum: sha1:0538ce655ea5579a81306f6d2e3acac51b7f562e
+    pristine_git_object: 5aa8c1ac2f44fecd243044d4bd0f71ff623ea0c6
+  lib/kintsugi_sdk/models/shared/quantity.rbi:
+    id: cdf04c53d73e
+    last_write_checksum: sha1:a552ced669c1fdb58acffc073f051102636e4674
+    pristine_git_object: ee10a65775d318335acf6a2b12e51db3b71618ef
+  lib/kintsugi_sdk/models/shared/quantity_of_the_product_.rb:
+    id: fdad00406f9e
+    last_write_checksum: sha1:ee5d3efc5a0e2303bbe2826a93c5862a9af95f75
+    pristine_git_object: 3a9ca10e51aff6bfde4138a7eb303c36ce645321
+  lib/kintsugi_sdk/models/shared/quantity_of_the_product_.rbi:
+    id: 8d6d250d60da
+    last_write_checksum: sha1:3c07d20b693603cada03e1c4efd058a7ab002bb3
+    pristine_git_object: fe583ea3a110cc5b7f6d6c2d530cbd8717ca08ba
+  lib/kintsugi_sdk/models/shared/rate.rb:
+    id: 6e6154caaa41
+    last_write_checksum: sha1:97804a497a99de2c8052010cd58cc1b17b5df113
+    pristine_git_object: cce93059114b748714ceab6b574b6d27d0be3d63
+  lib/kintsugi_sdk/models/shared/rate.rbi:
+    id: f91d377fe2c0
+    last_write_checksum: sha1:da1e998a05f67ec191e816f02b19cd9db2695c45
+    pristine_git_object: 3c055a696584c5defb9a7a67b73b120bf4e73c02
   lib/kintsugi_sdk/models/shared/registrationsregimeenum.rb:
     id: b421c281903a
     last_write_checksum: sha1:f117f7c0a769280083d10eba70c7c6c9b55ff0dd
@@ -1284,16 +1826,16 @@ trackedFiles:
     pristine_git_object: 9893563fa8f24f663ead9f28327e169787389d3e
   lib/kintsugi_sdk/models/shared/security.rb:
     id: cd54941178b1
-    last_write_checksum: sha1:9100a1367108def7d0a12aabb69a131286cf1d90
-    pristine_git_object: bc0ea20a32aaa1cb884a50d02c5064984822246f
+    last_write_checksum: sha1:34d5dceb69577819c142b1f45ee87a4604817168
+    pristine_git_object: 07214ef4a9f8d1b04fddd138bf903640e0c35660
   lib/kintsugi_sdk/models/shared/security.rbi:
     id: bab077972f30
-    last_write_checksum: sha1:4f17b985d7853ca2cca0408a9f146ac1d3152157
-    pristine_git_object: 6e606507e6fc3cefe05f96f1ab137d72fcb28a0d
+    last_write_checksum: sha1:71e5c15b15209f68d62fe47440e6d7ad4ddc1fa3
+    pristine_git_object: 93235836320f2d4b6dd43fb4bd84eabfc8031d72
   lib/kintsugi_sdk/models/shared/sourceenum.rb:
     id: d2d7aad36e99
-    last_write_checksum: sha1:f99ba1a2c6956c8c5aff7cf2d5610737c0c90db0
-    pristine_git_object: 1bd97d58b8cec6a1412db5c78a4ed9a155e9a103
+    last_write_checksum: sha1:709034ad01ad2564104b7e4c9cb5518d91c66a23
+    pristine_git_object: 895f79dea644c51f3e25b55290cdff49421ae8f2
   lib/kintsugi_sdk/models/shared/sourceenum.rbi:
     id: 0f0e4b39bc8b
     last_write_checksum: sha1:fe5f846b606c34464151f1a705f62ff9d7786018
@@ -1306,42 +1848,98 @@ trackedFiles:
     id: 3d2ed654c5d9
     last_write_checksum: sha1:391a478947cb7e775c660f4ff031b22e64b457f9
     pristine_git_object: 1af91db900c4d4961ad08878e8db60cb31f4ca64
+  lib/kintsugi_sdk/models/shared/tax_amount_calculated.rb:
+    id: ce6f7c4b3558
+    last_write_checksum: sha1:80aceca0943c4bdf049801537527029dbfa1fb73
+    pristine_git_object: d6ec939a98c262b562a7ccb1163161d0c32ee7c1
+  lib/kintsugi_sdk/models/shared/tax_amount_calculated.rbi:
+    id: 9dd4db7c1e8d
+    last_write_checksum: sha1:47bfb3f4d2918fc260ec679bc145730a5e41f990
+    pristine_git_object: f7397daa6fa6164af42d7070bbd41283a2421ad0
+  lib/kintsugi_sdk/models/shared/tax_amount_imported.rb:
+    id: 76b1d62fe5ce
+    last_write_checksum: sha1:773b1ee6cdd4ec2e9ee8cc5d55fef11c86c9a5db
+    pristine_git_object: d9f6deee12d0ea7e13880fa4762b99ba9139d1a2
+  lib/kintsugi_sdk/models/shared/tax_amount_imported.rbi:
+    id: 7b07dd314e92
+    last_write_checksum: sha1:38581eb95df5a666eb49631f12d08f0e340e4353
+    pristine_git_object: b3004c5d94e99325d403a13ec0d2277c38e9c4fa
+  lib/kintsugi_sdk/models/shared/tax_rate_calculated.rb:
+    id: d5a3925015b3
+    last_write_checksum: sha1:5d91ec5e415d9a18d54420516c1626bd64e79910
+    pristine_git_object: 2061140e96215635e5fc63c895cf42dae53df725
+  lib/kintsugi_sdk/models/shared/tax_rate_calculated.rbi:
+    id: 68d6313ee9db
+    last_write_checksum: sha1:39813200ef5c39401a5e4124911505fc8935e139
+    pristine_git_object: 1f4d8aa1bce29175e114de5b18f0144bddeede39
+  lib/kintsugi_sdk/models/shared/tax_rate_imported.rb:
+    id: ebe4812103a0
+    last_write_checksum: sha1:f9aa20ffd1a93e228947ad119e856020fb1b88c7
+    pristine_git_object: 797ba8ad92db0c0203819c47a2ae39c15a42156c
+  lib/kintsugi_sdk/models/shared/tax_rate_imported.rbi:
+    id: a30257038c44
+    last_write_checksum: sha1:919718574f7dcd8218d3f786ef38a1b846b056c8
+    pristine_git_object: 8c15c4967cf867ef9765a4d660320638d830923b
+  lib/kintsugi_sdk/models/shared/taxable_amount.rb:
+    id: b474f8b44be5
+    last_write_checksum: sha1:e6b9667620bbb3fbadec43e0fe2710896865af7d
+    pristine_git_object: a4b7894a68cb5da770fa2556b83eba88a45e337a
+  lib/kintsugi_sdk/models/shared/taxable_amount.rbi:
+    id: c933805a2105
+    last_write_checksum: sha1:2836cb7f7ee8241148f67322bc834ebd6fcff588
+    pristine_git_object: 8c744696cb6f29b9a1507fa19af58d304f66c120
   lib/kintsugi_sdk/models/shared/taxexemptionenum.rb:
     id: d3fa2dbaf50b
-    last_write_checksum: sha1:f87c2068a7876180bda964822cc102f5b2adace4
-    pristine_git_object: 83f271275ee5514a73d68cfd3fe927c21d58a97d
+    last_write_checksum: sha1:0e20932ab107729a7ae3c4356a258f5a13e44e66
+    pristine_git_object: e83a5c0712b5c83dabb9011a3fae94a851cc735d
   lib/kintsugi_sdk/models/shared/taxexemptionenum.rbi:
     id: dcbaa7577308
     last_write_checksum: sha1:e3d6746ff24118bcdece68458f314d456fbb8c3b
     pristine_git_object: 1873d3dea39799a3f5b00ef56dab1f460396a3cf
   lib/kintsugi_sdk/models/shared/taxitembuilder.rb:
     id: 255e7b1b1749
-    last_write_checksum: sha1:0e49960228a7af38b482aca375fba82b663dc882
-    pristine_git_object: ab98b142dd2e19f94b2d45558d19d803a469dd1f
+    last_write_checksum: sha1:1aebfb8fe0f845e9e40a4766a1033c89fa42ba71
+    pristine_git_object: 8d53f5c6083f2ac7dde0304f4a096fd4e796c7cc
   lib/kintsugi_sdk/models/shared/taxitembuilder.rbi:
     id: f0e427333baa
-    last_write_checksum: sha1:b900557202086fbefec501b6791ba47c52c26d1f
-    pristine_git_object: c36013527b50305541c0a6e2972e7616617151aa
+    last_write_checksum: sha1:efdf34618ac56821c33d1ae54d19f19bf201c222
+    pristine_git_object: 97456ef6b7b7df06090cbb67282f9012c79c9c20
+  lib/kintsugi_sdk/models/shared/taxitembuilder_amount.rb:
+    id: dc652518188d
+    last_write_checksum: sha1:bcbffa1f2b97c91e4f931d65cd02410b21d6ab6a
+    pristine_git_object: 8d515fbf7674451eb607719f28866b89aeb981aa
+  lib/kintsugi_sdk/models/shared/taxitembuilder_amount.rbi:
+    id: 2f7e9037e6ab
+    last_write_checksum: sha1:d265450718466f7c44b570d097115432fad59f6d
+    pristine_git_object: b91d784bba1a4ecd0a333cd5cbf22ec81cb09af7
+  lib/kintsugi_sdk/models/shared/taxitembuilder_converted_amount.rb:
+    id: a4f8420c9861
+    last_write_checksum: sha1:c06f453272e5f2047abefe7c65e037d2a90f91d5
+    pristine_git_object: 3add9dbefbd8005dbffb44e6531ffbdf5e8d4bb5
+  lib/kintsugi_sdk/models/shared/taxitembuilder_converted_amount.rbi:
+    id: 23320cc4a0d9
+    last_write_checksum: sha1:26f6568f06806737eb66670e3311f31d8eb176be
+    pristine_git_object: 3fad49798783d246a283f1e36c4c024d9898a171
   lib/kintsugi_sdk/models/shared/taxitemestimate.rb:
     id: c37f9c1c0187
-    last_write_checksum: sha1:76dcffac35094cb24ac2b8aa71aeeefbad2f5ea7
-    pristine_git_object: edf34520864cfde67beb32be65c782f03850b700
+    last_write_checksum: sha1:88167ac28af18701a67145aebeaaf6122faed26e
+    pristine_git_object: 6b86ffe224fe04ba7046e4bc10f18a4d406f0d5b
   lib/kintsugi_sdk/models/shared/taxitemestimate.rbi:
     id: 8c755c60e6e9
-    last_write_checksum: sha1:bd1011c7cb307275474bda6263b59245f7c1c9f3
-    pristine_git_object: adab19d823faee2733eb3b06dfd5c39c38054385
+    last_write_checksum: sha1:21046eacb0b6da32fe44529d2ed09fc405a33a74
+    pristine_git_object: 3a6b11ec33695a8ecd4b9d04adfd4d1a8f1749ed
   lib/kintsugi_sdk/models/shared/taxitemread.rb:
     id: 371fcbde684e
-    last_write_checksum: sha1:56a02ccfcd7d490fed1a40d8742d8be3756afbf1
-    pristine_git_object: 0562df36060e270421d7cd64b98d078f1927dfa1
+    last_write_checksum: sha1:ef888936976fa1509682a75a078f749f43765a30
+    pristine_git_object: e18ddd1d64640157ec8e716dc68ec0f5396a90dd
   lib/kintsugi_sdk/models/shared/taxitemread.rbi:
     id: c033e99516ea
-    last_write_checksum: sha1:bfe2cf2595e9a5bd236e2184ceff737a8b9ac33e
-    pristine_git_object: 40fb1d0e9ac34791ccf97613f71e563920651b0d
+    last_write_checksum: sha1:4bf755c6422dd7bf9e4e9b13f3e602c4fff69606
+    pristine_git_object: 95a0f09fee604c89ddb09aa3c47ed061430f1784
   lib/kintsugi_sdk/models/shared/taxitemreturnreasonenum.rb:
     id: 28c6562e1fd1
-    last_write_checksum: sha1:1f4e3087329e861b74ef61f6e787e4f48d1378c7
-    pristine_git_object: 6bdd78bd39d6cacb9e1f659481e02863d93e5fa9
+    last_write_checksum: sha1:d851c395c955ac1c23e1d488ba29b71e286f0394
+    pristine_git_object: 196bbdaae8f511583dddcbf43966db53b8dc45fb
   lib/kintsugi_sdk/models/shared/taxitemreturnreasonenum.rbi:
     id: 9e8fa308fd52
     last_write_checksum: sha1:be09f5db7b50b551e837e28f248550f7a1df3351
@@ -1362,62 +1960,118 @@ trackedFiles:
     id: d0a46b35eaf4
     last_write_checksum: sha1:cfca6ac813fefac3928c3004a6302e65ac1370f2
     pristine_git_object: 87c544794b77e8ca73d13a43bd2056c4d79721c4
+  lib/kintsugi_sdk/models/shared/taxtypeenum.rb:
+    id: 989f62ea334b
+    last_write_checksum: sha1:9f30019395f2609d1b94a0ef5a8cf9dea483b1b8
+    pristine_git_object: aca977401084e70f0e99cc741e208630bbd90bc7
+  lib/kintsugi_sdk/models/shared/taxtypeenum.rbi:
+    id: 44210486fd75
+    last_write_checksum: sha1:fcc9c5addddef33919e070b3679bc99ac0689531
+    pristine_git_object: 31126e7f56f15bc8955dbbbe0651ebc0c7e6d58c
+  lib/kintsugi_sdk/models/shared/total_amount.rb:
+    id: 8fbdff6d1017
+    last_write_checksum: sha1:d44fbf308a94daaa58bc39c91d5f72bcdcdff0d8
+    pristine_git_object: c4bb627fb9005916501b141224366ade28ca5d11
+  lib/kintsugi_sdk/models/shared/total_amount.rbi:
+    id: c48b409415e1
+    last_write_checksum: sha1:e80e8df6b6d4e7aec02cbd060daba5618d774a3a
+    pristine_git_object: 25d292a18e9a6d42c3eb4401e9c3b3df245cfcd9
+  lib/kintsugi_sdk/models/shared/total_amount_of_this_transaction_item_after_discounts_.rb:
+    id: d63e2ddc4252
+    last_write_checksum: sha1:9e9481cba3da3a522b32a0ba8f66cf31bf2a0880
+    pristine_git_object: 0dd1333c350c540e53c01f12ffde5d40e18b9eb8
+  lib/kintsugi_sdk/models/shared/total_amount_of_this_transaction_item_after_discounts_.rbi:
+    id: 7163f67e5dad
+    last_write_checksum: sha1:c80c30c843154166079254584f0c9035270c5349
+    pristine_git_object: f67f62cb74a89dc97692b00368aa5c098a57e404
+  lib/kintsugi_sdk/models/shared/total_tax_amount_calculated.rb:
+    id: 095deed388e8
+    last_write_checksum: sha1:722968059e6d8616b450c42e260968b2a8505cad
+    pristine_git_object: ddaa4e9002c56baef42930cf9267ac084daf2d2a
+  lib/kintsugi_sdk/models/shared/total_tax_amount_calculated.rbi:
+    id: 8549977457ac
+    last_write_checksum: sha1:d41962dd6eb9451905884078fb1bf22ae2f30176
+    pristine_git_object: bac487a8848f8051fef76a5dba2d6ac5cd9fd5ca
+  lib/kintsugi_sdk/models/shared/total_tax_amount_imported.rb:
+    id: ea4ca79c1a67
+    last_write_checksum: sha1:ae3f37378939645ad8375a3f226bc2321056a5e7
+    pristine_git_object: c3249a10f0901df3f148b541f8757d2cdc1c1abb
+  lib/kintsugi_sdk/models/shared/total_tax_amount_imported.rbi:
+    id: e7f9477392aa
+    last_write_checksum: sha1:27a7c93cdaded06145f5802945dba3c952baf68e
+    pristine_git_object: 920dd7333ff458613f650056c6ac5b40bd784f89
+  lib/kintsugi_sdk/models/shared/total_tax_liability_amount.rb:
+    id: d83feb974a33
+    last_write_checksum: sha1:417763a927db5c4f62d0fed241c9c11aae994ed8
+    pristine_git_object: 032363b5dc57297e26986a478303c563226beea0
+  lib/kintsugi_sdk/models/shared/total_tax_liability_amount.rbi:
+    id: 86231f842ff8
+    last_write_checksum: sha1:6dc33e171b09673182c32138acbd3bae7e61aa0c
+    pristine_git_object: 3d9a1103ca0f829a1a858a9cf76d7aa8ba7067bc
   lib/kintsugi_sdk/models/shared/transactionaddressbuilder.rb:
     id: 34d0e029117c
-    last_write_checksum: sha1:f7b2c46608056d70b50efb7a1940ca3434078953
-    pristine_git_object: b02d6b2452f6eca89b437c9d514591232e0ec75c
+    last_write_checksum: sha1:5a2e83cc3cbe6217c78a67aa56caa90692ba6c32
+    pristine_git_object: d627b34c501ce247a0f88e122abb5e195e3e4a25
   lib/kintsugi_sdk/models/shared/transactionaddressbuilder.rbi:
     id: 8106f29b8efd
-    last_write_checksum: sha1:a0c3d2835816f11095e19b106c36949035b52489
-    pristine_git_object: 5975bb36ae7b3e120d0ca6b63c8668100d908aae
+    last_write_checksum: sha1:771fe42134257fd1734f8c866840baf2cf09c422
+    pristine_git_object: e33704b8599795534af5eb200b64d03fa47c9040
   lib/kintsugi_sdk/models/shared/transactionaddresspublic.rb:
     id: 1f5751d7a7c1
-    last_write_checksum: sha1:b6d560c58d36727667dcddffe9f615a7e6180517
-    pristine_git_object: cb0d9195249eb23d7e28d71be8cd32ee02e74455
+    last_write_checksum: sha1:7014e254e299e09872dcf07d9689ea14ae351e21
+    pristine_git_object: 80d12eb42bc9046d05b88ca1999e9a1bd51aec08
   lib/kintsugi_sdk/models/shared/transactionaddresspublic.rbi:
     id: adda4704581c
-    last_write_checksum: sha1:aa09f39f50baaf0811851b0587c417a5ce5198f2
-    pristine_git_object: 3a6bd5eec7ab22048632b1112d7f5f0b0c110ed2
+    last_write_checksum: sha1:49f747b1a73281649ce54c5c9b9fb972bc8eae19
+    pristine_git_object: e4eacaf49ef1fc5aa1f7016707dfc058bdef2647
   lib/kintsugi_sdk/models/shared/transactionaddressread_output.rb:
     id: 5c3f262e0f71
-    last_write_checksum: sha1:8451814f21eaa13a7beb67ca2c2231d055de66a1
-    pristine_git_object: a2a3843546c8e1798d6e5c4c0dc35a52826e2087
+    last_write_checksum: sha1:160d2b77559910aa49e479ab2b63f68ab1d17392
+    pristine_git_object: 9350a76e9d341a4ea032a4d045effd9a1e04d372
   lib/kintsugi_sdk/models/shared/transactionaddressread_output.rbi:
     id: e6690ac9125e
-    last_write_checksum: sha1:04240373d74bafbcf431e900444b60621701696f
-    pristine_git_object: eb1ff2644d2d533e4bd6045193950f49ddfdc936
+    last_write_checksum: sha1:6da5fdecd0d8cc059b266e547c51bfd37a5c9934
+    pristine_git_object: 6531edbc58e12546d85222f51808c586a96508cb
   lib/kintsugi_sdk/models/shared/transactioncreate.rb:
     id: 015b453e7baf
-    last_write_checksum: sha1:71fa5b993f03f0b6b39e464c3654789f7fb2c4d3
-    pristine_git_object: 034c7bef5368c6c31ffbb55300668e13f3fbbc11
+    last_write_checksum: sha1:2dad0fecdbc5178deb922f2bb489ad234fe73369
+    pristine_git_object: f4eeee56de7893eee1016072b7aaa4a725f400cb
   lib/kintsugi_sdk/models/shared/transactioncreate.rbi:
     id: 07ab572e3d3d
-    last_write_checksum: sha1:2ee0b892ca6f792875551560240df3b65c8a8f08
-    pristine_git_object: 0b6d1954589c9acd1cd4eb4d66a5929717b7ae7c
+    last_write_checksum: sha1:709561efab12897a266ee70399c65dcad5e28e3b
+    pristine_git_object: 28806372d2c4edbd87595c3c288cfae2ecc27813
+  lib/kintsugi_sdk/models/shared/transactiondirectionenum.rb:
+    id: 7ed6d86d8e6e
+    last_write_checksum: sha1:3555acfdb0051e1396d2a1323dcc5e9bb57a98cb
+    pristine_git_object: b98caa3144c94497254156ce6cbe9d0eb8cf15e9
+  lib/kintsugi_sdk/models/shared/transactiondirectionenum.rbi:
+    id: 38602c23caf2
+    last_write_checksum: sha1:e61bda72dd5ad0d4c79bd1e9b1229a66e6e8422a
+    pristine_git_object: 52c0158b9437a99f6b72970e35f6fbe84dee8fc8
   lib/kintsugi_sdk/models/shared/transactionestimatepublicrequest.rb:
     id: 2bd80b842b24
-    last_write_checksum: sha1:513301f5772e8db188c703473f21c199b37b99de
-    pristine_git_object: 53a669ab28afb9ca05b79e903b4ef5232cf1189a
+    last_write_checksum: sha1:e2e5e1a02ff85de4df1808bc82352574545e54c7
+    pristine_git_object: 8efb83eed427da4dd02a7c68f9fe263fd3cf08a0
   lib/kintsugi_sdk/models/shared/transactionestimatepublicrequest.rbi:
     id: a1cd853f27a5
-    last_write_checksum: sha1:41d5697163fbeeadee2e8bb911c13641c19b4799
-    pristine_git_object: 3b63f144a4b7d56bc43adcebdf6901e3880f62f1
+    last_write_checksum: sha1:50a29fc5ec5b191e3749747e304cf384ab157607
+    pristine_git_object: c79e270c1101a24030712e818310ca82f5e7ab27
   lib/kintsugi_sdk/models/shared/transactionestimateresponse.rb:
     id: 38ea12b2a3b4
-    last_write_checksum: sha1:6e68a121a7d311c1a0a68b533f80b041f6245bea
-    pristine_git_object: 48de30413d7ec82de58dcfe882025590f2bdd68e
+    last_write_checksum: sha1:25d032a5216e48df429ea73f143deff814dbc143
+    pristine_git_object: f312ce886dae4c5feb5615ebffed3dc7419c2d6f
   lib/kintsugi_sdk/models/shared/transactionestimateresponse.rbi:
     id: f8eee7cdf289
-    last_write_checksum: sha1:9f792319966a7247ba426141df7c1d85ae484fa2
-    pristine_git_object: a800ec74e0817fc43ec01f6c6d3f9c17471d505e
+    last_write_checksum: sha1:ad27c00b25ec19b6018da76036b3547b12057d96
+    pristine_git_object: 4579e9c7fcfbfec8c451ee635ee7d5542564dc33
   lib/kintsugi_sdk/models/shared/transactionestimateresponse_addresses.rb:
     id: ec7c2b48f55e
-    last_write_checksum: sha1:4e9104abfa3a26fe45c879a78b635839dce59b25
-    pristine_git_object: c5cb20bd4e1c7a06d1efd6a2ee2129293d5f69a9
+    last_write_checksum: sha1:23ccf118f20a70cfa9fce7e0d1fb0a56e45418a7
+    pristine_git_object: 6666222c34f8d5f91bb2364d6870d140b8dafe18
   lib/kintsugi_sdk/models/shared/transactionestimateresponse_addresses.rbi:
     id: a6e816f3e23c
-    last_write_checksum: sha1:b0045ba2dcce343fc9f9b2b1822cd8bccd6c5bd1
-    pristine_git_object: 8c41216266b4e24e4511c2626d7a11c92f63052d
+    last_write_checksum: sha1:154c9c15cc12acf5f9c1d0992034378f8c033b6c
+    pristine_git_object: aafb8277639de0b372965ff99ccd8169fda25263
   lib/kintsugi_sdk/models/shared/transactionestimateresponse_type.rb:
     id: 946518cb1e48
     last_write_checksum: sha1:b1ff386285617bb2ef2a531ea9c3185472e8189d
@@ -1434,62 +2088,278 @@ trackedFiles:
     id: 6d2d461b0f8b
     last_write_checksum: sha1:5a861cfb6646b0aa0a8481e5e4ed82a784ce46f6
     pristine_git_object: e62d0b3d9b61fb91931ce9a2a7b1a382560ee7c3
+  lib/kintsugi_sdk/models/shared/transactionimportcustomer.rb:
+    id: 773cfb272633
+    last_write_checksum: sha1:8eed8708ba8e8acf3a106851004eb3e41686d17b
+    pristine_git_object: 0c4feb9baf8a9a149e1c1b997495b41aad2f93e6
+  lib/kintsugi_sdk/models/shared/transactionimportcustomer.rbi:
+    id: 00fa6422fc3a
+    last_write_checksum: sha1:e30366488ec8fb68c7974a538932d65a87c85ba9
+    pristine_git_object: 97c7137be19677d764677c5caf83d0a6d2d270b2
   lib/kintsugi_sdk/models/shared/transactionitembuilder.rb:
     id: eb4df228f47f
-    last_write_checksum: sha1:9b9374e915dbf24eb03f0c947bcbc369125bc92a
-    pristine_git_object: db17cfe32921f8e2c1d7ac2cc3c5035825db71b4
+    last_write_checksum: sha1:5a1fa12d7743a07364ecaf3ee83795901051c50a
+    pristine_git_object: b8a363755390e0488e4d37b2289a12e604af6f3a
   lib/kintsugi_sdk/models/shared/transactionitembuilder.rbi:
     id: 1eaf6f19e60a
-    last_write_checksum: sha1:941202c4c8e8a682cbdebeeca98c065ed9d2ca5c
-    pristine_git_object: ea0fa88f477db1dae889b009cf5bd4e54aaf7e2c
+    last_write_checksum: sha1:d2b845664ffa467b4e879791b69b8d7cc08fe7f8
+    pristine_git_object: 658ae0ad59a9ffe0c88eff5a5ed94ad061d38922
+  lib/kintsugi_sdk/models/shared/transactionitembuilder_amount.rb:
+    id: cbb606993005
+    last_write_checksum: sha1:1e5877bee040fec77e687faa034206e8a44187f7
+    pristine_git_object: 0dc56fe486083e07243844c31c0e7eed1d289999
+  lib/kintsugi_sdk/models/shared/transactionitembuilder_amount.rbi:
+    id: 6a400bfa17e0
+    last_write_checksum: sha1:4ff2a1104a0e44589629071f2e82203fd105d1cf
+    pristine_git_object: 4c3381125beac352010f93a17865bb656fba1816
+  lib/kintsugi_sdk/models/shared/transactionitembuilder_converted_amount.rb:
+    id: f03e783ee659
+    last_write_checksum: sha1:2086f77cdc705a221d9ff72c8006eea908aac128
+    pristine_git_object: 5975277342961294acef76588ab81b049e6a116c
+  lib/kintsugi_sdk/models/shared/transactionitembuilder_converted_amount.rbi:
+    id: 64bb96fd05f7
+    last_write_checksum: sha1:9803f8b4fc9b28af9c906888ddd2492f4df66bfe
+    pristine_git_object: 84177dccb16d981b0ba180c38330efa6c0043416
+  lib/kintsugi_sdk/models/shared/transactionitembuilder_converted_subtotal.rb:
+    id: 25c922ed4dbb
+    last_write_checksum: sha1:8c544bd0b5c53e64f21dd4d3e543faa6890c732e
+    pristine_git_object: c36556472e640aa0d979299f2d5dc6bcb38a5400
+  lib/kintsugi_sdk/models/shared/transactionitembuilder_converted_subtotal.rbi:
+    id: 758bcfe09e6a
+    last_write_checksum: sha1:0932f51dd25f351148df26717d1f19b272fb1e30
+    pristine_git_object: ad9d5fdb893f2efd7f42b91dd44f26b9e744e370
+  lib/kintsugi_sdk/models/shared/transactionitembuilder_converted_tax_amount_calculated.rb:
+    id: 81e37199ef86
+    last_write_checksum: sha1:b13a28f05e595059f764fd4fd5dc8571a2cb8ad7
+    pristine_git_object: db04acc3699ece0bbec064fb225b6b706199bd15
+  lib/kintsugi_sdk/models/shared/transactionitembuilder_converted_tax_amount_calculated.rbi:
+    id: c73b63ebbbbc
+    last_write_checksum: sha1:f49bb862358c523a1037da9a08455fb5daa459f1
+    pristine_git_object: bdda0a91f133a88beb1014734f9d1855f2f7ff61
+  lib/kintsugi_sdk/models/shared/transactionitembuilder_converted_tax_amount_imported.rb:
+    id: ef3b038ac3e2
+    last_write_checksum: sha1:2f73abed5ba55599b65424ed00d37f354fce09f5
+    pristine_git_object: 58dc5d7aa89ffc4b443a9b2067b3c02c33f5f87e
+  lib/kintsugi_sdk/models/shared/transactionitembuilder_converted_tax_amount_imported.rbi:
+    id: a26d143d676a
+    last_write_checksum: sha1:5498ee133fa588c69be618fb9862ea2119e4ef6b
+    pristine_git_object: c7bcba10cdc7a480051d6acf00882692611b7d34
+  lib/kintsugi_sdk/models/shared/transactionitembuilder_converted_taxable_amount.rb:
+    id: b61cd2cfde8d
+    last_write_checksum: sha1:e0ca8f6f3ebc07470d6965c534a2ff7173300a29
+    pristine_git_object: 0751c73a84e0274546500e2c21fdb0233c72ebe2
+  lib/kintsugi_sdk/models/shared/transactionitembuilder_converted_taxable_amount.rbi:
+    id: f97d314f2062
+    last_write_checksum: sha1:4e29d83d8d9e32ccb538bd2afe169a94fcf8eeb5
+    pristine_git_object: d26e5538a15154ba2c4c7039a834035624e9005c
+  lib/kintsugi_sdk/models/shared/transactionitembuilder_converted_total_discount.rb:
+    id: 0c51ec23b8ce
+    last_write_checksum: sha1:67406717e004986716e47a9c210aaa6408aea1e2
+    pristine_git_object: f4d13a0de7f05d9fe04975453bff342189ec36d2
+  lib/kintsugi_sdk/models/shared/transactionitembuilder_converted_total_discount.rbi:
+    id: 45bc879ce02f
+    last_write_checksum: sha1:006f115ee9958b4ed9277ad9c0d537154212739f
+    pristine_git_object: 3b71317ad58aba699ff51805dd05ee9ffaa7505b
+  lib/kintsugi_sdk/models/shared/transactionitembuilder_quantity.rb:
+    id: 52af25f305b7
+    last_write_checksum: sha1:3a434ff1f6fae6701653100c161f67bfe082e272
+    pristine_git_object: c1bc55685e3f68da957e91e61de4e06b2f2918d5
+  lib/kintsugi_sdk/models/shared/transactionitembuilder_quantity.rbi:
+    id: 5661670e0b3e
+    last_write_checksum: sha1:34011b8898a34746fb566e1ef75b0cfccfa0c366
+    pristine_git_object: 09ba5090ec72f4cd827fc2cca045c842ec4f5baf
+  lib/kintsugi_sdk/models/shared/transactionitembuilder_tax_amount_calculated.rb:
+    id: f2bbd65f8397
+    last_write_checksum: sha1:b5be5833c750a36264898f0a9d981305f99258d0
+    pristine_git_object: 7067c3b9f4e5e7f19c916d1a2bfcfa50ec846fc7
+  lib/kintsugi_sdk/models/shared/transactionitembuilder_tax_amount_calculated.rbi:
+    id: 4372ffcabdf8
+    last_write_checksum: sha1:3f2264852b680c70c341de6475aa1a9a94cc6548
+    pristine_git_object: b105710336caea1a5f9630f7713b37cf2a8b52a0
+  lib/kintsugi_sdk/models/shared/transactionitembuilder_tax_amount_imported.rb:
+    id: f8f56cd73f22
+    last_write_checksum: sha1:1f535ddd866af766405b900b644ddf2edf75c545
+    pristine_git_object: 1dc86ad966332a97ae500ab504d974441230bb3f
+  lib/kintsugi_sdk/models/shared/transactionitembuilder_tax_amount_imported.rbi:
+    id: 88a30b5f15b3
+    last_write_checksum: sha1:4af8b11a4361f08aa173f0f351d2847ec3c079e5
+    pristine_git_object: c218d24c16f8fa63f16a448a9ae63a48a9d83590
+  lib/kintsugi_sdk/models/shared/transactionitembuilder_tax_rate_calculated.rb:
+    id: f0e2e2f265ca
+    last_write_checksum: sha1:3f028395842e0e0063c58e84ecce7726c5fc2ae6
+    pristine_git_object: 638be2a51ba65764905cd1823858b5fcd7084ca5
+  lib/kintsugi_sdk/models/shared/transactionitembuilder_tax_rate_calculated.rbi:
+    id: 0b89a2cf10cf
+    last_write_checksum: sha1:6b778f0e270f9000383988643271a32d8f254bae
+    pristine_git_object: cd6fd1bbafc66cfaae23f96b0efaef85ad4b800b
+  lib/kintsugi_sdk/models/shared/transactionitembuilder_tax_rate_imported.rb:
+    id: a8fc7856a5ee
+    last_write_checksum: sha1:fb29296e7ac22b06988a4c77303a166f27969c16
+    pristine_git_object: 710b4a608e8b9e9152487e3f7b19da80c52a7e70
+  lib/kintsugi_sdk/models/shared/transactionitembuilder_tax_rate_imported.rbi:
+    id: f4d882d7a8c2
+    last_write_checksum: sha1:5eaaedb0f072f4a7c482b50ef49351850165d243
+    pristine_git_object: 1383315d33d4943bc07018422ef1cc2a2e2fa422
+  lib/kintsugi_sdk/models/shared/transactionitembuilder_taxable_amount.rb:
+    id: cb032de154b7
+    last_write_checksum: sha1:f89805238dfa6c7da47a2039a3387a53757189ce
+    pristine_git_object: 1a2983cabc0dcf825e2c4c2738c54934d4af5e88
+  lib/kintsugi_sdk/models/shared/transactionitembuilder_taxable_amount.rbi:
+    id: bcec29167458
+    last_write_checksum: sha1:362c5f3cc0cb50e071d49bea0db71458cf84ecf9
+    pristine_git_object: acae5e0712faa62ace844b525fcc2ba60f9ef41f
   lib/kintsugi_sdk/models/shared/transactionitemcreateupdate.rb:
     id: 5370506f6184
-    last_write_checksum: sha1:96dd218bd2aa1d8a783921bab65566ff5064f8f9
-    pristine_git_object: 2cdc9d20931954301d8285fe4ebb7ac41665d17f
+    last_write_checksum: sha1:1b8dbd0fe135a8e609c9b7fbbae6bbd4c34b8957
+    pristine_git_object: 1c51efd6b31d591d6a0aaf58de59f5739a6f5ef6
   lib/kintsugi_sdk/models/shared/transactionitemcreateupdate.rbi:
     id: 1e3b1d040b3c
-    last_write_checksum: sha1:2309b59455b2e035b08aa452857566635bf79201
-    pristine_git_object: 25ad2a5986f641ea23175cbe2bdfbb295801204a
+    last_write_checksum: sha1:9afe52efb3a4b551119e3d62c414d4bdde68845e
+    pristine_git_object: 7b08750459a858ecff509191ad4a7b324eea74f9
+  lib/kintsugi_sdk/models/shared/transactionitemcreateupdate_converted_subtotal.rb:
+    id: be4c05f8899a
+    last_write_checksum: sha1:07c160c49bf65b83cc3f8d2fa425e4a662e1c6c9
+    pristine_git_object: 49369ba4e43fb2c021e09f740ae40360b07dd47f
+  lib/kintsugi_sdk/models/shared/transactionitemcreateupdate_converted_subtotal.rbi:
+    id: 0f569822480c
+    last_write_checksum: sha1:a29592a1c67e90c50e568ab250d599fb1c60943b
+    pristine_git_object: 49100aa2abcd1a25fc2d523136ceeb773e33ba63
+  lib/kintsugi_sdk/models/shared/transactionitemcreateupdate_converted_taxable_amount.rb:
+    id: 045b56ec38b6
+    last_write_checksum: sha1:350f59d3434189f60d7cf5fac41eb1f0e1270f36
+    pristine_git_object: 7df5afed07778410883f6b5e7e608ebd40acaa3c
+  lib/kintsugi_sdk/models/shared/transactionitemcreateupdate_converted_taxable_amount.rbi:
+    id: 7fc25e56ddc8
+    last_write_checksum: sha1:56d94e02a93ea90bda1abf9e3fa9769670ca1838
+    pristine_git_object: 7cbff57e21bae9512d8a0e8372920e723123a9b6
+  lib/kintsugi_sdk/models/shared/transactionitemcreateupdate_converted_total_discount.rb:
+    id: 3068dfe537c4
+    last_write_checksum: sha1:04baa7b02921f8edb4df294738a32b66d2c44cd8
+    pristine_git_object: 5328d236d422c542dfb309270d0b3464c74cb66c
+  lib/kintsugi_sdk/models/shared/transactionitemcreateupdate_converted_total_discount.rbi:
+    id: 7448997b0ece
+    last_write_checksum: sha1:441df81ca1f8c896a9f0fc561c2a838abebb5723
+    pristine_git_object: 2071dcfa110dde26937eeee0afa0c6e035a6a67c
+  lib/kintsugi_sdk/models/shared/transactionitemcreateupdate_tax_rate_calculated.rb:
+    id: ee836cb6bc0d
+    last_write_checksum: sha1:97a47765c4ec2069f10bbc729e675ea72436207c
+    pristine_git_object: d0576ea50168e15f95f9b03abf90f632b76ccc4c
+  lib/kintsugi_sdk/models/shared/transactionitemcreateupdate_tax_rate_calculated.rbi:
+    id: d8103008dff9
+    last_write_checksum: sha1:3787d209dccd14ab583b02e067c0a0555a222ede
+    pristine_git_object: 2f10829d609f6436a33e24083ea019e338def9a0
+  lib/kintsugi_sdk/models/shared/transactionitemcreateupdate_tax_rate_imported.rb:
+    id: a841c7b84606
+    last_write_checksum: sha1:d4671059ebb7bcf06c5887c5aed619a91b9e4f21
+    pristine_git_object: b48dd7862982894d85ae4f02141bd07abfbfbb07
+  lib/kintsugi_sdk/models/shared/transactionitemcreateupdate_tax_rate_imported.rbi:
+    id: 3578503ad74d
+    last_write_checksum: sha1:8069e716c18eff2ff21263ffaf66676bb9be5287
+    pristine_git_object: 07a773fd1397cbdd8897cc633a25578577449915
+  lib/kintsugi_sdk/models/shared/transactionitemcreateupdate_taxable_amount.rb:
+    id: 2020b615a2cf
+    last_write_checksum: sha1:a0b77caa1cdca1aba755e7e5a400dc9ebfe05df6
+    pristine_git_object: 393d6a09ec4fb439b13f7ac85695e813352525a0
+  lib/kintsugi_sdk/models/shared/transactionitemcreateupdate_taxable_amount.rbi:
+    id: 3301f1eb4c82
+    last_write_checksum: sha1:a5e9098d4002a421b4ecddb84c3ab06519b4f888
+    pristine_git_object: 431f792253ccd0dac467baedf9cac2d9ffa3299d
   lib/kintsugi_sdk/models/shared/transactionitemestimatebase.rb:
     id: 8df60634b9a1
-    last_write_checksum: sha1:726b22c9bc615072c12ee9b3b7b22540370ab5e0
-    pristine_git_object: b7f0d4dbd332d9be80afe78d315c4947ab2c783a
+    last_write_checksum: sha1:ee1f4583f846db25fccbb84d8ebd604e855a0fe7
+    pristine_git_object: 0eade64e0959d9726b8e142a1c3ce1b9b0d97bef
   lib/kintsugi_sdk/models/shared/transactionitemestimatebase.rbi:
     id: 6b1cf08bce9c
-    last_write_checksum: sha1:165e1337d6e8e095f6044e35ff2381ed1630f57e
-    pristine_git_object: 0664a9a2e76a029818b1a2b2cdca02ae23d05a8e
+    last_write_checksum: sha1:e08c85f3f13d14fd6c7367a180c69c928f43e9f8
+    pristine_git_object: 7d2e960f360df9e80dd6a087925ec9360ec4bc81
   lib/kintsugi_sdk/models/shared/transactionitemestimateresponse.rb:
     id: ffffee624166
-    last_write_checksum: sha1:d77c12d23461c984511ac05dffc3b140050e2fd7
-    pristine_git_object: 744ab9d292278eb1626f1193a838368800586675
+    last_write_checksum: sha1:4bfbbf057429343e8fe0b78d2ea621f879ad63bb
+    pristine_git_object: f9769e7cf0b9682d4e0be1cc0732e6ab5ee72340
   lib/kintsugi_sdk/models/shared/transactionitemestimateresponse.rbi:
     id: d2a8b194f976
-    last_write_checksum: sha1:63aaea220acefaea2babc40d47eecf856a408787
-    pristine_git_object: 74c2e9fea5c4e5e1e42e38e85bf3d23f21caffcc
+    last_write_checksum: sha1:e35512f0c988b6f1884fee002845c08edb33d887
+    pristine_git_object: 12bf8796378792a788b410b092922685cded8803
   lib/kintsugi_sdk/models/shared/transactionitemread.rb:
     id: 0b816e1e7c14
-    last_write_checksum: sha1:bfaabf042592acbea2a43bb97ae7fc9177095617
-    pristine_git_object: 3615f10b3466b4fb75373747d10e6fc44822fd26
+    last_write_checksum: sha1:98c7aa038e23e2b5824e590b90ebb48741d2094c
+    pristine_git_object: 143a90a2a0a7260f8843d2a556fed63b9f994ecf
   lib/kintsugi_sdk/models/shared/transactionitemread.rbi:
     id: 43c61132cd30
-    last_write_checksum: sha1:82da6719679842d66432d4b39afde2424d7e7765
-    pristine_git_object: 9ef56cc8ce8ef8f7a08ed302b2a5c2270b3fe9cc
+    last_write_checksum: sha1:b398a325e03c83ee9bcab579fab2fde850736f2f
+    pristine_git_object: 819582d1efdfd193aae027bb6a717ab91faff4c7
   lib/kintsugi_sdk/models/shared/transactionpublicrequest.rb:
     id: 2f7ea14699b1
-    last_write_checksum: sha1:10e18b00af475dad5a8659952c7f2097ded98180
-    pristine_git_object: 543685452d4185a87cc4ddedff551a97f8d2fd53
+    last_write_checksum: sha1:2f72538b145525a35204c638fc8bc86bc4cc41af
+    pristine_git_object: cd294941c12bc26456b5932df417da7aec5753bf
   lib/kintsugi_sdk/models/shared/transactionpublicrequest.rbi:
     id: a587d3874043
-    last_write_checksum: sha1:9d278195bb960ca607551645fa7ca3cedb5867e6
-    pristine_git_object: 4f584c1be60be150765a8d20a73d1c3349f9cda2
+    last_write_checksum: sha1:207259c9b5aae45d77d186c07044b706bbbe4b4c
+    pristine_git_object: a100aa1c732aeb6f89c80e1aafc15318c0ce1aba
+  lib/kintsugi_sdk/models/shared/transactionpublicrequest_tax_rate_calculated.rb:
+    id: 3b19f8146346
+    last_write_checksum: sha1:60f60ebc432cc3b9a4d470c4595453c167263090
+    pristine_git_object: f67d2b49b8171c67a082cec3478a5514a3c503e2
+  lib/kintsugi_sdk/models/shared/transactionpublicrequest_tax_rate_calculated.rbi:
+    id: 988714974d40
+    last_write_checksum: sha1:55072c460547e4a52fc61c66abbf1ff4f8ee52f9
+    pristine_git_object: 77de3657c12a637522bc5c4558eac84c6379bcec
+  lib/kintsugi_sdk/models/shared/transactionpublicrequest_tax_rate_imported.rb:
+    id: bd60b2df27ee
+    last_write_checksum: sha1:4a231682558c1846e8bce0bad51c0949c28afae1
+    pristine_git_object: 4e86991b37c0d694e59a97c79ebc9d9ffea1dc6c
+  lib/kintsugi_sdk/models/shared/transactionpublicrequest_tax_rate_imported.rbi:
+    id: 9520ca671268
+    last_write_checksum: sha1:038a07956835f2613acedb1900dabd194bf91340
+    pristine_git_object: 7e838f0cf9bf4ab8c9f119ed8076789bca52dfd8
+  lib/kintsugi_sdk/models/shared/transactionpublicrequest_taxable_amount.rb:
+    id: 68ba2770606b
+    last_write_checksum: sha1:e63c703f5deb5efe6d4cd8c24d661433a8723fbd
+    pristine_git_object: f4168b0c1657e89be6ae6fe690ce0c5699a905e6
+  lib/kintsugi_sdk/models/shared/transactionpublicrequest_taxable_amount.rbi:
+    id: 3ca36ba0750b
+    last_write_checksum: sha1:cbde57596b54c49b4b934de32a1db4c92e35c539
+    pristine_git_object: ff78e1555e77f2bf76e7c9b25414babd825e42c8
+  lib/kintsugi_sdk/models/shared/transactionpublicrequest_total_amount.rb:
+    id: 1b9b5ee0fbe8
+    last_write_checksum: sha1:e291c4edeee2175d650e1117d68d790b19bd792b
+    pristine_git_object: 3d119f90626b5ac4048642d5555e1dd21777cf8f
+  lib/kintsugi_sdk/models/shared/transactionpublicrequest_total_amount.rbi:
+    id: 555f1af2c779
+    last_write_checksum: sha1:1245c82dd7e846ee54221e978c623665e136cd43
+    pristine_git_object: 56406665535067311d34ace2e2ec946b9a3c2057
+  lib/kintsugi_sdk/models/shared/transactionpublicrequest_total_tax_amount_calculated.rb:
+    id: dd295c5aaf30
+    last_write_checksum: sha1:1ed95b40b3a49a9e1fc9921054e28562fc01c628
+    pristine_git_object: 6a7daed5d3b629f7b5b2331bd83a872f5e36f6ab
+  lib/kintsugi_sdk/models/shared/transactionpublicrequest_total_tax_amount_calculated.rbi:
+    id: 07c587d0f716
+    last_write_checksum: sha1:e30e7b03a26abd7c957f4b51aea105ccdda2b023
+    pristine_git_object: 2f4b82d06ceec43930f6a409abe5eeab86792913
+  lib/kintsugi_sdk/models/shared/transactionpublicrequest_total_tax_amount_imported.rb:
+    id: 7f02cb9c5498
+    last_write_checksum: sha1:cf9295b40895f31af892a7ba067e07239df0ae64
+    pristine_git_object: f0e7c3623634dc9704ee97eb0e4127046b5101d1
+  lib/kintsugi_sdk/models/shared/transactionpublicrequest_total_tax_amount_imported.rbi:
+    id: 0e7d2bf3474f
+    last_write_checksum: sha1:b2cbf6a443cb4b12efe0abbe9de61d0a22b9cc44
+    pristine_git_object: 2b91037fd70f479ca7ac2a52e340de401c446eb3
+  lib/kintsugi_sdk/models/shared/transactionpublicrequest_total_tax_liability_amount.rb:
+    id: 4d2c03519c8b
+    last_write_checksum: sha1:1f4b27d1e3192ffa3778ac6dc078883c40344de2
+    pristine_git_object: c0e13df82fb0ef49f82bed4931cc2ef99f1368ec
+  lib/kintsugi_sdk/models/shared/transactionpublicrequest_total_tax_liability_amount.rbi:
+    id: 449e12ad4bd2
+    last_write_checksum: sha1:1cde0d8925de66661da84ff02f03559c66dd6e28
+    pristine_git_object: 41cc9a7a1fd3fa13101fe01da8913a0b9c66d145
   lib/kintsugi_sdk/models/shared/transactionread.rb:
     id: be69a0b981d3
-    last_write_checksum: sha1:0beb1ae93c936c3f4571fd6f82ef0b108548dfd8
-    pristine_git_object: b048c5a7d525784465e17b4253f3f0d5ead63117
+    last_write_checksum: sha1:1f8d5fbb54245105028acaff3116f20213bb4fba
+    pristine_git_object: 071188aa0719ad84cdd030b0de94fce5656bf2e3
   lib/kintsugi_sdk/models/shared/transactionread.rbi:
     id: c256a14216f7
-    last_write_checksum: sha1:db0015ad8cb506204decda73b5569fae98da28dc
-    pristine_git_object: 9f752c76bf9eb0900b3798aa0d5cbc92f871e3c2
+    last_write_checksum: sha1:8c4d8eb2418bcad4459d6264ac74704adf3bb164
+    pristine_git_object: d4c4aa7973698b310dc8e814dda202ae5a7d08fd
   lib/kintsugi_sdk/models/shared/transactionrefundstatus.rb:
     id: 52520e9fde33
     last_write_checksum: sha1:63803b877443fb4cb3cbe1d39539bd6183d6bed8
@@ -1508,20 +2378,76 @@ trackedFiles:
     pristine_git_object: bdb3024844c8583ed08b729365751a6acca5ccaa
   lib/kintsugi_sdk/models/shared/transactiontypeenum.rb:
     id: "582029041e68"
-    last_write_checksum: sha1:1bf5c58c04af95faadd7d7ed5fed8b4f46ef87cd
-    pristine_git_object: 957c50a60058d497fd5a7058f7604a253ea8fe84
+    last_write_checksum: sha1:2146948af92673a4d3cfb0076730bc8f48abeb86
+    pristine_git_object: cb96dcb9c13094b0ec65b50eb20f548db46cab4b
   lib/kintsugi_sdk/models/shared/transactiontypeenum.rbi:
     id: a68d40a67aa6
     last_write_checksum: sha1:23339b2b8d7b6f99383dd49fdfd677d28ff707d2
     pristine_git_object: b6c354fb7faff411dbc6ed19db6cec5fd367ddf9
   lib/kintsugi_sdk/models/shared/transactionupdate.rb:
     id: 8f720d00adc5
-    last_write_checksum: sha1:82ee9dfad538ab53ae8a7aa46127d3a58fcbcd98
-    pristine_git_object: b3df5f86d26f6ccc2d58bcb188fec13ca6cb820e
+    last_write_checksum: sha1:a12ec5728877486605d45c5a8e49c60d16534edf
+    pristine_git_object: 878c3d1e7dc6e31cd87c54d884412f1cfcf17e6f
   lib/kintsugi_sdk/models/shared/transactionupdate.rbi:
     id: 729cbd2ae1f9
-    last_write_checksum: sha1:a207ed0488421524f54f0c109911a20b60b43e4e
-    pristine_git_object: 98e02eb754d7023aee8043540370d538958f9e71
+    last_write_checksum: sha1:41d172b6caf894fd545adad3492caee8e5452a2d
+    pristine_git_object: 41d5aa95b41569d227be2f0bd50838f044f58efc
+  lib/kintsugi_sdk/models/shared/transactionupdate_tax_rate_calculated.rb:
+    id: dbd858e04837
+    last_write_checksum: sha1:3a488e08fa87c2a2c40ed75ca55ff55036ceddb9
+    pristine_git_object: e149a46e9b8c9d892a537b5b41a12344b3c0e92b
+  lib/kintsugi_sdk/models/shared/transactionupdate_tax_rate_calculated.rbi:
+    id: 7177a3007da8
+    last_write_checksum: sha1:7ac735b0d7024a2fd8b0158d115cefc2f155508d
+    pristine_git_object: 72d7f6cf5cf9ded7509eb3dbba24d9fe7923b176
+  lib/kintsugi_sdk/models/shared/transactionupdate_tax_rate_imported.rb:
+    id: 7d6528d35b66
+    last_write_checksum: sha1:8f963e03a6d0da96277a99e781f6ee8a0f69b678
+    pristine_git_object: 4858412e1d8264113225014e5da46ab73181bcb3
+  lib/kintsugi_sdk/models/shared/transactionupdate_tax_rate_imported.rbi:
+    id: 97b2df9a19e7
+    last_write_checksum: sha1:12f72d7b6b66315a53099d91ae2d15084393a0da
+    pristine_git_object: 974cd2d2cefb18b862568003fd0c43401f3757ee
+  lib/kintsugi_sdk/models/shared/transactionupdate_taxable_amount.rb:
+    id: 63fbcee69d8c
+    last_write_checksum: sha1:552ba52b47fd0d619e60086f4d6d1adca655b34c
+    pristine_git_object: 3ecf2812cc7e96af18b4ccddf7fe7af850f9e58b
+  lib/kintsugi_sdk/models/shared/transactionupdate_taxable_amount.rbi:
+    id: 0950cb3f3b2d
+    last_write_checksum: sha1:312caba92685586ed9070313f98075b714a94018
+    pristine_git_object: 057dc22b3dc58adfe67eb7eb8de82322062b83ce
+  lib/kintsugi_sdk/models/shared/transactionupdate_total_amount.rb:
+    id: fe799b125961
+    last_write_checksum: sha1:68421b424a5fff724ea4bb2a0046f7d89a25ecee
+    pristine_git_object: bb22d606af23334380a28ccf892ee2ba60e74d79
+  lib/kintsugi_sdk/models/shared/transactionupdate_total_amount.rbi:
+    id: 86f6158bd41e
+    last_write_checksum: sha1:290546724bbd51549d3124a4ac1b1b9bd8e954b9
+    pristine_git_object: 4f3935030da7732cf5c64adb88d2abc03721fbb2
+  lib/kintsugi_sdk/models/shared/transactionupdate_total_tax_amount_calculated.rb:
+    id: b93aee66ce5c
+    last_write_checksum: sha1:6ed1e2bef1d079aab1f7215f05abac3d657bcc2a
+    pristine_git_object: 06be5fe4d7ec512654239f5d02f0d6da667fdccb
+  lib/kintsugi_sdk/models/shared/transactionupdate_total_tax_amount_calculated.rbi:
+    id: 127d831289a8
+    last_write_checksum: sha1:bbbd9944af13bf714b0cea7eaba427bea7e976c0
+    pristine_git_object: 0a6056db9c2db52a8c84f45e3379717323cba5ed
+  lib/kintsugi_sdk/models/shared/transactionupdate_total_tax_amount_imported.rb:
+    id: f522b3431339
+    last_write_checksum: sha1:49e146892edd1aeb53f0eb5163ea4663864b2004
+    pristine_git_object: f2b0a29ede11727bcc8c8102205e1a93cfc7ceed
+  lib/kintsugi_sdk/models/shared/transactionupdate_total_tax_amount_imported.rbi:
+    id: cb64b4848c31
+    last_write_checksum: sha1:dfb75a35d253f38eef915c9d3ad6dc68c68cdfad
+    pristine_git_object: 0a5ee9aea6c61a891881e1bacecd3ab4c8ed8825
+  lib/kintsugi_sdk/models/shared/transactionupdate_total_tax_liability_amount.rb:
+    id: 3ce0480b5339
+    last_write_checksum: sha1:9bb9c02d0c636d0034d87dc0c48986f4dae94c8c
+    pristine_git_object: fb6ac6e1547925c32a47bc48bde2612d5fb9cb3b
+  lib/kintsugi_sdk/models/shared/transactionupdate_total_tax_liability_amount.rbi:
+    id: d4c26d470dc2
+    last_write_checksum: sha1:3c352a1e971a8f87945db7e6cefd19daf243f749
+    pristine_git_object: b1368d8b84f0780e68cc5c3d73f1e8e6e1666690
   lib/kintsugi_sdk/models/shared/treatmentenum.rb:
     id: b4913715c79d
     last_write_checksum: sha1:004f6b58104a086ac17462a9246f052093f99666
@@ -1540,32 +2466,32 @@ trackedFiles:
     pristine_git_object: c4ea115d5117b352376bb4610f4edd8ce03010e3
   lib/kintsugi_sdk/models/shared/validationaddress.rb:
     id: 074f29956bb5
-    last_write_checksum: sha1:f20c5fbdfdc63f39a4412b2421bb774e136a7aaf
-    pristine_git_object: d87ab49c63c0d4ddb7a6bae4a698ab564e52c82a
+    last_write_checksum: sha1:7fafd70164fb3158df32e88b511bcc408085dcea
+    pristine_git_object: 36b14824a0f0ad7a31e0701c75f0330e08bf49df
   lib/kintsugi_sdk/models/shared/validationaddress.rbi:
     id: 99428f784276
-    last_write_checksum: sha1:6a69e851859bda989197ba506787553b45a36d42
-    pristine_git_object: fcc1fc869b57cab82fa50c0693cdb8ea344ed842
+    last_write_checksum: sha1:9a9ebbc5bbb873aecf4459b96efff3c56503da44
+    pristine_git_object: 3756176e65fe6d6a05ca75ae80f8bbc408132514
   lib/kintsugi_sdk/models/shared/validationerror.rb:
     id: 46465d182d76
-    last_write_checksum: sha1:824225bc90e4b0e008ee8dbbf1bb4cef9955f96c
-    pristine_git_object: 64f67ff659bb64da12b447429759121131923e74
+    last_write_checksum: sha1:9f378bf124346f3b22a7e6c67f4e1c1fd85d96da
+    pristine_git_object: 2a8994470c8d687ba0935b70445048bef028017f
   lib/kintsugi_sdk/models/shared/validationerror.rbi:
     id: 386addd343a6
-    last_write_checksum: sha1:571fed982405474cc601c14401e4b06565421043
-    pristine_git_object: 51e5e09429925e26887e500d982f66322499c95e
+    last_write_checksum: sha1:0a7dea3ac5e25a10d00d02fc7333ba7fa8685a2c
+    pristine_git_object: a3cb9158821903eb41d4448d37cb81de7223add7
   lib/kintsugi_sdk/nexus.rb:
     id: de0b2076fa71
-    last_write_checksum: sha1:d85ca1cb84aac9c65370832c1f63944bc160e0d2
-    pristine_git_object: 656cbd7c5c8c5e993e77951a724c0bce5d7d51c7
+    last_write_checksum: sha1:4f262c476a8c4fa9576b85e962b7354f6c1de296
+    pristine_git_object: 5814c7d8b6b81a0c73fa4227df96501c6d113409
   lib/kintsugi_sdk/openapisdk.rb:
     id: 0719dc5a59cb
-    last_write_checksum: sha1:838809ed38ba28f2aa410408c939b0da7a74ea9d
-    pristine_git_object: 09124c57a97a30ba813c25192ccca97071d7ecfe
+    last_write_checksum: sha1:2b8e4674748d743b0fd02c2976e03e0742eb7950
+    pristine_git_object: 1ecea83c571e75fd5837a199aa62d58cd13daead
   lib/kintsugi_sdk/products.rb:
     id: ccf5d58e94e5
-    last_write_checksum: sha1:4b27ff09c01f3a1d8dd4352ade3f03307fca417c
-    pristine_git_object: 758e486a04b074936f0a4470d055266f100423e8
+    last_write_checksum: sha1:1a778a5ade0fc03b6d20a52d258ba3454c7762c9
+    pristine_git_object: b2eb30cdb5a231766dab143fc2bf5218e5416deb
   lib/kintsugi_sdk/sdk_hooks/hooks.rb:
     id: f64854c77a24
     last_write_checksum: sha1:6c576d900e75091d53e9cccf18e85a8648df5524
@@ -1576,20 +2502,20 @@ trackedFiles:
     pristine_git_object: 1a482305b34d6451ab6ef7d372f9deb57a8ff0ea
   lib/kintsugi_sdk/sdkconfiguration.rb:
     id: a40583fa0346
-    last_write_checksum: sha1:13dc74cf5666975cfd5adab4928a7fc5fdf5b350
-    pristine_git_object: 33345dcf368f28c767fd97dec356b7b3adda703f
+    last_write_checksum: sha1:112d343e42dad1fb02124e2495c73a7cc4638489
+    pristine_git_object: ff747cdd80d041f92776fb635444badaad2b1f3f
   lib/kintsugi_sdk/sdkconfiguration.rbi:
     id: 1c402ef0cb0d
     last_write_checksum: sha1:b850b2b64a2bba1150dce2dde3e1a1170aced613
     pristine_git_object: dd9e04a8276ac734e583f413d7306b2b071e2a28
   lib/kintsugi_sdk/taxestimation.rb:
     id: 891686169ab0
-    last_write_checksum: sha1:0b893368a4e3961fbf159cc5aea6488c3e4182d6
-    pristine_git_object: 1aabc45622f0ffdd7a07c6ecd4ad83cb87320896
+    last_write_checksum: sha1:1fa4afb6090e270220c9f7c0f84e763e2b040ce3
+    pristine_git_object: 91c87ef5bc5e31ef24b7fbc5a5482b4ee8c98545
   lib/kintsugi_sdk/transactions.rb:
     id: 2be43af57712
-    last_write_checksum: sha1:94825642e45ab829c8b99ba6cd92cbf724658358
-    pristine_git_object: 7afe0e7e7ab0adb4046cb6092784c69f440ad387
+    last_write_checksum: sha1:520683bb21320bd3468e70fd887317d33982b7cd
+    pristine_git_object: eea8374914d26aab2b483d187fde3faacf1fe082
   lib/kintsugi_sdk/utils/forms.rb:
     id: 6b6c32535c33
     last_write_checksum: sha1:de1c064cd01507a668556b40006a2c34c1b1521e
@@ -1608,8 +2534,8 @@ trackedFiles:
     pristine_git_object: f971f4b2198553514f6d55a8dfe0d5feb5c8384b
   lib/kintsugi_sdk/utils/retries.rb:
     id: b1ef15f085c7
-    last_write_checksum: sha1:918794ae91e50f0940777e7c44b16996ca058147
-    pristine_git_object: 0baf62082e6679cad9fbda268b4df76a27d9be63
+    last_write_checksum: sha1:23756e5fea3120d2a480909e44b4997f469a1414
+    pristine_git_object: 9fab8bcb3983b590998a408db54d212310236b81
   lib/kintsugi_sdk/utils/security.rb:
     id: d44072f7c1c4
     last_write_checksum: sha1:cebd544e301f43bab952556633803f35405e51ec
@@ -1620,8 +2546,8 @@ trackedFiles:
     pristine_git_object: fed4939f197b7d04a43364042d2150360173c78e
   lib/kintsugi_sdk/utils/utils.rb:
     id: 1ae61d5a6752
-    last_write_checksum: sha1:c64dc672d16b235faea099b54ee6e7bd187455a3
-    pristine_git_object: a4a9ac27cd3e2bdd0beb29148a6a5c8ed5059946
+    last_write_checksum: sha1:ec22c0040af739b750abcc272b6a4bdd2ca6d44f
+    pristine_git_object: ad14089ecb2eb4a829346512cf30291003670be4
   sorbet/config:
     id: 59392da43f94
     last_write_checksum: sha1:d02b32628dad70edc5929a9b9801d5e2dca15d40
@@ -1658,8 +2584,11 @@ examples:
           application/json: {"detail": "<value>"}
   suggestions_v1_address_validation_suggestions_post:
     speakeasy-default-suggestions-v1-address-validation-suggestions-post:
+      parameters:
+        header:
+          x-organization-id: "org_12345"
       requestBody:
-        application/json: {"country": "US", "postalCode": ""}
+        application/json: {}
       responses:
         "200":
           application/json: "<value>"
@@ -1680,6 +2609,9 @@ examples:
           order_by: "created_at,street_1,street_2,city,state,postal_code,country,status"
           page: 1
           size: 50
+          connection_id__in: "conn_abc123,conn_def456"
+        header:
+          x-organization-id: "org_12345"
       responses:
         "200":
           application/json: {"items": [{"id": "<id>", "organization_id": "<id>"}], "total": 757850, "page": 719000, "size": 237986, "pages": 933225}
@@ -1691,6 +2623,9 @@ examples:
           application/json: {"detail": "<value>"}
   create_customer_v1_customers_post:
     speakeasy-default-create-customer-v1-customers-post:
+      parameters:
+        header:
+          x-organization-id: "org_12345"
       requestBody:
         application/json: {}
       responses:
@@ -1707,6 +2642,8 @@ examples:
       parameters:
         path:
           customer_id: "cust_abc123"
+        header:
+          x-organization-id: "org_12345"
       responses:
         "200":
           application/json: {"id": "<id>", "organization_id": "<id>"}
@@ -1717,6 +2654,8 @@ examples:
       parameters:
         path:
           customer_id: "<id>"
+        header:
+          x-organization-id: "org_12345"
       requestBody:
         application/json: {}
       responses:
@@ -1733,6 +2672,8 @@ examples:
       parameters:
         path:
           external_id: "external_12345"
+        header:
+          x-organization-id: "org_12345"
       responses:
         "200":
           application/json: {"id": "<id>", "organization_id": "<id>"}
@@ -1743,9 +2684,11 @@ examples:
       parameters:
         path:
           customer_id: "<id>"
+        header:
+          x-organization-id: "org_12345"
       responses:
         "200":
-          application/json: [{"organization_id": "<id>", "external_id": "<id>", "date": "2025-01-31T02:37:17.664Z", "total_amount": "0.00", "marketplace": false, "total_tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "total_tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "total_tax_liability_amount": "0.00", "taxable_amount": "0.00", "locked": false, "id": "<id>", "addresses": [{"type": "BILL_TO"}], "transaction_items": [{"organization_id": "<id>", "date": "2023-05-06T21:03:02.196Z", "external_product_id": "<id>", "quantity": "1.0", "amount": "0.00", "tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "taxable_amount": "0.00", "exempt": false, "id": "<id>", "tax_items": [{"rule_id": "0000", "rate": "<value>", "amount": "509.35", "name": "<value>"}]}], "type": "SALE"}]
+          application/json: [{"organization_id": "<id>", "external_id": "<id>", "date": "2025-01-31T02:37:17.664Z", "total_amount": "0.00", "marketplace": false, "total_tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "total_tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "total_tax_liability_amount": "0.00", "taxable_amount": "0.00", "locked": false, "is_duplicate": false, "id": "<id>", "is_deferred_transaction": false, "addresses": [{"type": "BILL_TO", "is_unincorporated": false}], "transaction_items": [{"organization_id": "<id>", "date": "2023-05-06T21:03:02.196Z", "external_product_id": "<id>", "quantity": "1.0", "amount": "0.00", "tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "taxable_amount": "0.00", "exempt": false, "id": "<id>", "tax_items": [{"rule_id": "0000", "rate": "<value>", "amount": "509.35", "name": "<value>"}], "is_reverse_charge_self_accounted": false}], "type": "SALE"}]
         "422":
           application/json: {}
   createTransactionByCustomer:
@@ -1753,11 +2696,13 @@ examples:
       parameters:
         path:
           customer_id: "<id>"
+        header:
+          x-organization-id: "org_12345"
       requestBody:
-        application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-04-30T23:54:13.835Z", "total_amount": 0, "marketplace": false, "total_tax_amount_imported": 0, "tax_rate_imported": 0, "total_tax_amount_calculated": 0, "tax_rate_calculated": 0, "total_tax_liability_amount": 0, "taxable_amount": 0, "locked": false, "addresses": [], "transaction_items": [{"organization_id": "<id>", "date": "2023-12-30T23:49:45.106Z", "external_product_id": "<id>", "quantity": 1, "amount": 0, "tax_amount_imported": 0, "tax_rate_imported": 0, "tax_amount_calculated": 0, "tax_rate_calculated": 0, "taxable_amount": 0, "exempt": false}]}
+        application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-04-30T23:54:13.835Z", "locked": false, "is_duplicate": false, "addresses": [], "transaction_items": [{"organization_id": "<id>", "date": "2023-12-30T23:49:45.106Z", "external_product_id": "<id>", "quantity": 1, "amount": 0, "tax_amount_imported": 0, "tax_rate_imported": 0, "tax_amount_calculated": 0, "tax_rate_calculated": 0, "taxable_amount": 0, "exempt": false}]}
       responses:
         "200":
-          application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-12-17T07:53:07.575Z", "total_amount": "0.00", "marketplace": false, "total_tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "total_tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "total_tax_liability_amount": "0.00", "taxable_amount": "0.00", "locked": false, "id": "<id>", "addresses": [{"type": "BILL_FROM"}], "transaction_items": [{"organization_id": "<id>", "date": "2024-05-23T13:08:03.463Z", "external_product_id": "<id>", "quantity": "1.0", "amount": "0.00", "tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "taxable_amount": "0.00", "exempt": false, "id": "<id>", "tax_items": []}], "type": "FULL_CREDIT_NOTE"}
+          application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-12-17T07:53:07.575Z", "total_amount": "0.00", "total_tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "total_tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "total_tax_liability_amount": "0.00", "taxable_amount": "0.00", "locked": false, "is_duplicate": false, "id": "<id>", "is_deferred_transaction": false, "addresses": [{"type": "BILL_FROM", "is_unincorporated": false}], "transaction_items": [{"organization_id": "<id>", "date": "2024-05-23T13:08:03.463Z", "external_product_id": "<id>", "quantity": "1.0", "amount": "0.00", "tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "taxable_amount": "0.00", "exempt": false, "id": "<id>", "tax_items": [], "is_reverse_charge_self_accounted": false}], "type": "FULL_CREDIT_NOTE"}
         "422":
           application/json: {}
   get_exemptions_v1_exemptions_get:
@@ -1775,6 +2720,9 @@ examples:
           order_by: "end_date,FEIN,sales_tax_id,status"
           page: 1
           size: 50
+          connection_id__in: "conn_abc123,conn_def456"
+        header:
+          x-organization-id: "org_12345"
       responses:
         "200":
           application/json: {"items": [], "total": 656809, "page": 809509, "size": 363701, "pages": 281800}
@@ -1786,6 +2734,9 @@ examples:
           application/json: {"detail": "<value>"}
   create_exemption_v1_exemptions_post:
     speakeasy-default-create-exemption-v1-exemptions-post:
+      parameters:
+        header:
+          x-organization-id: "org_12345"
       requestBody:
         application/json: {"exemption_type": "customer", "start_date": "2023-03-27", "customer_id": "<id>", "reseller": false, "FEIN": "<value>", "sales_tax_id": "<id>", "status": "ACTIVE"}
       responses:
@@ -1802,6 +2753,8 @@ examples:
       parameters:
         path:
           exemption_id: "<id>"
+        header:
+          x-organization-id: "org_12345"
       responses:
         "200":
           application/json: {"exemption_type": "transaction", "start_date": "2024-02-13", "reseller": false, "id": "<id>"}
@@ -1816,6 +2769,8 @@ examples:
       parameters:
         path:
           exemption_id: "<id>"
+        header:
+          x-organization-id: "org_12345"
       requestBody:
         multipart/form-data: {"file": "x-file: example.file"}
       responses:
@@ -1832,6 +2787,8 @@ examples:
       parameters:
         path:
           exemption_id: "<id>"
+        header:
+          x-organization-id: "org_12345"
       responses:
         "200":
           application/json: [{"related_entity_id": "<id>", "related_entity_type": "EXEMPTION", "id": "<id>"}]
@@ -1848,9 +2805,11 @@ examples:
           page: 1
           size: 50
           without_pagination: false
+        header:
+          x-organization-id: "org_12345"
       responses:
         "200":
-          application/json: {"items": [{"country_code": "CN", "state_code": "<value>", "state_name": "<value>", "treatment_of_exempt_transactions": "YES_SALES_NO_TRANSACTIONS", "trigger": "<value>", "sales_or_transactions": "SALES", "threshold_sales": 476092, "threshold_transactions": 673561, "start_date": "2023-06-08", "transaction_count": 0, "transactions_amount": "0.00", "previous_transaction_count": 0, "previous_transactions_amount": "0.00", "calculated_tax_liability": "0.00", "imported_tax_liability": "0.00", "tax_liability": "0.00", "nexus_met": false, "economic_nexus_met": false, "physical_nexus_met": false, "collected_tax_nexus_met": false, "period_model": "PRECEDING_YEAR", "period_start_date": "2025-11-23", "period_end_date": "2024-12-20", "previous_period_start_date": "<value>", "previous_period_end_date": "<value>", "earliest_collected_date": "2018-01-01T00:00:00", "vda_eligible": false, "id": "<id>", "created_at": "2023-10-25T14:47:36.968Z", "updated_at": "2025-12-03T07:26:11.468Z", "organization_id": "<id>", "is_currently_disregarded": false, "is_vda_eligible": true, "nexus_type": "EU_MEMBER_STATE", "total_transactions": 116288, "total_transactions_included": 856257, "total_transactions_exempted": 666387, "total_transactions_marketplace": 747391, "marketplace_included": false}], "total": 218796, "page": 800733, "size": 990975, "pages": 825206}
+          application/json: [{"country_code": "CN", "state_code": "<value>", "state_name": "<value>", "treatment_of_exempt_transactions": "YES_SALES_NO_TRANSACTIONS", "trigger": "<value>", "sales_or_transactions": "SALES", "threshold_sales_bigint": 0, "threshold_transactions": 673561, "start_date": "2024-06-07", "transaction_count": 0, "transactions_amount": "0.00", "previous_transaction_count": 0, "previous_transactions_amount": "0.00", "tax_liability": "0.00", "nexus_met": false, "economic_nexus_met": false, "physical_nexus_met": false, "period_model": "PRECEDING_YEAR", "period_start_date": "2026-11-23", "period_end_date": "2025-12-20", "previous_period_start_date": "2026-12-03", "previous_period_end_date": null, "earliest_collected_date": "2018-01-01T00:00:00", "id": "<id>", "created_at": "2026-06-25T19:40:42.904Z", "updated_at": "2024-05-07T10:51:23.843Z", "organization_id": "<id>", "is_currently_disregarded": false, "ior_opt_out_eligible": false, "ior_eligible_at_registration": false, "requires_ior_number_to_register": false, "threshold_sales": 856257, "is_vda_eligible": false, "nexus_type": "STATE", "total_transactions": 517881, "total_transactions_included": 218796, "total_transactions_exempted": 800733, "total_transactions_marketplace": 990975, "marketplace_included": true}]
         "422":
           application/json: {}
   get_products_v1_products__get:
@@ -1886,6 +2845,8 @@ examples:
       parameters:
         path:
           product_id: "<id>"
+        header:
+          x-organization-id: "org_12345"
       responses:
         "200":
           application/json: {"id": "<id>", "external_id": "<id>", "sku": [], "code": "CODE_3012", "name": "<value>", "description": "reapply inasmuch officially until", "status": "PARTIALLY_APPROVED", "product_category": "UNKNOWN", "product_subcategory": "MACHINERY", "tax_exempt": true, "source": "ZUORA", "connection_id": "<id>", "classification_failed": true}
@@ -1900,6 +2861,8 @@ examples:
       parameters:
         path:
           product_id: "<id>"
+        header:
+          x-organization-id: "org_12345"
       requestBody:
         application/json: {"name": "<value>", "product_category": "PHYSICAL", "product_subcategory": "CATERING", "tax_exempt": true, "classification_failed": false}
       responses:
@@ -1926,6 +2889,9 @@ examples:
           order_by: "date,state,customer_name,status"
           page: 1
           size: 50
+          connection_id__in: "conn_abc123,conn_def456"
+        header:
+          x-organization-id: "org_12345"
       responses:
         "200":
           application/json: {"items": [], "total": 93605, "page": 198565, "size": 659955, "pages": 416441}
@@ -1937,11 +2903,14 @@ examples:
           application/json: {"detail": "<value>"}
   create_transaction_v1_transactions_post:
     speakeasy-default-create-transaction-v1-transactions-post:
+      parameters:
+        header:
+          x-organization-id: "org_12345"
       requestBody:
-        application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-11-05T23:48:53.053Z", "total_amount": 0, "marketplace": false, "total_tax_amount_imported": 0, "tax_rate_imported": 0, "total_tax_amount_calculated": 0, "tax_rate_calculated": 0, "total_tax_liability_amount": 0, "taxable_amount": 0, "locked": false, "addresses": [], "transaction_items": [], "customer": {"organization_id": "<id>", "is_test_data": false}, "type": "TAX_REFUND"}
+        application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-11-05T23:48:53.053Z", "locked": false, "addresses": [], "transaction_items": [], "customer": {"organization_id": "<id>", "is_test_data": false}, "type": "TAX_REFUND"}
       responses:
         "202":
-          application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-09-11T11:08:29.048Z", "total_amount": "0.00", "marketplace": false, "total_tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "total_tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "total_tax_liability_amount": "0.00", "taxable_amount": "0.00", "locked": false, "id": "<id>", "addresses": [{"type": "SHIP_FROM"}], "transaction_items": [{"organization_id": "<id>", "date": "2024-12-26T12:17:10.468Z", "external_product_id": "<id>", "quantity": "1.0", "amount": "0.00", "tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "taxable_amount": "0.00", "exempt": false, "id": "<id>", "tax_items": []}], "type": "FULL_CREDIT_NOTE"}
+          application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-09-11T11:08:29.048Z", "total_amount": "0.00", "total_tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "total_tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "total_tax_liability_amount": "0.00", "taxable_amount": "0.00", "locked": false, "is_duplicate": false, "id": "<id>", "is_deferred_transaction": false, "addresses": [{"type": "SHIP_FROM", "is_unincorporated": false}], "transaction_items": [{"organization_id": "<id>", "date": "2024-12-26T12:17:10.468Z", "external_product_id": "<id>", "quantity": "1.0", "amount": "0.00", "tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "taxable_amount": "0.00", "exempt": false, "id": "<id>", "tax_items": [], "is_reverse_charge_self_accounted": false}], "type": "FULL_CREDIT_NOTE"}
         "400":
           application/json: {"detail": "<value>"}
         "422":
@@ -1949,58 +2918,82 @@ examples:
         "500":
           application/json: {"detail": "<value>"}
     duplicate_external_id:
+      parameters:
+        header:
+          x-organization-id: "org_12345"
       requestBody:
-        application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-11-05T23:48:53.053Z", "total_amount": 0, "marketplace": false, "total_tax_amount_imported": 0, "tax_rate_imported": 0, "total_tax_amount_calculated": 0, "tax_rate_calculated": 0, "total_tax_liability_amount": 0, "taxable_amount": 0, "locked": false, "addresses": [], "transaction_items": [], "customer": {"organization_id": "<id>", "is_test_data": false}, "type": "TAX_REFUND"}
+        application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-11-05T23:48:53.053Z", "locked": false, "addresses": [], "transaction_items": [], "customer": {"organization_id": "<id>", "is_test_data": false}, "type": "TAX_REFUND"}
       responses:
         "400":
           application/json: {"detail": "Duplicate external id (ORDER_XYZ_789) for the given transaction not allowed."}
         "500":
           application/json: {"detail": "Duplicate external id (ORDER_XYZ_789) for the given transaction not allowed."}
     missing_product_external_id:
+      parameters:
+        header:
+          x-organization-id: "org_12345"
       requestBody:
-        application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-11-05T23:48:53.053Z", "total_amount": 0, "marketplace": false, "total_tax_amount_imported": 0, "tax_rate_imported": 0, "total_tax_amount_calculated": 0, "tax_rate_calculated": 0, "total_tax_liability_amount": 0, "taxable_amount": 0, "locked": false, "addresses": [], "transaction_items": [], "customer": {"organization_id": "<id>", "is_test_data": false}, "type": "TAX_REFUND"}
+        application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-11-05T23:48:53.053Z", "locked": false, "addresses": [], "transaction_items": [], "customer": {"organization_id": "<id>", "is_test_data": false}, "type": "TAX_REFUND"}
       responses:
         "400":
           application/json: {"detail": "[orgn_YourOrgIdHere] Product does not have an external id"}
         "500":
           application/json: {"detail": "[orgn_YourOrgIdHere] Product does not have an external id"}
     connection_mismatch:
+      parameters:
+        header:
+          x-organization-id: "org_12345"
       requestBody:
-        application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-11-05T23:48:53.053Z", "total_amount": 0, "marketplace": false, "total_tax_amount_imported": 0, "tax_rate_imported": 0, "total_tax_amount_calculated": 0, "tax_rate_calculated": 0, "total_tax_liability_amount": 0, "taxable_amount": 0, "locked": false, "addresses": [], "transaction_items": [], "customer": {"organization_id": "<id>", "is_test_data": false}, "type": "TAX_REFUND"}
+        application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-11-05T23:48:53.053Z", "locked": false, "addresses": [], "transaction_items": [], "customer": {"organization_id": "<id>", "is_test_data": false}, "type": "TAX_REFUND"}
       responses:
         "400":
           application/json: {"detail": "Connection mismatch between transaction and customer"}
         "500":
           application/json: {"detail": "Connection mismatch between transaction and customer"}
     invalid_address:
+      parameters:
+        header:
+          x-organization-id: "org_12345"
       requestBody:
-        application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-11-05T23:48:53.053Z", "total_amount": 0, "marketplace": false, "total_tax_amount_imported": 0, "tax_rate_imported": 0, "total_tax_amount_calculated": 0, "tax_rate_calculated": 0, "total_tax_liability_amount": 0, "taxable_amount": 0, "locked": false, "addresses": [], "transaction_items": [], "customer": {"organization_id": "<id>", "is_test_data": false}, "type": "TAX_REFUND"}
+        application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-11-05T23:48:53.053Z", "locked": false, "addresses": [], "transaction_items": [], "customer": {"organization_id": "<id>", "is_test_data": false}, "type": "TAX_REFUND"}
       responses:
         "400":
           application/json: {"detail": "Address validation failed: missing required fields"}
         "500":
           application/json: {"detail": "Address validation failed: missing required fields"}
     missing_org_id:
+      parameters:
+        header:
+          x-organization-id: "org_12345"
       requestBody:
-        application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-11-05T23:48:53.053Z", "total_amount": 0, "marketplace": false, "total_tax_amount_imported": 0, "tax_rate_imported": 0, "total_tax_amount_calculated": 0, "tax_rate_calculated": 0, "total_tax_liability_amount": 0, "taxable_amount": 0, "locked": false, "addresses": [], "transaction_items": [], "customer": {"organization_id": "<id>", "is_test_data": false}, "type": "TAX_REFUND"}
+        application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-11-05T23:48:53.053Z", "locked": false, "addresses": [], "transaction_items": [], "customer": {"organization_id": "<id>", "is_test_data": false}, "type": "TAX_REFUND"}
       responses:
         "422":
           application/json: {"detail": [{"type": "missing", "loc": ["header", "x-organization-id"], "msg": "Field required", "input": "<value>", "ctx": {"key": "<value>"}}]}
     missing_required_field:
+      parameters:
+        header:
+          x-organization-id: "org_12345"
       requestBody:
-        application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-11-05T23:48:53.053Z", "total_amount": 0, "marketplace": false, "total_tax_amount_imported": 0, "tax_rate_imported": 0, "total_tax_amount_calculated": 0, "tax_rate_calculated": 0, "total_tax_liability_amount": 0, "taxable_amount": 0, "locked": false, "addresses": [], "transaction_items": [], "customer": {"organization_id": "<id>", "is_test_data": false}, "type": "TAX_REFUND"}
+        application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-11-05T23:48:53.053Z", "locked": false, "addresses": [], "transaction_items": [], "customer": {"organization_id": "<id>", "is_test_data": false}, "type": "TAX_REFUND"}
       responses:
         "422":
           application/json: {"detail": [{"type": "missing", "loc": ["body", "external_id"], "msg": "Field required", "input": "<value>", "ctx": {"key": "<value>"}}]}
     invalid_enum_value:
+      parameters:
+        header:
+          x-organization-id: "org_12345"
       requestBody:
-        application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-11-05T23:48:53.053Z", "total_amount": 0, "marketplace": false, "total_tax_amount_imported": 0, "tax_rate_imported": 0, "total_tax_amount_calculated": 0, "tax_rate_calculated": 0, "total_tax_liability_amount": 0, "taxable_amount": 0, "locked": false, "addresses": [], "transaction_items": [], "customer": {"organization_id": "<id>", "is_test_data": false}, "type": "TAX_REFUND"}
+        application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-11-05T23:48:53.053Z", "locked": false, "addresses": [], "transaction_items": [], "customer": {"organization_id": "<id>", "is_test_data": false}, "type": "TAX_REFUND"}
       responses:
         "422":
           application/json: {"detail": [{"type": "enum", "loc": ["body", "currency"], "msg": "Input should be 'USD', 'CAD', 'EUR'...", "input": "INVALID", "ctx": {"expected": "one of USD, CAD, EUR..."}}]}
     invalid_date_format:
+      parameters:
+        header:
+          x-organization-id: "org_12345"
       requestBody:
-        application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-11-05T23:48:53.053Z", "total_amount": 0, "marketplace": false, "total_tax_amount_imported": 0, "tax_rate_imported": 0, "total_tax_amount_calculated": 0, "tax_rate_calculated": 0, "total_tax_liability_amount": 0, "taxable_amount": 0, "locked": false, "addresses": [], "transaction_items": [], "customer": {"organization_id": "<id>", "is_test_data": false}, "type": "TAX_REFUND"}
+        application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-11-05T23:48:53.053Z", "locked": false, "addresses": [], "transaction_items": [], "customer": {"organization_id": "<id>", "is_test_data": false}, "type": "TAX_REFUND"}
       responses:
         "422":
           application/json: {"detail": [{"type": "datetime_parsing", "loc": ["body", "date"], "msg": "Input should be a valid datetime, invalid format", "input": "2023-13-45", "ctx": {"key": "<value>"}}]}
@@ -2009,9 +3002,11 @@ examples:
       parameters:
         path:
           external_id: "<id>"
+        header:
+          x-organization-id: "org_12345"
       responses:
         "200":
-          application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-02-23T09:24:55.669Z", "total_amount": "0.00", "marketplace": false, "total_tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "total_tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "total_tax_liability_amount": "0.00", "taxable_amount": "0.00", "locked": false, "id": "<id>", "addresses": [], "transaction_items": [{"organization_id": "<id>", "date": "2024-11-23T03:24:58.603Z", "external_product_id": "<id>", "quantity": "1.0", "amount": "0.00", "tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "taxable_amount": "0.00", "exempt": false, "id": "<id>", "tax_items": []}], "type": "PARTIAL_CREDIT_NOTE"}
+          application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-02-23T09:24:55.669Z", "total_amount": "0.00", "total_tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "total_tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "total_tax_liability_amount": "0.00", "taxable_amount": "0.00", "locked": false, "is_duplicate": false, "id": "<id>", "is_deferred_transaction": false, "addresses": [], "transaction_items": [{"organization_id": "<id>", "date": "2024-11-23T03:24:58.603Z", "external_product_id": "<id>", "quantity": "1.0", "amount": "0.00", "tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "taxable_amount": "0.00", "exempt": false, "id": "<id>", "tax_items": [], "is_reverse_charge_self_accounted": false}], "type": "PARTIAL_CREDIT_NOTE"}
         "401":
           application/json: {"detail": "<value>"}
         "422":
@@ -2023,11 +3018,13 @@ examples:
       parameters:
         path:
           transaction_id: "<id>"
+        header:
+          x-organization-id: "org_12345"
       requestBody:
-        application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2024-09-25T05:56:56.167Z", "total_amount": 0, "marketplace": false, "total_tax_amount_imported": 0, "tax_rate_imported": 0, "total_tax_amount_calculated": 0, "tax_rate_calculated": 0, "total_tax_liability_amount": 0, "taxable_amount": 0, "locked": false, "addresses": [], "transaction_items": [], "customer": {}}
+        application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2024-09-25T05:56:56.167Z", "locked": false, "addresses": [], "transaction_items": [], "customer": {}}
       responses:
         "200":
-          application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-04-19T12:47:57.416Z", "total_amount": "0.00", "marketplace": false, "total_tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "total_tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "total_tax_liability_amount": "0.00", "taxable_amount": "0.00", "locked": false, "id": "<id>", "addresses": [{"type": "SHIP_FROM"}], "transaction_items": [{"organization_id": "<id>", "date": "2025-10-27T18:30:02.836Z", "external_product_id": "<id>", "quantity": "1.0", "amount": "0.00", "tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "taxable_amount": "0.00", "exempt": false, "id": "<id>", "tax_items": [{"rule_id": "0000", "rate": "<value>", "amount": "699.74", "name": "<value>"}]}], "type": "SALE"}
+          application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-04-19T12:47:57.416Z", "total_amount": "0.00", "total_tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "total_tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "total_tax_liability_amount": "0.00", "taxable_amount": "0.00", "locked": false, "is_duplicate": false, "id": "<id>", "is_deferred_transaction": false, "addresses": [{"type": "SHIP_FROM", "is_unincorporated": false}], "transaction_items": [{"organization_id": "<id>", "date": "2025-10-27T18:30:02.836Z", "external_product_id": "<id>", "quantity": "1.0", "amount": "0.00", "tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "taxable_amount": "0.00", "exempt": false, "id": "<id>", "tax_items": [{"rule_id": "0000", "rate": "<value>", "amount": "699.74", "name": "<value>"}], "is_reverse_charge_self_accounted": false}], "type": "SALE"}
         "422":
           application/json: {}
   get_transaction_by_id_v1_transactions__transaction_id__get:
@@ -2035,9 +3032,11 @@ examples:
       parameters:
         path:
           transaction_id: "<id>"
+        header:
+          x-organization-id: "org_12345"
       responses:
         "200":
-          application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2024-08-13T05:12:45.031Z", "total_amount": "0.00", "marketplace": false, "total_tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "total_tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "total_tax_liability_amount": "0.00", "taxable_amount": "0.00", "locked": false, "id": "<id>", "addresses": [{"type": "BILL_TO"}], "transaction_items": [], "type": "ARCHIVE"}
+          application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2024-08-13T05:12:45.031Z", "total_amount": "0.00", "total_tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "total_tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "total_tax_liability_amount": "0.00", "taxable_amount": "0.00", "locked": false, "is_duplicate": false, "id": "<id>", "is_deferred_transaction": false, "addresses": [{"type": "BILL_TO", "is_unincorporated": false}], "transaction_items": [], "type": "ARCHIVE"}
         "401":
           application/json: {"detail": "<value>"}
         "422":
@@ -2049,9 +3048,11 @@ examples:
       parameters:
         path:
           filing_id: "<id>"
+        header:
+          x-organization-id: "org_12345"
       responses:
         "200":
-          application/json: [{"organization_id": "<id>", "external_id": "<id>", "date": "2023-08-24T22:51:56.365Z", "total_amount": "0.00", "marketplace": false, "total_tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "total_tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "total_tax_liability_amount": "0.00", "taxable_amount": "0.00", "locked": false, "id": "<id>", "addresses": [{"type": "BILL_FROM"}], "transaction_items": [], "type": "TAX_REFUND"}]
+          application/json: [{"organization_id": "<id>", "external_id": "<id>", "date": "2023-08-24T22:51:56.365Z", "total_amount": "0.00", "marketplace": false, "total_tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "total_tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "total_tax_liability_amount": "0.00", "taxable_amount": "0.00", "locked": false, "is_duplicate": false, "id": "<id>", "is_deferred_transaction": false, "addresses": [{"type": "BILL_FROM", "is_unincorporated": false}], "transaction_items": [], "type": "TAX_REFUND"}]
         "401":
           application/json: {"detail": "<value>"}
         "422":
@@ -2060,18 +3061,24 @@ examples:
           application/json: {"detail": "<value>"}
   estimate_tax_v1_tax_estimate_post:
     speakeasy-default-estimate-tax-v1-tax-estimate-post:
+      parameters:
+        header:
+          x-organization-id: "org_12345"
       requestBody:
-        application/json: {"date": "2025-10-15T06:09:56.760Z", "external_id": "<id>", "currency": "WST", "marketplace": false, "transaction_items": [{"date": "2025-01-28T01:30:14.219Z", "quantity": 1, "amount": 9056.18, "exempt": false}], "addresses": [{"type": "BILL_TO", "state": "Maryland", "postal_code": "76246-6992", "country": "Montserrat"}]}
+        application/json: {"date": "2025-10-15T06:09:56.760Z", "external_id": "<id>", "currency": "WST", "transaction_items": [{"date": "2025-01-28T01:30:14.219Z", "quantity": 1, "amount": 9056.18, "exempt": false, "is_tax_inclusive": false}], "addresses": [{"type": "BILL_TO", "state": "Maryland", "postal_code": "76246-6992", "country": "Montserrat", "is_unincorporated": false}]}
       responses:
         "200":
-          application/json: {"items": [{"date": "2024-01-13T04:47:12.370Z", "external_id": "<id>", "currency": "BND", "marketplace": false, "transaction_items": [{"date": "2025-08-20T01:32:00.299Z", "quantity": "1.0", "amount": "61.49", "exempt": false, "tax_amount": "0.00", "taxable_amount": "0.00", "tax_rate": "0.00"}], "addresses": [], "total_tax_amount_calculated": "0.00", "taxable_amount": "0.00", "tax_rate_calculated": "0.00", "nexus_met": false, "has_active_registration": false}], "total": 435684, "page": 820020, "size": 413328, "pages": 929067}
+          application/json: {"date": "2026-10-15T06:09:56.760Z", "external_id": "<id>", "currency": "WST", "transaction_items": [{"date": "2026-01-28T01:30:14.219Z", "quantity": "1.0", "amount": "905.62", "exempt": false, "is_tax_inclusive": false, "tax_amount": "0.00", "taxable_amount": "0.00", "tax_rate": "0.00"}], "addresses": [{"type": "BILL_TO", "state": "Maryland", "postal_code": "76246-6992", "country": "Montserrat", "is_unincorporated": false}], "total_tax_amount_calculated": "0.00", "taxable_amount": "0.00", "tax_rate_calculated": "0.00", "nexus_met": false, "has_active_registration": false}
         "401":
           application/json: {"detail": "<value>"}
         "422":
           application/json: {"detail": [{"type": "<value>", "loc": ["<value 1>"], "msg": "<value>", "input": "<value>", "ctx": {"key": "<value>", "key1": "<value>", "key2": "<value>"}}]}
         "500":
           application/json: {"detail": "<value>"}
+        "400":
+          application/json: {"detail": "<value>"}
 examplesVersion: 1.0.2
+releaseNotes: "## Ruby SDK Changes:\n* `open_api_sdk.address_validation.search()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response.[]` **Changed** (Breaking ⚠️)\n* `open_api_sdk.address_validation.suggestions()`:  `request` **Changed** (Breaking ⚠️)\n* `open_api_sdk.customers.list()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response.items[]` **Changed** (Breaking ⚠️)\n* `open_api_sdk.customers.create()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `open_api_sdk.customers.get()`: \n  *  `request.x_organization_id` **Added** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error.detail[]` **Changed** (Breaking ⚠️)\n* `open_api_sdk.customers.update()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `open_api_sdk.customers.get_by_external_id()`: \n  *  `request.x_organization_id` **Added** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error.detail[]` **Changed** (Breaking ⚠️)\n* `open_api_sdk.customers.get_transactions()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error.detail[]` **Changed** (Breaking ⚠️)\n* `open_api_sdk.customers.create_transaction()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error.detail[]` **Changed** (Breaking ⚠️)\n* `open_api_sdk.exemptions.list()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response.items[]` **Changed** (Breaking ⚠️)\n* `open_api_sdk.exemptions.create()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `open_api_sdk.exemptions.get()`: \n  *  `request.x_organization_id` **Added** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `open_api_sdk.exemptions.upload_certificate()`:  `request` **Changed** (Breaking ⚠️)\n* `open_api_sdk.exemptions.get_attachments()`: \n  *  `request.x_organization_id` **Added** (Breaking ⚠️)\n* `open_api_sdk.nexus.list()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error.detail[]` **Changed** (Breaking ⚠️)\n* `open_api_sdk.products.get()`: \n  *  `request.x_organization_id` **Added** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `open_api_sdk.products.update()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `open_api_sdk.transactions.list()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response.items[]` **Changed** (Breaking ⚠️)\n* `open_api_sdk.transactions.create()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `open_api_sdk.transactions.get_by_external_id()`: \n  *  `request.x_organization_id` **Added** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `open_api_sdk.transactions.update()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error.detail[]` **Changed** (Breaking ⚠️)\n* `open_api_sdk.transactions.get_by_id()`: \n  *  `request.x_organization_id` **Added** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `open_api_sdk.transactions.get_by_filing_id()`: \n  *  `request.x_organization_id` **Added** (Breaking ⚠️)\n  *  `response.[]` **Changed** (Breaking ⚠️)\n* `open_api_sdk.tax_estimation.estimate_tax()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error` **Changed**\n"
 generatedFiles:
   - .gitattributes
   - .rubocop.yml
