@@ -22,4 +22,14 @@ class KintsugiSDK::Models::Shared::ExemptionRequired
   def jurisdiction=(str_); end
   def customer_id(); end
   def customer_id=(str_); end
+  def country_code(); end
+  def country_code=(str_); end
+  def end_date(); end
+  def end_date=(str_); end
+  def fein(); end
+  def fein=(str_); end
+  def sales_tax_id(); end
+  def sales_tax_id=(str_); end
+  def source(); end
+  def source=(str_); end
 end

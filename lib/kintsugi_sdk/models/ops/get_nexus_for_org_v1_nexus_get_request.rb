@@ -12,34 +12,46 @@ module KintsugiSDK
         extend T::Sig
         include Crystalline::MetadataFields
 
-        # Filter nexuses by disregard view: 'exposed' or 'disregarded'
-        field :disregard_view, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'disregard_view', 'style': 'form', 'explode': true } }
-
-        field :state_code, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'state_code', 'style': 'form', 'explode': true } }
-
-        field :country_code_in, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'country_code__in', 'style': 'form', 'explode': true } }
-
-        field :collected_tax_nexus_met, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'query_param': { 'field_name': 'collected_tax_nexus_met', 'style': 'form', 'explode': true } }
+        # The unique identifier for the organization making the request
+        field :x_organization_id, Crystalline::Nilable.new(::String), { 'header': { 'field_name': 'x-organization-id', 'style': 'simple', 'explode': false } }
         # Return all results without pagination
         field :without_pagination, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'query_param': { 'field_name': 'without_pagination', 'style': 'form', 'explode': true } }
+        # Filter nexuses by disregard view: 'exposed' or 'disregarded'
+        field :disregard_view, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'disregard_view', 'style': 'form', 'explode': true } }
+        # Search nexuses by state code or state name
+        field :search_query, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'search_query', 'style': 'form', 'explode': true } }
 
         field :status_in, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'status__in', 'style': 'form', 'explode': true } }
 
+        field :state_code, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'state_code', 'style': 'form', 'explode': true } }
+
+        field :state_code_in, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'state_code__in', 'style': 'form', 'explode': true } }
+
+        field :country_code_in, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'country_code__in', 'style': 'form', 'explode': true } }
+
+        field :tax_type_in, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'tax_type__in', 'style': 'form', 'explode': true } }
+
         field :order_by, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'order_by', 'style': 'form', 'explode': true } }
+
+        field :collected_tax_nexus_met, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'query_param': { 'field_name': 'collected_tax_nexus_met', 'style': 'form', 'explode': true } }
 
         field :page, Crystalline::Nilable.new(::Integer), { 'query_param': { 'field_name': 'page', 'style': 'form', 'explode': true } }
 
         field :size, Crystalline::Nilable.new(::Integer), { 'query_param': { 'field_name': 'size', 'style': 'form', 'explode': true } }
 
-        sig { params(disregard_view: T.nilable(::String), state_code: T.nilable(::String), country_code_in: T.nilable(::String), collected_tax_nexus_met: T.nilable(T::Boolean), without_pagination: T.nilable(T::Boolean), status_in: T.nilable(::String), order_by: T.nilable(::String), page: T.nilable(::Integer), size: T.nilable(::Integer)).void }
-        def initialize(disregard_view: nil, state_code: nil, country_code_in: nil, collected_tax_nexus_met: nil, without_pagination: false, status_in: 'APPROACHING,NOT_EXPOSED,PENDING_REGISTRATION,EXPOSED,APPROACHING,REGISTERED', order_by: 'state_code,country_code', page: 1, size: 50)
-          @disregard_view = disregard_view
-          @state_code = state_code
-          @country_code_in = country_code_in
-          @collected_tax_nexus_met = collected_tax_nexus_met
+        sig { params(x_organization_id: T.nilable(::String), without_pagination: T.nilable(T::Boolean), disregard_view: T.nilable(::String), search_query: T.nilable(::String), status_in: T.nilable(::String), state_code: T.nilable(::String), state_code_in: T.nilable(::String), country_code_in: T.nilable(::String), tax_type_in: T.nilable(::String), order_by: T.nilable(::String), collected_tax_nexus_met: T.nilable(T::Boolean), page: T.nilable(::Integer), size: T.nilable(::Integer)).void }
+        def initialize(x_organization_id: nil, without_pagination: false, disregard_view: nil, search_query: nil, status_in: nil, state_code: nil, state_code_in: nil, country_code_in: nil, tax_type_in: nil, order_by: nil, collected_tax_nexus_met: nil, page: 1, size: 50)
+          @x_organization_id = x_organization_id
           @without_pagination = without_pagination
+          @disregard_view = disregard_view
+          @search_query = search_query
           @status_in = status_in
+          @state_code = state_code
+          @state_code_in = state_code_in
+          @country_code_in = country_code_in
+          @tax_type_in = tax_type_in
           @order_by = order_by
+          @collected_tax_nexus_met = collected_tax_nexus_met
           @page = page
           @size = size
         end
@@ -47,13 +59,17 @@ module KintsugiSDK
         sig { params(other: T.untyped).returns(T::Boolean) }
         def ==(other)
           return false unless other.is_a? self.class
-          return false unless @disregard_view == other.disregard_view
-          return false unless @state_code == other.state_code
-          return false unless @country_code_in == other.country_code_in
-          return false unless @collected_tax_nexus_met == other.collected_tax_nexus_met
+          return false unless @x_organization_id == other.x_organization_id
           return false unless @without_pagination == other.without_pagination
+          return false unless @disregard_view == other.disregard_view
+          return false unless @search_query == other.search_query
           return false unless @status_in == other.status_in
+          return false unless @state_code == other.state_code
+          return false unless @state_code_in == other.state_code_in
+          return false unless @country_code_in == other.country_code_in
+          return false unless @tax_type_in == other.tax_type_in
           return false unless @order_by == other.order_by
+          return false unless @collected_tax_nexus_met == other.collected_tax_nexus_met
           return false unless @page == other.page
           return false unless @size == other.size
           true

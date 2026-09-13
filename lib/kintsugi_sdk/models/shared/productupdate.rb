@@ -24,6 +24,8 @@ module KintsugiSDK
         field :product_subcategory, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('product_subcategory'), required: true } }
         # Indicates whether the product is tax-exempt.
         field :tax_exempt, Crystalline::Boolean.new, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('tax_exempt'), required: true } }
+
+        field :status, Crystalline::Nilable.new(Models::Shared::ProductStatusEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('status'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::ProductStatusEnum, true) } }
         # The unique identifier of the product to be updated.
         field :id, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('id') } }
         # External identifier provided for the product,
@@ -33,22 +35,20 @@ module KintsugiSDK
         field :sku, Crystalline::Nilable.new(Crystalline::Array.new(::String)), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('sku') } }
         # Description of the product.
         field :description, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('description') } }
-
-        field :status, Crystalline::Nilable.new(Models::Shared::ProductStatusEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('status'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::ProductStatusEnum, true) } }
         # Indicates if the product classification failed.
         field :classification_failed, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('classification_failed') } }
 
-        sig { params(name: ::String, product_category: ::String, product_subcategory: ::String, tax_exempt: T::Boolean, id: T.nilable(::String), external_id: T.nilable(::String), sku: T.nilable(T::Array[::String]), description: T.nilable(::String), status: T.nilable(Models::Shared::ProductStatusEnum), classification_failed: T.nilable(T::Boolean)).void }
-        def initialize(name:, product_category:, product_subcategory:, tax_exempt:, id: nil, external_id: nil, sku: nil, description: nil, status: nil, classification_failed: false)
+        sig { params(name: ::String, product_category: ::String, product_subcategory: ::String, tax_exempt: T::Boolean, status: T.nilable(Models::Shared::ProductStatusEnum), id: T.nilable(::String), external_id: T.nilable(::String), sku: T.nilable(T::Array[::String]), description: T.nilable(::String), classification_failed: T.nilable(T::Boolean)).void }
+        def initialize(name:, product_category:, product_subcategory:, tax_exempt:, status: nil, id: nil, external_id: nil, sku: nil, description: nil, classification_failed: nil)
           @name = name
           @product_category = product_category
           @product_subcategory = product_subcategory
           @tax_exempt = tax_exempt
+          @status = status
           @id = id
           @external_id = external_id
           @sku = sku
           @description = description
-          @status = status
           @classification_failed = classification_failed
         end
 
@@ -59,11 +59,11 @@ module KintsugiSDK
           return false unless @product_category == other.product_category
           return false unless @product_subcategory == other.product_subcategory
           return false unless @tax_exempt == other.tax_exempt
+          return false unless @status == other.status
           return false unless @id == other.id
           return false unless @external_id == other.external_id
           return false unless @sku == other.sku
           return false unless @description == other.description
-          return false unless @status == other.status
           return false unless @classification_failed == other.classification_failed
           true
         end

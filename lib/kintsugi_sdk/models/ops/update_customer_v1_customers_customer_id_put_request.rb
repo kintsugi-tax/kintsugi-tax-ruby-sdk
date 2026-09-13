@@ -16,11 +16,14 @@ module KintsugiSDK
         field :customer_id, ::String, { 'path_param': { 'field_name': 'customer_id', 'style': 'simple', 'explode': false } }
 
         field :customer_update, Models::Shared::CustomerUpdate, { 'request': { 'media_type': 'application/json' } }
+        # The unique identifier for the organization making the request
+        field :x_organization_id, Crystalline::Nilable.new(::String), { 'header': { 'field_name': 'x-organization-id', 'style': 'simple', 'explode': false } }
 
-        sig { params(customer_id: ::String, customer_update: Models::Shared::CustomerUpdate).void }
-        def initialize(customer_id:, customer_update:)
+        sig { params(customer_id: ::String, customer_update: Models::Shared::CustomerUpdate, x_organization_id: T.nilable(::String)).void }
+        def initialize(customer_id:, customer_update:, x_organization_id: nil)
           @customer_id = customer_id
           @customer_update = customer_update
+          @x_organization_id = x_organization_id
         end
 
         sig { params(other: T.untyped).returns(T::Boolean) }
@@ -28,6 +31,7 @@ module KintsugiSDK
           return false unless other.is_a? self.class
           return false unless @customer_id == other.customer_id
           return false unless @customer_update == other.customer_update
+          return false unless @x_organization_id == other.x_organization_id
           true
         end
       end
