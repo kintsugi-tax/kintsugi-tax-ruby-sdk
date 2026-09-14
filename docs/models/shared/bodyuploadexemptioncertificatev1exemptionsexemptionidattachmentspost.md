@@ -5,4 +5,4 @@
 
 | Field                                                            | Type                                                             | Required                                                         | Description                                                      |
 | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- |
-| `file`                                                           | [Models::Shared::File](../../models/shared/file.md)              | :heavy_check_mark:                                               | The file to be uploaded. Supported format: PDF. Max size: 10 MB. |
+| `file`                                                           | *::String*                                                       | :heavy_check_mark:                                               | The file to be uploaded. Supported format: PDF. Max size: 10 MB. |
