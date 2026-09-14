@@ -12,4 +12,6 @@ class KintsugiSDK::Models::Ops::UploadExemptionCertRequest
   def exemption_id=(str_); end
   def body_upload_exemption_certificate_v1_exemptions_exemption_id_attachments_post(); end
   def body_upload_exemption_certificate_v1_exemptions_exemption_id_attachments_post=(str_); end
+  def x_organization_id(); end
+  def x_organization_id=(str_); end
 end

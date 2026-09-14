@@ -14,7 +14,7 @@ Developer-friendly & type-safe Ruby SDK specifically catered to leverage Kintsug
 <!-- Start Summary [summary] -->
 ## Summary
 
-
+Kintsugi Customer API: Publicly documented Kintsugi Customer API endpoints. The source (openapi/_source/openapi-master.json) is the platform spec filtered to the documented customer surface (openapi/customer-endpoints.json); scripts/build-specs.mjs re-applies that filter here. Do not edit by hand.
 <!-- End Summary [summary] -->
 
 <!-- Start Table of Contents [toc] -->
@@ -53,7 +53,9 @@ gem install kintsugi_sdk
 require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
-s = ::KintsugiSDK::OpenApiSDK.new
+s = ::KintsugiSDK::OpenApiSDK.new(
+  api_key_header: '<YOUR_API_KEY_HERE>'
+)
 
 req = Models::Shared::AddressBase.new(
   phone: '555-123-4567',
@@ -66,9 +68,7 @@ req = Models::Shared::AddressBase.new(
   country: Models::Shared::CountryCodeEnum::US,
   full_address: '1600 Amphitheatre Parkway, Mountain View, CA 94043'
 )
-res = s.address_validation.search(request: req, security: Models::Ops::SearchV1AddressValidationSearchPostSecurity.new(
-  api_key_header: '<YOUR_API_KEY_HERE>'
-))
+res = s.address_validation.search(request: req)
 
 unless res.nil?
   # handle response
@@ -82,52 +82,20 @@ end
 
 ### Per-Client Security Schemes
 
-This SDK supports the following security schemes globally:
+This SDK supports the following security scheme globally:
 
 | Name             | Type   | Scheme  |
 | ---------------- | ------ | ------- |
 | `api_key_header` | apiKey | API key |
-| `custom_header`  | apiKey | API key |
 
-You can set the security parameters through the `security` optional parameter when initializing the SDK client instance. The selected scheme will be used by default to authenticate with the API for all operations that support it. For example:
+To authenticate with the API the `api_key_header` parameter must be set when initializing the SDK client instance. For example:
 ```ruby
 require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-  security: Models::Shared::Security.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-    custom_header: '<YOUR_API_KEY_HERE>'
-  )
+  api_key_header: '<YOUR_API_KEY_HERE>'
 )
-
-req = Models::Shared::ValidationAddress.new(
-  line1: '1600 Amphitheatre Parkway',
-  line2: '',
-  line3: '',
-  city: 'Mountain View',
-  state: 'CA',
-  postal_code: '94043',
-  id: 215,
-  county: '',
-  full_address: '1600 Amphitheatre Parkway, Mountain View, CA 94043'
-)
-res = s.address_validation.suggestions(request: req)
-
-unless res.nil?
-  # handle response
-end
-
-```
-
-### Per-Operation Security Schemes
-
-Some operations in this SDK require the security scheme to be specified at the request level. For example:
-```ruby
-require 'kintsugi_sdk'
-
-Models = ::KintsugiSDK::Models
-s = ::KintsugiSDK::OpenApiSDK.new
 
 req = Models::Shared::AddressBase.new(
   phone: '555-123-4567',
@@ -140,9 +108,7 @@ req = Models::Shared::AddressBase.new(
   country: Models::Shared::CountryCodeEnum::US,
   full_address: '1600 Amphitheatre Parkway, Mountain View, CA 94043'
 )
-res = s.address_validation.search(request: req, security: Models::Ops::SearchV1AddressValidationSearchPostSecurity.new(
-  api_key_header: '<YOUR_API_KEY_HERE>'
-))
+res = s.address_validation.search(request: req)
 
 unless res.nil?
   # handle response
@@ -164,43 +130,43 @@ end
 
 ### [Customers](docs/sdks/customers/README.md)
 
-* [list](docs/sdks/customers/README.md#list) - Get Customers
-* [create](docs/sdks/customers/README.md#create) - Create Customer
-* [get](docs/sdks/customers/README.md#get) - Get Customer By Id
-* [update](docs/sdks/customers/README.md#update) - Update Customer
-* [get_by_external_id](docs/sdks/customers/README.md#get_by_external_id) - Get Customer By External Id
-* [get_transactions](docs/sdks/customers/README.md#get_transactions) - Get Transactions By Customer Id
-* [create_transaction](docs/sdks/customers/README.md#create_transaction) - Create Transaction By Customer Id
+* [list](docs/sdks/customers/README.md#list) - Get customers
+* [create](docs/sdks/customers/README.md#create) - Create customer
+* [get_by_external_id](docs/sdks/customers/README.md#get_by_external_id) - Get customer by external id
+* [get](docs/sdks/customers/README.md#get) - Get customer by id
+* [update](docs/sdks/customers/README.md#update) - Update customer
+* [get_transactions](docs/sdks/customers/README.md#get_transactions) - Get transactions by customer id
+* [create_transaction](docs/sdks/customers/README.md#create_transaction) - Create transaction by customer id
 
 ### [Exemptions](docs/sdks/exemptions/README.md)
 
-* [list](docs/sdks/exemptions/README.md#list) - Get Exemptions
-* [create](docs/sdks/exemptions/README.md#create) - Create Exemption
-* [get](docs/sdks/exemptions/README.md#get) - Get Exemption By Id
-* [upload_certificate](docs/sdks/exemptions/README.md#upload_certificate) - Upload Exemption Certificate
-* [get_attachments](docs/sdks/exemptions/README.md#get_attachments) - Get Attachments For Exemption
+* [list](docs/sdks/exemptions/README.md#list) - Get exemptions
+* [create](docs/sdks/exemptions/README.md#create) - Create exemption
+* [get](docs/sdks/exemptions/README.md#get) - Get exemption by id
+* [get_attachments](docs/sdks/exemptions/README.md#get_attachments) - Get attachments for exemption
+* [upload_certificate](docs/sdks/exemptions/README.md#upload_certificate) - Upload exemption certificate
 
 ### [Nexus](docs/sdks/nexus/README.md)
 
-* [list](docs/sdks/nexus/README.md#list) - Get Nexus For Org
+* [list](docs/sdks/nexus/README.md#list) - Get nexus for org
 
 ### [Products](docs/sdks/products/README.md)
 
-* [get](docs/sdks/products/README.md#get) - Get Product By Id
-* [update](docs/sdks/products/README.md#update) - Update Product
+* [get](docs/sdks/products/README.md#get) - Get product by id
+* [update](docs/sdks/products/README.md#update) - Update product
 
 ### [TaxEstimation](docs/sdks/taxestimation/README.md)
 
-* [estimate_tax](docs/sdks/taxestimation/README.md#estimate_tax) - Estimate Tax
+* [estimate_tax](docs/sdks/taxestimation/README.md#estimate_tax) - Estimate tax
 
 ### [Transactions](docs/sdks/transactions/README.md)
 
-* [list](docs/sdks/transactions/README.md#list) - Get Transactions
-* [create](docs/sdks/transactions/README.md#create) - Create Transaction
-* [get_by_external_id](docs/sdks/transactions/README.md#get_by_external_id) - Get Transaction By External Id
-* [update](docs/sdks/transactions/README.md#update) - Update Transaction
-* [get_by_id](docs/sdks/transactions/README.md#get_by_id) - Get Transaction By Id
-* [get_by_filing_id](docs/sdks/transactions/README.md#get_by_filing_id) - Get Transactions By Filing Id
+* [list](docs/sdks/transactions/README.md#list) - Get transactions
+* [create](docs/sdks/transactions/README.md#create) - Create transaction
+* [get_by_external_id](docs/sdks/transactions/README.md#get_by_external_id) - Get transaction by external id
+* [get_by_filing_id](docs/sdks/transactions/README.md#get_by_filing_id) - Get transactions by filing id
+* [get_by_id](docs/sdks/transactions/README.md#get_by_id) - Get transaction by id
+* [update](docs/sdks/transactions/README.md#update) - Update transaction
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -234,7 +200,9 @@ When custom error responses are specified for an operation, the SDK may also thr
 require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
-s = ::KintsugiSDK::OpenApiSDK.new
+s = ::KintsugiSDK::OpenApiSDK.new(
+  api_key_header: '<YOUR_API_KEY_HERE>'
+)
 
 begin
     req = Models::Shared::AddressBase.new(
@@ -248,9 +216,7 @@ begin
       country: Models::Shared::CountryCodeEnum::US,
       full_address: '1600 Amphitheatre Parkway, Mountain View, CA 94043'
     )
-    res = s.address_validation.search(request: req, security: Models::Ops::SearchV1AddressValidationSearchPostSecurity.new(
-      api_key_header: '<YOUR_API_KEY_HERE>'
-    ))
+    res = s.address_validation.search(request: req)
 
     unless res.nil?
       # handle response
@@ -283,7 +249,8 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-  server_url: 'https://api.trykintsugi.com'
+  server_url: 'https://api.trykintsugi.com',
+  api_key_header: '<YOUR_API_KEY_HERE>'
 )
 
 req = Models::Shared::AddressBase.new(
@@ -297,9 +264,7 @@ req = Models::Shared::AddressBase.new(
   country: Models::Shared::CountryCodeEnum::US,
   full_address: '1600 Amphitheatre Parkway, Mountain View, CA 94043'
 )
-res = s.address_validation.search(request: req, security: Models::Ops::SearchV1AddressValidationSearchPostSecurity.new(
-  api_key_header: '<YOUR_API_KEY_HERE>'
-))
+res = s.address_validation.search(request: req)
 
 unless res.nil?
   # handle response

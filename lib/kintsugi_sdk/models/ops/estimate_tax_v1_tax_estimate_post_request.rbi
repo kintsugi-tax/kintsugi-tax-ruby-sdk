@@ -12,4 +12,6 @@ class KintsugiSDK::Models::Ops::EstimateTaxV1TaxEstimatePostRequest
   def transaction_estimate_public_request=(str_); end
   def simulate_nexus_met(); end
   def simulate_nexus_met=(str_); end
+  def x_organization_id(); end
+  def x_organization_id=(str_); end
 end
