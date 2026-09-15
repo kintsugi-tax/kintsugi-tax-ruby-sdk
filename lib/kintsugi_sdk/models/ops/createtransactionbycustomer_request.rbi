@@ -12,4 +12,6 @@ class KintsugiSDK::Models::Ops::CreateTransactionByCustomerRequest
   def customer_id=(str_); end
   def transaction_create(); end
   def transaction_create=(str_); end
+  def x_organization_id(); end
+  def x_organization_id=(str_); end
 end

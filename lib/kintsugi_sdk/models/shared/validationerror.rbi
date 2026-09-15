@@ -14,4 +14,8 @@ class KintsugiSDK::Models::Shared::ValidationError
   def msg=(str_); end
   def type(); end
   def type=(str_); end
+  def input(); end
+  def input=(str_); end
+  def ctx(); end
+  def ctx=(str_); end
 end

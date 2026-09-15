@@ -12,6 +12,12 @@ module KintsugiSDK
         extend T::Sig
         include Crystalline::MetadataFields
 
+
+        field :status, Crystalline::Nilable.new(Models::Shared::StatusEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('status'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::StatusEnum, true) } }
+
+        field :address_status, Crystalline::Nilable.new(Models::Shared::AddressStatus), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('address_status'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::AddressStatus, true) } }
+        # Customer tax registrations associated with the customer.
+        field :customer_tax_registrations, Crystalline::Nilable.new(Crystalline::Array.new(Models::Shared::CustomerTaxRegistrationRead)), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('customer_tax_registrations') } }
         # Customer's phone number
         field :phone, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('phone') } }
         # Primary street address.
@@ -26,7 +32,7 @@ module KintsugiSDK
         field :state, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('state') } }
         # ZIP or Postal code of the customer.
         field :postal_code, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('postal_code') } }
-
+        # Country code in ISO 3166-1 alpha-2 format
         field :country, Crystalline::Nilable.new(Models::Shared::CountryCodeEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('country'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::CountryCodeEnum, true) } }
         # Complete address string of the customer, which can be used as an alternative to individual fields.
         field :full_address, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('full_address') } }
@@ -34,25 +40,24 @@ module KintsugiSDK
         field :name, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('name') } }
         # External identifier associated with the customer.
         field :external_id, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('external_id') } }
-
-        field :status, Crystalline::Nilable.new(Models::Shared::StatusEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('status'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::StatusEnum, true) } }
         # Customer's email address
         field :email, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('email') } }
-
+        # Registered or legal business name of the customer.
+        field :company_name, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('company_name') } }
+        # Source of the customer's record.
         field :source, Crystalline::Nilable.new(Models::Shared::SourceEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('source'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::SourceEnum, true) } }
         # Identifier for the connection source, if applicable.
         field :connection_id, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('connection_id') } }
-
-        field :address_status, Crystalline::Nilable.new(Models::Shared::AddressStatus), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('address_status'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::AddressStatus, true) } }
         # Registration number of the customer.
         field :registration_number, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('registration_number') } }
         # External friendly identifier associated with the customer. We need it for netsuite.
         field :external_friendly_id, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('external_friendly_id') } }
-        # Customer tax registrations associated with the customer.
-        field :customer_tax_registrations, Crystalline::Nilable.new(Crystalline::Array.new(Models::Shared::CustomerTaxRegistrationRead)), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('customer_tax_registrations') } }
 
-        sig { params(phone: T.nilable(::String), street_1: T.nilable(::String), street_2: T.nilable(::String), city: T.nilable(::String), county: T.nilable(::String), state: T.nilable(::String), postal_code: T.nilable(::String), country: T.nilable(Models::Shared::CountryCodeEnum), full_address: T.nilable(::String), name: T.nilable(::String), external_id: T.nilable(::String), status: T.nilable(Models::Shared::StatusEnum), email: T.nilable(::String), source: T.nilable(Models::Shared::SourceEnum), connection_id: T.nilable(::String), address_status: T.nilable(Models::Shared::AddressStatus), registration_number: T.nilable(::String), external_friendly_id: T.nilable(::String), customer_tax_registrations: T.nilable(T::Array[Models::Shared::CustomerTaxRegistrationRead])).void }
-        def initialize(phone: nil, street_1: nil, street_2: nil, city: nil, county: nil, state: nil, postal_code: nil, country: nil, full_address: nil, name: nil, external_id: nil, status: nil, email: nil, source: nil, connection_id: nil, address_status: nil, registration_number: nil, external_friendly_id: nil, customer_tax_registrations: nil)
+        sig { params(status: T.nilable(Models::Shared::StatusEnum), address_status: T.nilable(Models::Shared::AddressStatus), customer_tax_registrations: T.nilable(T::Array[Models::Shared::CustomerTaxRegistrationRead]), phone: T.nilable(::String), street_1: T.nilable(::String), street_2: T.nilable(::String), city: T.nilable(::String), county: T.nilable(::String), state: T.nilable(::String), postal_code: T.nilable(::String), country: T.nilable(Models::Shared::CountryCodeEnum), full_address: T.nilable(::String), name: T.nilable(::String), external_id: T.nilable(::String), email: T.nilable(::String), company_name: T.nilable(::String), source: T.nilable(Models::Shared::SourceEnum), connection_id: T.nilable(::String), registration_number: T.nilable(::String), external_friendly_id: T.nilable(::String)).void }
+        def initialize(status: nil, address_status: nil, customer_tax_registrations: nil, phone: nil, street_1: nil, street_2: nil, city: nil, county: nil, state: nil, postal_code: nil, country: nil, full_address: nil, name: nil, external_id: nil, email: nil, company_name: nil, source: nil, connection_id: nil, registration_number: nil, external_friendly_id: nil)
+          @status = status
+          @address_status = address_status
+          @customer_tax_registrations = customer_tax_registrations
           @phone = phone
           @street_1 = street_1
           @street_2 = street_2
@@ -64,19 +69,20 @@ module KintsugiSDK
           @full_address = full_address
           @name = name
           @external_id = external_id
-          @status = status
           @email = email
+          @company_name = company_name
           @source = source
           @connection_id = connection_id
-          @address_status = address_status
           @registration_number = registration_number
           @external_friendly_id = external_friendly_id
-          @customer_tax_registrations = customer_tax_registrations
         end
 
         sig { params(other: T.untyped).returns(T::Boolean) }
         def ==(other)
           return false unless other.is_a? self.class
+          return false unless @status == other.status
+          return false unless @address_status == other.address_status
+          return false unless @customer_tax_registrations == other.customer_tax_registrations
           return false unless @phone == other.phone
           return false unless @street_1 == other.street_1
           return false unless @street_2 == other.street_2
@@ -88,14 +94,12 @@ module KintsugiSDK
           return false unless @full_address == other.full_address
           return false unless @name == other.name
           return false unless @external_id == other.external_id
-          return false unless @status == other.status
           return false unless @email == other.email
+          return false unless @company_name == other.company_name
           return false unless @source == other.source
           return false unless @connection_id == other.connection_id
-          return false unless @address_status == other.address_status
           return false unless @registration_number == other.registration_number
           return false unless @external_friendly_id == other.external_friendly_id
-          return false unless @customer_tax_registrations == other.customer_tax_registrations
           true
         end
       end
