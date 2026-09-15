@@ -12,6 +12,8 @@ class KintsugiSDK::Models::Shared::TransactionItemEstimateResponse
   def date=(str_); end
   def amount(); end
   def amount=(str_); end
+  def tax_items(); end
+  def tax_items=(str_); end
   def external_id(); end
   def external_id=(str_); end
   def description(); end
@@ -28,18 +30,18 @@ class KintsugiSDK::Models::Shared::TransactionItemEstimateResponse
   def product_subcategory=(str_); end
   def product_category(); end
   def product_category=(str_); end
-  def exempt_reason(); end
-  def exempt_reason=(str_); end
-  def tax_items(); end
-  def tax_items=(str_); end
   def quantity(); end
   def quantity=(str_); end
   def exempt(); end
   def exempt=(str_); end
+  def is_tax_inclusive(); end
+  def is_tax_inclusive=(str_); end
   def tax_amount(); end
   def tax_amount=(str_); end
   def taxable_amount(); end
   def taxable_amount=(str_); end
   def tax_rate(); end
   def tax_rate=(str_); end
+  def exempt_reason(); end
+  def exempt_reason=(str_); end
 end

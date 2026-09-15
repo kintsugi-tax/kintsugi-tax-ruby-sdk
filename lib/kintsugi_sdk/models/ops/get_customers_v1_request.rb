@@ -12,27 +12,33 @@ module KintsugiSDK
         extend T::Sig
         include Crystalline::MetadataFields
 
+        # The unique identifier for the organization making the request
+        field :x_organization_id, Crystalline::Nilable.new(::String), { 'header': { 'field_name': 'x-organization-id', 'style': 'simple', 'explode': false } }
         # Search term to filter customers by name or other details
         field :search_query, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'search_query', 'style': 'form', 'explode': true } }
         # Country code in ISO 3166-1 alpha-2 format (e.g., 'US')
-        field :country, Crystalline::Nilable.new(Crystalline::Array.new(Models::Shared::CountryCodeEnum)), { 'query_param': { 'field_name': 'country', 'style': 'form', 'explode': true } }
+        field :country, Crystalline::Nilable.new(Crystalline::Array.new(Crystalline::Union.new(Models::Shared::CountryCodeEnum, ::String))), { 'query_param': { 'field_name': 'country', 'style': 'form', 'explode': true } }
         # State or province code to filter customers
         field :state, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'state', 'style': 'form', 'explode': true } }
         # Filter customers by source (comma-separated)
         field :source_in, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'source__in', 'style': 'form', 'explode': true } }
+        # Filter customers by connection ID (comma-separated)
+        field :connection_id_in, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'connection_id__in', 'style': 'form', 'explode': true } }
         # Comma-separated list of fields to sort results by.
         field :order_by, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'order_by', 'style': 'form', 'explode': true } }
-        # Page number
+
         field :page, Crystalline::Nilable.new(::Integer), { 'query_param': { 'field_name': 'page', 'style': 'form', 'explode': true } }
-        # Page size
+
         field :size, Crystalline::Nilable.new(::Integer), { 'query_param': { 'field_name': 'size', 'style': 'form', 'explode': true } }
 
-        sig { params(search_query: T.nilable(::String), country: T.nilable(T::Array[Models::Shared::CountryCodeEnum]), state: T.nilable(::String), source_in: T.nilable(::String), order_by: T.nilable(::String), page: T.nilable(::Integer), size: T.nilable(::Integer)).void }
-        def initialize(search_query: nil, country: nil, state: nil, source_in: nil, order_by: nil, page: 1, size: 50)
+        sig { params(x_organization_id: T.nilable(::String), search_query: T.nilable(::String), country: T.nilable(T::Array[T.any(Models::Shared::CountryCodeEnum, ::String)]), state: T.nilable(::String), source_in: T.nilable(::String), connection_id_in: T.nilable(::String), order_by: T.nilable(::String), page: T.nilable(::Integer), size: T.nilable(::Integer)).void }
+        def initialize(x_organization_id: nil, search_query: nil, country: nil, state: nil, source_in: nil, connection_id_in: nil, order_by: nil, page: 1, size: 50)
+          @x_organization_id = x_organization_id
           @search_query = search_query
           @country = country
           @state = state
           @source_in = source_in
+          @connection_id_in = connection_id_in
           @order_by = order_by
           @page = page
           @size = size
@@ -41,10 +47,12 @@ module KintsugiSDK
         sig { params(other: T.untyped).returns(T::Boolean) }
         def ==(other)
           return false unless other.is_a? self.class
+          return false unless @x_organization_id == other.x_organization_id
           return false unless @search_query == other.search_query
           return false unless @country == other.country
           return false unless @state == other.state
           return false unless @source_in == other.source_in
+          return false unless @connection_id_in == other.connection_id_in
           return false unless @order_by == other.order_by
           return false unless @page == other.page
           return false unless @size == other.size

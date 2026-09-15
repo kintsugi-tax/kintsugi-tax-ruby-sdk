@@ -13,7 +13,7 @@ module KintsugiSDK
         include Crystalline::MetadataFields
 
 
-        field :items, Crystalline::Array.new(Models::Shared::BackendSrcExemptionsModelsExemptionRead), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('items'), required: true } }
+        field :items, Crystalline::Array.new(Models::Shared::BackendSrcExemptionsSchemasExemptionExemptionRead), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('items'), required: true } }
 
         field :total, ::Integer, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('total'), required: true } }
 
@@ -23,7 +23,7 @@ module KintsugiSDK
 
         field :pages, ::Integer, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('pages'), required: true } }
 
-        sig { params(items: T::Array[Models::Shared::BackendSrcExemptionsModelsExemptionRead], total: ::Integer, page: ::Integer, size: ::Integer, pages: ::Integer).void }
+        sig { params(items: T::Array[Models::Shared::BackendSrcExemptionsSchemasExemptionExemptionRead], total: ::Integer, page: ::Integer, size: ::Integer, pages: ::Integer).void }
         def initialize(items:, total:, page:, size:, pages:)
           @items = items
           @total = total

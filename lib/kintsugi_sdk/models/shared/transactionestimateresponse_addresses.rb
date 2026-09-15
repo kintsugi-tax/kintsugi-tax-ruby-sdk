@@ -33,15 +33,17 @@ module KintsugiSDK
         field :county, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('county') } }
         # Complete address string of the customer, which can be used as an alternative to individual fields.
         field :full_address, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('full_address') } }
-        # Status of the address. Deprecated and ignored.
+        # Deprecated: ignored on estimate. Accepted for backward compatibility; each address is validated from structured fields.
         #
         # @deprecated true: This will be removed in a future release, please migrate away from it as soon as possible.
         field :status, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('status') } }
         # Additional enriched fields related to the address.
         field :enriched_fields, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('enriched_fields') } }
+        # If true, city-level tax rates are not applied for this address.
+        field :is_unincorporated, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('is_unincorporated') } }
 
-        sig { params(type: Models::Shared::TransactionEstimateResponseType, state: ::String, postal_code: ::String, country: ::String, phone: T.nilable(::String), street_1: T.nilable(::String), street_2: T.nilable(::String), city: T.nilable(::String), county: T.nilable(::String), full_address: T.nilable(::String), status: T.nilable(::String), enriched_fields: T.nilable(::String)).void }
-        def initialize(type:, state:, postal_code:, country:, phone: nil, street_1: nil, street_2: nil, city: nil, county: nil, full_address: nil, status: nil, enriched_fields: nil)
+        sig { params(type: Models::Shared::TransactionEstimateResponseType, state: ::String, postal_code: ::String, country: ::String, phone: T.nilable(::String), street_1: T.nilable(::String), street_2: T.nilable(::String), city: T.nilable(::String), county: T.nilable(::String), full_address: T.nilable(::String), status: T.nilable(::String), enriched_fields: T.nilable(::String), is_unincorporated: T.nilable(T::Boolean)).void }
+        def initialize(type:, state:, postal_code:, country:, phone: nil, street_1: nil, street_2: nil, city: nil, county: nil, full_address: nil, status: nil, enriched_fields: nil, is_unincorporated: false)
           @type = type
           @state = state
           @postal_code = postal_code
@@ -54,6 +56,7 @@ module KintsugiSDK
           @full_address = full_address
           @status = status
           @enriched_fields = enriched_fields
+          @is_unincorporated = is_unincorporated
         end
 
         sig { params(other: T.untyped).returns(T::Boolean) }
@@ -71,6 +74,7 @@ module KintsugiSDK
           return false unless @full_address == other.full_address
           return false unless @status == other.status
           return false unless @enriched_fields == other.enriched_fields
+          return false unless @is_unincorporated == other.is_unincorporated
           true
         end
       end

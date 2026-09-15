@@ -12,6 +12,7 @@ module KintsugiSDK
         enums do
           CANADA_FEDERAL = new('CANADA_FEDERAL')
           EU_AGGREGATOR = new('EU_AGGREGATOR')
+          EU_IOSS = new('EU_IOSS')
           STATE = new('STATE')
           EU_MEMBER_STATE = new('EU_MEMBER_STATE')
         end

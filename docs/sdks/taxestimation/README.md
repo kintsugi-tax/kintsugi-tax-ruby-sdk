@@ -4,7 +4,7 @@
 
 ### Available Operations
 
-* [estimate_tax](#estimate_tax) - Estimate Tax
+* [estimate_tax](#estimate_tax) - Estimate tax
 
 ## estimate_tax
 
@@ -20,13 +20,11 @@ require 'kintsugi_sdk'
 
 Models = ::KintsugiSDK::Models
 s = ::KintsugiSDK::OpenApiSDK.new(
-  security: Models::Shared::Security.new(
-    api_key_header: '<YOUR_API_KEY_HERE>',
-    custom_header: '<YOUR_API_KEY_HERE>'
-  )
+  api_key_header: '<YOUR_API_KEY_HERE>'
 )
 
 req = Models::Ops::EstimateTaxV1TaxEstimatePostRequest.new(
+  x_organization_id: 'org_12345',
   transaction_estimate_public_request: Models::Shared::TransactionEstimatePublicRequest.new(
     date: DateTime.iso8601('2025-01-23T13:01:29.949Z'),
     external_id: 'txn_12345',
@@ -43,6 +41,7 @@ req = Models::Ops::EstimateTaxV1TaxEstimatePostRequest.new(
         external_id: 'item_B',
         date: DateTime.iso8601('2024-10-28T10:00:00Z'),
         external_product_id: 'prod_xyz',
+        quantity: 1.0,
         amount: 75.5
       ),
     ],
@@ -74,13 +73,13 @@ end
 
 ### Response
 
-**[T.nilable(Models::Shared::PageTransactionEstimateResponse)](../../models/operations/pagetransactionestimateresponse.md)**
+**[T.nilable(Models::Shared::TransactionEstimateResponse)](../../models/operations/transactionestimateresponse.md)**
 
 ### Errors
 
 | Error Type                                                              | Status Code                                                             | Content Type                                                            |
 | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| Models::Errors::ErrorResponse                                           | 401                                                                     | application/json                                                        |
+| Models::Errors::ErrorResponse                                           | 400, 401                                                                | application/json                                                        |
 | Models::Errors::BackendSrcTaxEstimationResponsesValidationErrorResponse | 422                                                                     | application/json                                                        |
-| Models::Errors::ErrorResponse                                           | 500                                                                     | application/json                                                        |
+| Models::Errors::ErrorResponse                                           | 500, 503                                                                | application/json                                                        |
 | Errors::APIError                                                        | 4XX, 5XX                                                                | \*/\*                                                                   |
