@@ -13,7 +13,7 @@ module KintsugiSDK
         include Crystalline::MetadataFields
 
         # Date/time of item.
-        field :date, ::DateTime, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('date'), required: true, 'decoder': ::KintsugiSDK::Utils.datetime_from_iso_format(false) } }
+        field :date, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('date'), required: true } }
         # External product identifier.
         field :external_product_id, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('external_product_id'), required: true } }
         # The unique transaction item identifier.
@@ -78,9 +78,13 @@ module KintsugiSDK
         field :is_reverse_charge_self_accounted, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('is_reverse_charge_self_accounted') } }
         # Input VAT recoverability 0-100. Blank means 100%.
         field :recoverability_percent, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('recoverability_percent') } }
+        # VAT recoverable on this line in the transaction's currency, after the line's recoverability percentage and the organization's pro-rata recovery rate. 0.00 for sales and outside the EU and UK.
+        field :recoverable_input_vat, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('recoverable_input_vat') } }
+        # Recoverable VAT on this line in the destination currency. Null when the line has no converted amount.
+        field :converted_recoverable_input_vat, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('converted_recoverable_input_vat') } }
 
-        sig { params(date: ::DateTime, external_product_id: ::String, id: ::String, tax_items: T::Array[Models::Shared::TaxItemRead], organization_id: T.nilable(::String), external_id: T.nilable(::String), description: T.nilable(::String), product: T.nilable(::String), product_id: T.nilable(::String), product_name: T.nilable(::String), product_description: T.nilable(::String), quantity: T.nilable(::String), amount: T.nilable(::String), tax_amount_imported: T.nilable(::String), tax_rate_imported: T.nilable(::String), tax_amount_calculated: T.nilable(::String), tax_rate_calculated: T.nilable(::String), original_currency: T.nilable(Models::Shared::CurrencyEnum), destination_currency: T.nilable(Models::Shared::CurrencyEnum), converted_amount: T.nilable(::String), converted_taxable_amount: T.nilable(::String), converted_tax_amount_imported: T.nilable(::String), converted_tax_amount_calculated: T.nilable(::String), converted_total_discount: T.nilable(::String), converted_subtotal: T.nilable(::String), taxable_amount: T.nilable(::String), tax_exemption: T.nilable(Models::Shared::TaxExemptionEnum), exempt: T.nilable(T::Boolean), total_discount: T.nilable(::String), subtotal: T.nilable(::String), is_reverse_charge_self_accounted: T.nilable(T::Boolean), recoverability_percent: T.nilable(::String)).void }
-        def initialize(date:, external_product_id:, id:, tax_items:, organization_id: nil, external_id: nil, description: nil, product: nil, product_id: nil, product_name: nil, product_description: nil, quantity: '1.0', amount: '0.00', tax_amount_imported: '0.00', tax_rate_imported: '0.00', tax_amount_calculated: '0.00', tax_rate_calculated: '0.00', original_currency: nil, destination_currency: nil, converted_amount: nil, converted_taxable_amount: nil, converted_tax_amount_imported: nil, converted_tax_amount_calculated: nil, converted_total_discount: nil, converted_subtotal: nil, taxable_amount: '0.00', tax_exemption: nil, exempt: false, total_discount: nil, subtotal: nil, is_reverse_charge_self_accounted: false, recoverability_percent: nil)
+        sig { params(date: ::String, external_product_id: ::String, id: ::String, tax_items: T::Array[Models::Shared::TaxItemRead], organization_id: T.nilable(::String), external_id: T.nilable(::String), description: T.nilable(::String), product: T.nilable(::String), product_id: T.nilable(::String), product_name: T.nilable(::String), product_description: T.nilable(::String), quantity: T.nilable(::String), amount: T.nilable(::String), tax_amount_imported: T.nilable(::String), tax_rate_imported: T.nilable(::String), tax_amount_calculated: T.nilable(::String), tax_rate_calculated: T.nilable(::String), original_currency: T.nilable(Models::Shared::CurrencyEnum), destination_currency: T.nilable(Models::Shared::CurrencyEnum), converted_amount: T.nilable(::String), converted_taxable_amount: T.nilable(::String), converted_tax_amount_imported: T.nilable(::String), converted_tax_amount_calculated: T.nilable(::String), converted_total_discount: T.nilable(::String), converted_subtotal: T.nilable(::String), taxable_amount: T.nilable(::String), tax_exemption: T.nilable(Models::Shared::TaxExemptionEnum), exempt: T.nilable(T::Boolean), total_discount: T.nilable(::String), subtotal: T.nilable(::String), is_reverse_charge_self_accounted: T.nilable(T::Boolean), recoverability_percent: T.nilable(::String), recoverable_input_vat: T.nilable(::String), converted_recoverable_input_vat: T.nilable(::String)).void }
+        def initialize(date:, external_product_id:, id:, tax_items:, organization_id: nil, external_id: nil, description: nil, product: nil, product_id: nil, product_name: nil, product_description: nil, quantity: '1.0', amount: '0.00', tax_amount_imported: '0.00', tax_rate_imported: '0.00', tax_amount_calculated: '0.00', tax_rate_calculated: '0.00', original_currency: nil, destination_currency: nil, converted_amount: nil, converted_taxable_amount: nil, converted_tax_amount_imported: nil, converted_tax_amount_calculated: nil, converted_total_discount: nil, converted_subtotal: nil, taxable_amount: '0.00', tax_exemption: nil, exempt: false, total_discount: nil, subtotal: nil, is_reverse_charge_self_accounted: false, recoverability_percent: nil, recoverable_input_vat: '0.00', converted_recoverable_input_vat: nil)
           @date = date
           @external_product_id = external_product_id
           @id = id
@@ -113,6 +117,8 @@ module KintsugiSDK
           @subtotal = subtotal
           @is_reverse_charge_self_accounted = is_reverse_charge_self_accounted
           @recoverability_percent = recoverability_percent
+          @recoverable_input_vat = recoverable_input_vat
+          @converted_recoverable_input_vat = converted_recoverable_input_vat
         end
 
         sig { params(other: T.untyped).returns(T::Boolean) }
@@ -150,6 +156,8 @@ module KintsugiSDK
           return false unless @subtotal == other.subtotal
           return false unless @is_reverse_charge_self_accounted == other.is_reverse_charge_self_accounted
           return false unless @recoverability_percent == other.recoverability_percent
+          return false unless @recoverable_input_vat == other.recoverable_input_vat
+          return false unless @converted_recoverable_input_vat == other.converted_recoverable_input_vat
           true
         end
       end
