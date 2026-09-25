@@ -34,6 +34,7 @@ value = ExemptionSourceEnum::NETSUITE
 | `SHOPLINE`                | SHOPLINE                  |
 | `ORB`                     | ORB                       |
 | `ZENSKAR`                 | ZENSKAR                   |
+| `HYPERLINE`               | HYPERLINE                 |
 | `MANUAL`                  | MANUAL                    |
 | `BULK_UPLOAD`             | BULK_UPLOAD               |
 | `EMAIL`                   | EMAIL                     |
