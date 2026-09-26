@@ -29,6 +29,7 @@ module KintsugiSDK
           SHOPLINE = new('SHOPLINE')
           ORB = new('ORB')
           ZENSKAR = new('ZENSKAR')
+          HYPERLINE = new('HYPERLINE')
           MANUAL = new('MANUAL')
           BULK_UPLOAD = new('BULK_UPLOAD')
           EMAIL = new('EMAIL')
