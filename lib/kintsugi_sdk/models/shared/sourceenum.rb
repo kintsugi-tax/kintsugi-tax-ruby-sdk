@@ -48,6 +48,7 @@ module KintsugiSDK
           RIPPLING = new('RIPPLING')
           GUSTO = new('GUSTO')
           FACEBOOK = new('FACEBOOK')
+          FRESHBOOKS = new('FRESHBOOKS')
           OTHER = new('OTHER')
           ORDWAY = new('ORDWAY')
           INSTAGRAM = new('INSTAGRAM')
@@ -85,6 +86,7 @@ module KintsugiSDK
           INTUIT_ENTERPRISE_SUITE = new('INTUIT_ENTERPRISE_SUITE')
           ACUMATICA = new('ACUMATICA')
           PLENTYONE = new('PLENTYONE')
+          HYPERLINE = new('HYPERLINE')
         end
       end
     end
