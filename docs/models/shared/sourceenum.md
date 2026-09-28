@@ -51,6 +51,7 @@ value = SourceEnum::BIGCOMMERCE
 | `RIPPLING`                | RIPPLING                  |
 | `GUSTO`                   | GUSTO                     |
 | `FACEBOOK`                | FACEBOOK                  |
+| `FRESHBOOKS`              | FRESHBOOKS                |
 | `OTHER`                   | OTHER                     |
 | `ORDWAY`                  | ORDWAY                    |
 | `INSTAGRAM`               | INSTAGRAM                 |
@@ -88,3 +89,4 @@ value = SourceEnum::BIGCOMMERCE
 | `INTUIT_ENTERPRISE_SUITE` | INTUIT_ENTERPRISE_SUITE   |
 | `ACUMATICA`               | ACUMATICA                 |
 | `PLENTYONE`               | PLENTYONE                 |
+| `HYPERLINE`               | HYPERLINE                 |
