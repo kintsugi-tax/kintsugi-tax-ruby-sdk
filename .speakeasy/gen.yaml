@@ -39,7 +39,7 @@ generation:
     updateCredit: updateCreditNote
     upload_exemption_certificate_v1_exemptions__exemption_id__attachments_post: uploadExemptionCert
 ruby:
-  version: 5.7.0
+  version: 5.7.1
   additionalDependencies:
     development: {}
     runtime: {}
