@@ -30,4 +30,6 @@ class KintsugiSDK::Models::Shared::ExemptionCreate
   def transaction_id=(str_); end
   def reseller(); end
   def reseller=(str_); end
+  def certificate_type(); end
+  def certificate_type=(str_); end
 end
