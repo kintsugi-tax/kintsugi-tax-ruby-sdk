@@ -36,4 +36,6 @@ class KintsugiSDK::Models::Shared::BackendSrcExemptionsSchemasExemptionExemption
   def customer_name=(str_); end
   def attachment_id(); end
   def attachment_id=(str_); end
+  def certificate_type(); end
+  def certificate_type=(str_); end
 end
