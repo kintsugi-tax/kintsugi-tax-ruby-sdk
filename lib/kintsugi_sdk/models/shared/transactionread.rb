@@ -19,7 +19,7 @@ module KintsugiSDK
         # External identifier of the transaction.
         field :external_id, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('external_id'), required: true } }
         # Transaction date and time
-        field :date, ::DateTime, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('date'), required: true, 'decoder': ::KintsugiSDK::Utils.datetime_from_iso_format(false) } }
+        field :date, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('date'), required: true } }
         # The unique transaction identifier.
         field :id, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('id'), required: true } }
         # List of addresses associated.
@@ -28,7 +28,7 @@ module KintsugiSDK
         field :transaction_items, Crystalline::Array.new(Models::Shared::TransactionItemRead), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('transaction_items'), required: true } }
 
         field :type, Models::Shared::TransactionTypeEnum, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('type'), required: true, 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::TransactionTypeEnum, false) } }
-
+        # ISO-4217 currency code. Pair with a monetary amount on the same object.
         field :currency, Crystalline::Nilable.new(Models::Shared::CurrencyEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('currency'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::CurrencyEnum, true) } }
 
         field :source, Crystalline::Nilable.new(Models::Shared::SourceEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('source'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::SourceEnum, true) } }
@@ -60,7 +60,7 @@ module KintsugiSDK
         # Exemption status (e.g., NOT_EXEMPT)
         field :exempt, Crystalline::Nilable.new(Models::Shared::TransactionExemptStatusEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('exempt'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::TransactionExemptStatusEnum, true) } }
         # List of exemptions applied (if any).
-        field :exemptions, Crystalline::Nilable.new(Crystalline::Array.new(Models::Shared::Exemption)), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('exemptions') } }
+        field :exemptions, Crystalline::Nilable.new(Crystalline::Array.new(Models::Shared::TransactionEmbeddedExemption)), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('exemptions') } }
         # Related transaction identifier.
         field :related_to, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('related_to') } }
         # Secondary External Identifier.
@@ -83,6 +83,8 @@ module KintsugiSDK
         field :tax_liability_source, Crystalline::Nilable.new(Models::Shared::TaxLiabilitySourceEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('tax_liability_source'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::TaxLiabilitySourceEnum, true) } }
         # Taxable amount.
         field :taxable_amount, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('taxable_amount') } }
+        # Whether source amounts include tax. NULL means the source did not say.
+        field :is_tax_inclusive, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('is_tax_inclusive') } }
         # Transaction lock status.
         field :locked, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('locked') } }
         # Connection Identifier
@@ -131,6 +133,12 @@ module KintsugiSDK
         field :store_name, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('store_name') } }
         # Whether this transaction was deferred (rolled over) from a prior filing period.
         field :is_deferred_transaction, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('is_deferred_transaction') } }
+        # Recoverable input VAT across this transaction's lines, in the transaction's currency. 0.00 for sales and outside the EU and UK.
+        field :total_recoverable_input_vat, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('total_recoverable_input_vat') } }
+        # Recoverable input VAT across this transaction's lines in the destination currency. Null when the transaction is unconverted.
+        field :converted_total_recoverable_input_vat, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('converted_total_recoverable_input_vat') } }
+        # Pro-rata coefficient 0-100 used to scale recoverable input VAT on this purchase. Null for sales and outside the EU and UK. 100 when the organization has no partial exemption rate for the tax-point year.
+        field :input_vat_recovery_rate, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('input_vat_recovery_rate') } }
         # Customer information associated with the transaction.
         field :customer, Crystalline::Nilable.new(Models::Shared::CustomerRead), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('customer') } }
         # Total amount of all discounts applied to the transaction.
@@ -142,8 +150,8 @@ module KintsugiSDK
         # Converted final total amount including tax liability.
         field :converted_final_total_amount, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('converted_final_total_amount') } }
 
-        sig { params(organization_id: ::String, external_id: ::String, date: ::DateTime, id: ::String, addresses: T::Array[Models::Shared::TransactionAddressReadOutput], transaction_items: T::Array[Models::Shared::TransactionItemRead], type: Models::Shared::TransactionTypeEnum, currency: T.nilable(Models::Shared::CurrencyEnum), source: T.nilable(Models::Shared::SourceEnum), status: T.nilable(Models::Shared::TransactionStatusEnum), address_status: T.nilable(Models::Shared::AddressStatus), processing_status: T.nilable(Models::Shared::ProcessingStatusEnum), direction: T.nilable(Models::Shared::TransactionDirectionEnum), requires_exemption: T.nilable(Models::Shared::ExemptionRequired), shop_date: T.nilable(::Date), shop_date_tz: T.nilable(::String), description: T.nilable(::String), refund_status: T.nilable(Models::Shared::TransactionRefundStatus), total_amount: T.nilable(::String), customer_id: T.nilable(::String), marketplace: T.nilable(T::Boolean), exempt: T.nilable(Models::Shared::TransactionExemptStatusEnum), exemptions: T.nilable(T::Array[Models::Shared::Exemption]), related_to: T.nilable(::String), secondary_external_id: T.nilable(::String), secondary_source: T.nilable(::String), external_friendly_id: T.nilable(::String), total_tax_amount_imported: T.nilable(::String), tax_rate_imported: T.nilable(::String), total_tax_amount_calculated: T.nilable(::String), tax_rate_calculated: T.nilable(::String), total_tax_liability_amount: T.nilable(::String), tax_liability_source: T.nilable(Models::Shared::TaxLiabilitySourceEnum), taxable_amount: T.nilable(::String), locked: T.nilable(T::Boolean), connection_id: T.nilable(::String), filing_id: T.nilable(::String), city: T.nilable(::String), county: T.nilable(::String), state: T.nilable(::String), country: T.nilable(Models::Shared::CountryCodeEnum), postal_code: T.nilable(::String), tax_id: T.nilable(::String), document_type: T.nilable(Models::Shared::DocumentTypeEnum), created_from: T.nilable(::String), is_duplicate: T.nilable(T::Boolean), destination_currency: T.nilable(Models::Shared::CurrencyEnum), converted_total_amount: T.nilable(::String), converted_total_tax_amount_imported: T.nilable(::String), converted_total_tax_amount_calculated: T.nilable(::String), conversion_rate: T.nilable(::String), converted_taxable_amount: T.nilable(::String), converted_total_discount: T.nilable(::String), converted_subtotal: T.nilable(::String), converted_total_tax_liability_amount: T.nilable(::String), store_name: T.nilable(::String), is_deferred_transaction: T.nilable(T::Boolean), customer: T.nilable(Models::Shared::CustomerRead), total_discount: T.nilable(::String), subtotal: T.nilable(::String), final_total_amount: T.nilable(::String), converted_final_total_amount: T.nilable(::String)).void }
-        def initialize(organization_id:, external_id:, date:, id:, addresses:, transaction_items:, type:, currency: nil, source: nil, status: nil, address_status: nil, processing_status: nil, direction: nil, requires_exemption: nil, shop_date: nil, shop_date_tz: nil, description: nil, refund_status: nil, total_amount: '0.00', customer_id: nil, marketplace: nil, exempt: nil, exemptions: nil, related_to: nil, secondary_external_id: nil, secondary_source: nil, external_friendly_id: nil, total_tax_amount_imported: '0.00', tax_rate_imported: '0.00', total_tax_amount_calculated: '0.00', tax_rate_calculated: '0.00', total_tax_liability_amount: '0.00', tax_liability_source: nil, taxable_amount: '0.00', locked: false, connection_id: nil, filing_id: nil, city: nil, county: nil, state: nil, country: nil, postal_code: nil, tax_id: nil, document_type: nil, created_from: nil, is_duplicate: false, destination_currency: nil, converted_total_amount: nil, converted_total_tax_amount_imported: nil, converted_total_tax_amount_calculated: nil, conversion_rate: nil, converted_taxable_amount: nil, converted_total_discount: nil, converted_subtotal: nil, converted_total_tax_liability_amount: nil, store_name: nil, is_deferred_transaction: false, customer: nil, total_discount: nil, subtotal: nil, final_total_amount: nil, converted_final_total_amount: nil)
+        sig { params(organization_id: ::String, external_id: ::String, date: ::String, id: ::String, addresses: T::Array[Models::Shared::TransactionAddressReadOutput], transaction_items: T::Array[Models::Shared::TransactionItemRead], type: Models::Shared::TransactionTypeEnum, currency: T.nilable(Models::Shared::CurrencyEnum), source: T.nilable(Models::Shared::SourceEnum), status: T.nilable(Models::Shared::TransactionStatusEnum), address_status: T.nilable(Models::Shared::AddressStatus), processing_status: T.nilable(Models::Shared::ProcessingStatusEnum), direction: T.nilable(Models::Shared::TransactionDirectionEnum), requires_exemption: T.nilable(Models::Shared::ExemptionRequired), shop_date: T.nilable(::Date), shop_date_tz: T.nilable(::String), description: T.nilable(::String), refund_status: T.nilable(Models::Shared::TransactionRefundStatus), total_amount: T.nilable(::String), customer_id: T.nilable(::String), marketplace: T.nilable(T::Boolean), exempt: T.nilable(Models::Shared::TransactionExemptStatusEnum), exemptions: T.nilable(T::Array[Models::Shared::TransactionEmbeddedExemption]), related_to: T.nilable(::String), secondary_external_id: T.nilable(::String), secondary_source: T.nilable(::String), external_friendly_id: T.nilable(::String), total_tax_amount_imported: T.nilable(::String), tax_rate_imported: T.nilable(::String), total_tax_amount_calculated: T.nilable(::String), tax_rate_calculated: T.nilable(::String), total_tax_liability_amount: T.nilable(::String), tax_liability_source: T.nilable(Models::Shared::TaxLiabilitySourceEnum), taxable_amount: T.nilable(::String), is_tax_inclusive: T.nilable(T::Boolean), locked: T.nilable(T::Boolean), connection_id: T.nilable(::String), filing_id: T.nilable(::String), city: T.nilable(::String), county: T.nilable(::String), state: T.nilable(::String), country: T.nilable(Models::Shared::CountryCodeEnum), postal_code: T.nilable(::String), tax_id: T.nilable(::String), document_type: T.nilable(Models::Shared::DocumentTypeEnum), created_from: T.nilable(::String), is_duplicate: T.nilable(T::Boolean), destination_currency: T.nilable(Models::Shared::CurrencyEnum), converted_total_amount: T.nilable(::String), converted_total_tax_amount_imported: T.nilable(::String), converted_total_tax_amount_calculated: T.nilable(::String), conversion_rate: T.nilable(::String), converted_taxable_amount: T.nilable(::String), converted_total_discount: T.nilable(::String), converted_subtotal: T.nilable(::String), converted_total_tax_liability_amount: T.nilable(::String), store_name: T.nilable(::String), is_deferred_transaction: T.nilable(T::Boolean), total_recoverable_input_vat: T.nilable(::String), converted_total_recoverable_input_vat: T.nilable(::String), input_vat_recovery_rate: T.nilable(::String), customer: T.nilable(Models::Shared::CustomerRead), total_discount: T.nilable(::String), subtotal: T.nilable(::String), final_total_amount: T.nilable(::String), converted_final_total_amount: T.nilable(::String)).void }
+        def initialize(organization_id:, external_id:, date:, id:, addresses:, transaction_items:, type:, currency: nil, source: nil, status: nil, address_status: nil, processing_status: nil, direction: nil, requires_exemption: nil, shop_date: nil, shop_date_tz: nil, description: nil, refund_status: nil, total_amount: '0.00', customer_id: nil, marketplace: nil, exempt: nil, exemptions: nil, related_to: nil, secondary_external_id: nil, secondary_source: nil, external_friendly_id: nil, total_tax_amount_imported: '0.00', tax_rate_imported: '0.00', total_tax_amount_calculated: '0.00', tax_rate_calculated: '0.00', total_tax_liability_amount: '0.00', tax_liability_source: nil, taxable_amount: '0.00', is_tax_inclusive: nil, locked: false, connection_id: nil, filing_id: nil, city: nil, county: nil, state: nil, country: nil, postal_code: nil, tax_id: nil, document_type: nil, created_from: nil, is_duplicate: false, destination_currency: nil, converted_total_amount: nil, converted_total_tax_amount_imported: nil, converted_total_tax_amount_calculated: nil, conversion_rate: nil, converted_taxable_amount: nil, converted_total_discount: nil, converted_subtotal: nil, converted_total_tax_liability_amount: nil, store_name: nil, is_deferred_transaction: false, total_recoverable_input_vat: '0.00', converted_total_recoverable_input_vat: nil, input_vat_recovery_rate: nil, customer: nil, total_discount: nil, subtotal: nil, final_total_amount: nil, converted_final_total_amount: nil)
           @organization_id = organization_id
           @external_id = external_id
           @date = date
@@ -178,6 +186,7 @@ module KintsugiSDK
           @total_tax_liability_amount = total_tax_liability_amount
           @tax_liability_source = tax_liability_source
           @taxable_amount = taxable_amount
+          @is_tax_inclusive = is_tax_inclusive
           @locked = locked
           @connection_id = connection_id
           @filing_id = filing_id
@@ -201,6 +210,9 @@ module KintsugiSDK
           @converted_total_tax_liability_amount = converted_total_tax_liability_amount
           @store_name = store_name
           @is_deferred_transaction = is_deferred_transaction
+          @total_recoverable_input_vat = total_recoverable_input_vat
+          @converted_total_recoverable_input_vat = converted_total_recoverable_input_vat
+          @input_vat_recovery_rate = input_vat_recovery_rate
           @customer = customer
           @total_discount = total_discount
           @subtotal = subtotal
@@ -245,6 +257,7 @@ module KintsugiSDK
           return false unless @total_tax_liability_amount == other.total_tax_liability_amount
           return false unless @tax_liability_source == other.tax_liability_source
           return false unless @taxable_amount == other.taxable_amount
+          return false unless @is_tax_inclusive == other.is_tax_inclusive
           return false unless @locked == other.locked
           return false unless @connection_id == other.connection_id
           return false unless @filing_id == other.filing_id
@@ -268,6 +281,9 @@ module KintsugiSDK
           return false unless @converted_total_tax_liability_amount == other.converted_total_tax_liability_amount
           return false unless @store_name == other.store_name
           return false unless @is_deferred_transaction == other.is_deferred_transaction
+          return false unless @total_recoverable_input_vat == other.total_recoverable_input_vat
+          return false unless @converted_total_recoverable_input_vat == other.converted_total_recoverable_input_vat
+          return false unless @input_vat_recovery_rate == other.input_vat_recovery_rate
           return false unless @customer == other.customer
           return false unless @total_discount == other.total_discount
           return false unless @subtotal == other.subtotal
