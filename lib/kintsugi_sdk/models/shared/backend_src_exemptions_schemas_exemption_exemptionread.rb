@@ -44,8 +44,10 @@ module KintsugiSDK
 
         field :attachment_id, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('attachment_id') } }
 
-        sig { params(exemption_type: Models::Shared::ExemptionType, start_date: ::Date, id: ::String, jurisdiction: T.nilable(::String), country_code: T.nilable(Models::Shared::CountryCodeEnum), end_date: T.nilable(::Date), customer_id: T.nilable(::String), transaction_id: T.nilable(::String), reseller: T.nilable(T::Boolean), fein: T.nilable(::String), sales_tax_id: T.nilable(::String), status: T.nilable(Models::Shared::ExemptionStatus), customer_name: T.nilable(::String), attachment_id: T.nilable(::String)).void }
-        def initialize(exemption_type:, start_date:, id:, jurisdiction: nil, country_code: nil, end_date: nil, customer_id: nil, transaction_id: nil, reseller: false, fein: nil, sales_tax_id: nil, status: nil, customer_name: nil, attachment_id: nil)
+        field :certificate_type, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('certificate_type') } }
+
+        sig { params(exemption_type: Models::Shared::ExemptionType, start_date: ::Date, id: ::String, jurisdiction: T.nilable(::String), country_code: T.nilable(Models::Shared::CountryCodeEnum), end_date: T.nilable(::Date), customer_id: T.nilable(::String), transaction_id: T.nilable(::String), reseller: T.nilable(T::Boolean), fein: T.nilable(::String), sales_tax_id: T.nilable(::String), status: T.nilable(Models::Shared::ExemptionStatus), customer_name: T.nilable(::String), attachment_id: T.nilable(::String), certificate_type: T.nilable(::String)).void }
+        def initialize(exemption_type:, start_date:, id:, jurisdiction: nil, country_code: nil, end_date: nil, customer_id: nil, transaction_id: nil, reseller: false, fein: nil, sales_tax_id: nil, status: nil, customer_name: nil, attachment_id: nil, certificate_type: nil)
           @exemption_type = exemption_type
           @start_date = start_date
           @id = id
@@ -60,6 +62,7 @@ module KintsugiSDK
           @status = status
           @customer_name = customer_name
           @attachment_id = attachment_id
+          @certificate_type = certificate_type
         end
 
         sig { params(other: T.untyped).returns(T::Boolean) }
@@ -79,6 +82,7 @@ module KintsugiSDK
           return false unless @status == other.status
           return false unless @customer_name == other.customer_name
           return false unless @attachment_id == other.attachment_id
+          return false unless @certificate_type == other.certificate_type
           true
         end
       end

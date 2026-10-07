@@ -17,3 +17,4 @@ value = RelatedEntityType::EXEMPTION
 | `REGISTRATION`   | REGISTRATION     |
 | `FILING`         | FILING           |
 | `FILING_PAYMENT` | FILING_PAYMENT   |
+| `TASK`           | TASK             |
