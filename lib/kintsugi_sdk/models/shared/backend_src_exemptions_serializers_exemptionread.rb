@@ -38,9 +38,11 @@ module KintsugiSDK
         field :customer, Crystalline::Nilable.new(Models::Shared::CustomerRead), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('customer') } }
         # List of attachments related to the exemption
         field :attachment, Crystalline::Nilable.new(Crystalline::Array.new(Models::Shared::AttachmentRead)), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('attachment') } }
+        # Partial-exemption certificate form code. Null when the exemption is not a partial exemption.
+        field :certificate_type, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('certificate_type') } }
 
-        sig { params(start_date: ::Date, id: ::String, exemption_type: Models::Shared::ExemptionType, status: Models::Shared::ExemptionStatus, country_code: T.nilable(Models::Shared::CountryCodeEnum), jurisdiction: T.nilable(::String), end_date: T.nilable(::Date), transaction_id: T.nilable(::String), reseller: T.nilable(T::Boolean), fein: T.nilable(::String), sales_tax_id: T.nilable(::String), customer: T.nilable(Models::Shared::CustomerRead), attachment: T.nilable(T::Array[Models::Shared::AttachmentRead])).void }
-        def initialize(start_date:, id:, exemption_type:, status:, country_code: nil, jurisdiction: nil, end_date: nil, transaction_id: nil, reseller: false, fein: nil, sales_tax_id: nil, customer: nil, attachment: nil)
+        sig { params(start_date: ::Date, id: ::String, exemption_type: Models::Shared::ExemptionType, status: Models::Shared::ExemptionStatus, country_code: T.nilable(Models::Shared::CountryCodeEnum), jurisdiction: T.nilable(::String), end_date: T.nilable(::Date), transaction_id: T.nilable(::String), reseller: T.nilable(T::Boolean), fein: T.nilable(::String), sales_tax_id: T.nilable(::String), customer: T.nilable(Models::Shared::CustomerRead), attachment: T.nilable(T::Array[Models::Shared::AttachmentRead]), certificate_type: T.nilable(::String)).void }
+        def initialize(start_date:, id:, exemption_type:, status:, country_code: nil, jurisdiction: nil, end_date: nil, transaction_id: nil, reseller: false, fein: nil, sales_tax_id: nil, customer: nil, attachment: nil, certificate_type: nil)
           @start_date = start_date
           @id = id
           @exemption_type = exemption_type
@@ -54,6 +56,7 @@ module KintsugiSDK
           @sales_tax_id = sales_tax_id
           @customer = customer
           @attachment = attachment
+          @certificate_type = certificate_type
         end
 
         sig { params(other: T.untyped).returns(T::Boolean) }
@@ -72,6 +75,7 @@ module KintsugiSDK
           return false unless @sales_tax_id == other.sales_tax_id
           return false unless @customer == other.customer
           return false unless @attachment == other.attachment
+          return false unless @certificate_type == other.certificate_type
           true
         end
       end

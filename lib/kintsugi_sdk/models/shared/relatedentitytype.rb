@@ -14,6 +14,8 @@ module KintsugiSDK
           REGISTRATION = new('REGISTRATION')
           FILING = new('FILING')
           FILING_PAYMENT = new('FILING_PAYMENT')
+          TASK = new('TASK')
+          FILING_PAYMENT_RECEIPT = new('FILING_PAYMENT_RECEIPT')
         end
       end
     end

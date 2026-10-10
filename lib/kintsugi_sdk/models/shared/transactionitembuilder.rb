@@ -68,11 +68,13 @@ module KintsugiSDK
         field :tax_exemption, Crystalline::Nilable.new(Models::Shared::TaxExemptionEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('tax_exemption'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::TaxExemptionEnum, true) } }
         # Indicates if the item is exempt.
         field :exempt, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('exempt') } }
+        # Whether this line's source amount includes tax. NULL means the source did not say.
+        field :is_tax_inclusive, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('is_tax_inclusive') } }
 
         field :discount_builder, Crystalline::Nilable.new(Models::Shared::DiscountBuilder), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('discount_builder') } }
 
-        sig { params(date: ::DateTime, external_product_id: ::String, organization_id: T.nilable(::String), quantity: T.nilable(T.any(::Float, ::String)), amount: T.nilable(T.any(::Float, ::String)), tax_amount_imported: T.nilable(T.any(::Float, ::String)), tax_rate_imported: T.nilable(T.any(::Float, ::String)), tax_amount_calculated: T.nilable(T.any(::Float, ::String)), tax_rate_calculated: T.nilable(T.any(::Float, ::String)), taxable_amount: T.nilable(T.any(::Float, ::String)), tax_items: T.nilable(T::Array[Models::Shared::TaxItemBuilder]), external_id: T.nilable(::String), description: T.nilable(::String), product: T.nilable(::String), product_id: T.nilable(::String), product_name: T.nilable(::String), product_description: T.nilable(::String), original_currency: T.nilable(Models::Shared::CurrencyEnum), destination_currency: T.nilable(Models::Shared::CurrencyEnum), converted_amount: T.nilable(T.any(::Float, ::String)), converted_taxable_amount: T.nilable(T.any(::Float, ::String)), converted_tax_amount_imported: T.nilable(T.any(::Float, ::String)), converted_tax_amount_calculated: T.nilable(T.any(::Float, ::String)), converted_total_discount: T.nilable(T.any(::Float, ::String)), converted_subtotal: T.nilable(T.any(::Float, ::String)), tax_exemption: T.nilable(Models::Shared::TaxExemptionEnum), exempt: T.nilable(T::Boolean), discount_builder: T.nilable(Models::Shared::DiscountBuilder)).void }
-        def initialize(date:, external_product_id:, organization_id: nil, quantity: nil, amount: nil, tax_amount_imported: nil, tax_rate_imported: nil, tax_amount_calculated: nil, tax_rate_calculated: nil, taxable_amount: nil, tax_items: nil, external_id: nil, description: nil, product: nil, product_id: nil, product_name: nil, product_description: nil, original_currency: nil, destination_currency: nil, converted_amount: nil, converted_taxable_amount: nil, converted_tax_amount_imported: nil, converted_tax_amount_calculated: nil, converted_total_discount: nil, converted_subtotal: nil, tax_exemption: nil, exempt: false, discount_builder: nil)
+        sig { params(date: ::DateTime, external_product_id: ::String, organization_id: T.nilable(::String), quantity: T.nilable(T.any(::Float, ::String)), amount: T.nilable(T.any(::Float, ::String)), tax_amount_imported: T.nilable(T.any(::Float, ::String)), tax_rate_imported: T.nilable(T.any(::Float, ::String)), tax_amount_calculated: T.nilable(T.any(::Float, ::String)), tax_rate_calculated: T.nilable(T.any(::Float, ::String)), taxable_amount: T.nilable(T.any(::Float, ::String)), tax_items: T.nilable(T::Array[Models::Shared::TaxItemBuilder]), external_id: T.nilable(::String), description: T.nilable(::String), product: T.nilable(::String), product_id: T.nilable(::String), product_name: T.nilable(::String), product_description: T.nilable(::String), original_currency: T.nilable(Models::Shared::CurrencyEnum), destination_currency: T.nilable(Models::Shared::CurrencyEnum), converted_amount: T.nilable(T.any(::Float, ::String)), converted_taxable_amount: T.nilable(T.any(::Float, ::String)), converted_tax_amount_imported: T.nilable(T.any(::Float, ::String)), converted_tax_amount_calculated: T.nilable(T.any(::Float, ::String)), converted_total_discount: T.nilable(T.any(::Float, ::String)), converted_subtotal: T.nilable(T.any(::Float, ::String)), tax_exemption: T.nilable(Models::Shared::TaxExemptionEnum), exempt: T.nilable(T::Boolean), is_tax_inclusive: T.nilable(T::Boolean), discount_builder: T.nilable(Models::Shared::DiscountBuilder)).void }
+        def initialize(date:, external_product_id:, organization_id: nil, quantity: nil, amount: nil, tax_amount_imported: nil, tax_rate_imported: nil, tax_amount_calculated: nil, tax_rate_calculated: nil, taxable_amount: nil, tax_items: nil, external_id: nil, description: nil, product: nil, product_id: nil, product_name: nil, product_description: nil, original_currency: nil, destination_currency: nil, converted_amount: nil, converted_taxable_amount: nil, converted_tax_amount_imported: nil, converted_tax_amount_calculated: nil, converted_total_discount: nil, converted_subtotal: nil, tax_exemption: nil, exempt: false, is_tax_inclusive: nil, discount_builder: nil)
           @date = date
           @external_product_id = external_product_id
           @organization_id = organization_id
@@ -100,6 +102,7 @@ module KintsugiSDK
           @converted_subtotal = converted_subtotal
           @tax_exemption = tax_exemption
           @exempt = exempt
+          @is_tax_inclusive = is_tax_inclusive
           @discount_builder = discount_builder
         end
 
@@ -133,6 +136,7 @@ module KintsugiSDK
           return false unless @converted_subtotal == other.converted_subtotal
           return false unless @tax_exemption == other.tax_exemption
           return false unless @exempt == other.exempt
+          return false unless @is_tax_inclusive == other.is_tax_inclusive
           return false unless @discount_builder == other.discount_builder
           true
         end
