@@ -7,7 +7,7 @@
 module KintsugiSDK
   module Models
     module Shared
-
+      # CurrencyEnum - ISO-4217 currency code. Pair with a monetary amount on the same object.
       class CurrencyEnum < T::Enum
         enums do
           AED = new('AED')
