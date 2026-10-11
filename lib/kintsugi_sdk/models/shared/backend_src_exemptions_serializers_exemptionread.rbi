@@ -34,4 +34,6 @@ class KintsugiSDK::Models::Shared::BackendSrcExemptionsSerializersExemptionRead
   def customer=(str_); end
   def attachment(); end
   def attachment=(str_); end
+  def certificate_type(); end
+  def certificate_type=(str_); end
 end
