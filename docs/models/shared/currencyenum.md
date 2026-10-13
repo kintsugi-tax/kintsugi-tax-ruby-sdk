@@ -1,5 +1,7 @@
 # CurrencyEnum
 
+ISO-4217 currency code. Pair with a monetary amount on the same object.
+
 ## Example Usage
 
 ```ruby
