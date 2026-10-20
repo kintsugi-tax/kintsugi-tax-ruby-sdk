@@ -14,6 +14,7 @@ module KintsugiSDK
           WHOLESALE = new('wholesale')
           TRANSACTION = new('transaction')
           REVERSE_CHARGE = new('reverse_charge')
+          PARTIAL = new('partial')
         end
       end
     end
