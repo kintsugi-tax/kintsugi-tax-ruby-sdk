@@ -76,6 +76,8 @@ class KintsugiSDK::Models::Shared::TransactionRead
   def tax_liability_source=(str_); end
   def taxable_amount(); end
   def taxable_amount=(str_); end
+  def is_tax_inclusive(); end
+  def is_tax_inclusive=(str_); end
   def locked(); end
   def locked=(str_); end
   def connection_id(); end
@@ -122,6 +124,12 @@ class KintsugiSDK::Models::Shared::TransactionRead
   def store_name=(str_); end
   def is_deferred_transaction(); end
   def is_deferred_transaction=(str_); end
+  def total_recoverable_input_vat(); end
+  def total_recoverable_input_vat=(str_); end
+  def converted_total_recoverable_input_vat(); end
+  def converted_total_recoverable_input_vat=(str_); end
+  def input_vat_recovery_rate(); end
+  def input_vat_recovery_rate=(str_); end
   def customer(); end
   def customer=(str_); end
   def total_discount(); end
