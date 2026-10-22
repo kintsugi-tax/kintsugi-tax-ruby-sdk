@@ -2,10 +2,10 @@ openapi: "3.1.0"
 info:
   title: "Kintsugi Customer API"
   version: "1.0.0"
-  x-spec-synced-at: "2026-09-15T00:01:38.301Z"
+  x-spec-synced-at: "2026-10-22T00:01:51.115Z"
   description: "Publicly documented Kintsugi Customer API endpoints. The source (openapi/_source/openapi-master.json) is the platform spec filtered to the documented customer surface (openapi/customer-endpoints.json); scripts/build-specs.mjs re-applies that filter here. Do not edit by hand."
   x-spec-source: "committed openapi-master.json"
-  x-spec-checked-at: "2026-09-15T00:01:38.301Z"
+  x-spec-checked-at: "2026-10-22T00:01:51.115Z"
 paths:
   /v1/address_validation/search:
     post:
@@ -1163,6 +1163,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-public: true
       x-speakeasy-name-override: create
+  /v1/exemptions/partial-certificate-types: {}
   /v1/exemptions/{exemption_id}:
     get:
       tags:
@@ -1391,6 +1392,9 @@ paths:
       x-public: true
       x-speakeasy-name-override: uploadCertificate
   /v1/filings: {}
+  /v1/filings/back-filing-request: {}
+  /v1/filings/back-filing-request/options: {}
+  /v1/filings/back-filing-terms/current: {}
   /v1/filings/registration/{registration_id}: {}
   /v1/filings/{filing_id}: {}
   /v1/filings/{filing_id}/approve: {}
@@ -2426,7 +2430,7 @@ paths:
                 title: "Response 202 Create Transaction V1 Transactions Post"
               example:
                 - organization_id: "orgn_YOURORGID"
-                  external_id: "tran_YOURTRANSACTIONID"
+                  external_id: "YourUniqueOrder123"
                   date: "2024-01-15T14:30:00"
                   status: "COMMITTED"
                   description: "Order with one taxable book and one exempt service"
@@ -4039,7 +4043,6 @@ components:
           description: "External identifier of the transaction."
         date:
           type: "string"
-          format: "date-time"
           title: "Date"
           description: "Transaction date and time"
         shop_date:
@@ -4094,7 +4097,7 @@ components:
         exemptions:
           anyOf:
             - items:
-                $ref: "#/components/schemas/Exemption"
+                $ref: "#/components/schemas/TransactionEmbeddedExemption"
               type: "array"
             - type: "null"
           title: "Exemptions"
@@ -4164,6 +4167,12 @@ components:
           title: "Taxable Amount"
           description: "Taxable amount."
           default: "0.00"
+        is_tax_inclusive:
+          anyOf:
+            - type: "boolean"
+            - type: "null"
+          title: "Is Tax Inclusive"
+          description: "Whether source amounts include tax. NULL means the source did not say."
         currency:
           $ref: "#/components/schemas/CurrencyEnum"
           description: "Currency code (ISO 4217, e.g., USD)"
@@ -4343,6 +4352,26 @@ components:
           type: "array"
           title: "Transaction Items"
           description: "List of items in the transaction."
+        total_recoverable_input_vat:
+          type: "string"
+          pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,18}|(?=[\\d.]{1,21}0*$)\\d{0,18}\\.\\d{0,2}0*$)"
+          title: "Total Recoverable Input Vat"
+          description: "Recoverable input VAT across this transaction's lines, in the transaction's currency. 0.00 for sales and outside the EU and UK."
+          default: "0.00"
+        converted_total_recoverable_input_vat:
+          anyOf:
+            - type: "string"
+              pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,18}|(?=[\\d.]{1,21}0*$)\\d{0,18}\\.\\d{0,2}0*$)"
+            - type: "null"
+          title: "Converted Total Recoverable Input Vat"
+          description: "Recoverable input VAT across this transaction's lines in the destination currency. Null when the transaction is unconverted."
+        input_vat_recovery_rate:
+          anyOf:
+            - type: "string"
+              pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,18}|(?=[\\d.]{1,21}0*$)\\d{0,18}\\.\\d{0,2}0*$)"
+            - type: "null"
+          title: "Input Vat Recovery Rate"
+          description: "Pro-rata coefficient 0-100 used to scale recoverable input VAT on this purchase. Null for sales and outside the EU and UK. 100 when the organization has no partial exemption rate for the tax-point year."
         customer:
           anyOf:
             - $ref: "#/components/schemas/CustomerRead"
@@ -4496,7 +4525,7 @@ components:
         exemptions:
           anyOf:
             - items:
-                $ref: "#/components/schemas/Exemption"
+                $ref: "#/components/schemas/TransactionEmbeddedExemption"
               type: "array"
             - type: "null"
           title: "Exemptions"
@@ -4578,6 +4607,12 @@ components:
           title: "Taxable Amount"
           description: "Taxable amount."
           default: "0.00"
+        is_tax_inclusive:
+          anyOf:
+            - type: "boolean"
+            - type: "null"
+          title: "Is Tax Inclusive"
+          description: "Whether source amounts include tax. NULL means the source did not say."
         currency:
           $ref: "#/components/schemas/CurrencyEnum"
           description: "Currency code (ISO 4217, e.g., USD)"
@@ -4858,6 +4893,12 @@ components:
         status:
           $ref: "#/components/schemas/ExemptionStatus"
           description: "The status of the exemption"
+        certificate_type:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Certificate Type"
+          description: "Partial-exemption certificate form code. Required when exemption_type is partial; must be absent otherwise."
       type: "object"
       required:
         - "exemption_type"
@@ -4935,6 +4976,12 @@ components:
         exemption_type:
           $ref: "#/components/schemas/ExemptionType"
           description: "Type of exemption"
+        certificate_type:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Certificate Type"
+          description: "Partial-exemption certificate form code. Null when the exemption is not a partial exemption."
         status:
           $ref: "#/components/schemas/ExemptionStatus"
           description: "Status of the exemption.\n        Possible values: ACTIVE, INACTIVE, EXPIRED."
@@ -4945,6 +4992,27 @@ components:
         - "exemption_type"
         - "status"
       title: "ExemptionRead"
+    PartialCertificateTypeRead:
+      properties:
+        code:
+          type: "string"
+          title: "Code"
+        name:
+          type: "string"
+          title: "Name"
+        jurisdiction:
+          type: "string"
+          title: "Jurisdiction"
+        country:
+          $ref: "#/components/schemas/CountryCodeEnum"
+      type: "object"
+      required:
+        - "code"
+        - "name"
+        - "jurisdiction"
+        - "country"
+      title: "PartialCertificateTypeRead"
+      description: "One certificate form the Add Exemption dropdown can offer for a partial exemption."
     backend__src__exemptions__schemas__exemption__ExemptionRead:
       properties:
         exemption_type:
@@ -5022,6 +5090,11 @@ components:
             - type: "string"
             - type: "null"
           title: "Attachment Id"
+        certificate_type:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Certificate Type"
       type: "object"
       required:
         - "exemption_type"
@@ -5100,11 +5173,114 @@ components:
       required:
         - "detail"
       title: "ValidationErrorResponse"
+    BackFilingRequestCreate:
+      properties:
+        requests:
+          items:
+            $ref: "#/components/schemas/BackFilingRequestRegistrationInput"
+          type: "array"
+          title: "Requests"
+        notes:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Notes"
+      type: "object"
+      required:
+        - "requests"
+      title: "BackFilingRequestCreate"
+    BackFilingRequestCreateResponse:
+      properties:
+        created_filings:
+          items:
+            $ref: "#/components/schemas/FilingRead"
+          type: "array"
+          title: "Created Filings"
+        total_created:
+          type: "integer"
+          title: "Total Created"
+      type: "object"
+      required:
+        - "created_filings"
+        - "total_created"
+      title: "BackFilingRequestCreateResponse"
+    BackFilingRequestOptionsResponse:
+      properties:
+        registrations:
+          items:
+            $ref: "#/components/schemas/BackFilingRequestRegistrationOption"
+          type: "array"
+          title: "Registrations"
+        help_article_url:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Help Article Url"
+        help_article_label:
+          type: "string"
+          title: "Help Article Label"
+      type: "object"
+      required:
+        - "registrations"
+        - "help_article_url"
+        - "help_article_label"
+      title: "BackFilingRequestOptionsResponse"
+    BackFilingTermsRead:
+      properties:
+        id:
+          type: "string"
+          title: "Id"
+        version:
+          type: "integer"
+          title: "Version"
+        timeline:
+          type: "string"
+          title: "Timeline"
+        penalties_and_interest:
+          type: "string"
+          title: "Penalties And Interest"
+        what_you_are_approving:
+          type: "string"
+          title: "What You Are Approving"
+        fees:
+          type: "string"
+          title: "Fees"
+        help_article_url:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Help Article Url"
+        help_article_label:
+          type: "string"
+          title: "Help Article Label"
+      type: "object"
+      required:
+        - "id"
+        - "version"
+        - "timeline"
+        - "penalties_and_interest"
+        - "what_you_are_approving"
+        - "fees"
+        - "help_article_label"
+      title: "BackFilingTermsRead"
     FilingDetailsRead:
       properties:
+        input_vat_recovery_rate:
+          anyOf:
+            - type: "string"
+              pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,18}|(?=[\\d.]{1,21}0*$)\\d{0,18}\\.\\d{0,2}0*$)"
+            - type: "null"
+          title: "Input Vat Recovery Rate"
+          description: "Input VAT recovery rate applied to this filing, as a percentage 0-100. Null when no rate exists for the filing's country and year, which means fully recoverable. Uses the definitive rate when set, otherwise the year's frozen provisional."
+        input_vat_recovery_rate_is_definitive:
+          anyOf:
+            - type: "boolean"
+            - type: "null"
+          title: "Input Vat Recovery Rate Is Definitive"
+          description: "True when input_vat_recovery_rate is this year's definitive rate. False when it is the provisional. Null when no rate exists."
         status:
           $ref: "#/components/schemas/FilingStatusEnum"
-          description: "Filing status. Possible values:\n                                    UNFILED, FILING, FILED, PAUSED, SKIPPED, CANCELLED, ISSUE."
+          description: "Filing status. Possible values:\n                                    UNFILED, FILING, SUBMITTED, FILED, PAUSED, SKIPPED, CANCELLED, ISSUE."
           default: "UNFILED"
         start_date:
           type: "string"
@@ -5223,13 +5399,8 @@ components:
           description: "Reason why the filing was cancelled, if applicable."
         tax_type:
           $ref: "#/components/schemas/TaxTypeEnum"
-          description: "Which taxes this filing return covers. SALES_AND_USE_TAX is one real return covering both; USE_TAX is a standalone consumer use tax return."
+          description: "Which taxes this filing return covers. SALES_AND_USE_TAX is one real return covering both; USE_TAX is a standalone consumer use tax return; RETAIL_DELIVERY_FEE is a standalone retail delivery fee return."
           default: "SALES_TAX"
-        is_rdf:
-          type: "boolean"
-          title: "Is Rdf"
-          description: "True when this filing is a state Retail Delivery Fee return, a separate filing from the state's sales tax return."
-          default: false
         amount_calculated:
           type: "string"
           pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,18}|(?=[\\d.]{1,21}0*$)\\d{0,18}\\.\\d{0,2}0*$)"
@@ -5254,6 +5425,11 @@ components:
           title: "Amount Fees"
           description: "Fees applied to the filing."
           default: "0.00"
+        fee_type:
+          anyOf:
+            - $ref: "#/components/schemas/FeeTypeEnum"
+            - type: "null"
+          description: "Whether amount_fees is a penalty, interest, or other fee. Null when unknown (legacy rows)."
         amount_penalties:
           type: "string"
           pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,18}|(?=[\\d.]{1,21}0*$)\\d{0,18}\\.\\d{0,2}0*$)"
@@ -5276,14 +5452,27 @@ components:
           type: "string"
           pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,18}|(?=[\\d.]{1,21}0*$)\\d{0,18}\\.\\d{0,2}0*$)"
           title: "Amount Input Vat Recoverable"
-          description: "Input VAT recovered on this filing's purchases. Subtracted from liability; always 0.00 outside EU/UK VAT AP filings."
+          description: "Input VAT this filing actually claimed. Subtracted from liability; always 0.00 outside EU/UK VAT filings."
           default: "0.00"
         amount_input_vat_true_up:
           type: "string"
           pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,18}|(?=[\\d.]{1,21}0*$)\\d{0,18}\\.\\d{0,2}0*$)"
           title: "Amount Input Vat True Up"
-          description: "Prior-year input VAT pro-rata true-up on this filing. Positive claims more, negative repays. Always 0.00 until posted."
+          description: "Prior-year input VAT pro-rata true-up on this filing. Negative claims more, positive repays. Always 0.00 until posted."
           default: "0.00"
+        amount_input_vat_recoverable_base:
+          type: "string"
+          pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,18}|(?=[\\d.]{1,21}0*$)\\d{0,18}\\.\\d{0,2}0*$)"
+          title: "Amount Input Vat Recoverable Base"
+          description: "Input VAT this filing would have claimed at a 100% rate. Always 0.00 outside EU/UK VAT filings."
+          default: "0.00"
+        input_vat_recovery_rate_applied:
+          anyOf:
+            - type: "string"
+              pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,3}|(?=[\\d.]{1,13}0*$)\\d{0,3}\\.\\d{0,9}0*$)"
+            - type: "null"
+          title: "Input Vat Recovery Rate Applied"
+          description: "Rate actually used on this filing's reclaim. Null when this filing is not EU/UK VAT."
         amount_sales:
           type: "string"
           pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,18}|(?=[\\d.]{1,21}0*$)\\d{0,18}\\.\\d{0,2}0*$)"
@@ -5451,19 +5640,6 @@ components:
           title: "Deferred Transaction Count"
           description: "Number of transactions deferred from this filing period."
           default: 0
-        input_vat_recovery_rate:
-          anyOf:
-            - type: "string"
-              pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,18}|(?=[\\d.]{1,21}0*$)\\d{0,18}\\.\\d{0,2}0*$)"
-            - type: "null"
-          title: "Input Vat Recovery Rate"
-          description: "Input VAT recovery rate applied to this filing, as a percentage 0-100. Null when no rate exists for the filing's country and year, which means fully recoverable. Uses the definitive rate when set, otherwise the year's frozen provisional."
-        input_vat_recovery_rate_is_definitive:
-          anyOf:
-            - type: "boolean"
-            - type: "null"
-          title: "Input Vat Recovery Rate Is Definitive"
-          description: "True when input_vat_recovery_rate is this year's definitive rate. False when it is the provisional. Null when no rate exists."
         filing_website_url:
           anyOf:
             - type: "string"
@@ -5505,7 +5681,7 @@ components:
       properties:
         status:
           $ref: "#/components/schemas/FilingStatusEnum"
-          description: "Filing status. Possible values:\n                                    UNFILED, FILING, FILED, PAUSED, SKIPPED, CANCELLED, ISSUE."
+          description: "Filing status. Possible values:\n                                    UNFILED, FILING, SUBMITTED, FILED, PAUSED, SKIPPED, CANCELLED, ISSUE."
           default: "UNFILED"
         start_date:
           type: "string"
@@ -5624,13 +5800,8 @@ components:
           description: "Reason why the filing was cancelled, if applicable."
         tax_type:
           $ref: "#/components/schemas/TaxTypeEnum"
-          description: "Which taxes this filing return covers. SALES_AND_USE_TAX is one real return covering both; USE_TAX is a standalone consumer use tax return."
+          description: "Which taxes this filing return covers. SALES_AND_USE_TAX is one real return covering both; USE_TAX is a standalone consumer use tax return; RETAIL_DELIVERY_FEE is a standalone retail delivery fee return."
           default: "SALES_TAX"
-        is_rdf:
-          type: "boolean"
-          title: "Is Rdf"
-          description: "True when this filing is a state Retail Delivery Fee return, a separate filing from the state's sales tax return."
-          default: false
         amount_calculated:
           type: "string"
           pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,18}|(?=[\\d.]{1,21}0*$)\\d{0,18}\\.\\d{0,2}0*$)"
@@ -5655,6 +5826,11 @@ components:
           title: "Amount Fees"
           description: "Fees applied to the filing."
           default: "0.00"
+        fee_type:
+          anyOf:
+            - $ref: "#/components/schemas/FeeTypeEnum"
+            - type: "null"
+          description: "Whether amount_fees is a penalty, interest, or other fee. Null when unknown (legacy rows)."
         amount_penalties:
           type: "string"
           pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,18}|(?=[\\d.]{1,21}0*$)\\d{0,18}\\.\\d{0,2}0*$)"
@@ -5677,14 +5853,27 @@ components:
           type: "string"
           pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,18}|(?=[\\d.]{1,21}0*$)\\d{0,18}\\.\\d{0,2}0*$)"
           title: "Amount Input Vat Recoverable"
-          description: "Input VAT recovered on this filing's purchases. Subtracted from liability; always 0.00 outside EU/UK VAT AP filings."
+          description: "Input VAT this filing actually claimed. Subtracted from liability; always 0.00 outside EU/UK VAT filings."
           default: "0.00"
         amount_input_vat_true_up:
           type: "string"
           pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,18}|(?=[\\d.]{1,21}0*$)\\d{0,18}\\.\\d{0,2}0*$)"
           title: "Amount Input Vat True Up"
-          description: "Prior-year input VAT pro-rata true-up on this filing. Positive claims more, negative repays. Always 0.00 until posted."
+          description: "Prior-year input VAT pro-rata true-up on this filing. Negative claims more, positive repays. Always 0.00 until posted."
           default: "0.00"
+        amount_input_vat_recoverable_base:
+          type: "string"
+          pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,18}|(?=[\\d.]{1,21}0*$)\\d{0,18}\\.\\d{0,2}0*$)"
+          title: "Amount Input Vat Recoverable Base"
+          description: "Input VAT this filing would have claimed at a 100% rate. Always 0.00 outside EU/UK VAT filings."
+          default: "0.00"
+        input_vat_recovery_rate_applied:
+          anyOf:
+            - type: "string"
+              pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,3}|(?=[\\d.]{1,13}0*$)\\d{0,3}\\.\\d{0,9}0*$)"
+            - type: "null"
+          title: "Input Vat Recovery Rate Applied"
+          description: "Rate actually used on this filing's reclaim. Null when this filing is not EU/UK VAT."
         amount_sales:
           type: "string"
           pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,18}|(?=[\\d.]{1,21}0*$)\\d{0,18}\\.\\d{0,2}0*$)"
@@ -6024,13 +6213,11 @@ components:
         earliest_transaction_date:
           anyOf:
             - type: "string"
-              format: "date-time"
             - type: "null"
           title: "Earliest Transaction Date"
         most_recent_transaction_date:
           anyOf:
             - type: "string"
-              format: "date-time"
             - type: "null"
           title: "Most Recent Transaction Date"
         find_threshold_crossing_transaction_state:
@@ -6038,10 +6225,10 @@ components:
             - $ref: "#/components/schemas/FindThresholdCrossingTransactionState"
             - type: "null"
         earliest_collected_date:
-          type: "string"
-          format: "date-time"
+          anyOf:
+            - type: "string"
+            - type: "null"
           title: "Earliest Collected Date"
-          default: "2018-01-01T00:00:00"
         predicted_month_from_today:
           anyOf:
             - type: "integer"
@@ -6061,13 +6248,11 @@ components:
         last_processed_at:
           anyOf:
             - type: "string"
-              format: "date-time"
             - type: "null"
           title: "Last Processed At"
         last_tax_liability_processed_at:
           anyOf:
             - type: "string"
-              format: "date-time"
             - type: "null"
           title: "Last Tax Liability Processed At"
         periods:
@@ -6085,12 +6270,14 @@ components:
           type: "string"
           title: "Id"
         created_at:
-          type: "string"
-          format: "date-time"
+          anyOf:
+            - type: "string"
+            - type: "null"
           title: "Created At"
         updated_at:
-          type: "string"
-          format: "date-time"
+          anyOf:
+            - type: "string"
+            - type: "null"
           title: "Updated At"
         organization_id:
           type: "string"
@@ -6108,7 +6295,6 @@ components:
         disregarded_at:
           anyOf:
             - type: "string"
-              format: "date-time"
             - type: "null"
           title: "Disregarded At"
         disregarded_by:
@@ -6879,6 +7065,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -6891,8 +7082,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -6900,7 +7093,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -6994,12 +7187,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "AlabamaRegistrationPayload"
       description: "Full payload for Alabama registration import.\nNests Alabama-specific fields under jurisdiction_specific_fields.\nParticipates in the discriminated union for route-level validation\nvia Tag(\"REGULAR_US_AL\")."
@@ -7073,6 +7269,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -7085,8 +7286,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -7094,7 +7297,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -7188,6 +7391,10 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
         pin_plain_text:
           anyOf:
             - type: "string"
@@ -7199,7 +7406,6 @@ components:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "ArizonaRegistrationPayload"
       description: "Full payload for Arizona TPT registration import.\nNests Arizona-specific fields under jurisdiction_specific_fields."
@@ -7273,6 +7479,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -7285,8 +7496,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -7294,7 +7507,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -7388,12 +7601,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "ArkansasRegistrationPayload"
       description: "Full payload for Arkansas registration import."
@@ -7467,6 +7683,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -7479,8 +7700,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -7488,7 +7711,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -7582,12 +7805,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "CaliforniaRegistrationPayload"
       description: "Full payload for California registration import."
@@ -7661,6 +7887,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -7673,8 +7904,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -7682,7 +7915,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -7776,217 +8009,18 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "ConnecticutRegistrationPayload"
       description: "Full payload for Connecticut registration import."
-    ColoradoRegistrationPayload:
-      properties:
-        registration_import_type:
-          type: "string"
-          const: "REGULAR"
-          title: "Registration Import Type"
-          description: "Specifies this is a regular jurisdiction registration import."
-          default: "REGULAR"
-        registration_date:
-          anyOf:
-            - type: "string"
-              format: "date"
-            - type: "null"
-          title: "Registration Date"
-          description: "The date when the registration was created. Format: YYYY-MM-DD."
-        registration_email:
-          anyOf:
-            - type: "string"
-            - type: "null"
-          title: "Registration Email"
-          description: "Email address associated with the registration."
-        registration_requested:
-          anyOf:
-            - type: "string"
-              format: "date-time"
-            - type: "null"
-          title: "Registration Requested"
-          description: "Timestamp when the registration was requested."
-        registration_completed:
-          anyOf:
-            - type: "string"
-              format: "date-time"
-            - type: "null"
-          title: "Registration Completed"
-          description: "Timestamp when the registration was completed."
-        deregistration_requested:
-          anyOf:
-            - type: "string"
-              format: "date-time"
-            - type: "null"
-          title: "Deregistration Requested"
-          description: "Timestamp when deregistration was requested."
-        deregistration_completed:
-          anyOf:
-            - type: "string"
-              format: "date-time"
-            - type: "null"
-          title: "Deregistration Completed"
-          description: "Timestamp when the deregistration was completed."
-        auto_registered:
-          anyOf:
-            - type: "boolean"
-            - type: "null"
-          title: "Auto Registered"
-          description: "Indicates whether the registration was completed automatically."
-          default: false
-        do_not_file:
-          type: "boolean"
-          title: "Do Not File"
-          description: "If true, do not file for this registration (treated as False by default)."
-          default: false
-        registrations_regime:
-          anyOf:
-            - $ref: "#/components/schemas/RegistrationsRegimeEnum"
-            - type: "null"
-          description: "The tax registration regime (e.g., STANDARD, SIMPLIFIED)."
-        change_regime_status:
-          anyOf:
-            - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
-            - type: "null"
-        country_code:
-          $ref: "#/components/schemas/CountryCodeEnum"
-          description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
-        state_code:
-          type: "string"
-          title: "State Code"
-          description: "The state/province code where the registration applies."
-        state_name:
-          type: "string"
-          title: "State Name"
-          description: "The name of the state/province."
-        filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
-        period_end_month:
-          anyOf:
-            - type: "integer"
-              maximum: 12
-              minimum: 1
-            - type: "null"
-          title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
-        username:
-          anyOf:
-            - type: "string"
-            - type: "null"
-          title: "Username"
-          description: "Username for accessing tax registration details."
-        comment:
-          anyOf:
-            - type: "string"
-            - type: "null"
-          title: "Comment"
-          description: "Additional comments related to the registration."
-        create_filings_from:
-          anyOf:
-            - type: "string"
-              format: "date"
-            - type: "null"
-          title: "Create Filings From"
-          description: "The date from which filings should be created. should start (YYYY-MM-DD)."
-        initial_sync:
-          anyOf:
-            - type: "boolean"
-            - type: "null"
-          title: "Initial Sync"
-          description: "Indicates whether an initial synchronization should be performed."
-          default: false
-        amount_fees:
-          anyOf:
-            - type: "number"
-            - type: "string"
-              pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,18}|(?=[\\d.]{1,21}0*$)\\d{0,18}\\.\\d{0,2}0*$)"
-          title: "Amount Fees"
-          description: "The amount of fees associated with the registration."
-          default: "0.00"
-        vda:
-          anyOf:
-            - type: "boolean"
-            - type: "null"
-          title: "Vda"
-          description: "Indicates whether a Voluntary Disclosure Agreement (VDA) applies."
-          default: false
-        imported:
-          anyOf:
-            - type: "boolean"
-            - type: "null"
-          title: "Imported"
-          description: "Whether the registration was imported from another system."
-        sales_tax_id:
-          anyOf:
-            - type: "string"
-            - type: "null"
-          title: "Sales Tax Id"
-          description: "The sales tax ID associated with the registration."
-        ior_number:
-          anyOf:
-            - type: "string"
-            - type: "null"
-          title: "Ior Number"
-          description: "The Importer of Record (IOR) number associated with the registration."
-        sst_import:
-          anyOf:
-            - type: "boolean"
-            - type: "null"
-          title: "Sst Import"
-          description: "Indicates whether the registration is an SST Import."
-          default: false
-        tax_id:
-          anyOf:
-            - type: "string"
-            - type: "null"
-          title: "Tax Id"
-          description: "Organization-level tax ID (e.g., VAT number, Canada Business Number)."
-        password_plain_text:
-          anyOf:
-            - type: "string"
-            - type: "null"
-          title: "Password Plain Text"
-          description: "The plaintext password for accessing the tax registration account."
-        password_metadata_plain_text:
-          anyOf:
-            - type: "string"
-            - type: "null"
-          title: "Password Metadata Plain Text"
-          description: "Metadata related to the password."
-        jurisdiction_specific_fields:
-          anyOf:
-            - additionalProperties: true
-              type: "object"
-            - type: "null"
-          title: "Jurisdiction Specific Fields"
-          description: "State-specific registration fields (e.g. Alabama Sign On ID, Access Code)."
-        request_id:
-          anyOf:
-            - type: "string"
-            - type: "null"
-          title: "Request Id"
-          description: "Optional client-minted id for this confirm attempt."
-        retail_delivery_fee_obligated:
-          type: "boolean"
-          title: "Retail Delivery Fee Obligated"
-          description: "Whether this Colorado registration is declared obligated to file a Retail Delivery Fee return (DR 1786)."
-          default: false
-      type: "object"
-      required:
-        - "country_code"
-        - "state_code"
-        - "state_name"
-        - "filing_frequency"
-      title: "ColoradoRegistrationPayload"
-      description: "Create/import payload for Colorado, including RDF obligation declaration."
     DistrictOfColumbiaRegistrationPayload:
       properties:
         registration_import_type:
@@ -8057,6 +8091,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -8069,8 +8108,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -8078,7 +8119,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -8172,12 +8213,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "DistrictOfColumbiaRegistrationPayload"
       description: "Full payload for District of Columbia registration import."
@@ -8251,6 +8295,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -8263,8 +8312,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -8272,7 +8323,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -8366,12 +8417,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "GeorgiaRegistrationPayload"
       description: "Full payload for Georgia GTC registration import"
@@ -8445,6 +8499,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -8457,8 +8516,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -8466,7 +8527,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -8560,12 +8621,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "HawaiiRegistrationPayload"
       description: "Full payload for Hawaii Revenue Online registration import"
@@ -8639,6 +8703,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -8651,8 +8720,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -8660,7 +8731,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -8754,12 +8825,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "IdahoRegistrationPayload"
       description: "Full payload for Idaho registration import."
@@ -8833,6 +8907,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -8845,8 +8924,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -8854,7 +8935,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -8948,12 +9029,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "IllinoisRegistrationPayload"
       description: "Full payload for Illinois registration import."
@@ -9027,6 +9111,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -9039,8 +9128,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -9048,7 +9139,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -9142,12 +9233,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "IndianaRegistrationPayload"
       description: "Full payload for Indiana registration import."
@@ -9221,6 +9315,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -9233,8 +9332,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -9242,7 +9343,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -9336,12 +9437,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "IowaRegistrationPayload"
       description: "Full payload for Iowa registration import."
@@ -9415,6 +9519,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -9427,8 +9536,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -9436,7 +9547,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -9530,12 +9641,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "KansasRegistrationPayload"
       description: "Full payload for Kansas registration import."
@@ -9609,6 +9723,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -9621,8 +9740,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -9630,7 +9751,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -9724,12 +9845,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "MassachusettsRegistrationPayload"
       description: "Full payload for Massachusetts registration import."
@@ -9803,6 +9927,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -9815,8 +9944,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -9824,7 +9955,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -9918,12 +10049,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "MississippiRegistrationPayload"
       description: "Full payload for Mississippi registration import."
@@ -9997,6 +10131,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -10009,8 +10148,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -10018,7 +10159,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -10112,12 +10253,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "MichiganRegistrationPayload"
       description: "Full payload for Michigan registration import."
@@ -10191,6 +10335,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -10203,8 +10352,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -10212,7 +10363,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -10306,12 +10457,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "MissouriRegistrationPayload"
       description: "Full payload for Missouri registration import."
@@ -10385,6 +10539,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -10397,8 +10556,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -10406,7 +10567,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -10500,12 +10661,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "TennesseeRegistrationPayload"
       description: "Full payload for Tennessee TNTAP registration import."
@@ -10579,6 +10743,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -10591,8 +10760,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -10600,7 +10771,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -10694,12 +10865,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "TexasRegistrationPayload"
       description: "Full payload for Texas registration import."
@@ -10773,6 +10947,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -10785,8 +10964,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -10794,7 +10975,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -10888,6 +11069,10 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
         pin_plain_text:
           anyOf:
             - type: "string"
@@ -10899,7 +11084,6 @@ components:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "UtahRegistrationPayload"
       description: "Full payload for Utah registration import."
@@ -10973,6 +11157,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -10985,8 +11174,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -10994,7 +11185,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -11088,12 +11279,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "VermontRegistrationPayload"
       description: "Full payload for Vermont registration import."
@@ -11167,6 +11361,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -11179,8 +11378,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -11188,7 +11389,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -11282,12 +11483,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "VirginiaRegistrationPayload"
       description: "Full payload for Virginia registration import."
@@ -11361,6 +11565,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -11373,8 +11582,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -11382,7 +11593,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -11476,12 +11687,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "WashingtonRegistrationPayload"
       description: "Full payload for Washington registration import."
@@ -11555,6 +11769,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -11567,8 +11786,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -11576,7 +11797,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -11670,12 +11891,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "WestVirginiaRegistrationPayload"
       description: "Full payload for West Virginia registration import."
@@ -11749,6 +11973,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -11761,8 +11990,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -11770,7 +12001,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -11864,12 +12095,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "WisconsinRegistrationPayload"
       description: "Full payload for Wisconsin registration import."
@@ -11943,6 +12177,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -11955,8 +12194,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -11964,7 +12205,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -12058,12 +12299,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "MaineRegistrationPayload"
       description: "Full payload for Maine registration import."
@@ -12137,6 +12381,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -12149,8 +12398,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -12158,7 +12409,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -12252,12 +12503,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "MinnesotaRegistrationPayload"
       description: "Full payload for Minnesota registration import."
@@ -12331,6 +12585,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -12343,8 +12602,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -12352,7 +12613,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -12450,12 +12711,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
       title: "RegistrationCreatePayload"
     OSSRegistrationCreatePayload:
       properties:
@@ -12603,6 +12867,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -12615,8 +12884,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -12624,7 +12895,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -12718,12 +12989,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "KentuckyRegistrationPayload"
       description: "Full payload for Kentucky registration import."
@@ -12797,6 +13071,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -12809,8 +13088,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -12818,7 +13099,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -12912,12 +13193,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "MarylandRegistrationPayload"
       description: "Full payload for Maryland registration import."
@@ -12991,6 +13275,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -13003,8 +13292,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -13012,7 +13303,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -13106,6 +13397,10 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
         pin_plain_text:
           anyOf:
             - type: "string"
@@ -13117,7 +13412,6 @@ components:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "NebraskaRegistrationPayload"
       description: "Full payload for a Nebraska registration import."
@@ -13191,6 +13485,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -13203,8 +13502,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -13212,7 +13513,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -13306,12 +13607,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "NevadaRegistrationPayload"
       description: "Full payload for Nevada registration import."
@@ -13385,6 +13689,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -13397,8 +13706,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -13406,7 +13717,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -13500,12 +13811,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "NewJerseyRegistrationPayload"
       description: "Full payload for New Jersey registration import."
@@ -13579,6 +13893,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -13591,8 +13910,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -13600,7 +13921,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -13694,12 +14015,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "NewMexicoRegistrationPayload"
       description: "Full payload for New Mexico registration import."
@@ -13773,6 +14097,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -13785,8 +14114,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -13794,7 +14125,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -13888,12 +14219,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "NewYorkRegistrationPayload"
       description: "Full payload for New York registration import."
@@ -13967,6 +14301,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -13979,8 +14318,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -13988,7 +14329,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -14082,12 +14423,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "NorthDakotaRegistrationPayload"
       description: "Full payload for North Dakota registration import."
@@ -14161,6 +14505,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -14173,8 +14522,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -14182,7 +14533,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -14276,12 +14627,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "SouthCarolinaRegistrationPayload"
       description: "Full payload for South Carolina registration import."
@@ -14355,6 +14709,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -14367,8 +14726,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -14376,7 +14737,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -14470,12 +14831,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "OklahomaRegistrationPayload"
       description: "Full payload for Oklahoma registration import."
@@ -14549,6 +14913,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -14561,8 +14930,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -14570,7 +14941,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -14664,12 +15035,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "LouisianaRegistrationPayload"
       description: "Full payload for Louisiana registration import."
@@ -14743,6 +15117,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -14755,8 +15134,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -14764,7 +15145,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -14858,12 +15239,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "OhioRegistrationPayload"
       description: "Full payload for Ohio registration import."
@@ -14937,6 +15321,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -14949,8 +15338,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -14958,7 +15349,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -15052,12 +15443,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "PennsylvaniaRegistrationPayload"
       description: "Full payload for Pennsylvania registration import."
@@ -15131,6 +15525,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -15143,8 +15542,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -15152,7 +15553,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -15246,12 +15647,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "RhodeIslandRegistrationPayload"
       description: "Full payload for Rhode Island registration import."
@@ -15325,6 +15729,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -15337,8 +15746,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -15346,7 +15757,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -15440,12 +15851,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "SouthDakotaRegistrationPayload"
       description: "Full payload for South Dakota registration import."
@@ -15519,6 +15933,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -15531,8 +15950,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -15540,7 +15961,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -15634,12 +16055,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "FloridaRegistrationPayload"
       description: "Full payload for Florida registration import."
@@ -15713,6 +16137,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -15725,8 +16154,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -15734,7 +16165,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -15828,12 +16259,15 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
       type: "object"
       required:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "NorthCarolinaRegistrationPayload"
       description: "Full payload for North Carolina registration import."
@@ -15907,6 +16341,11 @@ components:
           anyOf:
             - $ref: "#/components/schemas/ChangeRegimeStatusEnum"
             - type: "null"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "Set true to mark the organization as collecting tax in this jurisdiction ahead of registration details, instead of a normal import. Opens the registration in PROCESSING; filing frequency and credentials are not required."
+          default: false
         country_code:
           $ref: "#/components/schemas/CountryCodeEnum"
           description: "The country code (ISO 3166-1 alpha-2 format) where the registration applies."
@@ -15919,8 +16358,10 @@ components:
           title: "State Name"
           description: "The name of the state/province."
         filing_frequency:
-          $ref: "#/components/schemas/FilingFrequencyEnum"
-          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN."
+          anyOf:
+            - $ref: "#/components/schemas/FilingFrequencyEnum"
+            - type: "null"
+          description: "Specifies how often tax filings should be made. Possible values: MONTHLY, QUARTERLY, ANNUALLY, UNKNOWN. Required unless isPreCollecting is set."
         period_end_month:
           anyOf:
             - type: "integer"
@@ -15928,7 +16369,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) and United Kingdom (GB)\n        quarterly, and California (US-CA) and District of Columbia (US-DC) annual.\n        Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -16022,6 +16463,10 @@ components:
             - type: "null"
           title: "Request Id"
           description: "Optional client-minted id for this confirm attempt."
+        tax_type:
+          $ref: "#/components/schemas/TaxTypeEnum"
+          description: "Tax obligation this registration covers."
+          default: "SALES_TAX"
         pin_plain_text:
           anyOf:
             - type: "string"
@@ -16033,7 +16478,6 @@ components:
         - "country_code"
         - "state_code"
         - "state_name"
-        - "filing_frequency"
         - "jurisdiction_specific_fields"
       title: "WyomingRegistrationPayload"
       description: "Full payload for Wyoming registration import."
@@ -16055,28 +16499,24 @@ components:
         registration_requested:
           anyOf:
             - type: "string"
-              format: "date-time"
             - type: "null"
           title: "Registration Requested"
           description: "Timestamp when the registration was requested."
         registration_completed:
           anyOf:
             - type: "string"
-              format: "date-time"
             - type: "null"
           title: "Registration Completed"
           description: "Timestamp when the registration was completed."
         deregistration_requested:
           anyOf:
             - type: "string"
-              format: "date-time"
             - type: "null"
           title: "Deregistration Requested"
           description: "Timestamp when deregistration was requested."
         deregistration_completed:
           anyOf:
             - type: "string"
-              format: "date-time"
             - type: "null"
           title: "Deregistration Completed"
           description: "Timestamp when the deregistration was completed."
@@ -16120,6 +16560,11 @@ components:
             - type: "null"
           title: "Marked Collecting"
           description: "Indicates whether the  registration is marked as collecting in shopify"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "True when this PROCESSING registration marks the organization as collecting tax in the jurisdiction ahead of registration details. It skips the Tax Ops registration task until the flag is cleared."
+          default: false
         status:
           $ref: "#/components/schemas/RegistrationStatusEnum"
           description: "The current status of the registration. Possible values: REGISTERED, PROCESSING, UNREGISTERED, DEREGISTERING, DEREGISTERED, CANCELLED, VALIDATING, AWAITING_CLARIFICATION, SELF_MANAGED."
@@ -16184,18 +16629,6 @@ components:
           title: "Create Back Filing"
           description: "Whether to also file the single period preceding the first filing period."
           default: false
-        retail_delivery_fee_obligated:
-          type: "boolean"
-          title: "Retail Delivery Fee Obligated"
-          description: "Whether this registration is declared obligated to file a Retail Delivery Fee return (e.g. Colorado DR 1786)."
-          default: false
-        retail_delivery_fee_effective_from:
-          anyOf:
-            - type: "string"
-              format: "date"
-            - type: "null"
-          title: "Retail Delivery Fee Effective From"
-          description: "First date from which retail delivery fee filings may be generated. Periods that closed before this date must not get those filings."
         initial_sync:
           anyOf:
             - type: "boolean"
@@ -16265,7 +16698,6 @@ components:
         marked_collecting_date:
           anyOf:
             - type: "string"
-              format: "date-time"
             - type: "null"
           title: "Marked Collecting Date"
           description: "The date when the registration was marked as collecting."
@@ -16283,7 +16715,6 @@ components:
         created_at:
           anyOf:
             - type: "string"
-              format: "date-time"
             - type: "null"
           title: "Created At"
           description: "Timestamp when this registration was created in Kintsugi."
@@ -16303,6 +16734,36 @@ components:
             - type: "null"
           title: "Jurisdiction Specific Fields"
           description: "Jurisdiction-specific registration fields."
+        deregistration_closure_date:
+          anyOf:
+            - type: "string"
+              format: "date"
+            - type: "null"
+          title: "Deregistration Closure Date"
+          description: "Effective date the registration closes with the jurisdiction."
+        deregistration_reason:
+          anyOf:
+            - $ref: "#/components/schemas/DeregistrationReasonEnum"
+            - type: "null"
+          description: "Reason the registration is being closed."
+        deregistration_acknowledged_at:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Deregistration Acknowledged At"
+          description: "When final-return acknowledgement was recorded."
+        kintsugi_mail_on_file:
+          type: "boolean"
+          title: "Kintsugi Mail On File"
+          description: "True when the Kintsugi Mail address is on file with the state for this registration."
+          default: false
+        kintsugi_mail_confirmed_at:
+          anyOf:
+            - type: "string"
+              format: "date"
+            - type: "null"
+          title: "Kintsugi Mail Confirmed At"
+          description: "Date Tax Ops marked Kintsugi Mail as on file with the state. Null when not on file."
         filing_days:
           type: "integer"
           title: "Filing Days"
@@ -16329,7 +16790,7 @@ components:
         - "registration_type"
         - "filing_website_url"
       title: "RegistrationRead"
-    JurisdictionSpecificFieldsResponse:
+    CustomerJurisdictionSpecificFieldsResponse:
       properties:
         country_code:
           type: "string"
@@ -16351,6 +16812,12 @@ components:
           type: "object"
           title: "Metadata"
           description: "UI metadata (help articles, portal URL, filing frequencies, etc.)."
+        tax_types:
+          items:
+            $ref: "#/components/schemas/TaxTypeEnum"
+          type: "array"
+          title: "Tax Types"
+          description: "Tax types that can be imported for this jurisdiction."
       type: "object"
       required:
         - "country_code"
@@ -16358,7 +16825,9 @@ components:
         - "default_form"
         - "jurisdiction_fields_json_schema"
         - "metadata"
-      title: "JurisdictionSpecificFieldsResponse"
+        - "tax_types"
+      title: "CustomerJurisdictionSpecificFieldsResponse"
+      description: "Customer import fields, including the tax types that jurisdiction allows.\n\nThe partner and public jurisdiction-fields routes stay on the base response.\nAllowed tax types depend on the organization, and those contracts do not."
     RegistrationJurisdictionOptionRead:
       properties:
         country_code:
@@ -16463,6 +16932,11 @@ components:
             - type: "null"
           title: "Marked Collecting"
           description: "Indicates whether the  registration is marked as collecting in shopify"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "True when this PROCESSING registration marks the organization as collecting tax in the jurisdiction ahead of registration details. It skips the Tax Ops registration task until the flag is cleared."
+          default: false
         encrypted_username:
           anyOf:
             - type: "string"
@@ -16591,14 +17065,32 @@ components:
       title: "Attachment"
     DeregisterRegistrationRequest:
       properties:
+        closure_date:
+          type: "string"
+          format: "date"
+          title: "Closure Date"
+          description: "Effective date the permit closes with the jurisdiction (YYYY-MM-DD). Past and future dates are accepted."
+        reason:
+          $ref: "#/components/schemas/DeregistrationReasonEnum"
+          description: "Why the permit is closing: full business closure, or closing nexus in this one state."
+        final_return_acknowledged:
+          type: "boolean"
+          const: true
+          title: "Final Return Acknowledged"
+          description: "Must be true: the actor confirms a final return is still owed."
         request_id:
           anyOf:
             - type: "string"
             - type: "null"
           title: "Request Id"
+          description: "Optional client-minted id for this confirm attempt."
       type: "object"
+      required:
+        - "closure_date"
+        - "reason"
+        - "final_return_acknowledged"
       title: "DeregisterRegistrationRequest"
-      description: "Optional body for POST /registrations/{id}/deregister (CP-4742)."
+      description: "Body for POST /registrations/{id}/deregister."
     OssRegistrationCountryRead:
       properties:
         id:
@@ -17002,7 +17494,7 @@ components:
         exemptions:
           anyOf:
             - items:
-                $ref: "#/components/schemas/Exemption"
+                $ref: "#/components/schemas/TransactionEmbeddedExemption"
               type: "array"
             - type: "null"
           title: "Exemptions"
@@ -17084,6 +17576,12 @@ components:
           title: "Taxable Amount"
           description: "Taxable amount."
           default: "0.00"
+        is_tax_inclusive:
+          anyOf:
+            - type: "boolean"
+            - type: "null"
+          title: "Is Tax Inclusive"
+          description: "Whether source amounts include tax. NULL means the source did not say."
         currency:
           $ref: "#/components/schemas/CurrencyEnum"
           description: "Currency code (ISO 4217, e.g., USD)"
@@ -17273,6 +17771,12 @@ components:
             - type: "null"
           title: "Addresses"
           description: "A list of TransactionAddressBuilder objects or None if no addresses are provided. This field represents the addresses associated with the transaction."
+        is_tax_inclusive:
+          anyOf:
+            - type: "boolean"
+            - type: "null"
+          title: "Is Tax Inclusive"
+          description: "Whether the source amounts include tax (EI-1534). None means the source did not say. Mirrors the parent order's signal; netting stays EI-1538."
         transaction_items:
           items:
             $ref: "#/components/schemas/CreditNoteItemCreateUpdate"
@@ -17364,7 +17868,7 @@ components:
         exemptions:
           anyOf:
             - items:
-                $ref: "#/components/schemas/Exemption"
+                $ref: "#/components/schemas/TransactionEmbeddedExemption"
               type: "array"
             - type: "null"
           title: "Exemptions"
@@ -17446,6 +17950,12 @@ components:
           title: "Taxable Amount"
           description: "Taxable amount."
           default: "0.00"
+        is_tax_inclusive:
+          anyOf:
+            - type: "boolean"
+            - type: "null"
+          title: "Is Tax Inclusive"
+          description: "Whether source amounts include tax. NULL means the source did not say."
         currency:
           $ref: "#/components/schemas/CurrencyEnum"
           description: "Currency code (ISO 4217, e.g., USD)"
@@ -17772,6 +18282,7 @@ components:
         - "RIPPLING"
         - "GUSTO"
         - "FACEBOOK"
+        - "FRESHBOOKS"
         - "OTHER"
         - "ORDWAY"
         - "INSTAGRAM"
@@ -17788,8 +18299,10 @@ components:
         - "MODALYST"
         - "NORDSTROM"
         - "FAIRE"
+        - "FRISBII_BILLING"
         - "SHOPWARE"
         - "ZOHO"
+        - "ZOHO_BOOKS"
         - "SAGE-INTACCT"
         - "AIRWALLEX"
         - "ORB"
@@ -17809,6 +18322,8 @@ components:
         - "INTUIT_ENTERPRISE_SUITE"
         - "ACUMATICA"
         - "PLENTYONE"
+        - "HYPERLINE"
+        - "OPENMETER"
       title: "SourceEnum"
     AddressStatus:
       type: "string"
@@ -17878,6 +18393,7 @@ components:
           deprecated: true
         exemption_type:
           $ref: "#/components/schemas/ExemptionType"
+          description: "Type of exemption. `partial` is not accepted here because it needs a certificate form; add partial exemptions to the customer instead."
         start_date:
           type: "string"
           format: "date-time"
@@ -17928,7 +18444,7 @@ components:
         - "ZERO_RATE_NOT_EXEMPT"
       title: "TransactionExemptStatusEnum"
       description: "Based on transaction item exempt status.\nNOT EXEMPT: None of the items are NOT EXEMPT\nPARTIALLY EXEMPT: At least some of the items are NOT EXEMPT\nFULLY_EXEMPT: All items sold in the transaction are EXEMPT\nZERO_RATE_NOT_EXEMPT: All items sold in the transaction are zero-rated"
-    Exemption:
+    TransactionEmbeddedExemption:
       properties:
         id:
           type: "string"
@@ -18025,11 +18541,18 @@ components:
             - $ref: "#/components/schemas/ExemptionSourceEnum"
             - type: "null"
           description: "Source of exemption."
+        certificate_type:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Certificate Type"
+          description: "Partial-exemption certificate form code. Null when the exemption is not a partial exemption."
       type: "object"
       required:
         - "exemption_type"
         - "start_date"
-      title: "Exemption"
+      title: "TransactionEmbeddedExemption"
+      description: "Public read schema mirroring the ORM ``Exemption`` for /v1 transaction embedding.\n\nA non-table twin of ``exemptions.models.Exemption``: it re-declares the exact fields\nthe ORM adds on top of ``ExemptionBase``/``TableBase`` (id, organization_id,\ncertificate_import_id, source, certificate_type) so\n``TransactionSerializerBase.exemptions`` can be\ntyped without importing the private ORM model (CP-4895). Its serialized shape is\nbyte-identical to the ORM's — ``from_attributes`` reads the same attributes off each\nORM row — so the /v1 response payload is unchanged. Keep it in lockstep with\n``Exemption`` if the ORM's public columns change (a JSON-schema parity test guards it)."
     TaxLiabilitySourceEnum:
       type: "string"
       enum:
@@ -18202,6 +18725,7 @@ components:
         - "ZMW"
         - "ZWD"
       title: "CurrencyEnum"
+      description: "ISO-4217 currency code. Pair with a monetary amount on the same object."
     DocumentTypeEnum:
       type: "string"
       enum:
@@ -18336,7 +18860,6 @@ components:
           deprecated: true
         date:
           type: "string"
-          format: "date-time"
           title: "Date"
           description: "Date/time of item."
         description:
@@ -18477,6 +19000,12 @@ components:
           title: "Exempt"
           description: "Indicates if the item is exempt."
           default: false
+        is_tax_inclusive:
+          anyOf:
+            - type: "boolean"
+            - type: "null"
+          title: "Is Tax Inclusive"
+          description: "Whether this line's source amount includes tax. NULL means the source did not say."
         id:
           type: "string"
           title: "Id"
@@ -18513,6 +19042,19 @@ components:
             - type: "null"
           title: "Recoverability Percent"
           description: "Input VAT recoverability 0-100. Blank means 100%."
+        recoverable_input_vat:
+          type: "string"
+          pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,18}|(?=[\\d.]{1,21}0*$)\\d{0,18}\\.\\d{0,2}0*$)"
+          title: "Recoverable Input Vat"
+          description: "VAT recoverable on this line in the transaction's currency, after the line's recoverability percentage and the organization's pro-rata recovery rate. 0.00 for sales and outside the EU and UK."
+          default: "0.00"
+        converted_recoverable_input_vat:
+          anyOf:
+            - type: "string"
+              pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,18}|(?=[\\d.]{1,21}0*$)\\d{0,18}\\.\\d{0,2}0*$)"
+            - type: "null"
+          title: "Converted Recoverable Input Vat"
+          description: "Recoverable VAT on this line in the destination currency. Null when the line has no converted amount."
       type: "object"
       required:
         - "organization_id"
@@ -18868,6 +19410,12 @@ components:
           title: "Exempt"
           description: "Indicates if the item is exempt."
           default: false
+        is_tax_inclusive:
+          anyOf:
+            - type: "boolean"
+            - type: "null"
+          title: "Is Tax Inclusive"
+          description: "Whether this line's source amount includes tax. NULL means the source did not say."
         tax_items:
           items:
             $ref: "#/components/schemas/TaxItemBuilder"
@@ -18923,6 +19471,7 @@ components:
         - "wholesale"
         - "transaction"
         - "reverse_charge"
+        - "partial"
       title: "ExemptionType"
     ExemptionStatus:
       type: "string"
@@ -18940,6 +19489,8 @@ components:
         - "REGISTRATION"
         - "FILING"
         - "FILING_PAYMENT"
+        - "TASK"
+        - "FILING_PAYMENT_RECEIPT"
       title: "RelatedEntityType"
     backend__src__filings__responses__ValidationErrorItem:
       properties:
@@ -18973,12 +19524,53 @@ components:
         - "input"
         - "ctx"
       title: "ValidationErrorItem"
+    BackFilingRequestRegistrationInput:
+      properties:
+        registration_id:
+          type: "string"
+          title: "Registration Id"
+        periods:
+          items:
+            $ref: "#/components/schemas/BackFilingRequestPeriodInput"
+          type: "array"
+          title: "Periods"
+      type: "object"
+      required:
+        - "registration_id"
+        - "periods"
+      title: "BackFilingRequestRegistrationInput"
+    BackFilingRequestRegistrationOption:
+      properties:
+        registration_id:
+          type: "string"
+          title: "Registration Id"
+        state_code:
+          type: "string"
+          title: "State Code"
+        remittance_tag:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Remittance Tag"
+        periods:
+          items:
+            $ref: "#/components/schemas/BackFilingRequestPeriod"
+          type: "array"
+          title: "Periods"
+      type: "object"
+      required:
+        - "registration_id"
+        - "state_code"
+        - "remittance_tag"
+        - "periods"
+      title: "BackFilingRequestRegistrationOption"
     FilingStatusEnum:
       type: "string"
       enum:
         - "UNFILED"
         - "FILED"
         - "FILING"
+        - "SUBMITTED"
         - "PAUSED"
         - "SKIPPED"
         - "CANCELLED"
@@ -18990,8 +19582,17 @@ components:
         - "SALES_TAX"
         - "USE_TAX"
         - "SALES_AND_USE_TAX"
+        - "RETAIL_DELIVERY_FEE"
       title: "TaxTypeEnum"
-      description: "Tax obligation on a nexus, registration, or filing row.\n\nRegistrations and filings may be SALES_AND_USE_TAX: one state account and\none return can cover both taxes, and each is stored as a single row.\nNexus rows are only SALES_TAX or USE_TAX. Sales and use tax exposure are\nseparate obligations with their own met dates, period models, and liability\naccrual."
+      description: "Tax obligation on a nexus, registration, or filing row.\n\nRegistrations and filings may be SALES_AND_USE_TAX: one state account and\none return can cover both taxes, and each is stored as a single row.\nNexus rows are SALES_TAX, USE_TAX, or RETAIL_DELIVERY_FEE. Sales tax, use\ntax, and the retail delivery fee are separate obligations with their own\nmet dates, period models, and liability accrual."
+    FeeTypeEnum:
+      type: "string"
+      enum:
+        - "PENALTY"
+        - "INTEREST"
+        - "OTHER"
+      title: "FeeTypeEnum"
+      description: "Label for ``Filing.amount_fees`` — penalty vs interest vs other.\n\nNullable on the row: existing fees predate the label and stay blank until\nTax Ops classifies them. Does not change arithmetic."
     QuarterlyPrepayBalanceDisplay:
       properties:
         gross_tax_liability:
@@ -19257,9 +19858,9 @@ components:
     PublicProductCategoryEnum:
       type: "string"
       enum:
+        - "Physical"
         - "Digital"
         - "Misc"
-        - "Physical"
         - "Services"
       title: "PublicProductCategoryEnum"
       description: "Top-level tax category for a product."
@@ -19373,28 +19974,24 @@ components:
         registration_requested:
           anyOf:
             - type: "string"
-              format: "date-time"
             - type: "null"
           title: "Registration Requested"
           description: "Timestamp when the registration was requested."
         registration_completed:
           anyOf:
             - type: "string"
-              format: "date-time"
             - type: "null"
           title: "Registration Completed"
           description: "Timestamp when the registration was completed."
         deregistration_requested:
           anyOf:
             - type: "string"
-              format: "date-time"
             - type: "null"
           title: "Deregistration Requested"
           description: "Timestamp when deregistration was requested."
         deregistration_completed:
           anyOf:
             - type: "string"
-              format: "date-time"
             - type: "null"
           title: "Deregistration Completed"
           description: "Timestamp when the deregistration was completed."
@@ -19438,6 +20035,11 @@ components:
             - type: "null"
           title: "Marked Collecting"
           description: "Indicates whether the  registration is marked as collecting in shopify"
+        is_pre_collecting:
+          type: "boolean"
+          title: "Is Pre Collecting"
+          description: "True when this PROCESSING registration marks the organization as collecting tax in the jurisdiction ahead of registration details. It skips the Tax Ops registration task until the flag is cleared."
+          default: false
         status:
           $ref: "#/components/schemas/RegistrationStatusEnum"
           description: "The current status of the registration. Possible values: REGISTERED, PROCESSING, UNREGISTERED, DEREGISTERING, DEREGISTERED, CANCELLED, VALIDATING, AWAITING_CLARIFICATION, SELF_MANAGED."
@@ -19502,18 +20104,6 @@ components:
           title: "Create Back Filing"
           description: "Whether to also file the single period preceding the first filing period."
           default: false
-        retail_delivery_fee_obligated:
-          type: "boolean"
-          title: "Retail Delivery Fee Obligated"
-          description: "Whether this registration is declared obligated to file a Retail Delivery Fee return (e.g. Colorado DR 1786)."
-          default: false
-        retail_delivery_fee_effective_from:
-          anyOf:
-            - type: "string"
-              format: "date"
-            - type: "null"
-          title: "Retail Delivery Fee Effective From"
-          description: "First date from which retail delivery fee filings may be generated. Periods that closed before this date must not get those filings."
         initial_sync:
           anyOf:
             - type: "boolean"
@@ -19583,7 +20173,6 @@ components:
         marked_collecting_date:
           anyOf:
             - type: "string"
-              format: "date-time"
             - type: "null"
           title: "Marked Collecting Date"
           description: "The date when the registration was marked as collecting."
@@ -19601,7 +20190,6 @@ components:
         created_at:
           anyOf:
             - type: "string"
-              format: "date-time"
             - type: "null"
           title: "Created At"
           description: "Timestamp when this registration was created in Kintsugi."
@@ -19621,6 +20209,36 @@ components:
             - type: "null"
           title: "Jurisdiction Specific Fields"
           description: "Jurisdiction-specific registration fields."
+        deregistration_closure_date:
+          anyOf:
+            - type: "string"
+              format: "date"
+            - type: "null"
+          title: "Deregistration Closure Date"
+          description: "Effective date the registration closes with the jurisdiction."
+        deregistration_reason:
+          anyOf:
+            - $ref: "#/components/schemas/DeregistrationReasonEnum"
+            - type: "null"
+          description: "Reason the registration is being closed."
+        deregistration_acknowledged_at:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Deregistration Acknowledged At"
+          description: "When final-return acknowledgement was recorded."
+        kintsugi_mail_on_file:
+          type: "boolean"
+          title: "Kintsugi Mail On File"
+          description: "True when the Kintsugi Mail address is on file with the state for this registration."
+          default: false
+        kintsugi_mail_confirmed_at:
+          anyOf:
+            - type: "string"
+              format: "date"
+            - type: "null"
+          title: "Kintsugi Mail Confirmed At"
+          description: "Date Tax Ops marked Kintsugi Mail as on file with the state. Null when not on file."
         password_encrypted:
           anyOf:
             - type: "string"
@@ -21262,6 +21880,13 @@ components:
         - "IMPORTED"
         - "DEREGISTRATION"
       title: "RegistrationCategoryEnum"
+    DeregistrationReasonEnum:
+      type: "string"
+      enum:
+        - "FULL_BUSINESS_CLOSURE"
+        - "CLOSING_NEXUS_IN_STATE"
+      title: "DeregistrationReasonEnum"
+      description: "Reason a registration is being closed."
     RegistrationTypeEnum:
       type: "string"
       enum:
@@ -22016,6 +22641,12 @@ components:
           title: "Exempt"
           description: "Indicates if the item is exempt."
           default: false
+        is_tax_inclusive:
+          anyOf:
+            - type: "boolean"
+            - type: "null"
+          title: "Is Tax Inclusive"
+          description: "Whether this line's source amount includes tax. NULL means the source did not say."
         tax_items:
           items:
             $ref: "#/components/schemas/TaxItemBuilder"
@@ -22333,6 +22964,17 @@ components:
           title: "Tax Items"
           description: "Detailed breakdown of individual tax components applied to this item."
           default: []
+        discount_builder:
+          anyOf:
+            - $ref: "#/components/schemas/DiscountBuilder"
+            - type: "null"
+          description: "Line-level discount for this credit note item, if any."
+        is_tax_inclusive:
+          anyOf:
+            - type: "boolean"
+            - type: "null"
+          title: "Is Tax Inclusive"
+          description: "Whether the source amount includes tax (EI-1534). None means the source did not say. Mirrors the parent order's signal; netting stays EI-1538."
       type: "object"
       required:
         - "external_id"
@@ -22362,6 +23004,8 @@ components:
         - "SHOPLINE"
         - "ORB"
         - "ZENSKAR"
+        - "HYPERLINE"
+        - "ODOO"
         - "MANUAL"
         - "BULK_UPLOAD"
         - "EMAIL"
@@ -22385,6 +23029,7 @@ components:
         - "TRANSACTION"
         - "CUSTOMER"
         - "WHOLESALE"
+        - "PARTIAL_CERTIFICATE"
         - "REGION"
         - "REVERSE_CHARGE"
         - "ZERO_RATE_TAX"
@@ -22546,6 +23191,40 @@ components:
       required:
         - "applied_to"
       title: "DiscountBuilder"
+    BackFilingRequestPeriodInput:
+      properties:
+        start_date:
+          type: "string"
+          format: "date"
+          title: "Start Date"
+        end_date:
+          type: "string"
+          format: "date"
+          title: "End Date"
+      type: "object"
+      required:
+        - "start_date"
+        - "end_date"
+      title: "BackFilingRequestPeriodInput"
+    BackFilingRequestPeriod:
+      properties:
+        start_date:
+          type: "string"
+          format: "date"
+          title: "Start Date"
+        end_date:
+          type: "string"
+          format: "date"
+          title: "End Date"
+        label:
+          type: "string"
+          title: "Label"
+      type: "object"
+      required:
+        - "start_date"
+        - "end_date"
+        - "label"
+      title: "BackFilingRequestPeriod"
     QuarterlyPrepayDeduction:
       properties:
         label:
@@ -22780,7 +23459,7 @@ components:
         rule:
           anyOf:
             - type: "string"
-              maxLength: 50
+              maxLength: 255
             - type: "null"
           title: "The rule id that was used to determine the tax."
       type: "object"
@@ -22816,6 +23495,7 @@ components:
       type: "string"
       enum:
         - "NO_RULE_FOUND"
+        - "ALL_RATES_OPTED_OUT"
         - "RULE_FOUND_TAXABLE"
         - "RULE_FOUND_NOT_TAXABLE"
         - "RULE_FOUND_TAXABLE_ZERO_RATE"
@@ -22823,6 +23503,7 @@ components:
         - "FROM_IMPORT"
         - "RULE_EXCLUDED_IN_CALCULATION"
         - "REVERSE_CHARGE"
+        - "RULE_FOUND_SUPPRESSED_BY_COUNTY"
       title: "TaxItemReturnReasonEnum"
       description: "We use this to understand the response from get_tax_items"
   securitySchemes:
