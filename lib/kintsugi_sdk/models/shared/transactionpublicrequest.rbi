@@ -70,6 +70,8 @@ class KintsugiSDK::Models::Shared::TransactionPublicRequest
   def external_friendly_id=(str_); end
   def tax_liability_source(); end
   def tax_liability_source=(str_); end
+  def is_tax_inclusive(); end
+  def is_tax_inclusive=(str_); end
   def locked(); end
   def locked=(str_); end
   def connection_id(); end
