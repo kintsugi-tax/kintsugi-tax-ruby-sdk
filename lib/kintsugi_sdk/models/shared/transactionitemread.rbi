@@ -64,6 +64,8 @@ class KintsugiSDK::Models::Shared::TransactionItemRead
   def tax_exemption=(str_); end
   def exempt(); end
   def exempt=(str_); end
+  def is_tax_inclusive(); end
+  def is_tax_inclusive=(str_); end
   def total_discount(); end
   def total_discount=(str_); end
   def subtotal(); end
@@ -72,4 +74,8 @@ class KintsugiSDK::Models::Shared::TransactionItemRead
   def is_reverse_charge_self_accounted=(str_); end
   def recoverability_percent(); end
   def recoverability_percent=(str_); end
+  def recoverable_input_vat(); end
+  def recoverable_input_vat=(str_); end
+  def converted_recoverable_input_vat(); end
+  def converted_recoverable_input_vat=(str_); end
 end
