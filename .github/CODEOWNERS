@@ -1,0 +1,2 @@
+# Default owners for every path. Global reviewers can approve any change except database migrations.
+* @julius-sea @ryanpl-kintsugi @kintsugi-tax/global-reviewers
