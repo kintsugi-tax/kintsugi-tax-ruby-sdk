@@ -26,9 +26,7 @@ module KintsugiSDK
         #         For example, Physical, Digital, etc. You can
         #         retrieve supported categories from [GET /products/categories endpoint](/reference/api/products/get-product-categories)
         field :product_category, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('product_category'), required: true } }
-        # Subcategory of the product.
-        #         For example, General Clothing, UNKNOWN, etc. You can
-        #         retrieve supported subcategories from [GET /products/categories endpoint](/reference/api/products/get-product-categories)
+        # Tax subcategory display label of the product (e.g. 'General Clothing'). List supported values from [GET /products/categories](/reference/api/products/get-product-categories).
         field :product_subcategory, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('product_subcategory'), required: true } }
 
         field :tax_exempt, Crystalline::Boolean.new, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('tax_exempt'), required: true } }
