@@ -34,9 +34,11 @@ module KintsugiSDK
         field :transaction_id, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('transaction_id') } }
         # Indicates whether the exemption is for a reseller
         field :reseller, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('reseller') } }
+        # Partial-exemption certificate form code. Required when exemption_type is partial; must be absent otherwise.
+        field :certificate_type, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('certificate_type') } }
 
-        sig { params(exemption_type: Models::Shared::ExemptionType, start_date: ::Date, customer_id: ::String, fein: ::String, sales_tax_id: ::String, status: Models::Shared::ExemptionStatus, jurisdiction: T.nilable(::String), country_code: T.nilable(Models::Shared::CountryCodeEnum), end_date: T.nilable(::Date), transaction_id: T.nilable(::String), reseller: T.nilable(T::Boolean)).void }
-        def initialize(exemption_type:, start_date:, customer_id:, fein:, sales_tax_id:, status:, jurisdiction: nil, country_code: nil, end_date: nil, transaction_id: nil, reseller: false)
+        sig { params(exemption_type: Models::Shared::ExemptionType, start_date: ::Date, customer_id: ::String, fein: ::String, sales_tax_id: ::String, status: Models::Shared::ExemptionStatus, jurisdiction: T.nilable(::String), country_code: T.nilable(Models::Shared::CountryCodeEnum), end_date: T.nilable(::Date), transaction_id: T.nilable(::String), reseller: T.nilable(T::Boolean), certificate_type: T.nilable(::String)).void }
+        def initialize(exemption_type:, start_date:, customer_id:, fein:, sales_tax_id:, status:, jurisdiction: nil, country_code: nil, end_date: nil, transaction_id: nil, reseller: false, certificate_type: nil)
           @exemption_type = exemption_type
           @start_date = start_date
           @customer_id = customer_id
@@ -48,6 +50,7 @@ module KintsugiSDK
           @end_date = end_date
           @transaction_id = transaction_id
           @reseller = reseller
+          @certificate_type = certificate_type
         end
 
         sig { params(other: T.untyped).returns(T::Boolean) }
@@ -64,6 +67,7 @@ module KintsugiSDK
           return false unless @end_date == other.end_date
           return false unless @transaction_id == other.transaction_id
           return false unless @reseller == other.reseller
+          return false unless @certificate_type == other.certificate_type
           true
         end
       end
