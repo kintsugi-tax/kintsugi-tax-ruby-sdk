@@ -14,6 +14,7 @@ module KintsugiSDK
           TRANSACTION = new('TRANSACTION')
           CUSTOMER = new('CUSTOMER')
           WHOLESALE = new('WHOLESALE')
+          PARTIAL_CERTIFICATE = new('PARTIAL_CERTIFICATE')
           REGION = new('REGION')
           REVERSE_CHARGE = new('REVERSE_CHARGE')
           ZERO_RATE_TAX = new('ZERO_RATE_TAX')
