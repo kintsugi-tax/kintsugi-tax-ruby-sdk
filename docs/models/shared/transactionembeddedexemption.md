@@ -1,4 +1,14 @@
-# Exemption
+# TransactionEmbeddedExemption
+
+Public read schema mirroring the ORM ``Exemption`` for /v1 transaction embedding.
+
+A non-table twin of ``exemptions.models.Exemption``: it re-declares the exact fields
+the ORM adds on top of ``ExemptionBase``/``TableBase`` (id, organization_id,
+certificate_import_id, source) so ``TransactionSerializerBase.exemptions`` can be
+typed without importing the private ORM model (CP-4895). Its serialized shape is
+byte-identical to the ORM's — ``from_attributes`` reads the same attributes off each
+ORM row — so the /v1 response payload is unchanged. Keep it in lockstep with
+``Exemption`` if the ORM's public columns change (a JSON-schema parity test guards it).
 
 
 ## Fields
