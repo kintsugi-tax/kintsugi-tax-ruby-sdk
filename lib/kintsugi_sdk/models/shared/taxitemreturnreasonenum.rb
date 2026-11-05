@@ -18,6 +18,7 @@ module KintsugiSDK
           FROM_IMPORT = new('FROM_IMPORT')
           RULE_EXCLUDED_IN_CALCULATION = new('RULE_EXCLUDED_IN_CALCULATION')
           REVERSE_CHARGE = new('REVERSE_CHARGE')
+          RULE_FOUND_SUPPRESSED_BY_COUNTY = new('RULE_FOUND_SUPPRESSED_BY_COUNTY')
         end
       end
     end
