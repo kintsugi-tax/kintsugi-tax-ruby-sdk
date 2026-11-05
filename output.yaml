@@ -2,10 +2,10 @@ openapi: "3.1.0"
 info:
   title: "Kintsugi Customer API"
   version: "1.0.0"
-  x-spec-synced-at: "2026-09-15T00:01:38.301Z"
+  x-spec-synced-at: "2026-09-25T00:01:42.728Z"
   description: "Publicly documented Kintsugi Customer API endpoints. The source (openapi/_source/openapi-master.json) is the platform spec filtered to the documented customer surface (openapi/customer-endpoints.json); scripts/build-specs.mjs re-applies that filter here. Do not edit by hand."
   x-spec-source: "committed openapi-master.json"
-  x-spec-checked-at: "2026-09-15T00:01:38.301Z"
+  x-spec-checked-at: "2026-09-25T00:01:42.728Z"
 paths:
   /v1/address_validation/search:
     post:
@@ -2426,7 +2426,7 @@ paths:
                 title: "Response 202 Create Transaction V1 Transactions Post"
               example:
                 - organization_id: "orgn_YOURORGID"
-                  external_id: "tran_YOURTRANSACTIONID"
+                  external_id: "YourUniqueOrder123"
                   date: "2024-01-15T14:30:00"
                   status: "COMMITTED"
                   description: "Order with one taxable book and one exempt service"
@@ -4039,7 +4039,6 @@ components:
           description: "External identifier of the transaction."
         date:
           type: "string"
-          format: "date-time"
           title: "Date"
           description: "Transaction date and time"
         shop_date:
@@ -4094,7 +4093,7 @@ components:
         exemptions:
           anyOf:
             - items:
-                $ref: "#/components/schemas/Exemption"
+                $ref: "#/components/schemas/TransactionEmbeddedExemption"
               type: "array"
             - type: "null"
           title: "Exemptions"
@@ -4343,6 +4342,26 @@ components:
           type: "array"
           title: "Transaction Items"
           description: "List of items in the transaction."
+        total_recoverable_input_vat:
+          type: "string"
+          pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,18}|(?=[\\d.]{1,21}0*$)\\d{0,18}\\.\\d{0,2}0*$)"
+          title: "Total Recoverable Input Vat"
+          description: "Recoverable input VAT across this transaction's lines, in the transaction's currency. 0.00 for sales and outside the EU and UK."
+          default: "0.00"
+        converted_total_recoverable_input_vat:
+          anyOf:
+            - type: "string"
+              pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,18}|(?=[\\d.]{1,21}0*$)\\d{0,18}\\.\\d{0,2}0*$)"
+            - type: "null"
+          title: "Converted Total Recoverable Input Vat"
+          description: "Recoverable input VAT across this transaction's lines in the destination currency. Null when the transaction is unconverted."
+        input_vat_recovery_rate:
+          anyOf:
+            - type: "string"
+              pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,18}|(?=[\\d.]{1,21}0*$)\\d{0,18}\\.\\d{0,2}0*$)"
+            - type: "null"
+          title: "Input Vat Recovery Rate"
+          description: "Pro-rata coefficient 0-100 used to scale recoverable input VAT on this purchase. Null for sales and outside the EU and UK. 100 when the organization has no partial exemption rate for the tax-point year."
         customer:
           anyOf:
             - $ref: "#/components/schemas/CustomerRead"
@@ -4496,7 +4515,7 @@ components:
         exemptions:
           anyOf:
             - items:
-                $ref: "#/components/schemas/Exemption"
+                $ref: "#/components/schemas/TransactionEmbeddedExemption"
               type: "array"
             - type: "null"
           title: "Exemptions"
@@ -5102,6 +5121,19 @@ components:
       title: "ValidationErrorResponse"
     FilingDetailsRead:
       properties:
+        input_vat_recovery_rate:
+          anyOf:
+            - type: "string"
+              pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,18}|(?=[\\d.]{1,21}0*$)\\d{0,18}\\.\\d{0,2}0*$)"
+            - type: "null"
+          title: "Input Vat Recovery Rate"
+          description: "Input VAT recovery rate applied to this filing, as a percentage 0-100. Null when no rate exists for the filing's country and year, which means fully recoverable. Uses the definitive rate when set, otherwise the year's frozen provisional."
+        input_vat_recovery_rate_is_definitive:
+          anyOf:
+            - type: "boolean"
+            - type: "null"
+          title: "Input Vat Recovery Rate Is Definitive"
+          description: "True when input_vat_recovery_rate is this year's definitive rate. False when it is the provisional. Null when no rate exists."
         status:
           $ref: "#/components/schemas/FilingStatusEnum"
           description: "Filing status. Possible values:\n                                    UNFILED, FILING, FILED, PAUSED, SKIPPED, CANCELLED, ISSUE."
@@ -5223,7 +5255,7 @@ components:
           description: "Reason why the filing was cancelled, if applicable."
         tax_type:
           $ref: "#/components/schemas/TaxTypeEnum"
-          description: "Which taxes this filing return covers. SALES_AND_USE_TAX is one real return covering both; USE_TAX is a standalone consumer use tax return."
+          description: "Which taxes this filing return covers. SALES_AND_USE_TAX is one real return covering both; USE_TAX is a standalone consumer use tax return; RETAIL_DELIVERY_FEE is a standalone retail delivery fee return."
           default: "SALES_TAX"
         is_rdf:
           type: "boolean"
@@ -5254,6 +5286,11 @@ components:
           title: "Amount Fees"
           description: "Fees applied to the filing."
           default: "0.00"
+        fee_type:
+          anyOf:
+            - $ref: "#/components/schemas/FeeTypeEnum"
+            - type: "null"
+          description: "Whether amount_fees is a penalty, interest, or other fee. Null when unknown (legacy rows)."
         amount_penalties:
           type: "string"
           pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,18}|(?=[\\d.]{1,21}0*$)\\d{0,18}\\.\\d{0,2}0*$)"
@@ -5276,14 +5313,27 @@ components:
           type: "string"
           pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,18}|(?=[\\d.]{1,21}0*$)\\d{0,18}\\.\\d{0,2}0*$)"
           title: "Amount Input Vat Recoverable"
-          description: "Input VAT recovered on this filing's purchases. Subtracted from liability; always 0.00 outside EU/UK VAT AP filings."
+          description: "Input VAT this filing actually claimed. Subtracted from liability; always 0.00 outside EU/UK VAT filings."
           default: "0.00"
         amount_input_vat_true_up:
           type: "string"
           pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,18}|(?=[\\d.]{1,21}0*$)\\d{0,18}\\.\\d{0,2}0*$)"
           title: "Amount Input Vat True Up"
-          description: "Prior-year input VAT pro-rata true-up on this filing. Positive claims more, negative repays. Always 0.00 until posted."
+          description: "Prior-year input VAT pro-rata true-up on this filing. Negative claims more, positive repays. Always 0.00 until posted."
           default: "0.00"
+        amount_input_vat_recoverable_base:
+          type: "string"
+          pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,18}|(?=[\\d.]{1,21}0*$)\\d{0,18}\\.\\d{0,2}0*$)"
+          title: "Amount Input Vat Recoverable Base"
+          description: "Input VAT this filing would have claimed at a 100% rate. Always 0.00 outside EU/UK VAT filings."
+          default: "0.00"
+        input_vat_recovery_rate_applied:
+          anyOf:
+            - type: "string"
+              pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,3}|(?=[\\d.]{1,13}0*$)\\d{0,3}\\.\\d{0,9}0*$)"
+            - type: "null"
+          title: "Input Vat Recovery Rate Applied"
+          description: "Rate actually used on this filing's reclaim. Null when this filing is not EU/UK VAT."
         amount_sales:
           type: "string"
           pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,18}|(?=[\\d.]{1,21}0*$)\\d{0,18}\\.\\d{0,2}0*$)"
@@ -5451,19 +5501,6 @@ components:
           title: "Deferred Transaction Count"
           description: "Number of transactions deferred from this filing period."
           default: 0
-        input_vat_recovery_rate:
-          anyOf:
-            - type: "string"
-              pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,18}|(?=[\\d.]{1,21}0*$)\\d{0,18}\\.\\d{0,2}0*$)"
-            - type: "null"
-          title: "Input Vat Recovery Rate"
-          description: "Input VAT recovery rate applied to this filing, as a percentage 0-100. Null when no rate exists for the filing's country and year, which means fully recoverable. Uses the definitive rate when set, otherwise the year's frozen provisional."
-        input_vat_recovery_rate_is_definitive:
-          anyOf:
-            - type: "boolean"
-            - type: "null"
-          title: "Input Vat Recovery Rate Is Definitive"
-          description: "True when input_vat_recovery_rate is this year's definitive rate. False when it is the provisional. Null when no rate exists."
         filing_website_url:
           anyOf:
             - type: "string"
@@ -5624,7 +5661,7 @@ components:
           description: "Reason why the filing was cancelled, if applicable."
         tax_type:
           $ref: "#/components/schemas/TaxTypeEnum"
-          description: "Which taxes this filing return covers. SALES_AND_USE_TAX is one real return covering both; USE_TAX is a standalone consumer use tax return."
+          description: "Which taxes this filing return covers. SALES_AND_USE_TAX is one real return covering both; USE_TAX is a standalone consumer use tax return; RETAIL_DELIVERY_FEE is a standalone retail delivery fee return."
           default: "SALES_TAX"
         is_rdf:
           type: "boolean"
@@ -5655,6 +5692,11 @@ components:
           title: "Amount Fees"
           description: "Fees applied to the filing."
           default: "0.00"
+        fee_type:
+          anyOf:
+            - $ref: "#/components/schemas/FeeTypeEnum"
+            - type: "null"
+          description: "Whether amount_fees is a penalty, interest, or other fee. Null when unknown (legacy rows)."
         amount_penalties:
           type: "string"
           pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,18}|(?=[\\d.]{1,21}0*$)\\d{0,18}\\.\\d{0,2}0*$)"
@@ -5677,14 +5719,27 @@ components:
           type: "string"
           pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,18}|(?=[\\d.]{1,21}0*$)\\d{0,18}\\.\\d{0,2}0*$)"
           title: "Amount Input Vat Recoverable"
-          description: "Input VAT recovered on this filing's purchases. Subtracted from liability; always 0.00 outside EU/UK VAT AP filings."
+          description: "Input VAT this filing actually claimed. Subtracted from liability; always 0.00 outside EU/UK VAT filings."
           default: "0.00"
         amount_input_vat_true_up:
           type: "string"
           pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,18}|(?=[\\d.]{1,21}0*$)\\d{0,18}\\.\\d{0,2}0*$)"
           title: "Amount Input Vat True Up"
-          description: "Prior-year input VAT pro-rata true-up on this filing. Positive claims more, negative repays. Always 0.00 until posted."
+          description: "Prior-year input VAT pro-rata true-up on this filing. Negative claims more, positive repays. Always 0.00 until posted."
           default: "0.00"
+        amount_input_vat_recoverable_base:
+          type: "string"
+          pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,18}|(?=[\\d.]{1,21}0*$)\\d{0,18}\\.\\d{0,2}0*$)"
+          title: "Amount Input Vat Recoverable Base"
+          description: "Input VAT this filing would have claimed at a 100% rate. Always 0.00 outside EU/UK VAT filings."
+          default: "0.00"
+        input_vat_recovery_rate_applied:
+          anyOf:
+            - type: "string"
+              pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,3}|(?=[\\d.]{1,13}0*$)\\d{0,3}\\.\\d{0,9}0*$)"
+            - type: "null"
+          title: "Input Vat Recovery Rate Applied"
+          description: "Rate actually used on this filing's reclaim. Null when this filing is not EU/UK VAT."
         amount_sales:
           type: "string"
           pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,18}|(?=[\\d.]{1,21}0*$)\\d{0,18}\\.\\d{0,2}0*$)"
@@ -6900,7 +6955,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -7094,7 +7149,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -7294,7 +7349,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -7488,7 +7543,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -7682,7 +7737,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -7876,7 +7931,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -8078,7 +8133,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -8272,7 +8327,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -8466,7 +8521,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -8660,7 +8715,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -8854,7 +8909,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -9048,7 +9103,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -9242,7 +9297,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -9436,7 +9491,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -9630,7 +9685,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -9824,7 +9879,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -10018,7 +10073,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -10212,7 +10267,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -10406,7 +10461,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -10600,7 +10655,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -10794,7 +10849,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -10994,7 +11049,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -11188,7 +11243,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -11382,7 +11437,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -11576,7 +11631,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -11770,7 +11825,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -11964,7 +12019,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -12158,7 +12213,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -12352,7 +12407,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -12624,7 +12679,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -12818,7 +12873,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -13012,7 +13067,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -13212,7 +13267,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -13406,7 +13461,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -13600,7 +13655,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -13794,7 +13849,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -13988,7 +14043,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -14182,7 +14237,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -14376,7 +14431,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -14570,7 +14625,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -14764,7 +14819,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -14958,7 +15013,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -15152,7 +15207,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -15346,7 +15401,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -15540,7 +15595,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -15734,7 +15789,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -15928,7 +15983,7 @@ components:
               minimum: 1
             - type: "null"
           title: "Period End Month"
-          description: "Fiscal-year anchor month (1-12) on which each quarterly/semiannual\n        period ends, for Hawaii (US-HI) filers whose periods are offset from the calendar.\n        Null (default) keeps the standard calendar grid."
+          description: "Fiscal-year anchor month (1-12) on which each recurring period\n        ends, for filers whose periods are offset from the calendar: Hawaii (US-HI)\n        quarterly/semiannual, British Columbia (CA-BC) quarterly, and California (US-CA)\n        annual. Null (default) keeps the standard calendar grid."
         username:
           anyOf:
             - type: "string"
@@ -16303,6 +16358,25 @@ components:
             - type: "null"
           title: "Jurisdiction Specific Fields"
           description: "Jurisdiction-specific registration fields."
+        deregistration_closure_date:
+          anyOf:
+            - type: "string"
+              format: "date"
+            - type: "null"
+          title: "Deregistration Closure Date"
+          description: "Effective date the registration closes with the jurisdiction."
+        deregistration_reason:
+          anyOf:
+            - $ref: "#/components/schemas/DeregistrationReasonEnum"
+            - type: "null"
+          description: "Reason the registration is being closed."
+        deregistration_acknowledged_at:
+          anyOf:
+            - type: "string"
+              format: "date-time"
+            - type: "null"
+          title: "Deregistration Acknowledged At"
+          description: "When final-return acknowledgement was recorded."
         filing_days:
           type: "integer"
           title: "Filing Days"
@@ -16591,14 +16665,32 @@ components:
       title: "Attachment"
     DeregisterRegistrationRequest:
       properties:
+        closure_date:
+          type: "string"
+          format: "date"
+          title: "Closure Date"
+          description: "Effective date the permit closes with the jurisdiction (YYYY-MM-DD). Past and future dates are accepted."
+        reason:
+          $ref: "#/components/schemas/DeregistrationReasonEnum"
+          description: "Why the permit is closing: full business closure, or closing nexus in this one state."
+        final_return_acknowledged:
+          type: "boolean"
+          const: true
+          title: "Final Return Acknowledged"
+          description: "Must be true: the actor confirms a final return is still owed."
         request_id:
           anyOf:
             - type: "string"
             - type: "null"
           title: "Request Id"
+          description: "Optional client-minted id for this confirm attempt."
       type: "object"
+      required:
+        - "closure_date"
+        - "reason"
+        - "final_return_acknowledged"
       title: "DeregisterRegistrationRequest"
-      description: "Optional body for POST /registrations/{id}/deregister (CP-4742)."
+      description: "Body for POST /registrations/{id}/deregister."
     OssRegistrationCountryRead:
       properties:
         id:
@@ -17002,7 +17094,7 @@ components:
         exemptions:
           anyOf:
             - items:
-                $ref: "#/components/schemas/Exemption"
+                $ref: "#/components/schemas/TransactionEmbeddedExemption"
               type: "array"
             - type: "null"
           title: "Exemptions"
@@ -17364,7 +17456,7 @@ components:
         exemptions:
           anyOf:
             - items:
-                $ref: "#/components/schemas/Exemption"
+                $ref: "#/components/schemas/TransactionEmbeddedExemption"
               type: "array"
             - type: "null"
           title: "Exemptions"
@@ -17772,6 +17864,7 @@ components:
         - "RIPPLING"
         - "GUSTO"
         - "FACEBOOK"
+        - "FRESHBOOKS"
         - "OTHER"
         - "ORDWAY"
         - "INSTAGRAM"
@@ -17809,6 +17902,7 @@ components:
         - "INTUIT_ENTERPRISE_SUITE"
         - "ACUMATICA"
         - "PLENTYONE"
+        - "HYPERLINE"
       title: "SourceEnum"
     AddressStatus:
       type: "string"
@@ -17928,7 +18022,7 @@ components:
         - "ZERO_RATE_NOT_EXEMPT"
       title: "TransactionExemptStatusEnum"
       description: "Based on transaction item exempt status.\nNOT EXEMPT: None of the items are NOT EXEMPT\nPARTIALLY EXEMPT: At least some of the items are NOT EXEMPT\nFULLY_EXEMPT: All items sold in the transaction are EXEMPT\nZERO_RATE_NOT_EXEMPT: All items sold in the transaction are zero-rated"
-    Exemption:
+    TransactionEmbeddedExemption:
       properties:
         id:
           type: "string"
@@ -18029,7 +18123,8 @@ components:
       required:
         - "exemption_type"
         - "start_date"
-      title: "Exemption"
+      title: "TransactionEmbeddedExemption"
+      description: "Public read schema mirroring the ORM ``Exemption`` for /v1 transaction embedding.\n\nA non-table twin of ``exemptions.models.Exemption``: it re-declares the exact fields\nthe ORM adds on top of ``ExemptionBase``/``TableBase`` (id, organization_id,\ncertificate_import_id, source) so ``TransactionSerializerBase.exemptions`` can be\ntyped without importing the private ORM model (CP-4895). Its serialized shape is\nbyte-identical to the ORM's — ``from_attributes`` reads the same attributes off each\nORM row — so the /v1 response payload is unchanged. Keep it in lockstep with\n``Exemption`` if the ORM's public columns change (a JSON-schema parity test guards it)."
     TaxLiabilitySourceEnum:
       type: "string"
       enum:
@@ -18202,6 +18297,7 @@ components:
         - "ZMW"
         - "ZWD"
       title: "CurrencyEnum"
+      description: "ISO-4217 currency code. Pair with a monetary amount on the same object."
     DocumentTypeEnum:
       type: "string"
       enum:
@@ -18336,7 +18432,6 @@ components:
           deprecated: true
         date:
           type: "string"
-          format: "date-time"
           title: "Date"
           description: "Date/time of item."
         description:
@@ -18513,6 +18608,19 @@ components:
             - type: "null"
           title: "Recoverability Percent"
           description: "Input VAT recoverability 0-100. Blank means 100%."
+        recoverable_input_vat:
+          type: "string"
+          pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,18}|(?=[\\d.]{1,21}0*$)\\d{0,18}\\.\\d{0,2}0*$)"
+          title: "Recoverable Input Vat"
+          description: "VAT recoverable on this line in the transaction's currency, after the line's recoverability percentage and the organization's pro-rata recovery rate. 0.00 for sales and outside the EU and UK."
+          default: "0.00"
+        converted_recoverable_input_vat:
+          anyOf:
+            - type: "string"
+              pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,18}|(?=[\\d.]{1,21}0*$)\\d{0,18}\\.\\d{0,2}0*$)"
+            - type: "null"
+          title: "Converted Recoverable Input Vat"
+          description: "Recoverable VAT on this line in the destination currency. Null when the line has no converted amount."
       type: "object"
       required:
         - "organization_id"
@@ -18990,8 +19098,17 @@ components:
         - "SALES_TAX"
         - "USE_TAX"
         - "SALES_AND_USE_TAX"
+        - "RETAIL_DELIVERY_FEE"
       title: "TaxTypeEnum"
-      description: "Tax obligation on a nexus, registration, or filing row.\n\nRegistrations and filings may be SALES_AND_USE_TAX: one state account and\none return can cover both taxes, and each is stored as a single row.\nNexus rows are only SALES_TAX or USE_TAX. Sales and use tax exposure are\nseparate obligations with their own met dates, period models, and liability\naccrual."
+      description: "Tax obligation on a nexus, registration, or filing row.\n\nRegistrations and filings may be SALES_AND_USE_TAX: one state account and\none return can cover both taxes, and each is stored as a single row.\nNexus rows are SALES_TAX, USE_TAX, or RETAIL_DELIVERY_FEE. Sales tax, use\ntax, and the retail delivery fee are separate obligations with their own\nmet dates, period models, and liability accrual."
+    FeeTypeEnum:
+      type: "string"
+      enum:
+        - "PENALTY"
+        - "INTEREST"
+        - "OTHER"
+      title: "FeeTypeEnum"
+      description: "Label for ``Filing.amount_fees`` — penalty vs interest vs other.\n\nNullable on the row: existing fees predate the label and stay blank until\nTax Ops classifies them. Does not change arithmetic."
     QuarterlyPrepayBalanceDisplay:
       properties:
         gross_tax_liability:
@@ -19621,6 +19738,25 @@ components:
             - type: "null"
           title: "Jurisdiction Specific Fields"
           description: "Jurisdiction-specific registration fields."
+        deregistration_closure_date:
+          anyOf:
+            - type: "string"
+              format: "date"
+            - type: "null"
+          title: "Deregistration Closure Date"
+          description: "Effective date the registration closes with the jurisdiction."
+        deregistration_reason:
+          anyOf:
+            - $ref: "#/components/schemas/DeregistrationReasonEnum"
+            - type: "null"
+          description: "Reason the registration is being closed."
+        deregistration_acknowledged_at:
+          anyOf:
+            - type: "string"
+              format: "date-time"
+            - type: "null"
+          title: "Deregistration Acknowledged At"
+          description: "When final-return acknowledgement was recorded."
         password_encrypted:
           anyOf:
             - type: "string"
@@ -21262,6 +21398,13 @@ components:
         - "IMPORTED"
         - "DEREGISTRATION"
       title: "RegistrationCategoryEnum"
+    DeregistrationReasonEnum:
+      type: "string"
+      enum:
+        - "FULL_BUSINESS_CLOSURE"
+        - "CLOSING_NEXUS_IN_STATE"
+      title: "DeregistrationReasonEnum"
+      description: "Reason a registration is being closed."
     RegistrationTypeEnum:
       type: "string"
       enum:
@@ -22333,6 +22476,11 @@ components:
           title: "Tax Items"
           description: "Detailed breakdown of individual tax components applied to this item."
           default: []
+        discount_builder:
+          anyOf:
+            - $ref: "#/components/schemas/DiscountBuilder"
+            - type: "null"
+          description: "Line-level discount for this credit note item, if any."
       type: "object"
       required:
         - "external_id"
@@ -22362,6 +22510,7 @@ components:
         - "SHOPLINE"
         - "ORB"
         - "ZENSKAR"
+        - "HYPERLINE"
         - "MANUAL"
         - "BULK_UPLOAD"
         - "EMAIL"
