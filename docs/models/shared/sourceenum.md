@@ -51,6 +51,7 @@ value = SourceEnum::BIGCOMMERCE
 | `RIPPLING`                | RIPPLING                  |
 | `GUSTO`                   | GUSTO                     |
 | `FACEBOOK`                | FACEBOOK                  |
+| `FRESHBOOKS`              | FRESHBOOKS                |
 | `OTHER`                   | OTHER                     |
 | `ORDWAY`                  | ORDWAY                    |
 | `INSTAGRAM`               | INSTAGRAM                 |
@@ -69,6 +70,7 @@ value = SourceEnum::BIGCOMMERCE
 | `FAIRE`                   | FAIRE                     |
 | `SHOPWARE`                | SHOPWARE                  |
 | `ZOHO`                    | ZOHO                      |
+| `ZOHO_BOOKS`              | ZOHO_BOOKS                |
 | `SAGE_INTACCT`            | SAGE-INTACCT              |
 | `AIRWALLEX`               | AIRWALLEX                 |
 | `ORB`                     | ORB                       |
@@ -88,3 +90,5 @@ value = SourceEnum::BIGCOMMERCE
 | `INTUIT_ENTERPRISE_SUITE` | INTUIT_ENTERPRISE_SUITE   |
 | `ACUMATICA`               | ACUMATICA                 |
 | `PLENTYONE`               | PLENTYONE                 |
+| `HYPERLINE`               | HYPERLINE                 |
+| `OPENMETER`               | OPENMETER                 |

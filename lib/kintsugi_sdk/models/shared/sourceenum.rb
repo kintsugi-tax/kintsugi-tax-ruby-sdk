@@ -48,6 +48,7 @@ module KintsugiSDK
           RIPPLING = new('RIPPLING')
           GUSTO = new('GUSTO')
           FACEBOOK = new('FACEBOOK')
+          FRESHBOOKS = new('FRESHBOOKS')
           OTHER = new('OTHER')
           ORDWAY = new('ORDWAY')
           INSTAGRAM = new('INSTAGRAM')
@@ -66,6 +67,7 @@ module KintsugiSDK
           FAIRE = new('FAIRE')
           SHOPWARE = new('SHOPWARE')
           ZOHO = new('ZOHO')
+          ZOHO_BOOKS = new('ZOHO_BOOKS')
           SAGE_INTACCT = new('SAGE-INTACCT')
           AIRWALLEX = new('AIRWALLEX')
           ORB = new('ORB')
@@ -85,6 +87,8 @@ module KintsugiSDK
           INTUIT_ENTERPRISE_SUITE = new('INTUIT_ENTERPRISE_SUITE')
           ACUMATICA = new('ACUMATICA')
           PLENTYONE = new('PLENTYONE')
+          HYPERLINE = new('HYPERLINE')
+          OPENMETER = new('OPENMETER')
         end
       end
     end
