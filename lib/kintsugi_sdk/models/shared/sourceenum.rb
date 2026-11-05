@@ -85,6 +85,7 @@ module KintsugiSDK
           INTUIT_ENTERPRISE_SUITE = new('INTUIT_ENTERPRISE_SUITE')
           ACUMATICA = new('ACUMATICA')
           PLENTYONE = new('PLENTYONE')
+          HYPERLINE = new('HYPERLINE')
         end
       end
     end
