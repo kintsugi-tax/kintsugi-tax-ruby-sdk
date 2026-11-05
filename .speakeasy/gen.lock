@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 42356d7a-ce0a-4cdf-bb17-e774a6ae7cfc
 management:
-  docChecksum: 7495409a420b01921271008ed0e2702e
+  docChecksum: 59d914abbf95f40fa5ee641a2a3fc3d7
   docVersion: 1.0.0
   speakeasyVersion: 1.797.0
   generationVersion: 2.937.18
-  releaseVersion: 5.7.0
-  configChecksum: fe264206e4539d30ef1c6fbeee3b73b2
+  releaseVersion: 5.7.1
+  configChecksum: aa36554b65cebb1c8af29b58baa8bb07
   repoURL: https://github.com/kintsugi-tax/kintsugi-tax-ruby-sdk.git
   installationURL: https://github.com/kintsugi-tax/kintsugi-tax-ruby-sdk
   published: true
 persistentEdits:
-  generation_id: 657f8285-53d2-4b94-b71f-c7fa3f6fea55
-  pristine_commit_hash: 747ddc27717ea5eab9be121ee786c568833d4161
-  pristine_tree_hash: 6d24b06d9dbee540ed9930d5ea74ff5f36933b4d
+  generation_id: adab1f2c-ce21-4be7-bf9e-c02ef8c38b53
+  pristine_commit_hash: f5c6e7388e88e32d7813e69cd05d64f0af1eb8f9
+  pristine_tree_hash: 0cf55549b1f93504b715b059d84e8dd01291b76e
 features:
   ruby:
     constsAndDefaults: 0.1.4
@@ -46,8 +46,8 @@ trackedFiles:
     pristine_git_object: b0ea40558f3ca80dcf7d30b159d34a1e5ab33440
   Gemfile.lock:
     id: 21fb5836b499
-    last_write_checksum: sha1:bb6b403dab0b8a919713b7878ab28835addcba4a
-    pristine_git_object: 829e7304ab037a1b5e5964576285ad905ea47a71
+    last_write_checksum: sha1:c8607b627630c38a404d91b475f780808a776177
+    pristine_git_object: e78c15f4e601e7cbb2ff6469cf40d37c0d955ed5
   Rakefile:
     id: 44b7fa1ba503
     last_write_checksum: sha1:c572639efdae8c7b24141ee5c02d8f009e101ed8
@@ -734,8 +734,8 @@ trackedFiles:
     pristine_git_object: 1729cfd4eea066dc784977b04a3bc3ac815f748a
   docs/models/shared/transactionitemread.md:
     id: e5883635c19b
-    last_write_checksum: sha1:2095aadc96d7c5f4180ef2d3b69e77f63c6bb8fe
-    pristine_git_object: 551bf36a7c7f756bf7f5854ace07467bcd7c41f9
+    last_write_checksum: sha1:f80b8a14f04d2373e6c74b9ceb1a7d3d3c5b3aeb
+    pristine_git_object: 1f81e99bf2a4d78a1e893b439ea5ab67d61ecf6a
   docs/models/shared/transactionpublicrequest.md:
     id: 60bd03c17b64
     last_write_checksum: sha1:d9f2b8abf0e08ba840582a3cdc39e07aabe9b74c
@@ -770,8 +770,8 @@ trackedFiles:
     pristine_git_object: 91102724a50b65eb86bf8eda5c0408b463d81f5c
   docs/models/shared/transactionread.md:
     id: 3a72336fc3be
-    last_write_checksum: sha1:7406937a38eb71fff42c0984e526894c22e9a286
-    pristine_git_object: 6ff711a7ff2f980fdd733ef1d3a78f6c5b3922a4
+    last_write_checksum: sha1:291a08eb52cc7df11522b848fdb9a9f62d129832
+    pristine_git_object: 6611c008b92554efda396cafb0134ff7fb42e830
   docs/models/shared/transactionrefundstatus.md:
     id: 7793cc975958
     last_write_checksum: sha1:6f5cdf5c1833f792986e6a046ae61c32fa15811d
@@ -862,8 +862,8 @@ trackedFiles:
     pristine_git_object: 798e454e38a807dd9d641438c79199c1d3c55edd
   kintsugi_sdk.gemspec:
     id: 23c95d65a79e
-    last_write_checksum: sha1:31fc59d194ac25ccbf1af8cbb3f3057ca2971f27
-    pristine_git_object: d74a11785da91632a1533b8d89cfb37acd256560
+    last_write_checksum: sha1:ba5fcecce3bd2e45a23fd2df085c32440c8705c4
+    pristine_git_object: 7b761779b26cbda5c6ba243de98a56209e5e73f9
   lib/crystalline.rb:
     id: eca767cf937a
     last_write_checksum: sha1:b6ec0a2833f58ba9a6f07c9637fdca05e59006d3
@@ -2282,12 +2282,12 @@ trackedFiles:
     pristine_git_object: 12bf8796378792a788b410b092922685cded8803
   lib/kintsugi_sdk/models/shared/transactionitemread.rb:
     id: 0b816e1e7c14
-    last_write_checksum: sha1:98c7aa038e23e2b5824e590b90ebb48741d2094c
-    pristine_git_object: 143a90a2a0a7260f8843d2a556fed63b9f994ecf
+    last_write_checksum: sha1:20134c3bc1cf955e07903946393f91d570ca83ab
+    pristine_git_object: 315cc2e6220ea81e4a3f5f1347f8c86d21993af7
   lib/kintsugi_sdk/models/shared/transactionitemread.rbi:
     id: 43c61132cd30
-    last_write_checksum: sha1:b398a325e03c83ee9bcab579fab2fde850736f2f
-    pristine_git_object: 819582d1efdfd193aae027bb6a717ab91faff4c7
+    last_write_checksum: sha1:e8d987b6c35034c2411ff95423bc3076b5ec707d
+    pristine_git_object: fdd894df7bc1799e5ac591db9e46b03a9c44d1a0
   lib/kintsugi_sdk/models/shared/transactionpublicrequest.rb:
     id: 2f7ea14699b1
     last_write_checksum: sha1:2f72538b145525a35204c638fc8bc86bc4cc41af
@@ -2354,12 +2354,12 @@ trackedFiles:
     pristine_git_object: 41cc9a7a1fd3fa13101fe01da8913a0b9c66d145
   lib/kintsugi_sdk/models/shared/transactionread.rb:
     id: be69a0b981d3
-    last_write_checksum: sha1:1f8d5fbb54245105028acaff3116f20213bb4fba
-    pristine_git_object: 071188aa0719ad84cdd030b0de94fce5656bf2e3
+    last_write_checksum: sha1:185bcc5df6b68058191f6053e9f60c6517276ebc
+    pristine_git_object: ced7df0bda2c5d6019fd3f42c337990ec28e1fe3
   lib/kintsugi_sdk/models/shared/transactionread.rbi:
     id: c256a14216f7
-    last_write_checksum: sha1:8c4d8eb2418bcad4459d6264ac74704adf3bb164
-    pristine_git_object: d4c4aa7973698b310dc8e814dda202ae5a7d08fd
+    last_write_checksum: sha1:7711b33350052d23a392a8dfbc332ae2ba82f5ae
+    pristine_git_object: 24f385220e2c530b1bdcc0634aa4c5aad8d4ee25
   lib/kintsugi_sdk/models/shared/transactionrefundstatus.rb:
     id: 52520e9fde33
     last_write_checksum: sha1:63803b877443fb4cb3cbe1d39539bd6183d6bed8
@@ -2502,8 +2502,8 @@ trackedFiles:
     pristine_git_object: 1a482305b34d6451ab6ef7d372f9deb57a8ff0ea
   lib/kintsugi_sdk/sdkconfiguration.rb:
     id: a40583fa0346
-    last_write_checksum: sha1:d813df855d9404a1d51cd00904b9bd64b7b85830
-    pristine_git_object: e25e5940abc189ad8d32ef8398af2a4236677225
+    last_write_checksum: sha1:19f4a1074e05a0c7e794b76864d2485b721ad333
+    pristine_git_object: edd684f63516f1c5db7a9c056758c77116ba0c29
   lib/kintsugi_sdk/sdkconfiguration.rbi:
     id: 1c402ef0cb0d
     last_write_checksum: sha1:b850b2b64a2bba1150dce2dde3e1a1170aced613
@@ -2688,7 +2688,7 @@ examples:
           x-organization-id: "org_12345"
       responses:
         "200":
-          application/json: [{"organization_id": "<id>", "external_id": "<id>", "date": "2025-01-31T02:37:17.664Z", "total_amount": "0.00", "marketplace": false, "total_tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "total_tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "total_tax_liability_amount": "0.00", "taxable_amount": "0.00", "locked": false, "is_duplicate": false, "id": "<id>", "is_deferred_transaction": false, "addresses": [{"type": "BILL_TO", "is_unincorporated": false}], "transaction_items": [{"organization_id": "<id>", "date": "2023-05-06T21:03:02.196Z", "external_product_id": "<id>", "quantity": "1.0", "amount": "0.00", "tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "taxable_amount": "0.00", "exempt": false, "id": "<id>", "tax_items": [{"rule_id": "0000", "rate": "<value>", "amount": "509.35", "name": "<value>"}], "is_reverse_charge_self_accounted": false}], "type": "SALE"}]
+          application/json: [{"organization_id": "<id>", "external_id": "<id>", "date": "2025-01-31T02:37:17.664Z", "total_amount": "0.00", "marketplace": false, "total_tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "total_tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "total_tax_liability_amount": "0.00", "taxable_amount": "0.00", "locked": false, "is_duplicate": false, "id": "<id>", "is_deferred_transaction": false, "addresses": [{"type": "BILL_TO", "is_unincorporated": false}], "transaction_items": [{"organization_id": "<id>", "date": "2023-05-06T21:03:02.196Z", "external_product_id": "<id>", "quantity": "1.0", "amount": "0.00", "tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "taxable_amount": "0.00", "exempt": false, "id": "<id>", "tax_items": [{"rule_id": "0000", "rate": "<value>", "amount": "509.35", "name": "<value>"}], "is_reverse_charge_self_accounted": false, "recoverable_input_vat": "0.00"}], "total_recoverable_input_vat": "0.00", "type": "SALE"}]
         "422":
           application/json: {}
   createTransactionByCustomer:
@@ -2702,7 +2702,7 @@ examples:
         application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-04-30T23:54:13.835Z", "locked": false, "is_duplicate": false, "addresses": [], "transaction_items": [{"organization_id": "<id>", "date": "2023-12-30T23:49:45.106Z", "external_product_id": "<id>", "quantity": 1, "amount": 0, "tax_amount_imported": 0, "tax_rate_imported": 0, "tax_amount_calculated": 0, "tax_rate_calculated": 0, "taxable_amount": 0, "exempt": false}]}
       responses:
         "200":
-          application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-12-17T07:53:07.575Z", "total_amount": "0.00", "total_tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "total_tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "total_tax_liability_amount": "0.00", "taxable_amount": "0.00", "locked": false, "is_duplicate": false, "id": "<id>", "is_deferred_transaction": false, "addresses": [{"type": "BILL_FROM", "is_unincorporated": false}], "transaction_items": [{"organization_id": "<id>", "date": "2024-05-23T13:08:03.463Z", "external_product_id": "<id>", "quantity": "1.0", "amount": "0.00", "tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "taxable_amount": "0.00", "exempt": false, "id": "<id>", "tax_items": [], "is_reverse_charge_self_accounted": false}], "type": "FULL_CREDIT_NOTE"}
+          application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-12-17T07:53:07.575Z", "total_amount": "0.00", "total_tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "total_tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "total_tax_liability_amount": "0.00", "taxable_amount": "0.00", "locked": false, "is_duplicate": false, "id": "<id>", "is_deferred_transaction": false, "addresses": [{"type": "BILL_FROM", "is_unincorporated": false}], "transaction_items": [{"organization_id": "<id>", "date": "2024-05-23T13:08:03.463Z", "external_product_id": "<id>", "quantity": "1.0", "amount": "0.00", "tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "taxable_amount": "0.00", "exempt": false, "id": "<id>", "tax_items": [], "is_reverse_charge_self_accounted": false, "recoverable_input_vat": "0.00"}], "total_recoverable_input_vat": "0.00", "type": "FULL_CREDIT_NOTE"}
         "422":
           application/json: {}
   get_exemptions_v1_exemptions_get:
@@ -2910,7 +2910,7 @@ examples:
         application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-11-05T23:48:53.053Z", "locked": false, "addresses": [], "transaction_items": [], "customer": {"organization_id": "<id>", "is_test_data": false}, "type": "TAX_REFUND"}
       responses:
         "202":
-          application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-09-11T11:08:29.048Z", "total_amount": "0.00", "total_tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "total_tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "total_tax_liability_amount": "0.00", "taxable_amount": "0.00", "locked": false, "is_duplicate": false, "id": "<id>", "is_deferred_transaction": false, "addresses": [{"type": "SHIP_FROM", "is_unincorporated": false}], "transaction_items": [{"organization_id": "<id>", "date": "2024-12-26T12:17:10.468Z", "external_product_id": "<id>", "quantity": "1.0", "amount": "0.00", "tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "taxable_amount": "0.00", "exempt": false, "id": "<id>", "tax_items": [], "is_reverse_charge_self_accounted": false}], "type": "FULL_CREDIT_NOTE"}
+          application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-09-11T11:08:29.048Z", "total_amount": "0.00", "total_tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "total_tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "total_tax_liability_amount": "0.00", "taxable_amount": "0.00", "locked": false, "is_duplicate": false, "id": "<id>", "is_deferred_transaction": false, "addresses": [{"type": "SHIP_FROM", "is_unincorporated": false}], "transaction_items": [{"organization_id": "<id>", "date": "2024-12-26T12:17:10.468Z", "external_product_id": "<id>", "quantity": "1.0", "amount": "0.00", "tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "taxable_amount": "0.00", "exempt": false, "id": "<id>", "tax_items": [], "is_reverse_charge_self_accounted": false, "recoverable_input_vat": "0.00"}], "total_recoverable_input_vat": "0.00", "type": "FULL_CREDIT_NOTE"}
         "400":
           application/json: {"detail": "<value>"}
         "422":
@@ -3006,7 +3006,7 @@ examples:
           x-organization-id: "org_12345"
       responses:
         "200":
-          application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-02-23T09:24:55.669Z", "total_amount": "0.00", "total_tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "total_tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "total_tax_liability_amount": "0.00", "taxable_amount": "0.00", "locked": false, "is_duplicate": false, "id": "<id>", "is_deferred_transaction": false, "addresses": [], "transaction_items": [{"organization_id": "<id>", "date": "2024-11-23T03:24:58.603Z", "external_product_id": "<id>", "quantity": "1.0", "amount": "0.00", "tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "taxable_amount": "0.00", "exempt": false, "id": "<id>", "tax_items": [], "is_reverse_charge_self_accounted": false}], "type": "PARTIAL_CREDIT_NOTE"}
+          application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-02-23T09:24:55.669Z", "total_amount": "0.00", "total_tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "total_tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "total_tax_liability_amount": "0.00", "taxable_amount": "0.00", "locked": false, "is_duplicate": false, "id": "<id>", "is_deferred_transaction": false, "addresses": [], "transaction_items": [{"organization_id": "<id>", "date": "2024-11-23T03:24:58.603Z", "external_product_id": "<id>", "quantity": "1.0", "amount": "0.00", "tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "taxable_amount": "0.00", "exempt": false, "id": "<id>", "tax_items": [], "is_reverse_charge_self_accounted": false, "recoverable_input_vat": "0.00"}], "total_recoverable_input_vat": "0.00", "type": "PARTIAL_CREDIT_NOTE"}
         "401":
           application/json: {"detail": "<value>"}
         "422":
@@ -3024,7 +3024,7 @@ examples:
         application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2024-09-25T05:56:56.167Z", "locked": false, "addresses": [], "transaction_items": [], "customer": {}}
       responses:
         "200":
-          application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-04-19T12:47:57.416Z", "total_amount": "0.00", "total_tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "total_tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "total_tax_liability_amount": "0.00", "taxable_amount": "0.00", "locked": false, "is_duplicate": false, "id": "<id>", "is_deferred_transaction": false, "addresses": [{"type": "SHIP_FROM", "is_unincorporated": false}], "transaction_items": [{"organization_id": "<id>", "date": "2025-10-27T18:30:02.836Z", "external_product_id": "<id>", "quantity": "1.0", "amount": "0.00", "tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "taxable_amount": "0.00", "exempt": false, "id": "<id>", "tax_items": [{"rule_id": "0000", "rate": "<value>", "amount": "699.74", "name": "<value>"}], "is_reverse_charge_self_accounted": false}], "type": "SALE"}
+          application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2025-04-19T12:47:57.416Z", "total_amount": "0.00", "total_tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "total_tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "total_tax_liability_amount": "0.00", "taxable_amount": "0.00", "locked": false, "is_duplicate": false, "id": "<id>", "is_deferred_transaction": false, "addresses": [{"type": "SHIP_FROM", "is_unincorporated": false}], "transaction_items": [{"organization_id": "<id>", "date": "2025-10-27T18:30:02.836Z", "external_product_id": "<id>", "quantity": "1.0", "amount": "0.00", "tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "taxable_amount": "0.00", "exempt": false, "id": "<id>", "tax_items": [{"rule_id": "0000", "rate": "<value>", "amount": "699.74", "name": "<value>"}], "is_reverse_charge_self_accounted": false, "recoverable_input_vat": "0.00"}], "total_recoverable_input_vat": "0.00", "type": "SALE"}
         "422":
           application/json: {}
   get_transaction_by_id_v1_transactions__transaction_id__get:
@@ -3036,7 +3036,7 @@ examples:
           x-organization-id: "org_12345"
       responses:
         "200":
-          application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2024-08-13T05:12:45.031Z", "total_amount": "0.00", "total_tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "total_tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "total_tax_liability_amount": "0.00", "taxable_amount": "0.00", "locked": false, "is_duplicate": false, "id": "<id>", "is_deferred_transaction": false, "addresses": [{"type": "BILL_TO", "is_unincorporated": false}], "transaction_items": [], "type": "ARCHIVE"}
+          application/json: {"organization_id": "<id>", "external_id": "<id>", "date": "2024-08-13T05:12:45.031Z", "total_amount": "0.00", "total_tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "total_tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "total_tax_liability_amount": "0.00", "taxable_amount": "0.00", "locked": false, "is_duplicate": false, "id": "<id>", "is_deferred_transaction": false, "addresses": [{"type": "BILL_TO", "is_unincorporated": false}], "transaction_items": [], "total_recoverable_input_vat": "0.00", "type": "ARCHIVE"}
         "401":
           application/json: {"detail": "<value>"}
         "422":
@@ -3052,7 +3052,7 @@ examples:
           x-organization-id: "org_12345"
       responses:
         "200":
-          application/json: [{"organization_id": "<id>", "external_id": "<id>", "date": "2023-08-24T22:51:56.365Z", "total_amount": "0.00", "marketplace": false, "total_tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "total_tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "total_tax_liability_amount": "0.00", "taxable_amount": "0.00", "locked": false, "is_duplicate": false, "id": "<id>", "is_deferred_transaction": false, "addresses": [{"type": "BILL_FROM", "is_unincorporated": false}], "transaction_items": [], "type": "TAX_REFUND"}]
+          application/json: [{"organization_id": "<id>", "external_id": "<id>", "date": "2023-08-24T22:51:56.365Z", "total_amount": "0.00", "marketplace": false, "total_tax_amount_imported": "0.00", "tax_rate_imported": "0.00", "total_tax_amount_calculated": "0.00", "tax_rate_calculated": "0.00", "total_tax_liability_amount": "0.00", "taxable_amount": "0.00", "locked": false, "is_duplicate": false, "id": "<id>", "is_deferred_transaction": false, "addresses": [{"type": "BILL_FROM", "is_unincorporated": false}], "transaction_items": [], "total_recoverable_input_vat": "0.00", "type": "TAX_REFUND"}]
         "401":
           application/json: {"detail": "<value>"}
         "422":
@@ -3078,7 +3078,16 @@ examples:
         "400":
           application/json: {"detail": "<value>"}
 examplesVersion: 1.0.2
-releaseNotes: "## Ruby SDK Changes:\n* `open_api_sdk.address_validation.search()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response.[]` **Changed** (Breaking ⚠️)\n* `open_api_sdk.address_validation.suggestions()`:  `request` **Changed** (Breaking ⚠️)\n* `open_api_sdk.customers.list()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response.items[]` **Changed** (Breaking ⚠️)\n* `open_api_sdk.customers.create()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `open_api_sdk.customers.get()`: \n  *  `request.x_organization_id` **Added** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error.detail[]` **Changed** (Breaking ⚠️)\n* `open_api_sdk.customers.update()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `open_api_sdk.customers.get_by_external_id()`: \n  *  `request.x_organization_id` **Added** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error.detail[]` **Changed** (Breaking ⚠️)\n* `open_api_sdk.customers.get_transactions()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error.detail[]` **Changed** (Breaking ⚠️)\n* `open_api_sdk.customers.create_transaction()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error.detail[]` **Changed** (Breaking ⚠️)\n* `open_api_sdk.exemptions.list()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response.items[]` **Changed** (Breaking ⚠️)\n* `open_api_sdk.exemptions.create()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `open_api_sdk.exemptions.get()`: \n  *  `request.x_organization_id` **Added** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `open_api_sdk.exemptions.upload_certificate()`:  `request` **Changed** (Breaking ⚠️)\n* `open_api_sdk.exemptions.get_attachments()`: \n  *  `request.x_organization_id` **Added** (Breaking ⚠️)\n* `open_api_sdk.nexus.list()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error.detail[]` **Changed** (Breaking ⚠️)\n* `open_api_sdk.products.get()`: \n  *  `request.x_organization_id` **Added** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `open_api_sdk.products.update()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `open_api_sdk.transactions.list()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response.items[]` **Changed** (Breaking ⚠️)\n* `open_api_sdk.transactions.create()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `open_api_sdk.transactions.get_by_external_id()`: \n  *  `request.x_organization_id` **Added** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `open_api_sdk.transactions.update()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error.detail[]` **Changed** (Breaking ⚠️)\n* `open_api_sdk.transactions.get_by_id()`: \n  *  `request.x_organization_id` **Added** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `open_api_sdk.transactions.get_by_filing_id()`: \n  *  `request.x_organization_id` **Added** (Breaking ⚠️)\n  *  `response.[]` **Changed** (Breaking ⚠️)\n* `open_api_sdk.tax_estimation.estimate_tax()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error` **Changed**\n"
+releaseNotes: |
+  ## Ruby SDK Changes:
+  * `open_api_sdk.customers.get_transactions()`:  `response.union(Array<TransactionRead>)[]` **Changed** (Breaking ⚠️)
+  * `open_api_sdk.customers.create_transaction()`:  `response` **Changed** (Breaking ⚠️)
+  * `open_api_sdk.transactions.list()`:  `response.items[]` **Changed** (Breaking ⚠️)
+  * `open_api_sdk.transactions.create()`:  `response` **Changed** (Breaking ⚠️)
+  * `open_api_sdk.transactions.get_by_external_id()`:  `response` **Changed** (Breaking ⚠️)
+  * `open_api_sdk.transactions.get_by_filing_id()`:  `response.[]` **Changed** (Breaking ⚠️)
+  * `open_api_sdk.transactions.get_by_id()`:  `response` **Changed** (Breaking ⚠️)
+  * `open_api_sdk.transactions.update()`:  `response` **Changed** (Breaking ⚠️)
 generatedFiles:
   - .gitattributes
   - .rubocop.yml

@@ -122,6 +122,10 @@ class KintsugiSDK::Models::Shared::TransactionRead
   def store_name=(str_); end
   def is_deferred_transaction(); end
   def is_deferred_transaction=(str_); end
+  def total_recoverable_input_vat(); end
+  def total_recoverable_input_vat=(str_); end
+  def converted_total_recoverable_input_vat(); end
+  def converted_total_recoverable_input_vat=(str_); end
   def customer(); end
   def customer=(str_); end
   def total_discount(); end
