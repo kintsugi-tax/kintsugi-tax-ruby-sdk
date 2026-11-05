@@ -64,9 +64,9 @@ module KintsugiSDK
         #
         # Registrations and filings may be SALES_AND_USE_TAX: one state account and
         # one return can cover both taxes, and each is stored as a single row.
-        # Nexus rows are only SALES_TAX or USE_TAX. Sales and use tax exposure are
-        # separate obligations with their own met dates, period models, and liability
-        # accrual.
+        # Nexus rows are SALES_TAX, USE_TAX, or RETAIL_DELIVERY_FEE. Sales tax, use
+        # tax, and the retail delivery fee are separate obligations with their own
+        # met dates, period models, and liability accrual.
         field :tax_type, Crystalline::Nilable.new(Models::Shared::TaxTypeEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('tax_type'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::TaxTypeEnum, true) } }
 
         field :previous_period_start_date, Crystalline::Nilable.new(::Date), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('previous_period_start_date'), required: true, 'decoder': ::KintsugiSDK::Utils.date_from_iso_format(false) } }
