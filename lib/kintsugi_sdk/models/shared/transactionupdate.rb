@@ -40,7 +40,7 @@ module KintsugiSDK
         field :total_tax_liability_amount, Crystalline::Nilable.new(Crystalline::Union.new(::Float, ::String)), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('total_tax_liability_amount') } }
         # Taxable amount.
         field :taxable_amount, Crystalline::Nilable.new(Crystalline::Union.new(::Float, ::String)), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('taxable_amount') } }
-
+        # ISO-4217 currency code. Pair with a monetary amount on the same object.
         field :currency, Crystalline::Nilable.new(Models::Shared::CurrencyEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('currency'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::CurrencyEnum, true) } }
 
         field :source, Crystalline::Nilable.new(Models::Shared::SourceEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('source'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::SourceEnum, true) } }
@@ -63,7 +63,7 @@ module KintsugiSDK
         # Exemption status (e.g., NOT_EXEMPT)
         field :exempt, Crystalline::Nilable.new(Models::Shared::TransactionExemptStatusEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('exempt'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::TransactionExemptStatusEnum, true) } }
         # List of exemptions applied (if any).
-        field :exemptions, Crystalline::Nilable.new(Crystalline::Array.new(Models::Shared::Exemption)), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('exemptions') } }
+        field :exemptions, Crystalline::Nilable.new(Crystalline::Array.new(Models::Shared::TransactionEmbeddedExemption)), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('exemptions') } }
         # Related transaction identifier.
         field :related_to, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('related_to') } }
         # Secondary External Identifier.
@@ -74,6 +74,8 @@ module KintsugiSDK
         field :external_friendly_id, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('external_friendly_id') } }
         # Source of tax liability.
         field :tax_liability_source, Crystalline::Nilable.new(Models::Shared::TaxLiabilitySourceEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('tax_liability_source'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::TaxLiabilitySourceEnum, true) } }
+        # Whether source amounts include tax. NULL means the source did not say.
+        field :is_tax_inclusive, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('is_tax_inclusive') } }
         # Transaction lock status.
         field :locked, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('locked') } }
         # Connection Identifier
@@ -99,8 +101,8 @@ module KintsugiSDK
         # Identifier of the invoice that created from a sales order.
         field :created_from, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('created_from') } }
 
-        sig { params(organization_id: ::String, external_id: ::String, date: ::DateTime, addresses: T::Array[Models::Shared::TransactionAddressBuilder], transaction_items: T::Array[Models::Shared::TransactionItemCreateUpdate], customer: Models::Shared::CustomerUpdate, total_amount: T.nilable(T.any(::Float, ::String)), total_tax_amount_imported: T.nilable(T.any(::Float, ::String)), tax_rate_imported: T.nilable(T.any(::Float, ::String)), total_tax_amount_calculated: T.nilable(T.any(::Float, ::String)), tax_rate_calculated: T.nilable(T.any(::Float, ::String)), total_tax_liability_amount: T.nilable(T.any(::Float, ::String)), taxable_amount: T.nilable(T.any(::Float, ::String)), currency: T.nilable(Models::Shared::CurrencyEnum), source: T.nilable(Models::Shared::SourceEnum), status: T.nilable(Models::Shared::TransactionStatusEnum), requires_exemption: T.nilable(Models::Shared::ExemptionRequired), shop_date: T.nilable(::Date), shop_date_tz: T.nilable(::String), description: T.nilable(::String), refund_status: T.nilable(Models::Shared::TransactionRefundStatus), customer_id: T.nilable(::String), marketplace: T.nilable(T::Boolean), exempt: T.nilable(Models::Shared::TransactionExemptStatusEnum), exemptions: T.nilable(T::Array[Models::Shared::Exemption]), related_to: T.nilable(::String), secondary_external_id: T.nilable(::String), secondary_source: T.nilable(::String), external_friendly_id: T.nilable(::String), tax_liability_source: T.nilable(Models::Shared::TaxLiabilitySourceEnum), locked: T.nilable(T::Boolean), connection_id: T.nilable(::String), filing_id: T.nilable(::String), city: T.nilable(::String), county: T.nilable(::String), state: T.nilable(::String), country: T.nilable(Models::Shared::CountryCodeEnum), postal_code: T.nilable(::String), tax_id: T.nilable(::String), document_type: T.nilable(Models::Shared::DocumentTypeEnum), created_from: T.nilable(::String)).void }
-        def initialize(organization_id:, external_id:, date:, addresses:, transaction_items:, customer:, total_amount: nil, total_tax_amount_imported: nil, tax_rate_imported: nil, total_tax_amount_calculated: nil, tax_rate_calculated: nil, total_tax_liability_amount: nil, taxable_amount: nil, currency: nil, source: nil, status: nil, requires_exemption: nil, shop_date: nil, shop_date_tz: nil, description: nil, refund_status: nil, customer_id: nil, marketplace: nil, exempt: nil, exemptions: nil, related_to: nil, secondary_external_id: nil, secondary_source: nil, external_friendly_id: nil, tax_liability_source: nil, locked: false, connection_id: nil, filing_id: nil, city: nil, county: nil, state: nil, country: nil, postal_code: nil, tax_id: nil, document_type: nil, created_from: nil)
+        sig { params(organization_id: ::String, external_id: ::String, date: ::DateTime, addresses: T::Array[Models::Shared::TransactionAddressBuilder], transaction_items: T::Array[Models::Shared::TransactionItemCreateUpdate], customer: Models::Shared::CustomerUpdate, total_amount: T.nilable(T.any(::Float, ::String)), total_tax_amount_imported: T.nilable(T.any(::Float, ::String)), tax_rate_imported: T.nilable(T.any(::Float, ::String)), total_tax_amount_calculated: T.nilable(T.any(::Float, ::String)), tax_rate_calculated: T.nilable(T.any(::Float, ::String)), total_tax_liability_amount: T.nilable(T.any(::Float, ::String)), taxable_amount: T.nilable(T.any(::Float, ::String)), currency: T.nilable(Models::Shared::CurrencyEnum), source: T.nilable(Models::Shared::SourceEnum), status: T.nilable(Models::Shared::TransactionStatusEnum), requires_exemption: T.nilable(Models::Shared::ExemptionRequired), shop_date: T.nilable(::Date), shop_date_tz: T.nilable(::String), description: T.nilable(::String), refund_status: T.nilable(Models::Shared::TransactionRefundStatus), customer_id: T.nilable(::String), marketplace: T.nilable(T::Boolean), exempt: T.nilable(Models::Shared::TransactionExemptStatusEnum), exemptions: T.nilable(T::Array[Models::Shared::TransactionEmbeddedExemption]), related_to: T.nilable(::String), secondary_external_id: T.nilable(::String), secondary_source: T.nilable(::String), external_friendly_id: T.nilable(::String), tax_liability_source: T.nilable(Models::Shared::TaxLiabilitySourceEnum), is_tax_inclusive: T.nilable(T::Boolean), locked: T.nilable(T::Boolean), connection_id: T.nilable(::String), filing_id: T.nilable(::String), city: T.nilable(::String), county: T.nilable(::String), state: T.nilable(::String), country: T.nilable(Models::Shared::CountryCodeEnum), postal_code: T.nilable(::String), tax_id: T.nilable(::String), document_type: T.nilable(Models::Shared::DocumentTypeEnum), created_from: T.nilable(::String)).void }
+        def initialize(organization_id:, external_id:, date:, addresses:, transaction_items:, customer:, total_amount: nil, total_tax_amount_imported: nil, tax_rate_imported: nil, total_tax_amount_calculated: nil, tax_rate_calculated: nil, total_tax_liability_amount: nil, taxable_amount: nil, currency: nil, source: nil, status: nil, requires_exemption: nil, shop_date: nil, shop_date_tz: nil, description: nil, refund_status: nil, customer_id: nil, marketplace: nil, exempt: nil, exemptions: nil, related_to: nil, secondary_external_id: nil, secondary_source: nil, external_friendly_id: nil, tax_liability_source: nil, is_tax_inclusive: nil, locked: false, connection_id: nil, filing_id: nil, city: nil, county: nil, state: nil, country: nil, postal_code: nil, tax_id: nil, document_type: nil, created_from: nil)
           @organization_id = organization_id
           @external_id = external_id
           @date = date
@@ -131,6 +133,7 @@ module KintsugiSDK
           @secondary_source = secondary_source
           @external_friendly_id = external_friendly_id
           @tax_liability_source = tax_liability_source
+          @is_tax_inclusive = is_tax_inclusive
           @locked = locked
           @connection_id = connection_id
           @filing_id = filing_id
@@ -177,6 +180,7 @@ module KintsugiSDK
           return false unless @secondary_source == other.secondary_source
           return false unless @external_friendly_id == other.external_friendly_id
           return false unless @tax_liability_source == other.tax_liability_source
+          return false unless @is_tax_inclusive == other.is_tax_inclusive
           return false unless @locked == other.locked
           return false unless @connection_id == other.connection_id
           return false unless @filing_id == other.filing_id
