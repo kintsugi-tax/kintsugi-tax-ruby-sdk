@@ -16,7 +16,7 @@ module KintsugiSDK
         field :date, ::DateTime, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('date'), required: true, 'decoder': ::KintsugiSDK::Utils.datetime_from_iso_format(false) } }
         # Unique identifier of this transaction in the source system.
         field :external_id, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('external_id'), required: true } }
-
+        # ISO-4217 currency code. Pair with a monetary amount on the same object.
         field :currency, Models::Shared::CurrencyEnum, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('currency'), required: true, 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::CurrencyEnum, false) } }
 
         field :transaction_items, Crystalline::Array.new(Models::Shared::TransactionItemEstimateResponse), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('transaction_items'), required: true } }
