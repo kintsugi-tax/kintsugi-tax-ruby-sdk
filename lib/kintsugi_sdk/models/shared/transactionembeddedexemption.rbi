@@ -2,12 +2,12 @@
 # frozen_string_literal: true
 
 
-class KintsugiSDK::Models::Shared::Exemption
+class KintsugiSDK::Models::Shared::TransactionEmbeddedExemption
   extend ::Crystalline::MetadataFields::ClassMethods
 end
 
 
-class KintsugiSDK::Models::Shared::Exemption
+class KintsugiSDK::Models::Shared::TransactionEmbeddedExemption
   def exemption_type(); end
   def exemption_type=(str_); end
   def start_date(); end
@@ -42,4 +42,6 @@ class KintsugiSDK::Models::Shared::Exemption
   def certificate_import_id=(str_); end
   def source(); end
   def source=(str_); end
+  def certificate_type(); end
+  def certificate_type=(str_); end
 end
