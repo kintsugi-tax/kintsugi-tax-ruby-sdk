@@ -8,7 +8,7 @@ module KintsugiSDK
   module Models
     module Errors
 
-      class HTTPValidationError < StandardError
+      class HTTPValidationError < ::StandardError
         extend T::Sig
         include Crystalline::MetadataFields
 
