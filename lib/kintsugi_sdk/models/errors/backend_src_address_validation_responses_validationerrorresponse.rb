@@ -8,7 +8,7 @@ module KintsugiSDK
   module Models
     module Errors
 
-      class BackendSrcAddressValidationResponsesValidationErrorResponse < StandardError
+      class BackendSrcAddressValidationResponsesValidationErrorResponse < ::StandardError
         extend T::Sig
         include Crystalline::MetadataFields
 
