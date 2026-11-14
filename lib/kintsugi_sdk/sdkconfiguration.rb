@@ -15,7 +15,7 @@ module KintsugiSDK
 
   SERVERS = T.let([
     'https://api.trykintsugi.com', # 1 - Production
-  ].freeze, T::Array[String])
+  ].freeze, T::Array[::String])
   # Contains the list of servers available to the SDK
 
   class SDKConfiguration
@@ -30,7 +30,7 @@ module KintsugiSDK
     sig { returns(T.nilable(::KintsugiSDK::Utils::RetryConfig)) }
     attr_accessor :retry_config
 
-    sig { returns(T.nilable(Float)) }
+    sig { returns(T.nilable(::Float)) }
     attr_accessor :timeout
 
     
@@ -38,27 +38,27 @@ module KintsugiSDK
     attr_accessor :security_source
 
     
-    sig { returns(T.nilable(String)) }
+    sig { returns(T.nilable(::String)) }
     attr_accessor :server_url
 
     
-    sig { returns(T.nilable(Integer)) }
+    sig { returns(T.nilable(::Integer)) }
     attr_accessor :server_idx
 
     
-    sig { returns(String) }
+    sig { returns(::String) }
     attr_accessor :language
 
-    sig { returns(String) }
+    sig { returns(::String) }
     attr_accessor :openapi_doc_version
 
-    sig { returns(String) }
+    sig { returns(::String) }
     attr_accessor :sdk_version
 
-    sig { returns(String) }
+    sig { returns(::String) }
     attr_accessor :gen_version
 
-    sig { returns(String) }
+    sig { returns(::String) }
     attr_accessor :user_agent
 
     sig do
@@ -66,11 +66,11 @@ module KintsugiSDK
         client: T.nilable(Faraday::Connection),
         hooks: ::KintsugiSDK::SDKHooks::Hooks,
         retry_config: T.nilable(::KintsugiSDK::Utils::RetryConfig),
-        timeout_ms: T.nilable(Integer),
+        timeout_ms: T.nilable(::Integer),
         api_key_header: T.nilable(::String),
         security_source: T.nilable(T.proc.returns(Models::Shared::Security)),
-        server_url: T.nilable(String),
-        server_idx: T.nilable(Integer)
+        server_url: T.nilable(::String),
+        server_idx: T.nilable(::Integer)
       ).void
     end
     def initialize(client, hooks, retry_config, timeout_ms, api_key_header, security_source, server_url, server_idx)
@@ -80,7 +80,7 @@ module KintsugiSDK
       @server_url = server_url
       @timeout = (timeout_ms.to_f / 1000) unless timeout_ms.nil?
       @server_idx = server_idx.nil? ? 0 : server_idx
-      raise StandardError, "Invalid server index #{server_idx}" if @server_idx.negative? || @server_idx >= SERVERS.length
+      raise ::StandardError, "Invalid server index #{server_idx}" if @server_idx.negative? || @server_idx >= SERVERS.length
       if !security_source.nil?
         @security_source = security_source
       elsif !api_key_header.nil?
@@ -88,12 +88,12 @@ module KintsugiSDK
       end
       @language = 'ruby'
       @openapi_doc_version = '1.0.0'
-      @sdk_version = '5.7.0'
-      @gen_version = '2.937.18'
-      @user_agent = 'speakeasy-sdk/ruby 5.7.0 2.937.18 1.0.0 kintsugi_sdk'
+      @sdk_version = '5.7.1'
+      @gen_version = '2.961.1'
+      @user_agent = 'speakeasy-sdk/ruby 5.7.1 2.961.1 1.0.0 kintsugi_sdk'
     end
 
-    sig { returns([String, T::Hash[Symbol, String]]) }
+    sig { returns([::String, T::Hash[::Symbol, ::String]]) }
     def get_server_details
       return [@server_url.delete_suffix('/'), {}] if !@server_url.nil?
       @server_idx = T.must(@server_idx)
