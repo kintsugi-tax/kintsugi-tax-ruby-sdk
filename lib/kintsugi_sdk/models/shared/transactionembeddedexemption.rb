@@ -7,8 +7,17 @@
 module KintsugiSDK
   module Models
     module Shared
-
-      class Exemption
+      # Public read schema mirroring the ORM ``Exemption`` for /v1 transaction embedding.
+      #
+      # A non-table twin of ``exemptions.models.Exemption``: it re-declares the exact fields
+      # the ORM adds on top of ``ExemptionBase``/``TableBase`` (id, organization_id,
+      # certificate_import_id, source, certificate_type) so
+      # ``TransactionSerializerBase.exemptions`` can be
+      # typed without importing the private ORM model (CP-4895). Its serialized shape is
+      # byte-identical to the ORM's — ``from_attributes`` reads the same attributes off each
+      # ORM row — so the /v1 response payload is unchanged. Keep it in lockstep with
+      # ``Exemption`` if the ORM's public columns change (a JSON-schema parity test guards it).
+      class TransactionEmbeddedExemption
         extend T::Sig
         include Crystalline::MetadataFields
 
@@ -49,9 +58,11 @@ module KintsugiSDK
         field :certificate_import_id, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('certificate_import_id') } }
         # Source of exemption.
         field :source, Crystalline::Nilable.new(Models::Shared::ExemptionSourceEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('source'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::ExemptionSourceEnum, true) } }
+        # Partial-exemption certificate form code. Null when the exemption is not a partial exemption.
+        field :certificate_type, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('certificate_type') } }
 
-        sig { params(exemption_type: Models::Shared::ExemptionType, start_date: ::Date, id: T.nilable(::String), created_at: T.nilable(::DateTime), organization_id: T.nilable(::String), updated_at: T.nilable(::DateTime), jurisdiction: T.nilable(::String), country_code: T.nilable(Models::Shared::CountryCodeEnum), end_date: T.nilable(::Date), customer_id: T.nilable(::String), transaction_id: T.nilable(::String), reseller: T.nilable(T::Boolean), fein: T.nilable(::String), sales_tax_id: T.nilable(::String), status: T.nilable(Models::Shared::ExemptionStatus), certificate_import_id: T.nilable(::String), source: T.nilable(Models::Shared::ExemptionSourceEnum)).void }
-        def initialize(exemption_type:, start_date:, id: nil, created_at: nil, organization_id: nil, updated_at: nil, jurisdiction: nil, country_code: nil, end_date: nil, customer_id: nil, transaction_id: nil, reseller: false, fein: nil, sales_tax_id: nil, status: nil, certificate_import_id: nil, source: nil)
+        sig { params(exemption_type: Models::Shared::ExemptionType, start_date: ::Date, id: T.nilable(::String), created_at: T.nilable(::DateTime), organization_id: T.nilable(::String), updated_at: T.nilable(::DateTime), jurisdiction: T.nilable(::String), country_code: T.nilable(Models::Shared::CountryCodeEnum), end_date: T.nilable(::Date), customer_id: T.nilable(::String), transaction_id: T.nilable(::String), reseller: T.nilable(T::Boolean), fein: T.nilable(::String), sales_tax_id: T.nilable(::String), status: T.nilable(Models::Shared::ExemptionStatus), certificate_import_id: T.nilable(::String), source: T.nilable(Models::Shared::ExemptionSourceEnum), certificate_type: T.nilable(::String)).void }
+        def initialize(exemption_type:, start_date:, id: nil, created_at: nil, organization_id: nil, updated_at: nil, jurisdiction: nil, country_code: nil, end_date: nil, customer_id: nil, transaction_id: nil, reseller: false, fein: nil, sales_tax_id: nil, status: nil, certificate_import_id: nil, source: nil, certificate_type: nil)
           @exemption_type = exemption_type
           @start_date = start_date
           @id = id
@@ -69,6 +80,7 @@ module KintsugiSDK
           @status = status
           @certificate_import_id = certificate_import_id
           @source = source
+          @certificate_type = certificate_type
         end
 
         sig { params(other: T.untyped).returns(T::Boolean) }
@@ -91,6 +103,7 @@ module KintsugiSDK
           return false unless @status == other.status
           return false unless @certificate_import_id == other.certificate_import_id
           return false unless @source == other.source
+          return false unless @certificate_type == other.certificate_type
           true
         end
       end
