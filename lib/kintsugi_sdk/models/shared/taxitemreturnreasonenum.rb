@@ -11,6 +11,7 @@ module KintsugiSDK
       class TaxItemReturnReasonEnum < T::Enum
         enums do
           NO_RULE_FOUND = new('NO_RULE_FOUND')
+          ALL_RATES_OPTED_OUT = new('ALL_RATES_OPTED_OUT')
           RULE_FOUND_TAXABLE = new('RULE_FOUND_TAXABLE')
           RULE_FOUND_NOT_TAXABLE = new('RULE_FOUND_NOT_TAXABLE')
           RULE_FOUND_TAXABLE_ZERO_RATE = new('RULE_FOUND_TAXABLE_ZERO_RATE')
@@ -18,6 +19,7 @@ module KintsugiSDK
           FROM_IMPORT = new('FROM_IMPORT')
           RULE_EXCLUDED_IN_CALCULATION = new('RULE_EXCLUDED_IN_CALCULATION')
           REVERSE_CHARGE = new('REVERSE_CHARGE')
+          RULE_FOUND_SUPPRESSED_BY_COUNTY = new('RULE_FOUND_SUPPRESSED_BY_COUNTY')
         end
       end
     end
