@@ -26,9 +26,7 @@ module KintsugiSDK
         #         For example, Physical, Digital, etc. You can
         #         retrieve supported categories from [GET /products/categories endpoint](/reference/api/products/get-product-categories)
         field :product_category, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('product_category'), required: true } }
-        # Subcategory of the product.
-        #         For example, General Clothing, UNKNOWN, etc. You can
-        #         retrieve supported subcategories from [GET /products/categories endpoint](/reference/api/products/get-product-categories)
+        # Tax subcategory display label of the product (e.g. 'General Clothing'). List supported values from [GET /products/categories](/reference/api/products/get-product-categories).
         field :product_subcategory, ::String, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('product_subcategory'), required: true } }
 
         field :tax_exempt, Crystalline::Boolean.new, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('tax_exempt'), required: true } }
@@ -53,11 +51,11 @@ module KintsugiSDK
 
         field :source_taxonomy_name, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('source_taxonomy_name') } }
 
-        field :source_taxonomy_categories, Crystalline::Nilable.new(Crystalline::Array.new(Crystalline::Hash.new(Symbol, ::Object))), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('source_taxonomy_categories') } }
+        field :source_taxonomy_categories, Crystalline::Nilable.new(Crystalline::Array.new(Crystalline::Hash.new(::Symbol, ::Object))), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('source_taxonomy_categories') } }
 
-        field :source_taxonomy_metadata, Crystalline::Nilable.new(Crystalline::Hash.new(Symbol, ::Object)), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('source_taxonomy_metadata') } }
+        field :source_taxonomy_metadata, Crystalline::Nilable.new(Crystalline::Hash.new(::Symbol, ::Object)), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('source_taxonomy_metadata') } }
 
-        sig { params(id: ::String, external_id: ::String, code: ::String, name: ::String, status: Models::Shared::ProductStatusEnum, product_category: ::String, product_subcategory: ::String, tax_exempt: T::Boolean, source: Models::Shared::SourceEnum, sku: T.nilable(T::Array[::String]), description: T.nilable(::String), connection_id: T.nilable(::String), classification_failed: T.nilable(T::Boolean), store_name: T.nilable(::String), source_taxonomy_type: T.nilable(::String), source_taxonomy_code: T.nilable(::String), source_taxonomy_id: T.nilable(::String), source_taxonomy_name: T.nilable(::String), source_taxonomy_categories: T.nilable(T::Array[T::Hash[Symbol, ::Object]]), source_taxonomy_metadata: T.nilable(T::Hash[Symbol, ::Object])).void }
+        sig { params(id: ::String, external_id: ::String, code: ::String, name: ::String, status: Models::Shared::ProductStatusEnum, product_category: ::String, product_subcategory: ::String, tax_exempt: T::Boolean, source: Models::Shared::SourceEnum, sku: T.nilable(T::Array[::String]), description: T.nilable(::String), connection_id: T.nilable(::String), classification_failed: T.nilable(T::Boolean), store_name: T.nilable(::String), source_taxonomy_type: T.nilable(::String), source_taxonomy_code: T.nilable(::String), source_taxonomy_id: T.nilable(::String), source_taxonomy_name: T.nilable(::String), source_taxonomy_categories: T.nilable(T::Array[T::Hash[::Symbol, ::Object]]), source_taxonomy_metadata: T.nilable(T::Hash[::Symbol, ::Object])).void }
         def initialize(id:, external_id:, code:, name:, status:, product_category:, product_subcategory:, tax_exempt:, source:, sku: nil, description: nil, connection_id: nil, classification_failed: nil, store_name: nil, source_taxonomy_type: nil, source_taxonomy_code: nil, source_taxonomy_id: nil, source_taxonomy_name: nil, source_taxonomy_categories: nil, source_taxonomy_metadata: nil)
           @id = id
           @external_id = external_id
