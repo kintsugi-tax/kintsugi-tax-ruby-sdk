@@ -17,3 +17,4 @@ value = ExemptionType::CUSTOMER
 | `WHOLESALE`      | wholesale        |
 | `TRANSACTION`    | transaction      |
 | `REVERSE_CHARGE` | reverse_charge   |
+| `PARTIAL`        | partial          |
