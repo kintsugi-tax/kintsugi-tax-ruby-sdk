@@ -22,9 +22,9 @@ module KintsugiSDK
         field :country_code, Crystalline::Nilable.new(Crystalline::Array.new(Crystalline::Union.new(Models::Shared::CountryCodeEnum, ::String))), { 'query_param': { 'field_name': 'country_code', 'style': 'form', 'explode': true } }
         # Jurisdiction identifier
         field :jurisdiction, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'jurisdiction', 'style': 'form', 'explode': true } }
-        # Start date for filtering exemptions
+        # Include exemptions whose validity start date is on or after this date (YYYY-MM-DD)
         field :start_date, Crystalline::Nilable.new(::Date), { 'query_param': { 'field_name': 'start_date', 'style': 'form', 'explode': true } }
-        # End date for filtering exemptions
+        # Include exemptions whose validity end date is on or before this date (YYYY-MM-DD). Open-ended exemptions (null end date) are excluded when this filter is set.
         field :end_date, Crystalline::Nilable.new(::Date), { 'query_param': { 'field_name': 'end_date', 'style': 'form', 'explode': true } }
         # Customer ID to filter exemptions
         field :customer_id, Crystalline::Nilable.new(::String), { 'query_param': { 'field_name': 'customer_id', 'style': 'form', 'explode': true } }
