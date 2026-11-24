@@ -23,7 +23,7 @@ module KintsugiSDK
       
     end
 
-    sig { params(base_url: String, url_variables: T.nilable(T::Hash[Symbol, T.any(String, T::Enum)])).returns(String) }
+    sig { params(base_url: ::String, url_variables: T.nilable(T::Hash[::Symbol, T.any(::String, T::Enum)])).returns(::String) }
     def get_url(base_url:, url_variables: nil)
       sd_base_url, sd_options = @sdk_configuration.get_server_details
 
@@ -41,7 +41,7 @@ module KintsugiSDK
 
 
 
-    sig { params(request: Models::Ops::GetCustomersV1Request, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(Models::Shared::PageCustomerRead) }
+    sig { params(request: Models::Ops::GetCustomersV1Request, timeout_ms: T.nilable(::Integer), http_headers: T.nilable(T::Hash[T.any(::String, ::Symbol), ::String])).returns(Models::Shared::PageCustomerRead) }
     def list(request:, timeout_ms: nil, http_headers: nil)
       # list - Get customers
       # The Get Customers API retrieves
@@ -51,7 +51,7 @@ module KintsugiSDK
       base_url = Utils.template_url(url, params)
       url = "#{base_url}/v1/customers"
       headers = Utils.get_headers(request)
-      headers = T.cast(headers, T::Hash[String, String])
+      headers = T.cast(headers, T::Hash[::String, ::String])
       query_params = Utils.get_query_params(Models::Ops::GetCustomersV1Request, request, nil)
       headers['Accept'] = 'application/json'
       headers['user-agent'] = @sdk_configuration.user_agent
@@ -72,7 +72,7 @@ module KintsugiSDK
         security_source: @sdk_configuration.security_source
       )
 
-      error = T.let(nil, T.nilable(StandardError))
+      error = T.let(nil, T.nilable(::StandardError))
       http_response = T.let(nil, T.nilable(Faraday::Response))
       
 
@@ -93,7 +93,7 @@ module KintsugiSDK
             request: req
           )
         end
-      rescue StandardError => e
+      rescue ::StandardError => e
         error = e
       ensure
         if http_response.nil? || Utils.error_status?(http_response.status)
@@ -129,7 +129,7 @@ module KintsugiSDK
             response: http_response
           )
           response_data = http_response.env.response_body
-          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Shared::PageCustomerRead)
+          obj = Crystalline.unmarshal_json(::JSON.parse(response_data), Models::Shared::PageCustomerRead)
 
           return obj
         else
@@ -144,7 +144,7 @@ module KintsugiSDK
             response: http_response
           )
           response_data = http_response.env.response_body
-          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Errors::ErrorResponse)
+          obj = Crystalline.unmarshal_json(::JSON.parse(response_data), Models::Errors::ErrorResponse)
           raise obj
         else
           raise ::KintsugiSDK::Models::Errors::APIError.new(status_code: http_response.status, body: http_response.env.response_body, raw_response: http_response), 'Unknown content type received'
@@ -158,7 +158,7 @@ module KintsugiSDK
             response: http_response
           )
           response_data = http_response.env.response_body
-          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Errors::BackendSrcCustomersResponsesValidationErrorResponse)
+          obj = Crystalline.unmarshal_json(::JSON.parse(response_data), Models::Errors::BackendSrcCustomersResponsesValidationErrorResponse)
           raise obj
         else
           raise ::KintsugiSDK::Models::Errors::APIError.new(status_code: http_response.status, body: http_response.env.response_body, raw_response: http_response), 'Unknown content type received'
@@ -172,7 +172,7 @@ module KintsugiSDK
             response: http_response
           )
           response_data = http_response.env.response_body
-          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Errors::ErrorResponse)
+          obj = Crystalline.unmarshal_json(::JSON.parse(response_data), Models::Errors::ErrorResponse)
           raise obj
         else
           raise ::KintsugiSDK::Models::Errors::APIError.new(status_code: http_response.status, body: http_response.env.response_body, raw_response: http_response), 'Unknown content type received'
@@ -188,7 +188,7 @@ module KintsugiSDK
     end
 
 
-    sig { params(request: Models::Ops::CreateCustomerV1CustomersPostRequest, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(Models::Shared::CustomerRead) }
+    sig { params(request: Models::Ops::CreateCustomerV1CustomersPostRequest, timeout_ms: T.nilable(::Integer), http_headers: T.nilable(T::Hash[T.any(::String, ::Symbol), ::String])).returns(Models::Shared::CustomerRead) }
     def create(request:, timeout_ms: nil, http_headers: nil)
       # create - Create customer
       # The Create Customer API enables the creation of a new customer record with essential
@@ -197,15 +197,15 @@ module KintsugiSDK
       base_url = Utils.template_url(url, params)
       url = "#{base_url}/v1/customers"
       headers = Utils.get_headers(request)
-      headers = T.cast(headers, T::Hash[String, String])
+      headers = T.cast(headers, T::Hash[::String, ::String])
       req_content_type, data, form = Utils.serialize_request_body(request, false, false, :customer_create, :json)
       headers['content-type'] = req_content_type
-      raise StandardError, 'request body is required' if data.nil? && form.nil?
+      raise ::StandardError, 'request body is required' if data.nil? && form.nil?
 
       if form && !form.empty?
         body = Utils.encode_form(form)
       elsif Utils.match_content_type(req_content_type, 'application/x-www-form-urlencoded')
-        body = URI.encode_www_form(T.cast(data, T::Hash[Symbol, Object]))
+        body = ::URI.encode_www_form(T.cast(data, T::Hash[::Symbol, ::Object]))
       else
         body = data
       end
@@ -228,7 +228,7 @@ module KintsugiSDK
         security_source: @sdk_configuration.security_source
       )
 
-      error = T.let(nil, T.nilable(StandardError))
+      error = T.let(nil, T.nilable(::StandardError))
       http_response = T.let(nil, T.nilable(Faraday::Response))
       
 
@@ -249,7 +249,7 @@ module KintsugiSDK
             request: req
           )
         end
-      rescue StandardError => e
+      rescue ::StandardError => e
         error = e
       ensure
         if http_response.nil? || Utils.error_status?(http_response.status)
@@ -285,7 +285,7 @@ module KintsugiSDK
             response: http_response
           )
           response_data = http_response.env.response_body
-          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Shared::CustomerRead)
+          obj = Crystalline.unmarshal_json(::JSON.parse(response_data), Models::Shared::CustomerRead)
 
           return obj
         else
@@ -300,7 +300,7 @@ module KintsugiSDK
             response: http_response
           )
           response_data = http_response.env.response_body
-          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Errors::ErrorResponse)
+          obj = Crystalline.unmarshal_json(::JSON.parse(response_data), Models::Errors::ErrorResponse)
           raise obj
         else
           raise ::KintsugiSDK::Models::Errors::APIError.new(status_code: http_response.status, body: http_response.env.response_body, raw_response: http_response), 'Unknown content type received'
@@ -314,7 +314,7 @@ module KintsugiSDK
             response: http_response
           )
           response_data = http_response.env.response_body
-          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Errors::BackendSrcCustomersResponsesValidationErrorResponse)
+          obj = Crystalline.unmarshal_json(::JSON.parse(response_data), Models::Errors::BackendSrcCustomersResponsesValidationErrorResponse)
           raise obj
         else
           raise ::KintsugiSDK::Models::Errors::APIError.new(status_code: http_response.status, body: http_response.env.response_body, raw_response: http_response), 'Unknown content type received'
@@ -328,7 +328,7 @@ module KintsugiSDK
             response: http_response
           )
           response_data = http_response.env.response_body
-          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Errors::ErrorResponse)
+          obj = Crystalline.unmarshal_json(::JSON.parse(response_data), Models::Errors::ErrorResponse)
           raise obj
         else
           raise ::KintsugiSDK::Models::Errors::APIError.new(status_code: http_response.status, body: http_response.env.response_body, raw_response: http_response), 'Unknown content type received'
@@ -344,7 +344,7 @@ module KintsugiSDK
     end
 
 
-    sig { params(request: Models::Ops::GetCustomerByExternalIdV1CustomersExternalExternalIdGetRequest, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(Models::Shared::CustomerRead) }
+    sig { params(request: Models::Ops::GetCustomerByExternalIdV1CustomersExternalExternalIdGetRequest, timeout_ms: T.nilable(::Integer), http_headers: T.nilable(T::Hash[T.any(::String, ::Symbol), ::String])).returns(Models::Shared::CustomerRead) }
     def get_by_external_id(request:, timeout_ms: nil, http_headers: nil)
       # get_by_external_id - Get customer by external id
       # The Get Customer By External ID API retrieves the details of a single customer using
@@ -359,7 +359,7 @@ module KintsugiSDK
         request
       )
       headers = Utils.get_headers(request)
-      headers = T.cast(headers, T::Hash[String, String])
+      headers = T.cast(headers, T::Hash[::String, ::String])
       headers['Accept'] = 'application/json'
       headers['user-agent'] = @sdk_configuration.user_agent
 
@@ -379,7 +379,7 @@ module KintsugiSDK
         security_source: @sdk_configuration.security_source
       )
 
-      error = T.let(nil, T.nilable(StandardError))
+      error = T.let(nil, T.nilable(::StandardError))
       http_response = T.let(nil, T.nilable(Faraday::Response))
       
 
@@ -399,7 +399,7 @@ module KintsugiSDK
             request: req
           )
         end
-      rescue StandardError => e
+      rescue ::StandardError => e
         error = e
       ensure
         if http_response.nil? || Utils.error_status?(http_response.status)
@@ -435,7 +435,7 @@ module KintsugiSDK
             response: http_response
           )
           response_data = http_response.env.response_body
-          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Shared::CustomerRead)
+          obj = Crystalline.unmarshal_json(::JSON.parse(response_data), Models::Shared::CustomerRead)
 
           return obj
         else
@@ -450,7 +450,7 @@ module KintsugiSDK
             response: http_response
           )
           response_data = http_response.env.response_body
-          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Errors::HTTPValidationError)
+          obj = Crystalline.unmarshal_json(::JSON.parse(response_data), Models::Errors::HTTPValidationError)
           raise obj
         else
           raise ::KintsugiSDK::Models::Errors::APIError.new(status_code: http_response.status, body: http_response.env.response_body, raw_response: http_response), 'Unknown content type received'
@@ -466,7 +466,7 @@ module KintsugiSDK
     end
 
 
-    sig { params(request: Models::Ops::GetCustomerByIdV1CustomersCustomerIdGetRequest, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(Models::Shared::CustomerRead) }
+    sig { params(request: Models::Ops::GetCustomerByIdV1CustomersCustomerIdGetRequest, timeout_ms: T.nilable(::Integer), http_headers: T.nilable(T::Hash[T.any(::String, ::Symbol), ::String])).returns(Models::Shared::CustomerRead) }
     def get(request:, timeout_ms: nil, http_headers: nil)
       # get - Get customer by id
       # The Get Customer By ID API retrieves the details of a single customer
@@ -481,7 +481,7 @@ module KintsugiSDK
         request
       )
       headers = Utils.get_headers(request)
-      headers = T.cast(headers, T::Hash[String, String])
+      headers = T.cast(headers, T::Hash[::String, ::String])
       headers['Accept'] = 'application/json'
       headers['user-agent'] = @sdk_configuration.user_agent
 
@@ -501,7 +501,7 @@ module KintsugiSDK
         security_source: @sdk_configuration.security_source
       )
 
-      error = T.let(nil, T.nilable(StandardError))
+      error = T.let(nil, T.nilable(::StandardError))
       http_response = T.let(nil, T.nilable(Faraday::Response))
       
 
@@ -521,7 +521,7 @@ module KintsugiSDK
             request: req
           )
         end
-      rescue StandardError => e
+      rescue ::StandardError => e
         error = e
       ensure
         if http_response.nil? || Utils.error_status?(http_response.status)
@@ -557,7 +557,7 @@ module KintsugiSDK
             response: http_response
           )
           response_data = http_response.env.response_body
-          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Shared::CustomerRead)
+          obj = Crystalline.unmarshal_json(::JSON.parse(response_data), Models::Shared::CustomerRead)
 
           return obj
         else
@@ -572,7 +572,7 @@ module KintsugiSDK
             response: http_response
           )
           response_data = http_response.env.response_body
-          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Errors::HTTPValidationError)
+          obj = Crystalline.unmarshal_json(::JSON.parse(response_data), Models::Errors::HTTPValidationError)
           raise obj
         else
           raise ::KintsugiSDK::Models::Errors::APIError.new(status_code: http_response.status, body: http_response.env.response_body, raw_response: http_response), 'Unknown content type received'
@@ -588,7 +588,7 @@ module KintsugiSDK
     end
 
 
-    sig { params(request: Models::Ops::UpdateCustomerV1CustomersCustomerIdPutRequest, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(Models::Shared::CustomerRead) }
+    sig { params(request: Models::Ops::UpdateCustomerV1CustomersCustomerIdPutRequest, timeout_ms: T.nilable(::Integer), http_headers: T.nilable(T::Hash[T.any(::String, ::Symbol), ::String])).returns(Models::Shared::CustomerRead) }
     def update(request:, timeout_ms: nil, http_headers: nil)
       # update - Update customer
       # The Update Customer API allows you to modify an existing customer's
@@ -603,15 +603,15 @@ module KintsugiSDK
         request
       )
       headers = Utils.get_headers(request)
-      headers = T.cast(headers, T::Hash[String, String])
+      headers = T.cast(headers, T::Hash[::String, ::String])
       req_content_type, data, form = Utils.serialize_request_body(request, false, false, :customer_update, :json)
       headers['content-type'] = req_content_type
-      raise StandardError, 'request body is required' if data.nil? && form.nil?
+      raise ::StandardError, 'request body is required' if data.nil? && form.nil?
 
       if form && !form.empty?
         body = Utils.encode_form(form)
       elsif Utils.match_content_type(req_content_type, 'application/x-www-form-urlencoded')
-        body = URI.encode_www_form(T.cast(data, T::Hash[Symbol, Object]))
+        body = ::URI.encode_www_form(T.cast(data, T::Hash[::Symbol, ::Object]))
       else
         body = data
       end
@@ -634,7 +634,7 @@ module KintsugiSDK
         security_source: @sdk_configuration.security_source
       )
 
-      error = T.let(nil, T.nilable(StandardError))
+      error = T.let(nil, T.nilable(::StandardError))
       http_response = T.let(nil, T.nilable(Faraday::Response))
       
 
@@ -655,7 +655,7 @@ module KintsugiSDK
             request: req
           )
         end
-      rescue StandardError => e
+      rescue ::StandardError => e
         error = e
       ensure
         if http_response.nil? || Utils.error_status?(http_response.status)
@@ -691,7 +691,7 @@ module KintsugiSDK
             response: http_response
           )
           response_data = http_response.env.response_body
-          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Shared::CustomerRead)
+          obj = Crystalline.unmarshal_json(::JSON.parse(response_data), Models::Shared::CustomerRead)
 
           return obj
         else
@@ -706,7 +706,7 @@ module KintsugiSDK
             response: http_response
           )
           response_data = http_response.env.response_body
-          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Errors::ErrorResponse)
+          obj = Crystalline.unmarshal_json(::JSON.parse(response_data), Models::Errors::ErrorResponse)
           raise obj
         else
           raise ::KintsugiSDK::Models::Errors::APIError.new(status_code: http_response.status, body: http_response.env.response_body, raw_response: http_response), 'Unknown content type received'
@@ -720,7 +720,7 @@ module KintsugiSDK
             response: http_response
           )
           response_data = http_response.env.response_body
-          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Errors::BackendSrcCustomersResponsesValidationErrorResponse)
+          obj = Crystalline.unmarshal_json(::JSON.parse(response_data), Models::Errors::BackendSrcCustomersResponsesValidationErrorResponse)
           raise obj
         else
           raise ::KintsugiSDK::Models::Errors::APIError.new(status_code: http_response.status, body: http_response.env.response_body, raw_response: http_response), 'Unknown content type received'
@@ -734,7 +734,7 @@ module KintsugiSDK
             response: http_response
           )
           response_data = http_response.env.response_body
-          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Errors::ErrorResponse)
+          obj = Crystalline.unmarshal_json(::JSON.parse(response_data), Models::Errors::ErrorResponse)
           raise obj
         else
           raise ::KintsugiSDK::Models::Errors::APIError.new(status_code: http_response.status, body: http_response.env.response_body, raw_response: http_response), 'Unknown content type received'
@@ -750,7 +750,7 @@ module KintsugiSDK
     end
 
 
-    sig { params(request: Models::Ops::GetTransactionsByCustomerRequest, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(T.any(T::Array[Models::Shared::TransactionRead], Models::Shared::PageTransactionRead)) }
+    sig { params(request: Models::Ops::GetTransactionsByCustomerRequest, timeout_ms: T.nilable(::Integer), http_headers: T.nilable(T::Hash[T.any(::String, ::Symbol), ::String])).returns(T.any(T::Array[Models::Shared::TransactionRead], Models::Shared::PageTransactionRead)) }
     def get_transactions(request:, timeout_ms: nil, http_headers: nil)
       # get_transactions - Get transactions by customer id
       # Get a list of transactions for a customer by their unique ID. When pagination params are provided, this endpoint returns a paginated response. When omitted, it returns the legacy list response format (deprecated).
@@ -763,7 +763,7 @@ module KintsugiSDK
         request
       )
       headers = Utils.get_headers(request)
-      headers = T.cast(headers, T::Hash[String, String])
+      headers = T.cast(headers, T::Hash[::String, ::String])
       query_params = Utils.get_query_params(Models::Ops::GetTransactionsByCustomerRequest, request, nil)
       headers['Accept'] = 'application/json'
       headers['user-agent'] = @sdk_configuration.user_agent
@@ -784,7 +784,7 @@ module KintsugiSDK
         security_source: @sdk_configuration.security_source
       )
 
-      error = T.let(nil, T.nilable(StandardError))
+      error = T.let(nil, T.nilable(::StandardError))
       http_response = T.let(nil, T.nilable(Faraday::Response))
       
 
@@ -805,7 +805,7 @@ module KintsugiSDK
             request: req
           )
         end
-      rescue StandardError => e
+      rescue ::StandardError => e
         error = e
       ensure
         if http_response.nil? || Utils.error_status?(http_response.status)
@@ -841,7 +841,7 @@ module KintsugiSDK
             response: http_response
           )
           response_data = http_response.env.response_body
-          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Crystalline::Union.new(Crystalline::Array.new(Models::Shared::TransactionRead), Models::Shared::PageTransactionRead))
+          obj = Crystalline.unmarshal_json(::JSON.parse(response_data), Crystalline::Union.new(Crystalline::Array.new(Models::Shared::TransactionRead), Models::Shared::PageTransactionRead))
 
           return obj
         else
@@ -856,7 +856,7 @@ module KintsugiSDK
             response: http_response
           )
           response_data = http_response.env.response_body
-          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Errors::HTTPValidationError)
+          obj = Crystalline.unmarshal_json(::JSON.parse(response_data), Models::Errors::HTTPValidationError)
           raise obj
         else
           raise ::KintsugiSDK::Models::Errors::APIError.new(status_code: http_response.status, body: http_response.env.response_body, raw_response: http_response), 'Unknown content type received'
@@ -872,7 +872,7 @@ module KintsugiSDK
     end
 
 
-    sig { params(request: Models::Ops::CreateTransactionByCustomerRequest, timeout_ms: T.nilable(Integer), http_headers: T.nilable(T::Hash[T.any(String, Symbol), String])).returns(Models::Shared::TransactionRead) }
+    sig { params(request: Models::Ops::CreateTransactionByCustomerRequest, timeout_ms: T.nilable(::Integer), http_headers: T.nilable(T::Hash[T.any(::String, ::Symbol), ::String])).returns(Models::Shared::TransactionRead) }
     def create_transaction(request:, timeout_ms: nil, http_headers: nil)
       # create_transaction - Create transaction by customer id
       # Create a new transaction for a specific customer.
@@ -885,15 +885,15 @@ module KintsugiSDK
         request
       )
       headers = Utils.get_headers(request)
-      headers = T.cast(headers, T::Hash[String, String])
+      headers = T.cast(headers, T::Hash[::String, ::String])
       req_content_type, data, form = Utils.serialize_request_body(request, false, false, :transaction_create, :json)
       headers['content-type'] = req_content_type
-      raise StandardError, 'request body is required' if data.nil? && form.nil?
+      raise ::StandardError, 'request body is required' if data.nil? && form.nil?
 
       if form && !form.empty?
         body = Utils.encode_form(form)
       elsif Utils.match_content_type(req_content_type, 'application/x-www-form-urlencoded')
-        body = URI.encode_www_form(T.cast(data, T::Hash[Symbol, Object]))
+        body = ::URI.encode_www_form(T.cast(data, T::Hash[::Symbol, ::Object]))
       else
         body = data
       end
@@ -916,7 +916,7 @@ module KintsugiSDK
         security_source: @sdk_configuration.security_source
       )
 
-      error = T.let(nil, T.nilable(StandardError))
+      error = T.let(nil, T.nilable(::StandardError))
       http_response = T.let(nil, T.nilable(Faraday::Response))
       
 
@@ -937,7 +937,7 @@ module KintsugiSDK
             request: req
           )
         end
-      rescue StandardError => e
+      rescue ::StandardError => e
         error = e
       ensure
         if http_response.nil? || Utils.error_status?(http_response.status)
@@ -973,7 +973,7 @@ module KintsugiSDK
             response: http_response
           )
           response_data = http_response.env.response_body
-          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Shared::TransactionRead)
+          obj = Crystalline.unmarshal_json(::JSON.parse(response_data), Models::Shared::TransactionRead)
 
           return obj
         else
@@ -988,7 +988,7 @@ module KintsugiSDK
             response: http_response
           )
           response_data = http_response.env.response_body
-          obj = Crystalline.unmarshal_json(JSON.parse(response_data), Models::Errors::HTTPValidationError)
+          obj = Crystalline.unmarshal_json(::JSON.parse(response_data), Models::Errors::HTTPValidationError)
           raise obj
         else
           raise ::KintsugiSDK::Models::Errors::APIError.new(status_code: http_response.status, body: http_response.env.response_body, raw_response: http_response), 'Unknown content type received'

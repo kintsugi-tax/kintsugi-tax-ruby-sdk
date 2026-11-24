@@ -21,9 +21,9 @@ module KintsugiSDK
         # Invalid input value
         field :input, ::Object, { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('input'), required: true } }
         # Additional context
-        field :ctx, Crystalline::Hash.new(Symbol, ::Object), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('ctx'), required: true } }
+        field :ctx, Crystalline::Hash.new(::Symbol, ::Object), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('ctx'), required: true } }
 
-        sig { params(type: ::String, loc: T::Array[::String], msg: ::String, input: ::Object, ctx: T::Hash[Symbol, ::Object]).void }
+        sig { params(type: ::String, loc: T::Array[::String], msg: ::String, input: ::Object, ctx: T::Hash[::Symbol, ::Object]).void }
         def initialize(type:, loc:, msg:, input:, ctx:)
           @type = type
           @loc = loc
