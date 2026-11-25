@@ -34,6 +34,10 @@ value = ExemptionSourceEnum::NETSUITE
 | `SHOPLINE`                | SHOPLINE                  |
 | `ORB`                     | ORB                       |
 | `ZENSKAR`                 | ZENSKAR                   |
+| `HYPERLINE`               | HYPERLINE                 |
+| `ODOO`                    | ODOO                      |
+| `ZOHO_BOOKS`              | ZOHO_BOOKS                |
+| `UNLEASHED`               | UNLEASHED                 |
 | `MANUAL`                  | MANUAL                    |
 | `BULK_UPLOAD`             | BULK_UPLOAD               |
 | `EMAIL`                   | EMAIL                     |

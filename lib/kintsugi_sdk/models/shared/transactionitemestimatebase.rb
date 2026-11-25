@@ -39,13 +39,11 @@ module KintsugiSDK
         field :product_category, Crystalline::Nilable.new(::String), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('product_category') } }
         # Defaults to false. Indicates whether the item is exempt from tax.
         field :exempt, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('exempt') } }
-        # **Beta — not yet available in production.** When it is not enabled for your environment the field is accepted but ignored, and the response echoes `false`.
-        #
         # Defaults to false. When true, `amount` is the gross (tax-included) price and the tax is backed out of it rather than added on top; for a taxable line, `taxable_amount` in the response is then the net base.
         #
         # When the line is not taxed - exempt, or no tax rule applies in the destination - `taxable_amount` is `0.00` rather than the net base, matching how exempt tax-exclusive lines already behave. Read the net amount as `taxable_amount` when `tax_amount` is non-zero, and as `amount` otherwise.
         #
-        # This applies to the estimate in this request only. Transactions imported through a connection carry no such flag, so an order quoted here as gross is treated as net when it later syncs, and its recorded tax will be higher than this estimate. Send net amounts on the connection side, or reconcile the difference, until tax-inclusive import support ships.
+        # This applies to the estimate in this request only. Connection imports that report an inclusive price store the gross amount and the inclusive flag, and recalc backs the tax out the same way as this estimate.
         field :is_tax_inclusive, Crystalline::Nilable.new(Crystalline::Boolean.new), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('is_tax_inclusive') } }
 
         sig { params(date: ::DateTime, amount: T.any(::Float, ::String), quantity: T.nilable(T.any(::Float, ::String)), external_id: T.nilable(::String), description: T.nilable(::String), external_product_id: T.nilable(::String), product_name: T.nilable(::String), product_description: T.nilable(::String), product_source: T.nilable(Models::Shared::SourceEnum), product_subcategory: T.nilable(::String), product_category: T.nilable(::String), exempt: T.nilable(T::Boolean), is_tax_inclusive: T.nilable(T::Boolean)).void }

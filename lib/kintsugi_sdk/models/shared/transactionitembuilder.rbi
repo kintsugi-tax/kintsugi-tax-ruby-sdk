@@ -62,6 +62,8 @@ class KintsugiSDK::Models::Shared::TransactionItemBuilder
   def tax_exemption=(str_); end
   def exempt(); end
   def exempt=(str_); end
+  def is_tax_inclusive(); end
+  def is_tax_inclusive=(str_); end
   def discount_builder(); end
   def discount_builder=(str_); end
 end
