@@ -30,10 +30,6 @@ class KintsugiSDK::Models::Shared::NexusResponse
   def period_end_date=(str_); end
   def id(); end
   def id=(str_); end
-  def created_at(); end
-  def created_at=(str_); end
-  def updated_at(); end
-  def updated_at=(str_); end
   def organization_id(); end
   def organization_id=(str_); end
   def threshold_sales(); end
@@ -64,8 +60,14 @@ class KintsugiSDK::Models::Shared::NexusResponse
   def previous_period_end_date=(str_); end
   def periods(); end
   def periods=(str_); end
+  def created_at(); end
+  def created_at=(str_); end
+  def updated_at(); end
+  def updated_at=(str_); end
   def disregarded_nexus_types(); end
   def disregarded_nexus_types=(str_); end
+  def use_tax_registration_path(); end
+  def use_tax_registration_path=(str_); end
   def marketplace_included(); end
   def marketplace_included=(str_); end
   def threshold_sales_bigint(); end
