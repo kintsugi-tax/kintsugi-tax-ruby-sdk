@@ -2,10 +2,10 @@ openapi: "3.1.0"
 info:
   title: "Kintsugi Customer API"
   version: "1.0.0"
-  x-spec-synced-at: "2026-11-25T00:02:00.240Z"
+  x-spec-synced-at: "2026-11-26T00:02:06.411Z"
   description: "Publicly documented Kintsugi Customer API endpoints. The source (openapi/_source/openapi-master.json) is the platform spec filtered to the documented customer surface (openapi/customer-endpoints.json); scripts/build-specs.mjs re-applies that filter here. Do not edit by hand."
   x-spec-source: "committed openapi-master.json"
-  x-spec-checked-at: "2026-11-25T00:02:00.240Z"
+  x-spec-checked-at: "2026-11-26T00:02:06.411Z"
 paths:
   /v1/address_validation/search:
     post:
@@ -19642,8 +19642,9 @@ components:
         - "SALES_AND_USE_TAX"
         - "RETAIL_DELIVERY_FEE"
         - "SMALL_PARCEL_VAT"
+        - "LEASE_TAX"
       title: "TaxTypeEnum"
-      description: "Tax obligation on a nexus, registration, or filing row.\n\nRegistrations and filings may be SALES_AND_USE_TAX: one state account and\none return can cover both taxes, and each is stored as a single row.\nNexus rows are SALES_TAX, USE_TAX, RETAIL_DELIVERY_FEE, or\nSMALL_PARCEL_VAT. Sales tax, use tax, the retail delivery fee, and the\nSwiss small-parcel threshold are separate obligations with their own met\ndates and period models. SMALL_PARCEL_VAT is a threshold only. A sales\ntax registration covers it, and it has no account and no return of its own."
+      description: "Tax obligation on a nexus, registration, or filing row.\n\nRegistrations and filings may be SALES_AND_USE_TAX: one state account and\none return can cover both taxes, and each is stored as a single row.\nNexus rows are SALES_TAX, USE_TAX, RETAIL_DELIVERY_FEE, SMALL_PARCEL_VAT,\nor LEASE_TAX. Each of these is a separate obligation. Each has its own met\ndates and period models. SMALL_PARCEL_VAT is a threshold only. A sales tax\nregistration covers it, and it has no account and no return of its own.\nLEASE_TAX is a city tax on leased goods, such as the\nChicago lease tax. It has its own account and return."
     FeeTypeEnum:
       type: "string"
       enum:
