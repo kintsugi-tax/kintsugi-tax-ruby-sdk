@@ -39,3 +39,13 @@ Based on:
 - [ruby v5.7.1] .
 ### Releases
 - [Ruby Gems v5.7.1] https://rubygems.org/gems/kintsugi_sdk/versions/5.7.1 - .
+
+## 2026-11-27 00:16:01
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.812.1 (2.968.17) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [ruby v5.7.2] .
+### Releases
+- [Ruby Gems v5.7.2] https://rubygems.org/gems/kintsugi_sdk/versions/5.7.2 - .

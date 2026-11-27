@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 42356d7a-ce0a-4cdf-bb17-e774a6ae7cfc
 management:
-  docChecksum: 6caeae1a36d3c59d81edafd16975add0
+  docChecksum: 6528821c2e1fcdf971309aa058a0987a
   docVersion: 1.0.0
-  speakeasyVersion: 1.811.0
-  generationVersion: 2.968.1
-  releaseVersion: 5.7.1
-  configChecksum: 968108081692125fb94f6826a4adcff7
+  speakeasyVersion: 1.812.1
+  generationVersion: 2.968.17
+  releaseVersion: 5.7.2
+  configChecksum: d9a2a3874b96df2450dd68d30e62a40d
   repoURL: https://github.com/kintsugi-tax/kintsugi-tax-ruby-sdk.git
   installationURL: https://github.com/kintsugi-tax/kintsugi-tax-ruby-sdk
   published: true
 persistentEdits:
-  generation_id: 744e9637-bff2-49a0-b8ac-d1581592daa2
-  pristine_commit_hash: 870bbc93077356c989ab6c3250697311bfb007b5
-  pristine_tree_hash: f950edc7b364162480cbf1eebe21785d1222b562
+  generation_id: 13d6da02-9693-46fe-9bf2-b45816946806
+  pristine_commit_hash: f4515625b2c87936b2db822d6b39b85d318e230f
+  pristine_tree_hash: 4331ae3cf7d795f1f06a9a266dab7448df507abf
 features:
   ruby:
     constsAndDefaults: 0.1.4
@@ -46,8 +46,8 @@ trackedFiles:
     pristine_git_object: b0ea40558f3ca80dcf7d30b159d34a1e5ab33440
   Gemfile.lock:
     id: 21fb5836b499
-    last_write_checksum: sha1:c8607b627630c38a404d91b475f780808a776177
-    pristine_git_object: e78c15f4e601e7cbb2ff6469cf40d37c0d955ed5
+    last_write_checksum: sha1:778e2843314a04e1229f3413d2ecce7d45228a08
+    pristine_git_object: 4859a6a14c349b03fabb71263adf3f434ab97541
   Rakefile:
     id: 44b7fa1ba503
     last_write_checksum: sha1:c572639efdae8c7b24141ee5c02d8f009e101ed8
@@ -426,8 +426,8 @@ trackedFiles:
     pristine_git_object: 7ceac31de24e80c12a613d25da6ad5947b260630
   docs/models/shared/nexusresponse.md:
     id: a9d4c4f2310f
-    last_write_checksum: sha1:b20a34562f61dc1286092723547d709e7414e6f7
-    pristine_git_object: 67d901d174a17ff4f4d9bd1203794dded6e87a26
+    last_write_checksum: sha1:eeb1e7e318cc3e12be18a9885fdb987eb5b6c188
+    pristine_git_object: 8fc2ee4eef6df6a4e5fe011b9ed7834f380c2dbd
   docs/models/shared/nexusstateenum.md:
     id: 18d6fc90f31a
     last_write_checksum: sha1:8bc0ec507510fefb982260ab0cb16c815b7ac51b
@@ -570,8 +570,8 @@ trackedFiles:
     pristine_git_object: 6df744cb329b725191c33d24af5d26ec37351f5f
   docs/models/shared/taxtypeenum.md:
     id: c01b4f2245aa
-    last_write_checksum: sha1:3883ca0452a1f68a789828b6179eb1f83cc00742
-    pristine_git_object: 5a3e50fbdfb967ef7948ff913bb156a29f807554
+    last_write_checksum: sha1:ccc6bb261798a994c4cb1a16aef3c5af393f6cdd
+    pristine_git_object: 0f5a584af7ffff1a06d2c8bf9b1281aac020d7b7
   docs/models/shared/totalamount.md:
     id: ab2c6dd3702b
     last_write_checksum: sha1:7e363b1eb8e03d62102f3d43055104898dae0367
@@ -866,8 +866,8 @@ trackedFiles:
     pristine_git_object: 798e454e38a807dd9d641438c79199c1d3c55edd
   kintsugi_sdk.gemspec:
     id: 23c95d65a79e
-    last_write_checksum: sha1:ba5fcecce3bd2e45a23fd2df085c32440c8705c4
-    pristine_git_object: 7b761779b26cbda5c6ba243de98a56209e5e73f9
+    last_write_checksum: sha1:267e252b7f4f34d47ce064ced482423464a763a7
+    pristine_git_object: 3f69cd1fe671038da630716767475608aab72b57
   lib/crystalline.rb:
     id: eca767cf937a
     last_write_checksum: sha1:b6ec0a2833f58ba9a6f07c9637fdca05e59006d3
@@ -1670,8 +1670,8 @@ trackedFiles:
     pristine_git_object: e6f9572261315bbb8c1196d9bbc2f8adf1c00321
   lib/kintsugi_sdk/models/shared/nexusresponse.rb:
     id: 13435de075c9
-    last_write_checksum: sha1:9b0ed37478b3650aa895ce94e091a0b5b6b90c81
-    pristine_git_object: 9a77ab532671ad787bb0c2c6a1f2bdf904822c79
+    last_write_checksum: sha1:4ee455bc05b4b30564f19d176517a72df44eb105
+    pristine_git_object: bfa8aaad8d4a7494c2746e7eefc3cefc094c796f
   lib/kintsugi_sdk/models/shared/nexusresponse.rbi:
     id: 13d34f65abe7
     last_write_checksum: sha1:8cd8af1a19de00680d35da66d90e4d284d41a1b0
@@ -1958,8 +1958,8 @@ trackedFiles:
     pristine_git_object: 87c544794b77e8ca73d13a43bd2056c4d79721c4
   lib/kintsugi_sdk/models/shared/taxtypeenum.rb:
     id: 989f62ea334b
-    last_write_checksum: sha1:8ead476b421883754c59e63e35446f3d326743cd
-    pristine_git_object: bd94f21fced731010a95e5b723dd424a8c95b4a5
+    last_write_checksum: sha1:4248cef54b64c40e2ac48c595631c720e6d20b5a
+    pristine_git_object: 532ce13aff2d36e49c0e67077331e50d4b10f34e
   lib/kintsugi_sdk/models/shared/taxtypeenum.rbi:
     id: 44210486fd75
     last_write_checksum: sha1:fcc9c5addddef33919e070b3679bc99ac0689531
@@ -2514,8 +2514,8 @@ trackedFiles:
     pristine_git_object: 9c2396d8ba568394a25c5e01b74c93e3045c5abe
   lib/kintsugi_sdk/sdkconfiguration.rb:
     id: a40583fa0346
-    last_write_checksum: sha1:4856a34b26e80724260c9e6749c1adaceed71f6f
-    pristine_git_object: b8886188e31a7f1444d008e2ac7722117d0854ae
+    last_write_checksum: sha1:ce3b5b28be5c8df13ff975d97cf3cbe525f692e4
+    pristine_git_object: aeb6b2016fbf376785fa7cdfc50787d5460c5ed4
   lib/kintsugi_sdk/sdkconfiguration.rbi:
     id: 1c402ef0cb0d
     last_write_checksum: sha1:b850b2b64a2bba1150dce2dde3e1a1170aced613
@@ -3090,7 +3090,9 @@ examples:
         "400":
           application/json: {"detail": "<value>"}
 examplesVersion: 1.0.2
-releaseNotes: "## Ruby SDK Changes:\n* `open_api_sdk.customers.list()`:  `response.items[].source` **Changed** (Breaking ⚠️)\n* `open_api_sdk.customers.create()`: \n  *  `request.customer_create.source` **Changed**\n  *  `response.source` **Changed** (Breaking ⚠️)\n* `open_api_sdk.customers.get_by_external_id()`:  `response.source` **Changed** (Breaking ⚠️)\n* `open_api_sdk.customers.get()`:  `response.source` **Changed** (Breaking ⚠️)\n* `open_api_sdk.customers.update()`: \n  *  `request.customer_update.source` **Changed**\n  *  `response.source` **Changed** (Breaking ⚠️)\n* `open_api_sdk.customers.get_transactions()`:  `response.union(Array<TransactionRead>)[]` **Changed** (Breaking ⚠️)\n* `open_api_sdk.customers.create_transaction()`: \n  *  `request.transaction_create` **Changed**\n  *  `response` **Changed** (Breaking ⚠️)\n* `open_api_sdk.exemptions.list()`:  `response.items[]` **Changed** (Breaking ⚠️)\n* `open_api_sdk.exemptions.create()`: \n  *  `request.exemption_create` **Changed**\n  *  `response` **Changed** (Breaking ⚠️)\n* `open_api_sdk.exemptions.get()`:  `response` **Changed** (Breaking ⚠️)\n* `open_api_sdk.exemptions.get_attachments()`:  `response.[].related_entity_type` **Changed** (Breaking ⚠️)\n* `open_api_sdk.exemptions.upload_certificate()`:  `response.related_entity_type` **Changed** (Breaking ⚠️)\n* `open_api_sdk.nexus.list()`:  `response.union(Page_NexusResponse_).items[]` **Changed** (Breaking ⚠️)\n* `open_api_sdk.products.get()`:  `response.source` **Changed** (Breaking ⚠️)\n* `open_api_sdk.products.update()`:  `response.source` **Changed** (Breaking ⚠️)\n* `open_api_sdk.tax_estimation.estimate_tax()`: \n  *  `request.transaction_estimate_public_request.source` **Changed**\n  *  `response` **Changed** (Breaking ⚠️)\n* `open_api_sdk.transactions.list()`:  `response.items[]` **Changed** (Breaking ⚠️)\n* `open_api_sdk.transactions.create()`: \n  *  `request.transaction_public_request` **Changed**\n  *  `response` **Changed** (Breaking ⚠️)\n* `open_api_sdk.transactions.get_by_external_id()`:  `response` **Changed** (Breaking ⚠️)\n* `open_api_sdk.transactions.get_by_filing_id()`:  `response.[]` **Changed** (Breaking ⚠️)\n* `open_api_sdk.transactions.get_by_id()`:  `response` **Changed** (Breaking ⚠️)\n* `open_api_sdk.transactions.update()`: \n  *  `request.transaction_update` **Changed**\n  *  `response` **Changed** (Breaking ⚠️)\n"
+releaseNotes: |
+  ## Ruby SDK Changes:
+  * `open_api_sdk.nexus.list()`:  `response.union(Page_NexusResponse_).items[].tax_type.enum(lease_tax)` **Added** (Breaking ⚠️)
 generatedFiles:
   - .gitattributes
   - .rubocop.yml
