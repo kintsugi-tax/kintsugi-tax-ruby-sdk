@@ -60,11 +60,12 @@ module KintsugiSDK
         #
         # Registrations and filings may be SALES_AND_USE_TAX: one state account and
         # one return can cover both taxes, and each is stored as a single row.
-        # Nexus rows are SALES_TAX, USE_TAX, RETAIL_DELIVERY_FEE, or
-        # SMALL_PARCEL_VAT. Sales tax, use tax, the retail delivery fee, and the
-        # Swiss small-parcel threshold are separate obligations with their own met
-        # dates and period models. SMALL_PARCEL_VAT is a threshold only. A sales
-        # tax registration covers it, and it has no account and no return of its own.
+        # Nexus rows are SALES_TAX, USE_TAX, RETAIL_DELIVERY_FEE, SMALL_PARCEL_VAT,
+        # or LEASE_TAX. Each of these is a separate obligation. Each has its own met
+        # dates and period models. SMALL_PARCEL_VAT is a threshold only. A sales tax
+        # registration covers it, and it has no account and no return of its own.
+        # LEASE_TAX is a city tax on leased goods, such as the
+        # Chicago lease tax. It has its own account and return.
         field :tax_type, Crystalline::Nilable.new(Models::Shared::TaxTypeEnum), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('tax_type'), 'decoder': ::KintsugiSDK::Utils.enum_from_string(Models::Shared::TaxTypeEnum, true) } }
 
         field :previous_period_start_date, Crystalline::Nilable.new(::Date), { 'format_json': { 'letter_case': ::KintsugiSDK::Utils.field_name('previous_period_start_date'), required: true, 'decoder': ::KintsugiSDK::Utils.date_from_iso_format(false) } }
